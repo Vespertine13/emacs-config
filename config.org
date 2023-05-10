@@ -129,7 +129,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file (~/emacs_u
 
     ;; Org todo workflow
     (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
-    (setq org-agenda-files '(FOLDER_ORG))
 
     ;; custom command
     (setq org-agenda-custom-commands
@@ -289,67 +288,9 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file (~/emacs_u
 #+end_src
 ** Scratch
 #+begin_src emacs-lisp
-  (setq my-list '(
-		  "Hello          : Hola          "
-		  "Sorry          : Lo siento     "
-		  "Thank you      : gracias       "
-		  "bye            : adios         "
-		  "day            : día           "
-		  "food           : comida        "
-		  "sun            : sol           "
-		  "blue           : azul          "
-		  "green          : verde         "
-		  "yellow         : amarillo      "
-		  "yes            : si            "
-		  "no             : no            "
-		  "night          : noche         "
-		  "cool           : fresco        "
-		  "good           : bueno         "
-		  "how to say that: como decir eso"
-		  "do thing       : hacer algo    "
-		  "what is        : que es        "
-		  "that one       : ése/ésa       "
-		  "music          : musica        "
-		  "tree           : árbol         "
-		  "mountain       : montaña       "
-		  "programming    : programación  "
-		  "Norway         : Noruega       "
-		  "Norwegian      : Noruego       "
-		  "English        : Ingles        "
-		  "I speak        : Yo hablo      "
-		  "bad            : mal           "
-		  "good           : bueno         "
-		  "I like it      : me gusta      "
-		  "It is difficult: es dificil    "
-		  "where is it    : done esta     "
-		  "what is it     : qué es        "
-		  "how            : cómo          "
-		  "night          : noche         "
-		  "place          : lugar         "
-		  "city           : ciudad        "
-		  "country        : pais          "
-		  "house          : casa          "
-		  "street         : calle         "
-		  "right          : derecho       "
-		  "left           : izquierda     "
-		  "warm           : caliente      "
-		  "cold           : frio          "
-		  "high           : alta/alto     "
-		  "low            : baja/bajo     "
-		  "friend         : amigo         "
-		  "boyfriend      : novio         "
-		  "parents        : madres/padres "
-		  "dog            : perro         "
-		  "red            : Rojo/roja     "
-		  "black          : negra/negro   "
-		  "white          : blanca/blanco "
-		  "gray           : gris          "
-		  "bird           : Pájaro        "
-		  ))
-  
   ;; select random item:
-  (setq random-index (random (length my-list)))
-  (setq random-item (nth random-index my-list))
+  (setq random-index (random (length SPANISH_GLOSSARY)))
+  (setq random-item (nth random-index SPANISH_GLOSSARY))
   
   ;; input variable into scratch
   (setq initial-scratch-message (concat "+--- Spanish Scratch ---+ \n" random-item))
