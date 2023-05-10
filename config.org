@@ -1,0 +1,671 @@
+# -*- coding: utf-8 -*-
+#+TITLE: 	Config file for Windows 10/64bit/GNU Emacs
+#+AUTHOR:	Eivind Kjeka Broen
+#+STARTUP: content
+
+* Init Setup
+The init.el (path ~/.emacs.d/init.el) file will redirect to this file (~/emacs_utilities/org/config.org) if it contains the following code.
+
+(org-babel-load-file "~/emacs-config/config.org")
+
+* Configuration
+** Load external config
+#+begin_src emacs-lisp
+  ;; constants are written in caps
+  (load-file "~/mega/emacs_utilities/config/constants.el")
+  (load-file "~/mega/emacs_utilities/config/teos_config.el")
+#+end_src
+** Packages
+*** Melpa Package support
+#+begin_src emacs-lisp
+  ;; Load emacs packages and activate them
+  ;; This must come before configurations of installed packages.
+  ;; Don't delete this line.
+  (package-initialize)
+  
+  
+  ;; Enables basic packaging support
+  (require 'package)
+  
+  
+  ;; repositories
+  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+			   ("melpa" . "http://melpa.org/packages/")
+			   ("org" . "http://orgmode.org/elpa/")))
+  
+  
+  ;; If there are no archived package contents, refresh them
+  (if (not (package-installed-p 'use-package))
+      (progn
+	(package-refresh-contents)
+	(package-install 'use-package)))
+  
+  (require 'use-package)
+  
+#+end_src
+*** Package Installation
+#+begin_src emacs-lisp
+  ;; Installs packages
+  
+  ;; myPackages contains a list of package names
+  ;; dont be tempted to use elpy!
+  
+  (defvar myPackages
+    '(ess                              ;; ESS
+      anaconda-mode                    ;; anaconda mode for python
+      company-anaconda                 ;; company anaconda for python
+      flycheck                         ;; flycheck for coding
+      ein                              ;; jupyterlab stuff
+      )
+    )
+  
+  ;; Scans the list in myPackages
+  
+  ;; If the package listed is not already installed, install it
+  
+  (mapc #'(lambda (package)
+  
+	    (unless (package-installed-p package)
+  
+	      (package-install package)))
+  
+	myPackages)
+#+end_src
+
+** Text Preferences
+#+begin_src emacs-lisp
+  ;; Electric pair for closing parentheses etc
+  (electric-pair-mode t)
+  ;; Linum mode
+  (global-display-line-numbers-mode t)
+  ;; setting UTF-8 Encoding
+  (set-language-environment "UTF-8")
+  ;; hide emphasis markers (bold, italics etc)
+  ;; (setq org-hide-emphasis-markers t)
+#+end_src
+** Org Support
+*** Basics
+#+begin_src emacs-lisp
+  (require 'org)
+  (electric-indent-mode -1)       ;; disables electric indent mode
+  (setq org-log-done t)
+  ;; RETURN will follow links in org-mode files
+  (setq org-return-follows-link  t)
+  ;; remove stupid indent
+  (setq org-adapt-indentation nil)
+#+end_src
+*** Pictures
+#+begin_src emacs-lisp
+  (setq org-image-actual-width nil) ;; do not display images in actual size
+
+   ;; enables pictures in org files
+    (defun org-show-images ()
+      (interactive)
+      (message "Show images")
+      (org-toggle-inline-images t)
+      )
+
+ (add-hook 'org-mode-hook 'org-show-images)
+#+end_src
+*** Capture and Agenda
+#+begin_src emacs-lisp
+    (global-set-key (kbd "C-c a") 'org-agenda)
+    (global-set-key (kbd "C-c c") 'org-capture)
+
+    ;; kan denne slettes?
+
+    (setq org-capture-templates
+	  '(("t" "TODO" entry (file ORG_CAPTURE)
+	     "* TODO %?")
+	    ("j" "journal" entry (file+datetree ORG_JOURNAL)
+	     "* %?")
+	    ("h" "handleliste" entry (file ORG_HANDLELISTE)
+	     "* %?")
+	    ("m" "møtelogg" entry (file+datetree ORG_MOTELOGG)
+	     "* %? \nInnkalling: \nAgenda: \nNotater:")
+	    ("e" "Español" entry (file ORG_SPANISH)
+	     "* %? \nNorsk: \nEnglish: \nItaliano: ")
+  ))
+
+    ;; Org todo workflow
+    (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
+    (setq org-agenda-files '(FOLDER_ORG))
+
+    ;; custom command
+    (setq org-agenda-custom-commands
+	  '(("j" "Jobbrelaterte TODOS"
+	     tags "+jobb+TODO=\"TODO\"")))
+#+end_src
+*** Time Stamp
+#+begin_src emacs-lisp
+  (setq-default org-display-custom-times t)
+  (setq org-time-stamp-custom-formats '("<%e.%m.%Y>" . "<%e.%m.%Y %H:%M>"))
+#+end_src
+*** Artist Mode
+#+begin_src emacs-lisp
+  ;; add hotkeys
+  (add-hook 'artist-mode-hook
+	    (lambda ()
+	      (local-set-key (kbd "<f1>") 'artist-select-op-pen-line)  ; f1 = pen mode
+	      (local-set-key (kbd "<f2>") 'artist-select-op-erase-char); f2 = eraser mode
+	      (local-set-key (kbd "<f3>") 'artist-select-op-spray-can) ; f3 = spray-can mode
+	      (local-set-key (kbd "<f4>") 'artist-select-op-line)      ; f4 = line
+	      (local-set-key (kbd "<f5>") 'artist-select-op-square)    ; f5 = rectangle
+	      (local-set-key (kbd "<f6>") 'artist-select-op-ellipse)   ; f6 = ellipse
+	      (local-set-key (kbd "<f7>") 'artist-select-op-flood-fill); f7 = fill
+	      (local-set-key (kbd "<f8>") 'artist-select-op-poly-line) ; f8 = poly-lines
+	      ))
+  
+  
+  ;; set shortcut
+  
+#+end_src
+
+** Deft
+#+begin_src emacs-lisp
+  (require 'deft)
+  (setq deft-directory FOLDER_DEFT)
+  (setq deft-extensions '("org"))
+  (setq deft-default-extension "org")
+  (setq deft-text-mode 'org-mode)
+  (setq deft-use-filename-as-title t)
+  (setq deft-use-filter-string-for-filename t)
+  (setq deft-auto-save-interval 0)
+  (deft)
+#+end_src
+** Zetteldeft
+#+begin_src emacs-lisp
+  (use-package zetteldeft)
+  (setq zetteldeft-home-id "2023-01-24-1155")
+  
+  
+  (defun zetteldeft-wander ()
+    "Wander through `zetteldeft' notes.
+  Search `deft' for a random `zetteldeft' id."
+    (interactive)
+    (switch-to-buffer deft-buffer)
+    (let ((all-files (deft-find-all-files-no-prefix)))
+      (deft-filter
+	(zetteldeft--lift-id
+	  (nth (random (length all-files))
+	     all-files)))))
+#+end_src
+
+** Eshell
+#+begin_src emacs-lisp
+  (add-hook 'eshell-mode-hook
+	    (lambda ()
+	      (remove-hook 'completion-at-point-functions 'pcomplete-completions-at-point t)))
+  (setenv "LANG" "en_US.UTF-8")
+#+end_src
+** R Support
+#+begin_src emacs-lisp
+  ;; checks the system name and sets an R path accordingly
+  (if (string= (system-name) HOME_SYSTEM)(setq inferior-R-program-name "C:/Users/ekb/R/R-4.2.1/bin/R.exe"))
+  (if (string= (system-name) WORK_SYSTEM)(setq inferior-R-program-name "c:/Program Files/R/R-4.3.0/bin/R.exe"))
+  ;; (setq inferior-R-program-name '(
+  ;; Shut up compile saves
+  (setq compilation-ask-about-save nil)
+  ;; shut up auto ask
+  (setq ess-ask-for-ess-directory nil)
+  (setq ess-startup-directory nil)
+  ;; Don't save *anything*
+  (setq compilation-save-buffers-predicate '(lambda () nil))
+  ;;; ESS
+  (defun my-ess-hook ()
+    ;; ensure company-R-library is in ESS backends
+    (make-local-variable 'company-backends)
+    (cl-delete-if (lambda (x) (and (eq (car-safe x) 'company-R-args))) company-backends)
+    (push (list 'company-R-args 'company-R-objects 'company-R-library :separate)
+	  company-backends))
+  (add-hook 'ess-mode-hook 'my-ess-hook)
+  (with-eval-after-load 'ess
+    (setq ess-use-company t))
+  ;; company
+  (require 'company)
+  (setq tab-always-indent 'complete)
+  (global-set-key (kbd "C-M-/") #'company-complete)
+  (global-company-mode)
+  ;; hotkeys
+  (global-set-key (kbd "M--") " <- ")    ;; alt+-
+  (global-set-key (kbd "C-S-M") " %>% ") ;; control+shift+m
+#+end_src
+** Python Support
+#+begin_src emacs-lisp
+  ;; set interpreter
+  (require 'python)
+
+  (if (string= (system-name) HOME_SYSTEM)(setq python-shell-interpreter "C:/Users/ekb/AppData/Local/Programs/Python/Python310/python.exe"))
+  (if (string= (system-name) WORK_SYSTEM)(setq python-shell-interpreter "C:/Program Files/Python/python.exe"))
+
+    ;; add anaconda
+    (add-hook 'python-mode-hook 'anaconda-mode)
+  
+    ;; add company anaconda
+    (eval-after-load "company"
+      '(add-to-list 'company-backends 'company-anaconda))
+    (add-hook 'python-mode-hook 'anaconda-mode)
+  
+    ;; set standard indent
+    (add-hook 'python-mode-hook '(lambda () 
+				   (setq python-indent 4)))
+    (setq python-indent-guess-indent-offset nil)
+  
+    (defun my-python-line ()
+      (interactive)
+      (save-excursion
+	(setq the_script_buffer (format (buffer-name)))
+	(end-of-line)
+	(kill-region (point) (progn (back-to-indentation) (point)))
+	(if  (get-buffer  "*Python*")
+	    (message "")
+	  (run-python "ipython" nil nil))
+	;; (setq the_py_buffer (format "*Python[%s]*" (buffer-file-name)))
+	(setq the_py_buffer "*Python*")
+	(switch-to-buffer-other-window  the_py_buffer)
+	(goto-char (buffer-end 1))
+	(yank)
+	(comint-send-input)
+	(switch-to-buffer-other-window the_script_buffer)
+	(yank))
+      (end-of-line)
+      (next-line)
+      )
+  
+    ;; setter send line til C-return
+    (add-hook 'python-mode-hook
+	      (lambda ()
+		(define-key python-mode-map (kbd "<C-return>") 'my-python-line)))
+  
+    ;; setter send region til M-return
+    (add-hook 'python-mode-hook
+	      (lambda ()
+		(define-key python-mode-map (kbd "<M-return>") 'python-shell-send-region)))
+  
+#+end_src
+** git support
+#+begin_src emacs-lisp
+;; (add-to-list 'exec-path "C:/Program Files/Git/bin/")
+#+end_src
+** Scratch
+#+begin_src emacs-lisp
+  (setq my-list '(
+		  "Hello          : Hola          "
+		  "Sorry          : Lo siento     "
+		  "Thank you      : gracias       "
+		  "bye            : adios         "
+		  "day            : día           "
+		  "food           : comida        "
+		  "sun            : sol           "
+		  "blue           : azul          "
+		  "green          : verde         "
+		  "yellow         : amarillo      "
+		  "yes            : si            "
+		  "no             : no            "
+		  "night          : noche         "
+		  "cool           : fresco        "
+		  "good           : bueno         "
+		  "how to say that: como decir eso"
+		  "do thing       : hacer algo    "
+		  "what is        : que es        "
+		  "that one       : ése/ésa       "
+		  "music          : musica        "
+		  "tree           : árbol         "
+		  "mountain       : montaña       "
+		  "programming    : programación  "
+		  "Norway         : Noruega       "
+		  "Norwegian      : Noruego       "
+		  "English        : Ingles        "
+		  "I speak        : Yo hablo      "
+		  "bad            : mal           "
+		  "good           : bueno         "
+		  "I like it      : me gusta      "
+		  "It is difficult: es dificil    "
+		  "where is it    : done esta     "
+		  "what is it     : qué es        "
+		  "how            : cómo          "
+		  "night          : noche         "
+		  "place          : lugar         "
+		  "city           : ciudad        "
+		  "country        : pais          "
+		  "house          : casa          "
+		  "street         : calle         "
+		  "right          : derecho       "
+		  "left           : izquierda     "
+		  "warm           : caliente      "
+		  "cold           : frio          "
+		  "high           : alta/alto     "
+		  "low            : baja/bajo     "
+		  "friend         : amigo         "
+		  "boyfriend      : novio         "
+		  "parents        : madres/padres "
+		  "dog            : perro         "
+		  "red            : Rojo/roja     "
+		  "black          : negra/negro   "
+		  "white          : blanca/blanco "
+		  "gray           : gris          "
+		  "bird           : Pájaro        "
+		  ))
+  
+  ;; select random item:
+  (setq random-index (random (length my-list)))
+  (setq random-item (nth random-index my-list))
+  
+  ;; input variable into scratch
+  (setq initial-scratch-message (concat "+--- Spanish Scratch ---+ \n" random-item))
+#+end_src
+** Utilities
+*** Calendar Support
+#+begin_src emacs-lisp
+  (copy-face font-lock-constant-face 'calendar-iso-week-face)
+  (set-face-attribute 'calendar-iso-week-face nil
+		      :height 0.7)
+  (setq calendar-intermonth-text
+	'(propertize
+	  (format "%2d"
+		  (car
+		   (calendar-iso-from-absolute
+		    (calendar-absolute-from-gregorian (list month day year)))))
+	  'font-lock-face 'calendar-iso-week-face))
+  
+  
+  (add-hook 'calendar-load-hook
+	    (lambda ()
+	      (calendar-set-date-style 'european)))
+  
+  (setq calendar-week-start-day 1)
+  
+#+end_src
+*** Timer
+#+begin_src emacs-lisp
+  (setq org-clock-sound BELL)
+#+end_src
+** Garbage Collection
+#+begin_src emacs-lisp
+  ;; Minimize garbage collection during startup
+  (setq gc-cons-threshold most-positive-fixnum)
+  
+  ;; Lower threshold back to 8 MiB (default is 800kB)
+  (add-hook 'emacs-startup-hook
+	    (lambda ()
+	      (setq gc-cons-threshold (expt 2 23))))
+  
+#+end_src
+** Appearance
+*** Misc
+#+begin_src emacs-lisp
+  (add-to-list 'custom-theme-load-path FOLDER_THEMES) ;; set themes dir
+  (setq inhibit-startup-message t)    ;; Hide the startup message
+  (setq debug-on-error t)             ;; enable in-depth message on error
+  (setq ring-bell-function 'ignore)   ;; ignore annoying bell sounds while in emacs
+  (tool-bar-mode -1)                  ;; removes ugly tool bar
+  (menu-bar-mode -1)                  ;; removes menubar
+#+end_src
+*** Set font functions
+Some useless font functions.
+REMEMBER fonts need to be installed manually on windows systems.
+find the font files here ~/emacs_utilities/fonts
+
+#+begin_src emacs-lisp
+  (defun font-timesnewroman ()
+    (interactive)
+    (setq buffer-face-mode-face '(:family "TimesNewRoman"))
+    (buffer-face-mode))
+
+  (defun font-inconsolata ()
+    (interactive)
+    (setq buffer-face-mode-face '(:family "Inconsolata")) ;; standard font find it in ~/mega/fonts
+    (buffer-face-mode))
+#+end_src
+*** Theme functions
+#+begin_src emacs-lisp
+  (defun disable-all-themes ()
+  "Disable all currently active themes."
+    (interactive)
+    (dolist (i custom-enabled-themes)
+      (disable-theme i)))
+  ;; home made themes
+  (defun theme-skygr ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'skygr t))
+  
+  (defun theme-plains ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'plains t))
+  
+  (defun theme-sea-foam ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'sea_foam t))
+  
+  (defun theme-orange-wedge ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'orange_wedge t))
+  
+  (defun theme-cotton-candy ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'cotton_candy t))
+
+  ;; downloaded themes
+  (defun theme-silkworm ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'silkworm t)
+    (set-frame-font "Inconsolata 16" nil t))
+
+  (defun theme-organic-green ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'organic-green t)
+    (set-frame-font "Inconsolata 16" nil t))
+  
+  (defun theme-bharadwaj-slate ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'bharadwaj-slate t)
+    (set-frame-font "Inconsolata 16" nil t))
+
+  (defun theme-xemacs ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'xemacs t)
+    (set-frame-font "Inconsolata 16" nil t))  
+
+  (defun theme-birds-of-paradise-plus ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'birds-of-paradise-plus t)
+    (set-frame-font "Inconsolata 16" nil t))
+  
+  (defun theme-modus-operandi ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'modus-operandi t)
+    (set-frame-font "Inconsolata 16" nil t))
+
+  (defun theme-dream ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'dream t)
+    (set-frame-font "Inconsolata 16" nil t))
+
+  (defun theme-subtle-blue ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'subtle-blue t)
+    (set-frame-font "Inconsolata 16" nil t))
+
+  (defun theme-base16-greenscreen ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'base16-greenscreen t)
+    (set-frame-font "Inconsolata 16" nil t))
+  
+  (defun theme-lawrence ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'lawrence t)
+    (set-frame-font "Inconsolata 16" nil t))
+
+  (defun theme-shaman ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'shaman t)
+    (set-frame-font "Inconsolata 16" nil t))
+  
+#+end_src
+*** Transparent frames
+#+begin_src emacs-lisp
+(defun set-frame-alpha (frame)
+  (set-frame-parameter frame 'alpha '(95 70)))
+(set-frame-alpha (selected-frame))
+(add-hook 'after-make-frame-functions 'set-frame-alpha)
+#+end_src
+** ERC Support
+#+begin_src emacs-lisp
+  ;; erc-tls autorun
+  (defun run-libera-chat ()
+    (interactive)
+    (erc-tls :server "irc.libera.chat" :port 6697 :nick ERC_NICK :password )) ;; set standard username
+#+end_src
+** Misc Functions
+#+begin_src emacs-lisp
+  ;; check/uncheck all checkboxes
+  (defun checkbox-all ()
+    (interactive)
+    (mark-whole-buffer)
+    (org-toggle-checkbox))
+  
+  ;; chatbot
+  (defun open-parla ()
+    (interactive)
+    (find-file "~/parla/run.R"))
+  
+  ;; mega/org folder
+  (defun open-mega ()
+    (interactive)
+    (find-file FOLDER_CLOUD))
+  
+  ;; open config
+  (defun open-config ()
+    (interactive)
+    (find-file ORG_CONFIG))
+  
+  ;; open help
+  (defun open-help ()
+    (interactive)
+    (find-file ORG_HELP))
+  
+  (defun open-sign ()
+    (interactive)
+    (find-file ORG_SIGN))
+  
+  (defun open-teos ()
+    (interactive)
+    (find-file ORG_TEOS))
+
+    (defun open-notes ()
+    (interactive)
+    (find-file ORG_NOTES))
+  
+  ;; open home file
+  (defun open-home ()
+    (interactive)
+    (if (file-exists-p ORG_HOME)
+	(find-file ORG_HOME)
+      (switch-to-buffer "*scratch*")))
+  
+  ;; open scratch
+  (defun open-scratch ()
+    (interactive)
+    (switch-to-buffer "*scratch*"))
+  
+  ;; delete current file (written by chatgpt so beware)
+  (defun delete-current-file ()
+    "Deletes the current file being viewed in the buffer"
+    (interactive)
+    (let ((filename (buffer-file-name)))
+      (when filename
+	(if (yes-or-no-p (format "Are you sure you want to delete %s?" filename))
+	    (progn
+	      (delete-file filename)
+	      (message "File '%s' deleted." filename)
+	      (kill-buffer))
+	  (message "File '%s' not deleted." filename)))))
+  
+  (defun write-current-time ()
+    "Writes the current time at the cursor position."
+    (interactive)
+    (insert (current-time-string)))
+  
+  (defun write-current-path ()
+    "Writes the path to current buffer at the cursor position."
+    (interactive)
+    (insert (buffer-file-name)))
+#+end_src
+** Keybindings
+some unbound C-c: ruj
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c s") 'eshell)
+  (global-set-key (kbd "C-.") 'other-window)
+  (global-set-key (kbd "C-:") 'other-frame)
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c c") 'org-capture)
+  (global-set-key (kbd "C-c f") 'font-inconsolata)
+  (global-set-key (kbd "C-c q") 'query-replace)
+  (global-set-key (kbd "C-c C-a") 'artist-mode)
+  (global-set-key (kbd "C-c e") 'run-libera-chat)
+  (global-set-key "\M- " 'hippie-expand)
+  (global-set-key (kbd "C-c v") 'visual-line-mode)
+  (global-set-key (kbd "C-c g") 'goto-line)
+  (global-set-key (kbd "C-c b") 'checkbox-all) ;; Clear checkboxes
+  (global-set-key (kbd "C-c t") 'org-timer-set-timer)
+  (global-set-key (kbd "C-c n") 'display-line-numbers-mode) ;; display line numbers mode
+  (global-set-key (kbd "C-c k") 'delete-current-file)
+
+  ;; insert text
+  (global-set-key (kbd "C-c o") 'write-current-time)
+  (global-set-key (kbd "C-c p") 'write-current-path)
+
+  ;; open files/folder
+  (global-set-key (kbd "C-c l") 'open-notes)
+  (global-set-key (kbd "C-c ø") 'open-config)
+  (global-set-key (kbd "C-c æ") 'open-help)
+  (global-set-key (kbd "C-c å") 'open-parla)
+  (global-set-key (kbd "C-c m") 'open-mega)
+  (global-set-key (kbd "C-c y") 'open-teos)
+  (global-set-key (kbd "C-c u") 'open-sign)
+
+  ;; org stuff
+  (global-set-key (kbd "C-c i") 'org-show-images)
+
+  ;; themes
+  (global-set-key (kbd "C-c x") 'theme-dream) ;; dark-theme
+  (global-set-key (kbd "C-c z") 'theme-silkworm) ;; light-theme
+  (global-set-key (kbd "C-c w") 'theme-modus-operandi) ;; word-theme
+
+
+  ;; norwegian special characters
+  (global-set-key (kbd "C-ø") 'make-frame-command)
+  (global-set-key (kbd "C-æ") 'delete-frame)
+  (global-set-key (kbd "C-å") 'open-scratch)
+
+  ;; all zetteldeft keybindings start with C-c d
+  (zetteldeft-set-classic-keybindings)
+#+end_src
+
+** Start
+#+begin_src emacs-lisp
+  ;; make sure the files exists
+  (theme-dream)
+  (if (string= (system-name) WORK_SYSTEM)(theme-subtle-blue))  ;; theme jobb
+  (if (string= (system-name) HOME_SYSTEM)(theme-bharadwaj-slate)) ;; theme home
+  (open-home)
+  (cd "~/")
+#+end_src
+
+
