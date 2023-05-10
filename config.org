@@ -543,7 +543,7 @@ find the font files here ~/emacs_utilities/fonts
   ;; chatbot
   (defun open-parla ()
     (interactive)
-    (find-file "~/parla/run.R"))
+    (find-file PATH_PARLA))
   
   ;; mega/org folder
   (defun open-mega ()
