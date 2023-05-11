@@ -4,8 +4,7 @@ q# -*- coding: utf-8 -*-
 #+STARTUP: content
 
 * Init Setup
-The init.el (path ~/.emacs.d/init.el) file will redirect to this file (~/emacs_utilities/org/config.org) if it contains the following code.
-
+The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it contains the following code:
 (org-babel-load-file "~/emacs-config/config.org")
 
 * Configuration
