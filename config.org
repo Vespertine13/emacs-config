@@ -21,7 +21,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file (~/emacs_u
 #+begin_src emacs-lisp
   ;; Load emacs packages and activate them
   ;; This must come before configurations of installed packages.
-  ;; Don't delete this line.
   (package-initialize)
   
   
@@ -82,7 +81,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file (~/emacs_u
   ;; setting UTF-8 Encoding
   (set-language-environment "UTF-8")
   ;; hide emphasis markers (bold, italics etc)
-  ;; (setq org-hide-emphasis-markers t)
+  (setq org-hide-emphasis-markers t)
 #+end_src
 ** Org Support
 *** Basics
