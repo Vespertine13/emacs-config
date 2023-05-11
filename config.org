@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+q# -*- coding: utf-8 -*-
 #+TITLE: 	Config file for Windows 10/64bit/GNU Emacs
 #+AUTHOR:	Eivind Kjeka Broen
 #+STARTUP: content
@@ -362,7 +362,8 @@ find the font files here ~/emacs_utilities/fonts
     (interactive)
     (dolist (i custom-enabled-themes)
       (disable-theme i)))
-  ;; home made themes
+ 
+ ;; home made themes
   (defun theme-skygr ()
     (interactive)
     (disable-all-themes)
@@ -585,8 +586,7 @@ some unbound C-c: rujh
   ;; themes
   (global-set-key (kbd "C-c x") 'theme-dream) ;; dark-theme
   (global-set-key (kbd "C-c z") 'theme-silkworm) ;; light-theme
-  (global-set-key (kbd "C-c w") 'theme-modus-operandi) ;; word-theme
-
+  (global-set-key (kbd "C-c w") 'theme-modus-operandi) ;; document-theme
 
   ;; norwegian special characters
   (global-set-key (kbd "C-ø") 'make-frame-command)
