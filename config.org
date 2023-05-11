@@ -154,10 +154,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file (~/emacs_u
 	      (local-set-key (kbd "<f7>") 'artist-select-op-flood-fill); f7 = fill
 	      (local-set-key (kbd "<f8>") 'artist-select-op-poly-line) ; f8 = poly-lines
 	      ))
-  
-  
-  ;; set shortcut
-  
+
 #+end_src
 
 ** Deft
@@ -339,9 +336,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file (~/emacs_u
   (menu-bar-mode -1)                  ;; removes menubar
 #+end_src
 *** Set font functions
-Some useless font functions.
 REMEMBER fonts need to be installed manually on windows systems.
-find the font files here ~/emacs_utilities/fonts
 
 #+begin_src emacs-lisp
   (defun font-timesnewroman ()
@@ -457,6 +452,7 @@ find the font files here ~/emacs_utilities/fonts
   
 #+end_src
 *** Transparent frames
+A bit unsure of the value on this code.
 #+begin_src emacs-lisp
 (defun set-frame-alpha (frame)
   (set-frame-parameter frame 'alpha '(95 70)))
