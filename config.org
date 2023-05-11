@@ -14,6 +14,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file (~/emacs_u
   ;; constants are written in caps
   (load-file "~/mega/emacs_utilities/config/constants.el")
   (load-file "~/mega/emacs_utilities/config/teos_config.el")
+  (load-file "~/mega/emacs_utilities/config/spansk.el")
 #+end_src
 ** Packages
 *** Melpa Package support
@@ -124,7 +125,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file (~/emacs_u
 	    ("m" "møtelogg" entry (file+datetree ORG_MOTELOGG)
 	     "* %? \nInnkalling: \nAgenda: \nNotater:")
 	    ("e" "Español" entry (file ORG_SPANISH)
-	     "* %? \nNorsk: \nEnglish: \nItaliano: ")
+	     "* %?")
   ))
 
     ;; Org todo workflow
@@ -281,10 +282,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file (~/emacs_u
 	      (lambda ()
 		(define-key python-mode-map (kbd "<M-return>") 'python-shell-send-region)))
   
-#+end_src
-** git support
-#+begin_src emacs-lisp
-;; (add-to-list 'exec-path "C:/Program Files/Git/bin/")
 #+end_src
 ** Scratch
 #+begin_src emacs-lisp
@@ -480,31 +477,31 @@ find the font files here ~/emacs_utilities/fonts
     (interactive)
     (mark-whole-buffer)
     (org-toggle-checkbox))
-  
+
   ;; chatbot
   (defun open-parla ()
     (interactive)
     (find-file PATH_PARLA))
-  
+
   ;; mega/org folder
   (defun open-mega ()
     (interactive)
     (find-file FOLDER_CLOUD))
-  
+
   ;; open config
   (defun open-config ()
     (interactive)
     (find-file ORG_CONFIG))
-  
+
   ;; open help
   (defun open-help ()
     (interactive)
     (find-file ORG_HELP))
-  
+
   (defun open-sign ()
     (interactive)
     (find-file ORG_SIGN))
-  
+
   (defun open-teos ()
     (interactive)
     (find-file ORG_TEOS))
@@ -512,20 +509,21 @@ find the font files here ~/emacs_utilities/fonts
     (defun open-notes ()
     (interactive)
     (find-file ORG_NOTES))
-  
+
   ;; open home file
   (defun open-home ()
     (interactive)
     (if (file-exists-p ORG_HOME)
 	(find-file ORG_HOME)
       (switch-to-buffer "*scratch*")))
-  
+
   ;; open scratch
   (defun open-scratch ()
     (interactive)
     (switch-to-buffer "*scratch*"))
-  
+
   ;; delete current file (written by chatgpt so beware)
+  ;; Useful in zetteldeft
   (defun delete-current-file ()
     "Deletes the current file being viewed in the buffer"
     (interactive)
@@ -537,19 +535,19 @@ find the font files here ~/emacs_utilities/fonts
 	      (message "File '%s' deleted." filename)
 	      (kill-buffer))
 	  (message "File '%s' not deleted." filename)))))
-  
+
   (defun write-current-time ()
     "Writes the current time at the cursor position."
     (interactive)
     (insert (current-time-string)))
-  
+
   (defun write-current-path ()
     "Writes the path to current buffer at the cursor position."
     (interactive)
     (insert (buffer-file-name)))
 #+end_src
 ** Keybindings
-some unbound C-c: ruj
+some unbound C-c: rujh
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c s") 'eshell)
   (global-set-key (kbd "C-.") 'other-window)
