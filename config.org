@@ -542,7 +542,7 @@ A bit unsure of the value on this code.
     (insert (buffer-file-name)))
 #+end_src
 ** Keybindings
-some unbound C-c: rujh
+some unbound C-c: ruj
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c s") 'eshell)
   (global-set-key (kbd "C-.") 'other-window)
@@ -573,6 +573,7 @@ some unbound C-c: rujh
   (global-set-key (kbd "C-c m") 'open-mega)
   (global-set-key (kbd "C-c y") 'open-teos)
   (global-set-key (kbd "C-c u") 'open-sign)
+  (global-set-key (kbd "C-c h") 'open-home)
 
   ;; org stuff
   (global-set-key (kbd "C-c i") 'org-show-images)
@@ -597,8 +598,8 @@ some unbound C-c: rujh
   (theme-dream)
   (if (string= (system-name) WORK_SYSTEM)(theme-subtle-blue))  ;; theme jobb
   (if (string= (system-name) HOME_SYSTEM)(theme-bharadwaj-slate)) ;; theme home
-  (open-home)
   (cd "~/")
+  (open-scratch)
 #+end_src
 
 
