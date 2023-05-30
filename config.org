@@ -1,4 +1,4 @@
-q# -*- coding: utf-8 -*-
+# -*- coding: utf-8 -*-
 #+TITLE: 	Config file for Windows 10/64bit/GNU Emacs
 #+AUTHOR:	Eivind Kjeka Broen
 #+STARTUP: content
@@ -158,8 +158,10 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 
 ** Deft
 #+begin_src emacs-lisp
+    ;; general
   (require 'deft)
   (setq deft-directory FOLDER_DEFT)
+  (setq zetteldeft-home-id "2023-01-24-1155")
   (setq deft-extensions '("org"))
   (setq deft-default-extension "org")
   (setq deft-text-mode 'org-mode)
@@ -171,9 +173,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ** Zetteldeft
 #+begin_src emacs-lisp
   (use-package zetteldeft)
-  (setq zetteldeft-home-id "2023-01-24-1155")
-  
-  
   (defun zetteldeft-wander ()
     "Wander through `zetteldeft' notes.
   Search `deft' for a random `zetteldeft' id."
@@ -471,87 +470,93 @@ A bit unsure of the value on this code.
 #+end_src
 ** Misc Functions
 #+begin_src emacs-lisp
-    ;; check/uncheck all checkboxes
-    (defun checkbox-all ()
-      (interactive)
-      (mark-whole-buffer)
-      (org-toggle-checkbox))
+  ;; check/uncheck all checkboxes
+  (defun checkbox-all ()
+    (interactive)
+    (mark-whole-buffer)
+    (org-toggle-checkbox))
 
-    ;; chatbot
-    (defun open-parla ()
-      (interactive)
-      (find-file PATH_PARLA))
+  ;; chatbot
+  (defun open-parla ()
+    (interactive)
+    (find-file PATH_PARLA))
 
-    ;; mega/org folder
-    (defun open-mega ()
-      (interactive)
-      (find-file FOLDER_CLOUD))
+  ;; mega/org folder
+  (defun open-mega ()
+    (interactive)
+    (find-file FOLDER_CLOUD))
 
-    ;; open config
-    (defun open-config ()
-      (interactive)
-      (find-file ORG_CONFIG))
+  ;; open config
+  (defun open-config ()
+    (interactive)
+    (find-file ORG_CONFIG))
 
-    ;; open help
-    (defun open-help ()
-      (interactive)
-      (find-file ORG_HELP))
+  ;; open help
+  (defun open-help ()
+    (interactive)
+    (find-file ORG_HELP))
 
-    (defun open-sign ()
-      (interactive)
-      (find-file ORG_SIGN))
+  (defun open-sign ()
+    (interactive)
+    (find-file ORG_SIGN))
 
-    (defun open-teos ()
-      (interactive)
-      (find-file ORG_TEOS))
+  (defun open-notes ()
+    (interactive)
+    (find-file ORG_NOTES))
 
-      (defun open-notes ()
-      (interactive)
-      (find-file ORG_NOTES))
+  ;; open scratch
+  (defun open-scratch ()
+    (interactive)
+    (switch-to-buffer "*scratch*"))
 
-    ;; open home file
-    (defun open-home ()
-      (interactive)
-      (if (file-exists-p ORG_HOME)
-	  (find-file ORG_HOME)
-	(switch-to-buffer "*scratch*")))
+  ;; deft folders
+  (defun deft-folder-deft ()
+    (interactive)
+    (setq deft-directory FOLDER_DEFT)
+    (deft-refresh)
+    (setq zetteldeft-home-id "2023-01-24-1155")
+    (zetteldeft-go-home)
+    )
 
-    ;; open scratch
-    (defun open-scratch ()
-      (interactive)
-      (switch-to-buffer "*scratch*"))
+  (defun deft-folder-teos ()
+    (interactive)
+    (setq deft-directory FOLDER_TEOS)
+    (deft-refresh)
+    (setq zetteldeft-home-id "2023-01-24-1156")
+    (zetteldeft-go-home)
+    )
 
-    ;; make frame solid
-    (defun make-solid ()
-      (interactive)
-      (set-frame-solid (selected-frame)))
+  ;; make frame solid
+  (defun make-solid ()
+    (interactive)
+    (set-frame-solid (selected-frame)))
 
-    ;; delete current file (written by chatgpt so beware)
-    ;; Useful in zetteldeft
-    (defun delete-current-file ()
-      "Deletes the current file being viewed in the buffer"
-      (interactive)
-      (let ((filename (buffer-file-name)))
-	(when filename
-	  (if (yes-or-no-p (format "Are you sure you want to delete %s?" filename))
-	      (progn
-		(delete-file filename)
-		(message "File '%s' deleted." filename)
-		(kill-buffer))
-	    (message "File '%s' not deleted." filename)))))
+  ;; delete current file (written by chatgpt so beware)
+  ;; Useful in zetteldeft
+  (defun delete-current-file ()
+    "Deletes the current file being viewed in the buffer"
+    (interactive)
+    (let ((filename (buffer-file-name)))
+      (when filename
+	(if (yes-or-no-p (format "Are you sure you want to delete %s?" filename))
+	    (progn
+	      (delete-file filename)
+	      (message "File '%s' deleted." filename)
+	      (kill-buffer))
+	  (message "File '%s' not deleted." filename)))))
 
-    (defun write-current-time ()
-      "Writes the current time at the cursor position."
-      (interactive)
-      (insert (current-time-string)))
+  (defun write-current-time ()
+    "Writes the current time at the cursor position."
+    (interactive)
+    (insert (current-time-string)))
 
-    (defun write-current-path ()
-      "Writes the path to current buffer at the cursor position."
-      (interactive)
-      (insert (buffer-file-name)))
+  (defun write-current-path ()
+    "Writes the path to current buffer at the cursor position."
+    (interactive)
+    (insert (buffer-file-name)))
 #+end_src
 ** Keybindings
-some unbound C-c: rj
+some unbound C-c: 
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c s") 'eshell)
   (global-set-key (kbd "C-.") 'other-window)
@@ -581,9 +586,11 @@ some unbound C-c: rj
   (global-set-key (kbd "C-c æ") 'open-help)
   (global-set-key (kbd "C-c å") 'open-parla)
   (global-set-key (kbd "C-c m") 'open-mega)
-  (global-set-key (kbd "C-c y") 'open-teos)
   (global-set-key (kbd "C-c u") 'open-sign)
-  (global-set-key (kbd "C-c h") 'open-home)
+
+  ;; deft
+  (global-set-key (kbd "C-c j") 'deft-folder-teos)
+  (global-set-key (kbd "C-c h") 'deft-folder-deft)
 
   ;; org stuff
   (global-set-key (kbd "C-c i") 'org-show-images)
