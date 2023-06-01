@@ -474,7 +474,8 @@ A bit unsure of the value on this code.
   (defun checkbox-all ()
     (interactive)
     (mark-whole-buffer)
-    (org-toggle-checkbox))
+    (org-toggle-checkbox)
+    (message "check/uncheck all"))
 
   ;; chatbot
   (defun open-parla ()
@@ -529,7 +530,8 @@ A bit unsure of the value on this code.
   ;; make frame solid
   (defun make-solid ()
     (interactive)
-    (set-frame-solid (selected-frame)))
+    (set-frame-solid (selected-frame))
+    (message "Solid frame"))
 
   ;; delete current file (written by chatgpt so beware)
   ;; Useful in zetteldeft
@@ -554,9 +556,10 @@ A bit unsure of the value on this code.
     "Writes the path to current buffer at the cursor position."
     (interactive)
     (insert (buffer-file-name)))
+
 #+end_src
 ** Keybindings
-some unbound C-c: 
+some unbound C-c: y 
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c s") 'eshell)
   (global-set-key (kbd "C-.") 'other-window)
