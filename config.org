@@ -636,6 +636,7 @@ some unbound C-c: y
   (if (string= (system-name) HOME_SYSTEM)(theme-bharadwaj-slate)) ;; theme home
   (cd "~/")
   (open-scratch)
+  (make-solid)
 #+end_src
 
 
