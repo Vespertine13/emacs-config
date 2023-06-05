@@ -563,6 +563,15 @@ A bit unsure of the value on this code.
 	      (kill-buffer))
 	  (message "File '%s' not deleted." filename)))))
 
+   ;; Function that helps C-backspace be more similar to the windows equivalent
+  (defun backward-kill-word-or-whitespace ()
+    "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
+    (interactive)
+    (if (looking-back "\\s-")
+	(progn
+	  (delete-region (point) (save-excursion (skip-chars-backward " \t\n") (point))))
+      (backward-kill-word 1)))
+
   (defun write-current-time ()
     "Writes the current time at the cursor position."
     (interactive)
@@ -623,6 +632,9 @@ some unbound C-c: y
   (global-set-key (kbd "C-ø") 'make-frame-command)
   (global-set-key (kbd "C-æ") 'delete-frame)
   (global-set-key (kbd "C-å") 'open-scratch)
+
+  ;; new C-backspace
+  (global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace)
 
   ;; all zetteldeft keybindings start with C-c d
   (zetteldeft-set-classic-keybindings)
