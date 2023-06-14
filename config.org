@@ -13,7 +13,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   ;; constants are written in caps
   (load-file "~/mega/emacs_utilities/config/constants.el")
   (load-file "~/mega/emacs_utilities/config/teos_config.el")
-  (load-file "~/mega/emacs_utilities/config/spansk.el")
 #+end_src
 ** Packages
 *** Melpa Package support
@@ -116,14 +115,14 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
     (setq org-capture-templates
 	  '(("t" "TODO" entry (file ORG_CAPTURE)
 	     "* TODO %?")
-	    ("j" "journal" entry (file+datetree ORG_JOURNAL)
+	    ("d" "Diary" entry (file+datetree ORG_DIARY)
 	     "* %?")
-	    ("h" "handleliste" entry (file ORG_HANDLELISTE)
-	     "* %?")
-	    ("m" "møtelogg" entry (file+datetree ORG_MOTELOGG)
+	    ("m" "Møtelogg" entry (file+datetree ORG_MOTELOGG)
 	     "* %? \nInnkalling: \nAgenda: \nNotater:")
-	    ("e" "Español" entry (file ORG_SPANISH)
-	     "* %?")
+	    ("e" "Events" entry (file ORG_EVENTS)
+	     "* %? ")
+	    ("j" "Teos TODOS" entry (file ORG_TEOS_TODOS)
+	     "* TODO %?")
   ))
 
     ;; Org todo workflow
@@ -279,12 +278,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 ** Scratch
 #+begin_src emacs-lisp
-  ;; select random item:
-  (setq random-index (random (length SPANISH_GLOSSARY)))
-  (setq random-item (nth random-index SPANISH_GLOSSARY))
-  
-  ;; input variable into scratch
-  (setq initial-scratch-message (concat "+--- Spanish Scratch ---+ \n" random-item))
+;; input variable into scratch
+(setq initial-scratch-message "")
 #+end_src
 ** Utilities
 *** Calendar Support
@@ -582,6 +577,12 @@ A bit unsure of the value on this code.
     (interactive)
     (insert (buffer-file-name)))
 
+  (defun open-org-agenda-for-current-week ()
+    (interactive)
+    (let ((current-prefix-arg '(4)))
+      (call-interactively 'org-agenda-list))
+    (message "Opening agenda for current week"))
+
 #+end_src
 ** Keybindings
 some unbound C-c: y 
@@ -647,7 +648,8 @@ some unbound C-c: y
   (if (string= (system-name) WORK_SYSTEM)(theme-subtle-blue))  ;; theme jobb
   (if (string= (system-name) HOME_SYSTEM)(theme-bharadwaj-slate)) ;; theme home
   (cd "~/")
-  (open-scratch)
+  (open-org-agenda-for-current-week)
+  (delete-other-windows nil) ;; deletes deft window
   (make-solid)
 #+end_src
 
