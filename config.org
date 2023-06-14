@@ -125,13 +125,16 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	     "* TODO %?")
   ))
 
-    ;; Org todo workflow
-    (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
+  ;; Org todo workflow
+  (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
 
-    ;; custom command
-    (setq org-agenda-custom-commands
-	  '(("j" "Jobbrelaterte TODOS"
-	     tags "+jobb+TODO=\"TODO\"")))
+  ;; custom command
+  (setq org-agenda-custom-commands
+	'(("j" "Jobbrelaterte TODOS"
+	   tags "+jobb+TODO=\"TODO\"")
+	  ("h" "Handleliste TODOS"
+	   tags "+handle+TODO=\"TODO\"")))
+  
 #+end_src
 *** Time Stamp
 #+begin_src emacs-lisp
