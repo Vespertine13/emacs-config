@@ -182,8 +182,20 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ** Zetteldeft
 #+begin_src emacs-lisp
   (use-package zetteldeft)
-#+end_src
 
+  ;; zetteldeft wander lets you access a random note
+  (defun zetteldeft-wander ()
+    "Wander through `zetteldeft' notes.
+    Search `deft' for a random `zetteldeft' id."
+      (interactive)
+      (switch-to-buffer deft-buffer)
+      (let ((all-files (deft-find-all-files-no-prefix)))
+	(deft-filter
+	  (zetteldeft--lift-id
+	   (nth (random (length all-files))
+		all-files)))))
+
+#+end_src
 ** Eshell
 #+begin_src emacs-lisp
   (add-hook 'eshell-mode-hook
@@ -639,6 +651,7 @@ some unbound C-c: y
 
   ;; all zetteldeft keybindings start with C-c d
   (zetteldeft-set-classic-keybindings)
+  (global-set-key (kbd "C-c y") 'zetteldeft-wander)
 #+end_src
 
 ** Start
