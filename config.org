@@ -116,7 +116,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	  '(("t" "TODO" entry (file ORG_CAPTURE)
 	     "* TODO %?")
 	    ("d" "Diary" entry (file+datetree ORG_DIARY)
-	     "* %?")
+	     "* Dagen i går%?")
 	    ("m" "Møtelogg" entry (file+datetree ORG_MOTELOGG)
 	     "* %? \nInnkalling: \nAgenda: \nNotater:")
 	    ("e" "Events" entry (file ORG_EVENTS)
@@ -158,6 +158,13 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 
 #+end_src
 
+** Backup
+#+begin_src emacs-lisp
+    (setq backup-directory-alist
+          `((".*" . ,TEMP_DIRECTORY)))
+    (setq auto-save-file-name-transforms
+          `((".*" ,TEMP_DIRECTORY t)))
+#+end_src
 ** Deft
 #+begin_src emacs-lisp
     ;; general
@@ -175,16 +182,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ** Zetteldeft
 #+begin_src emacs-lisp
   (use-package zetteldeft)
-  (defun zetteldeft-wander ()
-    "Wander through `zetteldeft' notes.
-  Search `deft' for a random `zetteldeft' id."
-    (interactive)
-    (switch-to-buffer deft-buffer)
-    (let ((all-files (deft-find-all-files-no-prefix)))
-      (deft-filter
-	(zetteldeft--lift-id
-	  (nth (random (length all-files))
-	     all-files)))))
 #+end_src
 
 ** Eshell
