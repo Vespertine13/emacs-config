@@ -133,7 +133,12 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	'(("j" "Jobbrelaterte TODOS"
 	   tags "+jobb+TODO=\"TODO\"")
 	  ("h" "Handleliste TODOS"
-	   tags "+handle+TODO=\"TODO\"")))
+	   tags "+handle+TODO=\"TODO\"")
+	  ("f" "Filmer TODOS"
+	   tags "+film+TODO=\"TODO\"")
+	  ("b" "Bøker TODOS"
+	   tags "+bok+TODO=\"TODO\"")))
+
   
 #+end_src
 *** Time Stamp
