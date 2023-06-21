@@ -480,15 +480,26 @@ REMEMBER fonts need to be installed manually on windows systems.
 
 #+end_src
 *** Transparent frames
-A bit unsure of the value on this code.
 #+begin_src emacs-lisp
-(defun set-frame-alpha (frame)
-  (set-frame-parameter frame 'alpha '(90 50)))
-(set-frame-alpha (selected-frame))
-(add-hook 'after-make-frame-functions 'set-frame-alpha)
+  (defvar-local transparent-frame-enabled nil
+    "Flag that indicates if the buffer is transparent.")
 
-(defun set-frame-solid (frame)
-  (set-frame-parameter frame 'alpha '(100 100)))
+  (defun set-frame-solid ()
+    (set-frame-parameter (selected-frame) 'alpha '(100 100))
+    (message "Solid frame"))
+
+  (defun set-frame-transparent ()
+    (set-frame-parameter (selected-frame) 'alpha '(70 70))
+    (message "Transparent frame"))
+
+  (defun toggle-frame-solidity ()
+    "Toggle between solid and transparent frame for the current buffer."
+    (interactive)
+    (setq transparent-frame-enabled (not transparent-frame-enabled))
+    (if transparent-frame-enabled
+	(set-frame-transparent)
+      (set-frame-solid)))
+
 
 #+end_src
 ** ERC Support
@@ -556,12 +567,6 @@ A bit unsure of the value on this code.
     (setq zetteldeft-home-id "2023-01-24-1156")
     (zetteldeft-go-home)
     )
-
-  ;; make frame solid
-  (defun make-solid ()
-    (interactive)
-    (set-frame-solid (selected-frame))
-    (message "Solid frame"))
 
   ;; delete current file (written by chatgpt so beware)
   ;; Useful in zetteldeft
@@ -653,7 +658,7 @@ some unbound C-c: l, u
   (global-set-key (kbd "C-å") 'open-scratch)
   (global-set-key (kbd "M-ø") 'kmacro-start-macro-or-insert-counter)
   (global-set-key (kbd "M-æ") 'kmacro-end-or-call-macro)
-  (global-set-key (kbd "M-å") 'imenu)
+  (global-set-key (kbd "M-å") 'toggle-frame-solidity)
 
   ;; new C-backspace
   (global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace)
@@ -672,7 +677,6 @@ some unbound C-c: l, u
   (cd "~/")
   (open-org-agenda-for-current-week)
   (delete-other-windows nil) ;; deletes deft window
-  (make-solid)
 #+end_src
 
 
