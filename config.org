@@ -370,35 +370,17 @@ REMEMBER fonts need to be installed manually on windows systems.
       (disable-theme i)))
 
   ;; home made themes
-  (defun theme-skygr ()
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'skygr t)
-    (message "theme skygr"))
-
-  (defun theme-plains ()
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'plains t)
-    (message "theme plains"))
-
-  (defun theme-sea-foam ()
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'sea_foam t)
-    (message "theme sea_foam"))
-
   (defun theme-orange-wedge ()
     (interactive)
     (disable-all-themes)
        (load-theme 'orange_wedge t)
        (message "theme orange_wedge"))
 
-  (defun theme-cotton-candy ()
+  (defun theme-bubblegum ()
     (interactive)
     (disable-all-themes)
-    (load-theme 'cotton_candy t)
-    (message "theme cotton_candy"))
+    (load-theme 'bubblegum t)
+    (message "theme bubblegum"))
 
   ;; downloaded themes
   (defun theme-silkworm ()
@@ -408,13 +390,6 @@ REMEMBER fonts need to be installed manually on windows systems.
     (set-frame-font "Inconsolata 16" nil t)
     (message "theme silkworm"))
 
-  (defun theme-organic-green ()
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'organic-green t)
-    (set-frame-font "Inconsolata 16" nil t)
-    (message "theme organic green"))
-
   (defun theme-bharadwaj-slate ()
     (interactive)
     (disable-all-themes)
@@ -422,26 +397,12 @@ REMEMBER fonts need to be installed manually on windows systems.
     (set-frame-font "Inconsolata 16" nil t)
     (message "theme bharadwaj-slate"))
 
-  (defun theme-xemacs ()
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'xemacs t)
-    (set-frame-font "Inconsolata 16" nil t)  
-    (message "theme xemacs"))
-
   (defun theme-birds-of-paradise-plus ()
     (interactive)
     (disable-all-themes)
     (load-theme 'birds-of-paradise-plus t)
     (set-frame-font "Inconsolata 16" nil t)
     (message "theme birds-of-paradise-plus"))
-
-  (defun theme-modus-operandi ()
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'modus-operandi t)
-    (set-frame-font "Inconsolata 16" nil t)
-    (message "theme modus-operandi"))
 
   (defun theme-dream ()
     (interactive)
@@ -464,13 +425,6 @@ REMEMBER fonts need to be installed manually on windows systems.
     (set-frame-font "Inconsolata 16" nil t)
     (message "theme base16-greenscreen"))
 
-  (defun theme-lawrence ()
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'lawrence t)
-    (set-frame-font "Inconsolata 16" nil t)
-    (message "theme lawrence"))
-
   (defun theme-shaman ()
     (interactive)
     (disable-all-themes)
@@ -484,11 +438,15 @@ REMEMBER fonts need to be installed manually on windows systems.
   (defun cycle-themes ()
     "Toggle between different themes"
     (interactive)
-    (setq current-theme-idx (mod (1+ current-theme-idx) 4))
-    (cond ((= current-theme-idx 0) (theme-modus-operandi))
+    (setq current-theme-idx (mod (1+ current-theme-idx) 7))
+    (cond ((= current-theme-idx 0) (theme-base16-greenscreen))
 	  ((= current-theme-idx 1) (theme-silkworm))
-	  ((= current-theme-idx 2) (theme-dream))
-	  ((= current-theme-idx 3) (theme-shaman))))
+	  ((= current-theme-idx 2) (theme-shaman))
+	  ((= current-theme-idx 3) (theme-dream))
+	  ((= current-theme-idx 4) (theme-subtle-blue))
+	  ((= current-theme-idx 5) (theme-birds-of-paradise-plus))
+	  ((= current-theme-idx 6) (theme-bharadwaj-slate))))
+
 
 #+End_src
 
@@ -683,8 +641,8 @@ some unbound C-c: u, z, w
 #+begin_src emacs-lisp
   ;; make sure the files exists
   (theme-dream)
-  (when (string= (system-name) WORK_SYSTEM)(theme-subtle-blue))  ;; theme jobb
-  (when (string= (system-name) HOME_SYSTEM)(theme-bharadwaj-slate)) ;; theme home
+  (when (string= (system-name) WORK_SYSTEM)(theme-bubblegum))  ;; theme jobb
+  (when (string= (system-name) HOME_SYSTEM)(theme-orange-wedge)) ;; theme home
   (cd "~/")
   (open-org-agenda-for-current-week)
   (delete-other-windows nil) ;; deletes deft window
