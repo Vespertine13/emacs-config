@@ -363,122 +363,135 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+end_src
 *** Theme functions
 #+begin_src emacs-lisp
-   (defun disable-all-themes ()
-   "Disable all currently active themes."
-     (interactive)
-     (dolist (i custom-enabled-themes)
-       (disable-theme i)))
+  (defun disable-all-themes ()
+    "Disable all currently active themes."
+    (interactive)
+    (dolist (i custom-enabled-themes)
+      (disable-theme i)))
 
   ;; home made themes
-   (defun theme-skygr ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'skygr t)
-     (message "theme skygr"))
+  (defun theme-skygr ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'skygr t)
+    (message "theme skygr"))
 
-   (defun theme-plains ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'plains t)
-     (message "theme plains"))
+  (defun theme-plains ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'plains t)
+    (message "theme plains"))
 
-   (defun theme-sea-foam ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'sea_foam t)
-     (message "theme sea_foam"))
+  (defun theme-sea-foam ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'sea_foam t)
+    (message "theme sea_foam"))
 
-   (defun theme-orange-wedge ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'orange_wedge t)
-     (message "theme orange_wedge"))
+  (defun theme-orange-wedge ()
+    (interactive)
+    (disable-all-themes)
+       (load-theme 'orange_wedge t)
+       (message "theme orange_wedge"))
 
-   (defun theme-cotton-candy ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'cotton_candy t)
-     (message "theme cotton_candy"))
+  (defun theme-cotton-candy ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'cotton_candy t)
+    (message "theme cotton_candy"))
 
-   ;; downloaded themes
-   (defun theme-silkworm ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'silkworm t)
-     (set-frame-font "Inconsolata 16" nil t)
-     (message "theme silkworm"))
+  ;; downloaded themes
+  (defun theme-silkworm ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'silkworm t)
+    (set-frame-font "Inconsolata 16" nil t)
+    (message "theme silkworm"))
 
-   (defun theme-organic-green ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'organic-green t)
-     (set-frame-font "Inconsolata 16" nil t)
-     (message "theme organic green"))
+  (defun theme-organic-green ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'organic-green t)
+    (set-frame-font "Inconsolata 16" nil t)
+    (message "theme organic green"))
 
-   (defun theme-bharadwaj-slate ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'bharadwaj-slate t)
-     (set-frame-font "Inconsolata 16" nil t)
-     (message "theme bharadwaj-slate"))
+  (defun theme-bharadwaj-slate ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'bharadwaj-slate t)
+    (set-frame-font "Inconsolata 16" nil t)
+    (message "theme bharadwaj-slate"))
 
-   (defun theme-xemacs ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'xemacs t)
-     (set-frame-font "Inconsolata 16" nil t)  
-     (message "theme xemacs"))
+  (defun theme-xemacs ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'xemacs t)
+    (set-frame-font "Inconsolata 16" nil t)  
+    (message "theme xemacs"))
 
-   (defun theme-birds-of-paradise-plus ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'birds-of-paradise-plus t)
-     (set-frame-font "Inconsolata 16" nil t)
-     (message "theme birds-of-paradise-plus"))
+  (defun theme-birds-of-paradise-plus ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'birds-of-paradise-plus t)
+    (set-frame-font "Inconsolata 16" nil t)
+    (message "theme birds-of-paradise-plus"))
 
-   (defun theme-modus-operandi ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'modus-operandi t)
-     (set-frame-font "Inconsolata 16" nil t)
-     (message "theme modus-operandi"))
+  (defun theme-modus-operandi ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'modus-operandi t)
+    (set-frame-font "Inconsolata 16" nil t)
+    (message "theme modus-operandi"))
 
-   (defun theme-dream ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'dream t)
-     (set-frame-font "Inconsolata 16" nil t)
-     (message "theme dream"))
+  (defun theme-dream ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'dream t)
+    (set-frame-font "Inconsolata 16" nil t)
+    (message "theme dream"))
 
-   (defun theme-subtle-blue ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'subtle-blue t)
-     (set-frame-font "Inconsolata 16" nil t)
-     (message "theme subtle-blue"))
+  (defun theme-subtle-blue ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'subtle-blue t)
+    (set-frame-font "Inconsolata 16" nil t)
+    (message "theme subtle-blue"))
 
-   (defun theme-base16-greenscreen ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'base16-greenscreen t)
-     (set-frame-font "Inconsolata 16" nil t)
-     (message "theme base16-greenscreen"))
+  (defun theme-base16-greenscreen ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'base16-greenscreen t)
+    (set-frame-font "Inconsolata 16" nil t)
+    (message "theme base16-greenscreen"))
 
-   (defun theme-lawrence ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'lawrence t)
-     (set-frame-font "Inconsolata 16" nil t)
-     (message "theme lawrence"))
+  (defun theme-lawrence ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'lawrence t)
+    (set-frame-font "Inconsolata 16" nil t)
+    (message "theme lawrence"))
 
-   (defun theme-shaman ()
-     (interactive)
-     (disable-all-themes)
-     (load-theme 'shaman t)
-     (set-frame-font "Inconsolata 16" nil t)
-     (message "theme shaman"))
+  (defun theme-shaman ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'shaman t)
+    (set-frame-font "Inconsolata 16" nil t)
+    (message "theme shaman"))
 
-#+end_src
+  (defvar current-theme-idx 0
+    "integer representing the current theme")
+
+  (defun cycle-themes ()
+    "Toggle between different themes"
+    (interactive)
+    (setq current-theme-idx (mod (1+ current-theme-idx) 4))
+    (cond ((= current-theme-idx 0) (theme-modus-operandi))
+	  ((= current-theme-idx 1) (theme-silkworm))
+	  ((= current-theme-idx 2) (theme-dream))
+	  ((= current-theme-idx 3) (theme-shaman))))
+
+#+End_src
+
 *** Transparent frames
 #+begin_src emacs-lisp
   (defvar-local transparent-frame-enabled nil
@@ -609,7 +622,7 @@ REMEMBER fonts need to be installed manually on windows systems.
 
 #+end_src
 ** Keybindings
-some unbound C-c: l, u
+some unbound C-c: u, z, w
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c s") 'eshell)
   (global-set-key (kbd "C-.") 'other-window)
@@ -647,10 +660,8 @@ some unbound C-c: l, u
   ;; org stuff
   (global-set-key (kbd "C-c i") 'org-show-images)
 
-  ;; themes
-  (global-set-key (kbd "C-c x") 'theme-dream) ;; dark-theme
-  (global-set-key (kbd "C-c z") 'theme-silkworm) ;; light-theme
-  (global-set-key (kbd "C-c w") 'theme-modus-operandi) ;; document-theme
+  ;; Cycle themes
+  (global-set-key (kbd "C-c x") 'cycle-themes) 
 
   ;; norwegian special characters
   (global-set-key (kbd "C-ø") 'make-frame-command)
