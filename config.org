@@ -78,6 +78,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (global-display-line-numbers-mode t)
   ;; setting UTF-8 Encoding
   (set-language-environment "UTF-8")
+  (prefer-coding-system 'utf-8)
+  (set-terminal-coding-system 'utf-8)
   ;; hide emphasis markers (bold, italics etc)
   (setq org-hide-emphasis-markers t)
 #+end_src
@@ -602,7 +604,7 @@ A bit unsure of the value on this code.
 
 #+end_src
 ** Keybindings
-some unbound C-c: y 
+some unbound C-c: l, u
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c s") 'eshell)
   (global-set-key (kbd "C-.") 'other-window)
@@ -621,18 +623,17 @@ some unbound C-c: y
   (global-set-key (kbd "C-c n") 'display-line-numbers-mode) ;; display line numbers mode
   (global-set-key (kbd "C-c k") 'delete-current-file)
   (global-set-key (kbd "C-c r") 'make-solid)
+  (global-set-key (kbd "C-c l") 'sort-lines)
 
   ;; insert text
   (global-set-key (kbd "C-c o") 'write-current-time)
   (global-set-key (kbd "C-c p") 'write-current-path)
 
   ;; open files/folder
-  (global-set-key (kbd "C-c l") 'open-notes)
   (global-set-key (kbd "C-c ø") 'open-config)
-  (global-set-key (kbd "C-c æ") 'open-help)
   (global-set-key (kbd "C-c å") 'open-parla)
+  (global-set-key (kbd "C-c æ") 'open-sign)
   (global-set-key (kbd "C-c m") 'open-mega)
-  (global-set-key (kbd "C-c u") 'open-sign)
 
   ;; deft
   (global-set-key (kbd "C-c j") 'deft-folder-teos)
@@ -650,6 +651,9 @@ some unbound C-c: y
   (global-set-key (kbd "C-ø") 'make-frame-command)
   (global-set-key (kbd "C-æ") 'delete-frame)
   (global-set-key (kbd "C-å") 'open-scratch)
+  (global-set-key (kbd "M-ø") 'kmacro-start-macro-or-insert-counter)
+  (global-set-key (kbd "M-æ") 'kmacro-end-or-call-macro)
+  (global-set-key (kbd "M-å") 'imenu)
 
   ;; new C-backspace
   (global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace)
