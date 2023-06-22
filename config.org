@@ -472,6 +472,12 @@ REMEMBER fonts need to be installed manually on windows systems.
     (org-toggle-checkbox)
     (message "check/uncheck all"))
 
+  ;; unhighlight all
+  (defun unhighlight-all  ()
+    (interactive)
+    (unhighlight-regexp t)
+    (message "Removed all highlights"))
+  
   ;; chatbot
   (defun open-parla ()
     (interactive)
@@ -489,24 +495,21 @@ REMEMBER fonts need to be installed manually on windows systems.
   (defun open-org ()
     (interactive)
     (find-file FOLDER_ORG))
+  (defun open-handleliste ()
+    (interactive)
+    (find-file ORG_HANDLELISTE))
+  (defun open-emacs_utilities ()
+    (interactive)
+    (find-file FOLDER_EMACS_UTILITIES))
 
   ;; open config
   (defun open-config ()
     (interactive)
     (find-file ORG_CONFIG))
 
-  ;; open help
-  (defun open-help ()
-    (interactive)
-    (find-file ORG_HELP))
-
   (defun open-sign ()
     (interactive)
     (find-file ORG_SIGN))
-
-  (defun open-notes ()
-    (interactive)
-    (find-file ORG_NOTES))
 
   ;; open scratch
   (defun open-scratch ()
@@ -571,37 +574,41 @@ REMEMBER fonts need to be installed manually on windows systems.
 
 #+end_src
 ** Keybindings
-some unbound C-c: w
+some unbound C-c: m, u, z, r
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-c s") 'eshell)
+  (global-set-key (kbd "C-c s") 'eshell)	
   (global-set-key (kbd "C-.") 'other-window)
   (global-set-key (kbd "C-:") 'other-frame)
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key (kbd "C-c f") 'font-inconsolata)
+  (global-set-key (kbd "C-c f") 'find-file-read-only)
+  (global-set-key (kbd "C-c w") 'font-inconsolata)
   (global-set-key (kbd "C-c q") 'query-replace)
   (global-set-key (kbd "C-c e") 'run-libera-chat)
   (global-set-key "\M- " 'hippie-expand)
-  (global-set-key (kbd "C-c v") 'visual-line-mode)
   (global-set-key (kbd "C-c g") 'goto-line)
   (global-set-key (kbd "C-c b") 'checkbox-all) ;; Clear checkboxes
   (global-set-key (kbd "C-c t") 'org-timer-set-timer)
   (global-set-key (kbd "C-c n") 'display-line-numbers-mode) ;; display line numbers mode
+  (global-set-key (kbd "C-c v") 'visual-line-mode)
   (global-set-key (kbd "C-c k") 'delete-current-file)
-  (global-set-key (kbd "C-c r") 'make-solid)
   (global-set-key (kbd "C-c l") 'sort-lines)
 
   ;; insert text
   (global-set-key (kbd "C-c o") 'write-current-time)
   (global-set-key (kbd "C-c p") 'write-current-path)
 
-  ;; open files/folder
-  (global-set-key (kbd "C-c ø") 'open-config)
-  (global-set-key (kbd "C-c å") 'open-parla)
-  (global-set-key (kbd "C-c æ") 'open-flashcards)
-  (global-set-key (kbd "C-c m") 'open-mega)
-  (global-set-key (kbd "C-c u") 'open-sign)
-  (global-set-key (kbd "C-c z") 'open-org)
+  ;; open files 0:9
+  (global-set-key (kbd "C-c 1") 'zetteldeft-go-home)
+  (global-set-key (kbd "C-c 2") 'open-config)
+  (global-set-key (kbd "C-c 3") 'open-mega)
+  (global-set-key (kbd "C-c 4") 'open-emacs_utilities)
+  (global-set-key (kbd "C-c 5") 'open-org)
+  (global-set-key (kbd "C-c 6") 'open-handleliste)
+  (global-set-key (kbd "C-c 7") 'open-sign)
+  (global-set-key (kbd "C-c 8") 'open-flashcards)
+  (global-set-key (kbd "C-c 9") 'open-parla) 
+  (global-set-key (kbd "C-c 0") 'open-scratch)
 
   ;; deft
   (global-set-key (kbd "C-c j") 'deft-folder-teos)
@@ -611,12 +618,15 @@ some unbound C-c: w
   (global-set-key (kbd "C-c i") 'org-show-images)
 
   ;; Cycle themes
-  (global-set-key (kbd "C-c x") 'cycle-themes) 
+  (global-set-key (kbd "C-c x") 'cycle-themes)
 
   ;; norwegian special characters
+  (global-set-key (kbd "C-c æ") 'unhighlight-all) 
+  (global-set-key (kbd "C-c ø") 'highlight-symbol-at-point)
+  (global-set-key (kbd "C-c å") 'comment-dwim) ;; comments added at end of line (like this)
   (global-set-key (kbd "C-ø") 'make-frame-command)
   (global-set-key (kbd "C-æ") 'delete-frame)
-  (global-set-key (kbd "C-å") 'open-scratch)
+  (global-set-key (kbd "C-å") 'comment-line) ;; comments the line, so it does not run
   (global-set-key (kbd "M-ø") 'kmacro-start-macro-or-insert-counter)
   (global-set-key (kbd "M-æ") 'kmacro-end-or-call-macro)
   (global-set-key (kbd "M-å") 'toggle-frame-solidity)
