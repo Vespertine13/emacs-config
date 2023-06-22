@@ -595,6 +595,7 @@ some unbound C-c: u, r
   (global-set-key (kbd "C-c l") 'sort-lines)
   (global-set-key (kbd "C-c m") 'imenu)
   (global-set-key (kbd "C-c z") 'zone)
+  (global-set-key (kbd "C-c r") 'revert-buffer) ;; rereads current buffer from disk
 
   ;; insert text
   (global-set-key (kbd "C-c o") 'write-current-time)
