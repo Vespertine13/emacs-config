@@ -574,7 +574,7 @@ REMEMBER fonts need to be installed manually on windows systems.
 
 #+end_src
 ** Keybindings
-some unbound C-c: u, r
+some unbound C-c: u
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c s") 'eshell)
   (global-set-key (kbd "C-.") 'other-window)
