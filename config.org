@@ -148,23 +148,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (setq-default org-display-custom-times t)
   (setq org-time-stamp-custom-formats '("<%e.%m.%Y>" . "<%e.%m.%Y %H:%M>"))
 #+end_src
-*** Artist Mode
-#+begin_src emacs-lisp
-  ;; add hotkeys
-  (add-hook 'artist-mode-hook
-	    (lambda ()
-	      (local-set-key (kbd "<f1>") 'artist-select-op-pen-line)  ; f1 = pen mode
-	      (local-set-key (kbd "<f2>") 'artist-select-op-erase-char); f2 = eraser mode
-	      (local-set-key (kbd "<f3>") 'artist-select-op-spray-can) ; f3 = spray-can mode
-	      (local-set-key (kbd "<f4>") 'artist-select-op-line)      ; f4 = line
-	      (local-set-key (kbd "<f5>") 'artist-select-op-square)    ; f5 = rectangle
-	      (local-set-key (kbd "<f6>") 'artist-select-op-ellipse)   ; f6 = ellipse
-	      (local-set-key (kbd "<f7>") 'artist-select-op-flood-fill); f7 = fill
-	      (local-set-key (kbd "<f8>") 'artist-select-op-poly-line) ; f8 = poly-lines
-	      ))
-
-#+end_src
-
 ** Backup
 #+begin_src emacs-lisp
     (setq backup-directory-alist
@@ -494,10 +477,18 @@ REMEMBER fonts need to be installed manually on windows systems.
     (interactive)
     (find-file PATH_PARLA))
 
+  ;; flashcards
+  (defun open-flashcards ()
+    (interactive)
+    (find-file PATH_FLASHCARDS))
+
   ;; mega/org folder
   (defun open-mega ()
     (interactive)
     (find-file FOLDER_CLOUD))
+  (defun open-org ()
+    (interactive)
+    (find-file FOLDER_ORG))
 
   ;; open config
   (defun open-config ()
@@ -580,7 +571,7 @@ REMEMBER fonts need to be installed manually on windows systems.
 
 #+end_src
 ** Keybindings
-some unbound C-c: u, z, w
+some unbound C-c: w
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c s") 'eshell)
   (global-set-key (kbd "C-.") 'other-window)
@@ -589,7 +580,6 @@ some unbound C-c: u, z, w
   (global-set-key (kbd "C-c c") 'org-capture)
   (global-set-key (kbd "C-c f") 'font-inconsolata)
   (global-set-key (kbd "C-c q") 'query-replace)
-  (global-set-key (kbd "C-c C-a") 'artist-mode)
   (global-set-key (kbd "C-c e") 'run-libera-chat)
   (global-set-key "\M- " 'hippie-expand)
   (global-set-key (kbd "C-c v") 'visual-line-mode)
@@ -608,8 +598,10 @@ some unbound C-c: u, z, w
   ;; open files/folder
   (global-set-key (kbd "C-c ø") 'open-config)
   (global-set-key (kbd "C-c å") 'open-parla)
-  (global-set-key (kbd "C-c æ") 'open-sign)
+  (global-set-key (kbd "C-c æ") 'open-flashcards)
   (global-set-key (kbd "C-c m") 'open-mega)
+  (global-set-key (kbd "C-c u") 'open-sign)
+  (global-set-key (kbd "C-c z") 'open-org)
 
   ;; deft
   (global-set-key (kbd "C-c j") 'deft-folder-teos)
