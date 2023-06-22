@@ -20,34 +20,34 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   ;; Load emacs packages and activate them
   ;; This must come before configurations of installed packages.
   (package-initialize)
-  
-  
+
+
   ;; Enables basic packaging support
   (require 'package)
-  
-  
+
+
   ;; repositories
   (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
 			   ("melpa" . "http://melpa.org/packages/")
 			   ("org" . "http://orgmode.org/elpa/")))
-  
-  
+
+
   ;; If there are no archived package contents, refresh them
   (if (not (package-installed-p 'use-package))
       (progn
 	(package-refresh-contents)
 	(package-install 'use-package)))
-  
+
   (require 'use-package)
-  
+
 #+end_src
 *** Package Installation
 #+begin_src emacs-lisp
   ;; Installs packages
-  
+
   ;; myPackages contains a list of package names
   ;; dont be tempted to use elpy!
-  
+
   (defvar myPackages
     '(ess                              ;; ESS
       anaconda-mode                    ;; anaconda mode for python
@@ -56,17 +56,17 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       ein                              ;; jupyterlab stuff
       )
     )
-  
+
   ;; Scans the list in myPackages
-  
+
   ;; If the package listed is not already installed, install it
-  
+
   (mapc #'(lambda (package)
-  
+
 	    (unless (package-installed-p package)
-  
+
 	      (package-install package)))
-  
+
 	myPackages)
 #+end_src
 
@@ -141,7 +141,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	  ("b" "Bøker TODOS"
 	   tags "+bok+TODO=\"TODO\"")))
 
-  
+
 #+end_src
 *** Time Stamp
 #+begin_src emacs-lisp
@@ -235,17 +235,17 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 
     ;; add anaconda
     (add-hook 'python-mode-hook 'anaconda-mode)
-  
+
     ;; add company anaconda
     (eval-after-load "company"
       '(add-to-list 'company-backends 'company-anaconda))
     (add-hook 'python-mode-hook 'anaconda-mode)
-  
+
     ;; set standard indent
-    (add-hook 'python-mode-hook '(lambda () 
+    (add-hook 'python-mode-hook '(lambda ()
 				   (setq python-indent 4)))
     (setq python-indent-guess-indent-offset nil)
-  
+
     (defun my-python-line ()
       (interactive)
       (save-excursion
@@ -266,17 +266,17 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       (end-of-line)
       (next-line)
       )
-  
+
     ;; setter send line til C-return
     (add-hook 'python-mode-hook
 	      (lambda ()
 		(define-key python-mode-map (kbd "<C-return>") 'my-python-line)))
-  
+
     ;; setter send region til M-return
     (add-hook 'python-mode-hook
 	      (lambda ()
 		(define-key python-mode-map (kbd "<M-return>") 'python-shell-send-region)))
-  
+
 #+end_src
 ** Scratch
 #+begin_src emacs-lisp
@@ -296,14 +296,14 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 		   (calendar-iso-from-absolute
 		    (calendar-absolute-from-gregorian (list month day year)))))
 	  'font-lock-face 'calendar-iso-week-face))
-  
-  
+
+
   (add-hook 'calendar-load-hook
 	    (lambda ()
 	      (calendar-set-date-style 'european)))
-  
+
   (setq calendar-week-start-day 1)
-  
+
 #+end_src
 *** Timer
 #+begin_src emacs-lisp
@@ -313,12 +313,12 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+begin_src emacs-lisp
   ;; Minimize garbage collection during startup
   (setq gc-cons-threshold most-positive-fixnum)
-  
+
   ;; Lower threshold back to 8 MiB (default is 800kB)
   (add-hook 'emacs-startup-hook
 	    (lambda ()
 	      (setq gc-cons-threshold (expt 2 23))))
-  
+
 #+end_src
 ** Appearance
 *** Misc
@@ -477,7 +477,7 @@ REMEMBER fonts need to be installed manually on windows systems.
     (interactive)
     (unhighlight-regexp t)
     (message "Removed all highlights"))
-  
+
   ;; chatbot
   (defun open-parla ()
     (interactive)
@@ -574,9 +574,9 @@ REMEMBER fonts need to be installed manually on windows systems.
 
 #+end_src
 ** Keybindings
-some unbound C-c: m, u, z, r
+some unbound C-c: u, r
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-c s") 'eshell)	
+  (global-set-key (kbd "C-c s") 'eshell)
   (global-set-key (kbd "C-.") 'other-window)
   (global-set-key (kbd "C-:") 'other-frame)
   (global-set-key (kbd "C-c a") 'org-agenda)
@@ -593,6 +593,8 @@ some unbound C-c: m, u, z, r
   (global-set-key (kbd "C-c v") 'visual-line-mode)
   (global-set-key (kbd "C-c k") 'delete-current-file)
   (global-set-key (kbd "C-c l") 'sort-lines)
+  (global-set-key (kbd "C-c m") 'imenu)
+  (global-set-key (kbd "C-c z") 'zone)
 
   ;; insert text
   (global-set-key (kbd "C-c o") 'write-current-time)
@@ -607,7 +609,7 @@ some unbound C-c: m, u, z, r
   (global-set-key (kbd "C-c 6") 'open-handleliste)
   (global-set-key (kbd "C-c 7") 'open-sign)
   (global-set-key (kbd "C-c 8") 'open-flashcards)
-  (global-set-key (kbd "C-c 9") 'open-parla) 
+  (global-set-key (kbd "C-c 9") 'open-parla)
   (global-set-key (kbd "C-c 0") 'open-scratch)
 
   ;; deft
@@ -621,7 +623,7 @@ some unbound C-c: m, u, z, r
   (global-set-key (kbd "C-c x") 'cycle-themes)
 
   ;; norwegian special characters
-  (global-set-key (kbd "C-c æ") 'unhighlight-all) 
+  (global-set-key (kbd "C-c æ") 'unhighlight-all)
   (global-set-key (kbd "C-c ø") 'highlight-symbol-at-point)
   (global-set-key (kbd "C-c å") 'comment-dwim) ;; comments added at end of line (like this)
   (global-set-key (kbd "C-ø") 'make-frame-command)
@@ -649,5 +651,3 @@ some unbound C-c: m, u, z, r
   (open-org-agenda-for-current-week)
   (delete-other-windows nil) ;; deletes deft window
 #+end_src
-
-
