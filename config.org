@@ -456,12 +456,24 @@ REMEMBER fonts need to be installed manually on windows systems.
 
 
 #+end_src
+*** tabs
+#+begin_src emacs-lisp
+(custom-set-faces
+  '(tab-bar-tab ((t (:inherit default :font "inconsolata" :height 0.8)))))
+#+end_src
 ** ERC Support
 #+begin_src emacs-lisp
   ;; erc-tls autorun
   (defun run-libera-chat ()
     (interactive)
     (erc-tls :server "irc.libera.chat" :port 6697 :nick ERC_NICK :password )) ;; set standard username
+#+end_src
+** dirvish
+#+begin_src emacs-lisp
+ ;; (dirvish-override-dired-mode)
+
+;;  (setq dirvish-attributes
+;;	'(vc-state subtree-state collapse file-size))
 #+end_src
 ** Misc Functions
 #+begin_src emacs-lisp
