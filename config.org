@@ -484,149 +484,162 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+end_src
 ** Misc Functions
 #+begin_src emacs-lisp
-    ;; check/uncheck all checkboxes
-    (defun checkbox-all ()
-      (interactive)
-      (mark-whole-buffer)
-      (org-toggle-checkbox)
-      (message "check/uncheck all"))
+  ;; check/uncheck all checkboxes
+  (defun checkbox-all ()
+    (interactive)
+    (mark-whole-buffer)
+    (org-toggle-checkbox)
+    (message "check/uncheck all"))
 
-    ;; unhighlight all
-    (defun unhighlight-all  ()
-      (interactive)
-      (unhighlight-regexp t)
-      (message "Removed all highlights"))
+  ;; unhighlight all
+  (defun unhighlight-all  ()
+    (interactive)
+    (unhighlight-regexp t)
+    (message "Removed all highlights"))
 
-    ;; chatbot
-    (defun open-parla ()
-      (interactive)
-      (find-file PATH_PARLA))
+  ;; chatbot
+  (defun open-parla ()
+    (interactive)
+    (find-file PATH_PARLA))
 
-    ;; flashcards
-    (defun open-flashcards ()
-      (interactive)
-      (find-file PATH_FLASHCARDS))
+  ;; flashcards
+  (defun open-flashcards ()
+     (interactive)
+     (find-file PATH_FLASHCARDS))
 
-    ;; mega/org folder
-    (defun open-mega ()
-      (interactive)
-      (find-file FOLDER_CLOUD))
-    (defun open-org ()
-      (interactive)
-      (find-file FOLDER_ORG))
-    (defun open-handleliste ()
-      (interactive)
-      (find-file ORG_HANDLELISTE))
-    (defun open-emacs_utilities ()
-      (interactive)
-      (find-file FOLDER_EMACS_UTILITIES))
+  ;; save text as file
+  (defun save-text-as-file (text filename)
+  "Save TEXT as a file named FILENAME."
+  (with-temp-buffer
+     (insert text)
+     (write-file filename))
+     (message (format "'%s' saved." filename)))
 
-    ;; open config
-    (defun open-config ()
-      (interactive)
-      (find-file ORG_CONFIG))
+  ;; mega/org folder
+  (defun open-mega ()
+    (interactive)
+    (find-file FOLDER_CLOUD))
+  (defun open-org ()
+    (interactive)
+    (find-file FOLDER_ORG))
+  (defun open-handleliste ()
+    (interactive)
+    (find-file ORG_HANDLELISTE))
+  (defun open-emacs_utilities ()
+    (interactive)
+    (find-file FOLDER_EMACS_UTILITIES))
 
-    (defun open-sign ()
-      (interactive)
-      (find-file ORG_SIGN))
+  ;; open config
+  (defun open-config ()
+    (interactive)
+    (find-file ORG_CONFIG))
 
-    ;; open scratch
-    (defun open-scratch ()
-      (interactive)
-      (switch-to-buffer "*scratch*"))
+  (defun open-sign ()
+    (interactive)
+    (find-file ORG_SIGN))
 
-    ;; deft folders
-    (defun deft-folder-deft ()
-      (interactive)
-      (setq deft-directory FOLDER_DEFT)
-      (deft-refresh)
-      (setq zetteldeft-home-id "2023-01-24-1155")
-      (zetteldeft-go-home)
-      )
+  ;; open scratch
+  (defun open-scratch ()
+    (interactive)
+    (switch-to-buffer "*scratch*"))
 
-    (defun deft-folder-teos ()
-      (interactive)
-      (setq deft-directory FOLDER_TEOS)
-      (deft-refresh)
-      (setq zetteldeft-home-id "2023-01-24-1156")
-      (zetteldeft-go-home)
-      )
+  ;; deft folders
+  (defun deft-folder-deft ()
+    (interactive)
+    (setq deft-directory FOLDER_DEFT)
+    (deft-refresh)
+    (setq zetteldeft-home-id "2023-01-24-1155")
+    (zetteldeft-go-home)
+    )
 
-    ;; delete current file (written by chatgpt so beware)
-    ;; Useful in zetteldeft
-    (defun delete-current-file ()
-      "Deletes the current file being viewed in the buffer"
-      (interactive)
-      (let ((filename (buffer-file-name)))
-	(when filename
-	  (if (yes-or-no-p (format "Are you sure you want to delete %s?" filename))
-	      (progn
-		(delete-file filename)
-		(message "File '%s' deleted." filename)
-		(kill-buffer))
-	    (message "File '%s' not deleted." filename)))))
+  (defun deft-folder-teos ()
+    (interactive)
+    (setq deft-directory FOLDER_TEOS)
+    (deft-refresh)
+    (setq zetteldeft-home-id "2023-01-24-1156")
+    (zetteldeft-go-home)
+    )
 
-     ;; Function that helps C-backspace be more similar to the windows equivalent
-    (defun backward-kill-word-or-whitespace ()
-      "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
-      (interactive)
-      (if (looking-back "\\s-")
-	  (progn
-	    (delete-region (point) (save-excursion (skip-chars-backward " \t\n") (point))))
-	(backward-kill-word 1)))
+  ;; delete current file (written by chatgpt so beware)
+  ;; Useful in zetteldeft
+  (defun delete-current-file ()
+    "Deletes the current file being viewed in the buffer"
+    (interactive)
+    (let ((filename (buffer-file-name)))
+      (when filename
+	(if (yes-or-no-p (format "Are you sure you want to delete %s?" filename))
+	    (progn
+	      (delete-file filename)
+	      (message "File '%s' deleted." filename)
+	      (kill-buffer))
+	  (message "File '%s' not deleted." filename)))))
 
-    (defun write-current-time ()
-      "Writes the current time at the cursor position."
-      (interactive)
-      (insert (current-time-string)))
+   ;; Function that helps C-backspace be more similar to the windows equivalent
+  (defun backward-kill-word-or-whitespace ()
+    "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
+    (interactive)
+    (if (looking-back "\\s-")
+	(progn
+	  (delete-region (point) (save-excursion (skip-chars-backward " \t\n") (point))))
+      (backward-kill-word 1)))
 
-    (defun write-current-date ()
-      "Writes current date at current position"
-      (interactive)
-      (insert (format-time-string "%d-%m-%Y")))
+  (defun write-current-time ()
+    "Writes the current time at the cursor position."
+    (insert (current-time-string)))
 
-    (defun write-current-path ()
-      "Writes the path to current buffer at the cursor position."
-      (interactive)
-      (insert (buffer-file-name)))
+  (defun write-yesterday-date ()
+    "Writes yesterday's date at the current position"
+    (let ((yesterday (time-subtract (current-time) (seconds-to-time 86400))))
+      (insert (format-time-string "%d-%m-%Y" yesterday))))
 
-    (defun open-org-agenda-for-current-week ()
-      (interactive)
-      (let ((current-prefix-arg '(4)))
-	(call-interactively 'org-agenda-list))
-      (message "Opening agenda for current week"))
+  (defun write-current-date ()
+    "Writes current date at current position"
+    (interactive)
+    (insert (format-time-string "%d-%m-%Y")))
+
+  (defun write-current-path ()
+    "Writes the path to current buffer at the cursor position."
+    (interactive)
+    (insert (buffer-file-name)))
+
+  (defun open-org-agenda-for-current-week ()
+    (interactive)
+    (let ((current-prefix-arg '(4)))
+      (call-interactively 'org-agenda-list))
+    (message "Opening agenda for current week"))
 
 #+end_src
 ** Workout Diary
 #+begin_src emacs-lisp
   ;; adds line to workout diary table
   (defun workout-diary-add-line ()
-    (insert "|")
-    (write-current-date)
-    (insert "|NA|NA|NA|NA|NA|NA|")
-    (org-table-align)
-    (org-table-export))
-  ;; adds line to workout diary table
-  (defun workout-diary ()
-    ;; should run once a day
-    (find-file ORG_WORKOUT)
     (end-of-buffer)
-    (workout-diary-add-line)
-    (save-buffer))
+    (newline)
+    (write-yesterday-date)
+    (insert-file-contents WORKOUT_LOG)
+    (kill-line)
+    (kill-line))
+  (defun workout-diary ()
+    (find-file DATA_WORKOUT)
+    (end-of-buffer)
+      (workout-diary-add-line)
+      (save-buffer)
+      (save-text-as-file ",bench_120,dips_120,chinups,pullups,squat_120,wheel\n,NA,NA,NA,NA,NA,NA" WORKOUT_LOG))
 
-  (defvar workout-diary-last-run LAST_RUN_WORKOUT)
 
-  (defun workout-diary-wrapper ()
-    "Wrapper function to check if workout-diary should run."
-    (let ((last-run-time (when (file-exists-p workout-diary-last-run)
-			   (with-temp-buffer
-			     (insert-file-contents workout-diary-last-run)
-			     (buffer-string)))))
-      (when (or (not last-run-time)
-		(not (equal (format-time-string "%Y-%m-%d") last-run-time)))
-	(workout-diary)
-	(with-temp-file workout-diary-last-run
-	  (insert (format-time-string "%Y-%m-%d"))))))
+    (defvar workout-diary-last-run LAST_RUN_WORKOUT)
+
+    (defun workout-diary-wrapper ()
+      "Wrapper function to check if workout-diary should run."
+      (let ((last-run-time (when (file-exists-p workout-diary-last-run)
+			     (with-temp-buffer
+			       (insert-file-contents workout-diary-last-run)
+			       (buffer-string)))))
+	(when (or (not last-run-time)
+		  (not (equal (format-time-string "%Y-%m-%d") last-run-time)))
+	  (workout-diary)
+	  (with-temp-file workout-diary-last-run
+	    (insert (format-time-string "%Y-%m-%d"))))))
 #+end_src
 ** Keybindings
 some unbound C-c: u, w
