@@ -94,7 +94,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   ;; remove stupid indent
   (setq org-adapt-indentation nil)
 #+end_src
-*** Pictures
+*** Images
 #+begin_src emacs-lisp
   (setq org-image-actual-width nil) ;; do not display images in actual size
 
@@ -142,6 +142,20 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	   tags "+bok+TODO=\"TODO\"")))
 
 
+#+end_src
+
+*** Dynamic Blocks
+**** Settings
+#+begin_src emacs-lisp
+ (add-hook 'org-mode-hook 'org-update-all-dblocks)
+ (add-hook 'before-save-hook 'org-update-all-dblocks)
+#+end_src
+**** Functions
+#+begin_src emacs-lisp
+  (defun org-dblock-write:block-update-time (params)
+    (let ((fmt (or (plist-get params :format) "%d. %m. %Y")))
+      (insert "Last block update at: "
+	      (format-time-string fmt))))
 #+end_src
 *** Time Stamp
 #+begin_src emacs-lisp
@@ -514,6 +528,16 @@ REMEMBER fonts need to be installed manually on windows systems.
     (interactive)
     (find-file FOLDER_EMACS_UTILITIES))
 
+  ;; adds line to workout diary table
+  (defun workout-add-line ()
+    (interactive)
+    (insert "|")
+    (write-current-time)
+    (insert "|NA|NA|NA|NA|NA|NA|")
+    (org-table-align)
+    (org-table-export)
+    (newline))
+
   ;; open config
   (defun open-config ()
     (interactive)
@@ -593,8 +617,8 @@ some unbound C-c: u
   (global-set-key (kbd "C-:") 'other-frame)
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key (kbd "C-c f") 'find-file-read-only)
-  (global-set-key (kbd "C-c w") 'font-inconsolata)
+  (global-set-key (kbd "C-c w") 'workout-add-line)
+  (global-set-key (kbd "C-c f") 'font-inconsolata)
   (global-set-key (kbd "C-c q") 'query-replace)
   (global-set-key (kbd "C-c e") 'run-libera-chat)
   (global-set-key "\M- " 'hippie-expand)
@@ -607,7 +631,7 @@ some unbound C-c: u
   (global-set-key (kbd "C-c l") 'sort-lines)
   (global-set-key (kbd "C-c m") 'imenu)
   (global-set-key (kbd "C-c z") 'zone)
-  (global-set-key (kbd "C-c r") 'revert-buffer) ;; rereads current buffer from disk
+  (global-set-key (kbd "C-c r") 'find-file-read-only)
 
   ;; insert text
   (global-set-key (kbd "C-c o") 'write-current-time)
