@@ -482,142 +482,160 @@ REMEMBER fonts need to be installed manually on windows systems.
     (interactive)
     (erc-tls :server "irc.libera.chat" :port 6697 :nick ERC_NICK :password )) ;; set standard username
 #+end_src
-** dirvish
-#+begin_src emacs-lisp
- ;; (dirvish-override-dired-mode)
-
-;;  (setq dirvish-attributes
-;;	'(vc-state subtree-state collapse file-size))
-#+end_src
 ** Misc Functions
 #+begin_src emacs-lisp
-  ;; check/uncheck all checkboxes
-  (defun checkbox-all ()
-    (interactive)
-    (mark-whole-buffer)
-    (org-toggle-checkbox)
-    (message "check/uncheck all"))
+    ;; check/uncheck all checkboxes
+    (defun checkbox-all ()
+      (interactive)
+      (mark-whole-buffer)
+      (org-toggle-checkbox)
+      (message "check/uncheck all"))
 
-  ;; unhighlight all
-  (defun unhighlight-all  ()
-    (interactive)
-    (unhighlight-regexp t)
-    (message "Removed all highlights"))
+    ;; unhighlight all
+    (defun unhighlight-all  ()
+      (interactive)
+      (unhighlight-regexp t)
+      (message "Removed all highlights"))
 
-  ;; chatbot
-  (defun open-parla ()
-    (interactive)
-    (find-file PATH_PARLA))
+    ;; chatbot
+    (defun open-parla ()
+      (interactive)
+      (find-file PATH_PARLA))
 
-  ;; flashcards
-  (defun open-flashcards ()
-    (interactive)
-    (find-file PATH_FLASHCARDS))
+    ;; flashcards
+    (defun open-flashcards ()
+      (interactive)
+      (find-file PATH_FLASHCARDS))
 
-  ;; mega/org folder
-  (defun open-mega ()
-    (interactive)
-    (find-file FOLDER_CLOUD))
-  (defun open-org ()
-    (interactive)
-    (find-file FOLDER_ORG))
-  (defun open-handleliste ()
-    (interactive)
-    (find-file ORG_HANDLELISTE))
-  (defun open-emacs_utilities ()
-    (interactive)
-    (find-file FOLDER_EMACS_UTILITIES))
+    ;; mega/org folder
+    (defun open-mega ()
+      (interactive)
+      (find-file FOLDER_CLOUD))
+    (defun open-org ()
+      (interactive)
+      (find-file FOLDER_ORG))
+    (defun open-handleliste ()
+      (interactive)
+      (find-file ORG_HANDLELISTE))
+    (defun open-emacs_utilities ()
+      (interactive)
+      (find-file FOLDER_EMACS_UTILITIES))
 
-  ;; adds line to workout diary table
-  (defun workout-add-line ()
-    (interactive)
-    (insert "|")
-    (write-current-time)
-    (insert "|NA|NA|NA|NA|NA|NA|")
-    (org-table-align)
-    (org-table-export)
-    (newline))
+    ;; open config
+    (defun open-config ()
+      (interactive)
+      (find-file ORG_CONFIG))
 
-  ;; open config
-  (defun open-config ()
-    (interactive)
-    (find-file ORG_CONFIG))
+    (defun open-sign ()
+      (interactive)
+      (find-file ORG_SIGN))
 
-  (defun open-sign ()
-    (interactive)
-    (find-file ORG_SIGN))
+    ;; open scratch
+    (defun open-scratch ()
+      (interactive)
+      (switch-to-buffer "*scratch*"))
 
-  ;; open scratch
-  (defun open-scratch ()
-    (interactive)
-    (switch-to-buffer "*scratch*"))
+    ;; deft folders
+    (defun deft-folder-deft ()
+      (interactive)
+      (setq deft-directory FOLDER_DEFT)
+      (deft-refresh)
+      (setq zetteldeft-home-id "2023-01-24-1155")
+      (zetteldeft-go-home)
+      )
 
-  ;; deft folders
-  (defun deft-folder-deft ()
-    (interactive)
-    (setq deft-directory FOLDER_DEFT)
-    (deft-refresh)
-    (setq zetteldeft-home-id "2023-01-24-1155")
-    (zetteldeft-go-home)
-    )
+    (defun deft-folder-teos ()
+      (interactive)
+      (setq deft-directory FOLDER_TEOS)
+      (deft-refresh)
+      (setq zetteldeft-home-id "2023-01-24-1156")
+      (zetteldeft-go-home)
+      )
 
-  (defun deft-folder-teos ()
-    (interactive)
-    (setq deft-directory FOLDER_TEOS)
-    (deft-refresh)
-    (setq zetteldeft-home-id "2023-01-24-1156")
-    (zetteldeft-go-home)
-    )
+    ;; delete current file (written by chatgpt so beware)
+    ;; Useful in zetteldeft
+    (defun delete-current-file ()
+      "Deletes the current file being viewed in the buffer"
+      (interactive)
+      (let ((filename (buffer-file-name)))
+	(when filename
+	  (if (yes-or-no-p (format "Are you sure you want to delete %s?" filename))
+	      (progn
+		(delete-file filename)
+		(message "File '%s' deleted." filename)
+		(kill-buffer))
+	    (message "File '%s' not deleted." filename)))))
 
-  ;; delete current file (written by chatgpt so beware)
-  ;; Useful in zetteldeft
-  (defun delete-current-file ()
-    "Deletes the current file being viewed in the buffer"
-    (interactive)
-    (let ((filename (buffer-file-name)))
-      (when filename
-	(if (yes-or-no-p (format "Are you sure you want to delete %s?" filename))
-	    (progn
-	      (delete-file filename)
-	      (message "File '%s' deleted." filename)
-	      (kill-buffer))
-	  (message "File '%s' not deleted." filename)))))
+     ;; Function that helps C-backspace be more similar to the windows equivalent
+    (defun backward-kill-word-or-whitespace ()
+      "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
+      (interactive)
+      (if (looking-back "\\s-")
+	  (progn
+	    (delete-region (point) (save-excursion (skip-chars-backward " \t\n") (point))))
+	(backward-kill-word 1)))
 
-   ;; Function that helps C-backspace be more similar to the windows equivalent
-  (defun backward-kill-word-or-whitespace ()
-    "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
-    (interactive)
-    (if (looking-back "\\s-")
-	(progn
-	  (delete-region (point) (save-excursion (skip-chars-backward " \t\n") (point))))
-      (backward-kill-word 1)))
+    (defun write-current-time ()
+      "Writes the current time at the cursor position."
+      (interactive)
+      (insert (current-time-string)))
 
-  (defun write-current-time ()
-    "Writes the current time at the cursor position."
-    (interactive)
-    (insert (current-time-string)))
+    (defun write-current-date ()
+      "Writes current date at current position"
+      (interactive)
+      (insert (format-time-string "%d-%m-%Y")))
 
-  (defun write-current-path ()
-    "Writes the path to current buffer at the cursor position."
-    (interactive)
-    (insert (buffer-file-name)))
+    (defun write-current-path ()
+      "Writes the path to current buffer at the cursor position."
+      (interactive)
+      (insert (buffer-file-name)))
 
-  (defun open-org-agenda-for-current-week ()
-    (interactive)
-    (let ((current-prefix-arg '(4)))
-      (call-interactively 'org-agenda-list))
-    (message "Opening agenda for current week"))
+    (defun open-org-agenda-for-current-week ()
+      (interactive)
+      (let ((current-prefix-arg '(4)))
+	(call-interactively 'org-agenda-list))
+      (message "Opening agenda for current week"))
 
 #+end_src
+** Workout Diary
+#+begin_src emacs-lisp
+  ;; adds line to workout diary table
+  (defun workout-diary-add-line ()
+    (insert "|")
+    (write-current-date)
+    (insert "|NA|NA|NA|NA|NA|NA|")
+    (org-table-align)
+    (org-table-export))
+  ;; adds line to workout diary table
+  (defun workout-diary ()
+    ;; should run once a day
+    (find-file ORG_WORKOUT)
+    (end-of-buffer)
+    (workout-diary-add-line)
+    (save-buffer))
+
+  (defvar workout-diary-last-run LAST_RUN_WORKOUT)
+
+  (defun workout-diary-wrapper ()
+    "Wrapper function to check if workout-diary should run."
+    (let ((last-run-time (when (file-exists-p workout-diary-last-run)
+			   (with-temp-buffer
+			     (insert-file-contents workout-diary-last-run)
+			     (buffer-string)))))
+      (when (or (not last-run-time)
+		(not (equal (format-time-string "%Y-%m-%d") last-run-time)))
+	(workout-diary)
+	(with-temp-file workout-diary-last-run
+	  (insert (format-time-string "%Y-%m-%d"))))))
+#+end_src
 ** Keybindings
-some unbound C-c: u
+some unbound C-c: u, w
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c s") 'eshell)
   (global-set-key (kbd "C-.") 'other-window)
   (global-set-key (kbd "C-:") 'other-frame)
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key (kbd "C-c w") 'workout-add-line)
   (global-set-key (kbd "C-c f") 'font-inconsolata)
   (global-set-key (kbd "C-c q") 'query-replace)
   (global-set-key (kbd "C-c e") 'run-libera-chat)
@@ -685,6 +703,7 @@ some unbound C-c: u
   (when (string= (system-name) WORK_SYSTEM)(theme-bubblegum))  ;; theme jobb
   (when (string= (system-name) HOME_SYSTEM)(theme-orange-wedge)) ;; theme home
   (cd "~/")
+  (workout-diary-wrapper)
   (open-org-agenda-for-current-week)
   (delete-other-windows nil) ;; deletes deft window
 #+end_src
