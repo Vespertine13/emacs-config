@@ -360,93 +360,115 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+end_src
 *** Theme functions
 #+begin_src emacs-lisp
-  (defun disable-all-themes ()
-    "Disable all currently active themes."
-    (interactive)
-    (dolist (i custom-enabled-themes)
-      (disable-theme i)))
+    (defun disable-all-themes ()
+      "Disable all currently active themes."
+      (interactive)
+      (dolist (i custom-enabled-themes)
+	(disable-theme i)))
 
-  ;; home made themes
-  (defun theme-orange-wedge ()
-    (interactive)
-    (disable-all-themes)
-       (load-theme 'orange_wedge t)
-       (message "theme orange_wedge"))
+    ;; home made themes
+    (defun theme-orange-wedge ()
+      (interactive)
+      (disable-all-themes)
+	 (load-theme 'orange_wedge t)
+	 (message "theme orange_wedge"))
 
-  (defun theme-bubblegum ()
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'bubblegum t)
-    (message "theme bubblegum"))
+    (defun theme-bubblegum ()
+      (interactive)
+      (disable-all-themes)
+      (load-theme 'bubblegum t)
+      (message "theme bubblegum"))
 
-  ;; downloaded themes
-  (defun theme-silkworm ()
-    (interactive)
+    ;; downloaded themes
+    (defun theme-silkworm ()
+      (interactive)
+      (disable-all-themes)
+      (load-theme 'silkworm t)
+      (set-frame-font "Inconsolata 16" nil t)
+      (message "theme silkworm"))
+
+    (defun theme-bharadwaj-slate ()
+      (interactive)
+      (disable-all-themes)
+      (load-theme 'bharadwaj-slate t)
+      (set-frame-font "Inconsolata 16" nil t)
+      (message "theme bharadwaj-slate"))
+
+    (defun theme-birds-of-paradise-plus ()
+      (interactive)
+      (disable-all-themes)
+      (load-theme 'birds-of-paradise-plus t)
+      (set-frame-font "Inconsolata 16" nil t)
+      (message "theme birds-of-paradise-plus"))
+
+    (defun theme-dream ()
+      (interactive)
+      (disable-all-themes)
+      (load-theme 'dream t)
+      (set-frame-font "Inconsolata 16" nil t)
+      (message "theme dream"))
+
+    (defun theme-subtle-blue ()
+      (interactive)
+      (disable-all-themes)
+      (load-theme 'subtle-blue t)
+      (set-frame-font "Inconsolata 16" nil t)
+      (message "theme subtle-blue"))
+
+    (defun theme-base16-greenscreen ()
+      (interactive)
+      (disable-all-themes)
+      (load-theme 'base16-greenscreen t)
+      (set-frame-font "Inconsolata 16" nil t)
+      (message "theme base16-greenscreen"))
+
+    (defun theme-shaman ()
+      (interactive)
+      (disable-all-themes)
+      (load-theme 'shaman t)
+      (set-frame-font "Inconsolata 16" nil t)
+      (message "theme shaman"))
+
+    (defvar current-theme-idx 0
+      "integer representing the current theme")
+
+    (defun cycle-themes ()
+      "Toggle between different themes"
+      (interactive)
+      (setq current-theme-idx (mod (1+ current-theme-idx) 7))
+      (cond ((= current-theme-idx 0) (theme-base16-greenscreen))
+	    ((= current-theme-idx 1) (theme-silkworm))
+	    ((= current-theme-idx 2) (theme-shaman))
+	    ((= current-theme-idx 3) (theme-dream))
+	    ((= current-theme-idx 4) (theme-subtle-blue))
+	    ((= current-theme-idx 5) (theme-birds-of-paradise-plus))
+	    ((= current-theme-idx 6) (theme-bharadwaj-slate))))
+#+End_src
+*** ef seasonal themes
+#+begin_src emacs-lisp
+  ;; ef themes
+  (defvar current-ef-theme-idx 0
+    "integer representing the current ef theme")
+
+  (defun theme-ef (name)
     (disable-all-themes)
-    (load-theme 'silkworm t)
+    (load-theme (intern (format "ef-%s" name)) t)
     (set-frame-font "Inconsolata 16" nil t)
-    (message "theme silkworm"))
+    (message "theme ef-%s" name))
 
-  (defun theme-bharadwaj-slate ()
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'bharadwaj-slate t)
-    (set-frame-font "Inconsolata 16" nil t)
-    (message "theme bharadwaj-slate"))
-
-  (defun theme-birds-of-paradise-plus ()
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'birds-of-paradise-plus t)
-    (set-frame-font "Inconsolata 16" nil t)
-    (message "theme birds-of-paradise-plus"))
-
-  (defun theme-dream ()
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'dream t)
-    (set-frame-font "Inconsolata 16" nil t)
-    (message "theme dream"))
-
-  (defun theme-subtle-blue ()
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'subtle-blue t)
-    (set-frame-font "Inconsolata 16" nil t)
-    (message "theme subtle-blue"))
-
-  (defun theme-base16-greenscreen ()
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'base16-greenscreen t)
-    (set-frame-font "Inconsolata 16" nil t)
-    (message "theme base16-greenscreen"))
-
-  (defun theme-shaman ()
-    (interactive)
-    (disable-all-themes)
-    (load-theme 'shaman t)
-    (set-frame-font "Inconsolata 16" nil t)
-    (message "theme shaman"))
-
-  (defvar current-theme-idx 0
-    "integer representing the current theme")
-
-  (defun cycle-themes ()
-    "Toggle between different themes"
-    (interactive)
-    (setq current-theme-idx (mod (1+ current-theme-idx) 7))
-    (cond ((= current-theme-idx 0) (theme-base16-greenscreen))
-	  ((= current-theme-idx 1) (theme-silkworm))
-	  ((= current-theme-idx 2) (theme-shaman))
-	  ((= current-theme-idx 3) (theme-dream))
-	  ((= current-theme-idx 4) (theme-subtle-blue))
-	  ((= current-theme-idx 5) (theme-birds-of-paradise-plus))
-	  ((= current-theme-idx 6) (theme-bharadwaj-slate))))
-
+  (defun set-season-theme ()
+    (let* ((current-month (format-time-string "%m" (current-time)))
+	   (winter '("12" "01" "02"))
+	   (spring '("03" "04" "05"))
+	   (summer '("06" "07" "08"))
+	   (autumn '("09" "10" "11")))
+      (cond ((member current-month winter) (theme-ef "winter"))
+	    ((member current-month spring) (theme-ef "spring"))
+	    ((member current-month summer) (theme-ef "summer"))
+	    ((member current-month autumn) (theme-ef "autumn")
+	     ))))
 
 #+End_src
-
 *** Transparent frames
 #+begin_src emacs-lisp
   (defvar-local transparent-frame-enabled nil
@@ -475,12 +497,21 @@ REMEMBER fonts need to be installed manually on windows systems.
 (custom-set-faces
   '(tab-bar-tab ((t (:inherit default :font "inconsolata" :height 0.8)))))
 #+end_src
+*** emojify
+#+begin_src emacs-lisp
+  (add-hook 'after-init-hook #'global-emojify-mode)
+#+end_src
 ** ERC Support
 #+begin_src emacs-lisp
   ;; erc-tls autorun
   (defun run-libera-chat ()
     (interactive)
     (erc-tls :server "irc.libera.chat" :port 6697 :nick ERC_NICK :password )) ;; set standard username
+#+end_src
+** Mastodon
+#+begin_src emacs-lisp
+ (setq mastodon-instance-url "https://tech.lgbt"
+          mastodon-active-user "gray")
 #+end_src
 ** Misc Functions
 #+begin_src emacs-lisp
@@ -642,16 +673,15 @@ REMEMBER fonts need to be installed manually on windows systems.
 	    (insert (format-time-string "%Y-%m-%d"))))))
 #+end_src
 ** Keybindings
-some unbound C-c: u, w
+some unbound C-c: u, m
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-c s") 'eshell)
   (global-set-key (kbd "C-.") 'other-window)
   (global-set-key (kbd "C-:") 'other-frame)
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key (kbd "C-c f") 'font-inconsolata)
+  (global-set-key (kbd "C-c w") 'font-inconsolata)
   (global-set-key (kbd "C-c q") 'query-replace)
-  (global-set-key (kbd "C-c e") 'run-libera-chat)
+  (global-set-key (kbd "C-c e") 'emojify-apropos-emoji)
   (global-set-key "\M- " 'hippie-expand)
   (global-set-key (kbd "C-c g") 'goto-line)
   (global-set-key (kbd "C-c b") 'checkbox-all) ;; Clear checkboxes
@@ -660,21 +690,23 @@ some unbound C-c: u, w
   (global-set-key (kbd "C-c v") 'visual-line-mode)
   (global-set-key (kbd "C-c k") 'delete-current-file)
   (global-set-key (kbd "C-c l") 'sort-lines)
-  (global-set-key (kbd "C-c m") 'imenu)
-  (global-set-key (kbd "C-c z") 'zone)
-  (global-set-key (kbd "C-c r") 'find-file-read-only)
+  (global-set-key (kbd "C-c s") 'shell)
+
+  (global-set-key (kbd "C-c z") 'eshell)
+  (global-set-key (kbd "C-c f") 'find-file-read-only)
+  (global-set-key (kbd "C-c r") 'revert-buffer-quick)
 
   ;; insert text
   (global-set-key (kbd "C-c o") 'write-current-time)
   (global-set-key (kbd "C-c p") 'write-current-path)
 
-  ;; open files 0:9
+  ;; open files/programs 0:9
   (global-set-key (kbd "C-c 1") 'zetteldeft-go-home)
   (global-set-key (kbd "C-c 2") 'open-config)
   (global-set-key (kbd "C-c 3") 'open-mega)
   (global-set-key (kbd "C-c 4") 'open-emacs_utilities)
-  (global-set-key (kbd "C-c 5") 'open-org)
-  (global-set-key (kbd "C-c 6") 'open-handleliste)
+  (global-set-key (kbd "C-c 5") 'mastodon)
+  (global-set-key (kbd "C-c 6") 'run-libera-chat)
   (global-set-key (kbd "C-c 7") 'open-sign)
   (global-set-key (kbd "C-c 8") 'open-flashcards)
   (global-set-key (kbd "C-c 9") 'open-parla)
@@ -711,10 +743,7 @@ some unbound C-c: u, w
 
 ** Start
 #+begin_src emacs-lisp
-  ;; make sure the files exists
-  (theme-dream)
-  (when (string= (system-name) WORK_SYSTEM)(theme-bubblegum))  ;; theme jobb
-  (when (string= (system-name) HOME_SYSTEM)(theme-orange-wedge)) ;; theme home
+  (set-season-theme)
   (cd "~/")
   (workout-diary-wrapper)
   (open-org-agenda-for-current-week)
