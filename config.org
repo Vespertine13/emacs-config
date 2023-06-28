@@ -655,7 +655,7 @@ REMEMBER fonts need to be installed manually on windows systems.
     (end-of-buffer)
       (workout-diary-add-line)
       (save-buffer)
-      (save-text-as-file ",bench_120,dips_120,chinups,pullups,squat_120,wheel\n,NA,NA,NA,NA,NA,NA" WORKOUT_LOG))
+      (save-text-as-file ",bench_120,dips_40,chinups,pullups,squat_120,wheel\n,NA,NA,NA,NA,NA,NA" WORKOUT_LOG))
 
 
     (defvar workout-diary-last-run LAST_RUN_WORKOUT)
