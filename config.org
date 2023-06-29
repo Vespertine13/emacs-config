@@ -125,7 +125,9 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	     "* %? ")
 	    ("j" "Teos TODOS" entry (file ORG_TEOS_TODOS)
 	     "* TODO %?")
-  ))
+	    ("o" "Ord til Ordliste" entry (file ORG_ORDLISTE)
+	     "* %?") 
+ ))
 
   ;; Org todo workflow
   (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
@@ -616,6 +618,7 @@ REMEMBER fonts need to be installed manually on windows systems.
 
   (defun write-current-time ()
     "Writes the current time at the cursor position."
+    (interactive)
     (insert (current-time-string)))
 
   (defun write-yesterday-date ()
@@ -679,7 +682,7 @@ some unbound C-c: u, m
   (global-set-key (kbd "C-:") 'other-frame)
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
-  (global-set-key (kbd "C-c w") 'font-inconsolata)
+  (global-set-key (kbd "C-c f") 'font-inconsolata)
   (global-set-key (kbd "C-c q") 'query-replace)
   (global-set-key (kbd "C-c e") 'emojify-apropos-emoji)
   (global-set-key "\M- " 'hippie-expand)
@@ -693,7 +696,7 @@ some unbound C-c: u, m
   (global-set-key (kbd "C-c s") 'shell)
 
   (global-set-key (kbd "C-c z") 'eshell)
-  (global-set-key (kbd "C-c f") 'find-file-read-only)
+  (global-set-key (kbd "C-c m") 'find-file-read-only)
   (global-set-key (kbd "C-c r") 'revert-buffer-quick)
 
   ;; insert text
@@ -738,7 +741,7 @@ some unbound C-c: u, m
 
   ;; all zetteldeft keybindings start with C-c d
   (zetteldeft-set-classic-keybindings)
-  (global-set-key (kbd "C-c y") 'zetteldeft-wander)
+  (global-set-key (kbd "C-c w") 'zetteldeft-wander)
 #+end_src
 
 ** Start
