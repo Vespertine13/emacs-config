@@ -593,6 +593,12 @@ REMEMBER fonts need to be installed manually on windows systems.
     (zetteldeft-go-home)
     )
 
+  (defun file-content-equal-to-string-p (file string)
+    "Check if the content of FILE is equal to STRING."
+    (with-temp-buffer
+      (insert-file-contents file)
+      (string= (buffer-string) string)))
+
   ;; delete current file (written by chatgpt so beware)
   ;; Useful in zetteldeft
   (defun delete-current-file ()
@@ -621,11 +627,6 @@ REMEMBER fonts need to be installed manually on windows systems.
     (interactive)
     (insert (current-time-string)))
 
-  (defun write-yesterday-date ()
-    "Writes yesterday's date at the current position"
-    (let ((yesterday (time-subtract (current-time) (seconds-to-time 86400))))
-      (insert (format-time-string "%d-%m-%Y" yesterday))))
-
   (defun write-current-date ()
     "Writes current date at current position"
     (interactive)
@@ -645,34 +646,29 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+end_src
 ** Workout Diary
 #+begin_src emacs-lisp
-  ;; adds line to workout diary table
-  (defun workout-diary-add-line ()
-    (end-of-buffer)
-    (newline)
-    (write-yesterday-date)
-    (insert-file-contents WORKOUT_LOG)
-    (kill-line)
-    (kill-line))
-  (defun workout-diary ()
-    (find-file DATA_WORKOUT)
-    (end-of-buffer)
-      (workout-diary-add-line)
-      (save-buffer)
-      (save-text-as-file ";bench_120;dips_40;chinups;pullups;squat_120;wheel\n;NA;NA;NA;NA;NA;NA" WORKOUT_LOG))
+      ;; adds line to workout diary table
+      (defun workout-diary-add-line ()
+	(end-of-buffer)
+	(newline)
+	(write-current-date)
+	(insert-file-contents WORKOUT_LOG)
+	(kill-line)
+	(kill-line))
+      (defun workout-diary ()
+	(find-file DATA_WORKOUT)
+	(end-of-buffer)
+	  (workout-diary-add-line)
+	  (save-buffer)
+	  (save-text-as-file ";bench_120;dips_40;chinups;pullups;squat_120;wheel\n;NA;NA;NA;NA;NA;NA" WORKOUT_LOG))
 
-    (defvar workout-diary-last-run LAST_RUN_WORKOUT)
 
-    (defun workout-diary-wrapper ()
-      "Wrapper function to check if workout-diary should run."
-      (let ((last-run-time (when (file-exists-p workout-diary-last-run)
-			     (with-temp-buffer
-			       (insert-file-contents workout-diary-last-run)
-			       (buffer-string)))))
-	(when (or (not last-run-time)
-		  (not (equal (format-time-string "%Y-%m-%d") last-run-time)))
-	  (workout-diary)
-	  (with-temp-file workout-diary-last-run
-	    (insert (format-time-string "%Y-%m-%d"))))))
+
+  (when (not(file-content-equal-to-string-p WORKOUT_LOG ";bench_120;dips_40;chinups;pullups;squat_120;wheel
+;NA;NA;NA;NA;NA;NA
+"))
+	(workout-diary)
+	(message "Saved workout log"))
+
 #+end_src
 ** Keybindings
 some unbound C-c: u, m
@@ -747,7 +743,6 @@ some unbound C-c: u, m
 #+begin_src emacs-lisp
   (set-season-theme)
   (cd "~/")
-  (workout-diary-wrapper)
   (open-org-agenda-for-current-week)
   (delete-other-windows nil) ;; deletes deft window
 #+end_src
