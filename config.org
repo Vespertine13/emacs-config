@@ -362,74 +362,31 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+end_src
 *** Theme functions
 #+begin_src emacs-lisp
-    (defun disable-all-themes ()
-      "Disable all currently active themes."
-      (interactive)
-      (dolist (i custom-enabled-themes)
-	(disable-theme i)))
+  (defun disable-all-themes ()
+    "Disable all currently active themes."
+    (interactive)
+    (dolist (i custom-enabled-themes)
+      (disable-theme i)))
 
-    ;; home made themes
-    (defun theme-orange-wedge ()
-      (interactive)
-      (disable-all-themes)
-	 (load-theme 'orange_wedge t)
-	 (message "theme orange_wedge"))
+  ;; set theme function
+  (defun set-theme (theme)
+    (disable-all-themes)
+    (load-theme theme t)
+    (set-frame-font "Inconsolata 16" nil t)
+    (message "Theme '%s' set" theme))
 
-    (defun theme-bubblegum ()
-      (interactive)
-      (disable-all-themes)
-      (load-theme 'bubblegum t)
-      (message "theme bubblegum"))
+  ;; home made themes
+  (defun theme-orange-wedge ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'orange_wedge t)
+    (message "theme orange_wedge"))
 
-    ;; downloaded themes
-    (defun theme-silkworm ()
-      (interactive)
-      (disable-all-themes)
-      (load-theme 'silkworm t)
-      (set-frame-font "Inconsolata 16" nil t)
-      (message "theme silkworm"))
-
-    (defun theme-bharadwaj-slate ()
-      (interactive)
-      (disable-all-themes)
-      (load-theme 'bharadwaj-slate t)
-      (set-frame-font "Inconsolata 16" nil t)
-      (message "theme bharadwaj-slate"))
-
-    (defun theme-birds-of-paradise-plus ()
-      (interactive)
-      (disable-all-themes)
-      (load-theme 'birds-of-paradise-plus t)
-      (set-frame-font "Inconsolata 16" nil t)
-      (message "theme birds-of-paradise-plus"))
-
-    (defun theme-dream ()
-      (interactive)
-      (disable-all-themes)
-      (load-theme 'dream t)
-      (set-frame-font "Inconsolata 16" nil t)
-      (message "theme dream"))
-
-    (defun theme-subtle-blue ()
-      (interactive)
-      (disable-all-themes)
-      (load-theme 'subtle-blue t)
-      (set-frame-font "Inconsolata 16" nil t)
-      (message "theme subtle-blue"))
-
-    (defun theme-base16-greenscreen ()
-      (interactive)
-      (disable-all-themes)
-      (load-theme 'base16-greenscreen t)
-      (set-frame-font "Inconsolata 16" nil t)
-      (message "theme base16-greenscreen"))
-
-    (defun theme-shaman ()
-      (interactive)
-      (disable-all-themes)
-      (load-theme 'shaman t)
-      (set-frame-font "Inconsolata 16" nil t)
-      (message "theme shaman"))
+  (defun theme-bubblegum ()
+    (interactive)
+    (disable-all-themes)
+    (load-theme 'bubblegum t)
+    (message "theme bubblegum"))
 
     (defvar current-theme-idx 0
       "integer representing the current theme")
@@ -438,39 +395,48 @@ REMEMBER fonts need to be installed manually on windows systems.
       "Toggle between different themes"
       (interactive)
       (setq current-theme-idx (mod (1+ current-theme-idx) 7))
-      (cond ((= current-theme-idx 0) (theme-base16-greenscreen))
-	    ((= current-theme-idx 1) (theme-silkworm))
-	    ((= current-theme-idx 2) (theme-shaman))
-	    ((= current-theme-idx 3) (theme-dream))
-	    ((= current-theme-idx 4) (theme-subtle-blue))
-	    ((= current-theme-idx 5) (theme-birds-of-paradise-plus))
-	    ((= current-theme-idx 6) (theme-bharadwaj-slate))))
+      (cond ((= current-theme-idx 0) (set-theme 'base16-greenscreen))
+	    ((= current-theme-idx 1) (set-theme 'silkworm))
+	    ((= current-theme-idx 2) (set-theme 'shaman))
+	    ((= current-theme-idx 3) (set-theme 'dream))
+	    ((= current-theme-idx 4) (set-theme 'subtle-blue))
+	    ((= current-theme-idx 5) (set-theme 'birds-of-paradise-plus))
+	    ((= current-theme-idx 6) (set-theme 'bharadwaj-slate))))
 #+End_src
 *** ef seasonal themes
 #+begin_src emacs-lisp
-  ;; ef themes
-  (defvar current-ef-theme-idx 0
-    "integer representing the current ef theme")
+    ;; ef themes
+    (defvar current-ef-theme-idx 0
+      "integer representing the current ef theme")
 
-  (defun theme-ef (name)
-    (disable-all-themes)
-    (load-theme (intern (format "ef-%s" name)) t)
-    (set-frame-font "Inconsolata 16" nil t)
-    (message "theme ef-%s" name))
-
-  (defun set-season-theme ()
-    (let* ((current-month (format-time-string "%m" (current-time)))
-	   (winter '("12" "01" "02"))
-	   (spring '("03" "04" "05"))
-	   (summer '("06" "07" "08"))
-	   (autumn '("09" "10" "11")))
-      (cond ((member current-month winter) (theme-ef "winter"))
-	    ((member current-month spring) (theme-ef "spring"))
-	    ((member current-month summer) (theme-ef "summer"))
-	    ((member current-month autumn) (theme-ef "autumn")
-	     ))))
+  ;; https://protesilaos.com/emacs/ef-themes-pictures
+    (defun set-month-theme ()
+      (setq current-month (format-time-string "%m" (current-time)))
+      (cond 
+       ;; Day
+       ;; Spring
+       ((string-equal current-month "03") (set-theme 'ef-deuteranopia-light))
+       ((string-equal current-month "04") (set-theme 'ef-spring))
+       ((string-equal current-month "05") (set-theme 'ef-kassio))
+       ;; Summer
+       ((string-equal current-month "06") (set-theme 'ef-summer))
+       ((string-equal current-month "07") (set-theme 'ef-elea-light))
+       ((string-equal current-month "08") (set-theme 'ef-day))
+       ;; Night
+       ;; Autumns
+       ((string-equal current-month "09") (set-theme 'ef-cherie))
+       ((string-equal current-month "10") (set-theme 'ef-autumn))
+       ((string-equal current-month "11") (set-theme 'ef-bio))
+       ;; Winter
+       ((string-equal current-month "12") (set-theme 'ef-tritanopia-dark))
+       ((string-equal current-month "01") (set-theme 'ef-winter))
+       ((string-equal current-month "02") (set-theme 'ef-elea-dark))))
 
 #+End_src
+
+#+RESULTS:
+: set-month-theme
+
 *** Transparent frames
 #+begin_src emacs-lisp
   (defvar-local transparent-frame-enabled nil
@@ -741,7 +707,7 @@ some unbound C-c: u, m
 
 ** Start
 #+begin_src emacs-lisp
-  (set-season-theme)
+  (set-month-theme)
   (cd "~/")
   (open-org-agenda-for-current-week)
   (delete-other-windows nil) ;; deletes deft window
