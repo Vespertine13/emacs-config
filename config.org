@@ -15,7 +15,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (load-file "~/mega/emacs_utilities/config/teos_config.el")
 #+end_src
 ** Packages
-*** Melpa Package support
+*** Package support
 #+begin_src emacs-lisp
   ;; Load emacs packages and activate them
   ;; This must come before configurations of installed packages.
@@ -47,7 +47,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 
   ;; myPackages contains a list of package names
   ;; dont be tempted to use elpy!
-
   (defvar myPackages
     '(ess                              ;; ESS
       anaconda-mode                    ;; anaconda mode for python
@@ -58,9 +57,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
     )
 
   ;; Scans the list in myPackages
-
   ;; If the package listed is not already installed, install it
-
   (mapc #'(lambda (package)
 
 	    (unless (package-installed-p package)
@@ -82,7 +79,16 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (set-terminal-coding-system 'utf-8)
   ;; hide emphasis markers (bold, italics etc)
   (setq org-hide-emphasis-markers t)
+  ;; sentences does not end in double space anymore
+  (setq sentence-end-double-space nil)
 #+end_src
+*** undo-tree support
+"The `undo-tree-mode' provided by this package replaces Emacs' undo system with a system that treats undo history as what it is: a branching tree of changes."
+#+begin_src emacs-lisp
+  (require 'undo-tree)
+  (global-undo-tree-mode)
+#+end_src
+
 ** Org Support
 *** Basics
 #+begin_src emacs-lisp
