@@ -53,6 +53,9 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       company-anaconda                 ;; company anaconda for python
       flycheck                         ;; flycheck for coding
       ein                              ;; jupyterlab stuff
+      undo-tree                        ;; advanced undo
+      emojify                          ;; emojis
+      mastodon                         ;; mastodon social media
       )
     )
 
