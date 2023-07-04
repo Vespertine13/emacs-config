@@ -249,6 +249,9 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   ;; hotkeys
   (global-set-key (kbd "M--") " <- ")    ;; alt+-
   (global-set-key (kbd "C-S-M") " %>% ") ;; control+shift+m
+  ;; run script function
+  (defun run-r-script (script-path)
+    (shell-command (concat "Rscript " (shell-quote-argument script-path))))
 #+end_src
 ** Python Support
 #+begin_src emacs-lisp
@@ -487,8 +490,13 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+end_src
 ** Mastodon
 #+begin_src emacs-lisp
- (setq mastodon-instance-url "https://tech.lgbt"
-          mastodon-active-user "gray")
+  (setq mastodon-instance-url "https://tech.lgbt"
+	mastodon-active-user "gray")
+
+  (defun my-mastodon-hook ()
+    (visual-line-mode t))
+
+  (add-hook 'mastodon-mode-hook 'my-mastodon-hook)
 #+end_src
 ** Misc Functions
 #+begin_src emacs-lisp
@@ -621,29 +629,29 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+end_src
 ** Workout Diary
 #+begin_src emacs-lisp
-      ;; adds line to workout diary table
-      (defun workout-diary-add-line ()
-	(end-of-buffer)
-	(newline)
-	(write-current-date)
-	(insert-file-contents WORKOUT_LOG)
-	(kill-line)
-	(kill-line))
-      (defun workout-diary ()
-	(find-file DATA_WORKOUT)
-	(end-of-buffer)
-	  (workout-diary-add-line)
-	  (save-buffer)
-	  (save-text-as-file ";bench_120;dips_40;chinups;pullups;squat_120;wheel\n;NA;NA;NA;NA;NA;NA" WORKOUT_LOG))
-
-
+  ;; adds line to workout diary table
+  (defun workout-diary-add-line ()
+    (end-of-buffer)
+    (newline)
+    (write-current-date)
+    (insert-file-contents WORKOUT_LOG)
+    (kill-line)
+    (kill-line))
+  (defun workout-diary ()
+    (find-file DATA_WORKOUT)
+    (end-of-buffer)
+    (workout-diary-add-line)
+    (save-buffer)
+    (save-text-as-file ";bench_120;dips_40;chinups;pullups;squat_120;wheel\n;NA;NA;NA;NA;NA;NA" WORKOUT_LOG))
 
   (when (not(file-content-equal-to-string-p WORKOUT_LOG ";bench_120;dips_40;chinups;pullups;squat_120;wheel
-;NA;NA;NA;NA;NA;NA
-"))
-	(workout-diary)
-	(message "Saved workout log"))
+  ;NA;NA;NA;NA;NA;NA
+  "))
+    (workout-diary)
+    (message "Saved workout log"))
 
+  (when (string= (system-name) HOME_SYSTEM)(run-r-script R_WORKOUT_HOME))
+  (when (string= (system-name) WORK_SYSTEM)(run-r-script R_WORKOUT_WORK))
 #+end_src
 ** Keybindings
 some unbound C-c: u, m
