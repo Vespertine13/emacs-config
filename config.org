@@ -250,7 +250,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (global-set-key (kbd "M--") " <- ")    ;; alt+-
   (global-set-key (kbd "C-S-M") " %>% ") ;; control+shift+m
 #+end_src
-** Python Support
+** Pyth
+on Support
 #+begin_src emacs-lisp
   ;; set interpreter
   (require 'python)
