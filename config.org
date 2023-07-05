@@ -92,6 +92,11 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (global-undo-tree-mode)
 #+end_src
 
+*** Abbrevs
+#+begin_src emacs-lisp
+(setq-default abbrev-mode t)
+(define-abbrev global-abbrev-table "btw" "by the way")
+#+end_src
 ** Org Support
 *** Basics
 #+begin_src emacs-lisp
