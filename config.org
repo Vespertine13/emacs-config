@@ -630,26 +630,6 @@ REMEMBER fonts need to be installed manually on windows systems.
 ** Workout Diary
 #+begin_src emacs-lisp
   ;; adds line to workout diary table
-  (defun workout-diary-add-line ()
-    (end-of-buffer)
-    (newline)
-    (write-current-date)
-    (insert-file-contents WORKOUT_LOG)
-    (kill-line)
-    (kill-line))
-  (defun workout-diary ()
-    (find-file DATA_WORKOUT)
-    (end-of-buffer)
-    (workout-diary-add-line)
-    (save-buffer)
-    (save-text-as-file ";bench_120;dips_40;chinups;pullups;squat_120;wheel\n;NA;NA;NA;NA;NA;NA" WORKOUT_LOG))
-
-  (when (not(file-content-equal-to-string-p WORKOUT_LOG ";bench_120;dips_40;chinups;pullups;squat_120;wheel
-  ;NA;NA;NA;NA;NA;NA
-  "))
-    (workout-diary)
-    (message "Saved workout log"))
-
   (when (string= (system-name) HOME_SYSTEM)(run-r-script R_WORKOUT_HOME))
   (when (string= (system-name) WORK_SYSTEM)(run-r-script R_WORKOUT_WORK))
 #+end_src
