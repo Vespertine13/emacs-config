@@ -57,6 +57,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       emojify                          ;; emojis
       mastodon                         ;; mastodon social media
       elfeed                           ;; can be used to read RSS
+      nyan-mode                        ;; yes.
       )
     )
 
@@ -497,13 +498,15 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+begin_src emacs-lisp
   (add-hook 'after-init-hook #'global-emojify-mode)
 #+end_src
+*** nyan-mode
+#+begin_src emacs-lisp
+  (defun proper-nyan ()
+    (nyan-start-animation)
+    (nyan-toggle-wavy-trail))
+  (add-hook 'nyan-mode-hook 'proper-nyan)
+#+end_src
 ** Elfeed
 https://github.com/skeeto/elfeed
-
-
-
-
-
 
 #+begin_src emacs-lisp
   (setq elfeed-feeds
@@ -684,7 +687,7 @@ some unbound C-c: u, m
   (global-set-key (kbd "C-c g") 'goto-line)
   (global-set-key (kbd "C-c b") 'checkbox-all) ;; Clear checkboxes
   (global-set-key (kbd "C-c t") 'org-timer-set-timer)
-  (global-set-key (kbd "C-c n") 'display-line-numbers-mode) ;; display line numbers mode
+  (global-set-key (kbd "C-c n") 'nyan-mode)
   (global-set-key (kbd "C-c v") 'visual-line-mode)
   (global-set-key (kbd "C-c k") 'delete-current-file)
   (global-set-key (kbd "C-c l") 'sort-lines)
