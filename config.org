@@ -56,6 +56,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       undo-tree                        ;; advanced undo
       emojify                          ;; emojis
       mastodon                         ;; mastodon social media
+      elfeed                           ;; can be used to read RSS
       )
     )
 
@@ -70,6 +71,13 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	myPackages)
 #+end_src
 
+** Auto Revert 
+#+begin_src emacs-lisp
+  ;; files reload from disc when reopened
+  (global-auto-revert-mode t)
+  ;; dired automatically updates  
+  (setq dired-auto-revert-buffer t)
+#+end_src
 ** Text Preferences
 #+begin_src emacs-lisp
   ;; Electric pair for closing parentheses etc
@@ -84,6 +92,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (setq org-hide-emphasis-markers t)
   ;; sentences does not end in double space anymore
   (setq sentence-end-double-space nil)
+  ;; when something is selected it will now be deleted if typed over
+  (delete-selection-mode t)
 #+end_src
 *** undo-tree support
 "The `undo-tree-mode' provided by this package replaces Emacs' undo system with a system that treats undo history as what it is: a branching tree of changes."
@@ -222,6 +232,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	    (lambda ()
 	      (remove-hook 'completion-at-point-functions 'pcomplete-completions-at-point t)))
   (setenv "LANG" "en_US.UTF-8")
+  (setq eshell-scroll-to-bottom-on-input t)
 #+end_src
 ** R Support
 #+begin_src emacs-lisp
@@ -486,6 +497,27 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+begin_src emacs-lisp
   (add-hook 'after-init-hook #'global-emojify-mode)
 #+end_src
+** Elfeed
+https://github.com/skeeto/elfeed
+
+
+
+
+
+
+#+begin_src emacs-lisp
+  (setq elfeed-feeds
+	'("https://pitchfork.com/feed/feed-album-reviews/rss" ;; pitchfork album reviews 
+	  "www.nrk.no/toppsaker.rss"
+	  "www.nrk.no/osloogviken/siste.rss"
+	  "https://planet.emacslife.com/atom.xml"
+	  "https://store.steampowered.com/feeds/news.xml"
+	  "https://store.steampowered.com/feeds/newreleases.xml"
+	  "https://www.theguardian.com/world/rss"
+	  "https://www.nintendo.co.uk/news.xml"
+	  ))
+
+#+end_src
 ** ERC Support
 #+begin_src emacs-lisp
   ;; erc-tls autorun
@@ -660,7 +692,7 @@ some unbound C-c: u, m
 
   (global-set-key (kbd "C-c z") 'eshell)
   (global-set-key (kbd "C-c m") 'find-file-read-only)
-  (global-set-key (kbd "C-c r") 'revert-buffer-quick)
+  (global-set-key (kbd "C-c r") 'elfeed)
 
   ;; insert text
   (global-set-key (kbd "C-c o") 'write-current-time)
