@@ -134,39 +134,41 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 *** Capture and Agenda
 #+begin_src emacs-lisp
-    (global-set-key (kbd "C-c a") 'org-agenda)
-    (global-set-key (kbd "C-c c") 'org-capture)
+     (global-set-key (kbd "C-c a") 'org-agenda)
+     (global-set-key (kbd "C-c c") 'org-capture)
 
-    ;; kan denne slettes?
+     ;; kan denne slettes?
 
-    (setq org-capture-templates
-	  '(("t" "TODO" entry (file ORG_CAPTURE)
-	     "* TODO %?")
-	    ("d" "Diary" entry (file+datetree ORG_DIARY)
-	     "* Dagen i går%?")
-	    ("m" "Møtelogg" entry (file+datetree ORG_MOTELOGG)
-	     "* %? \nInnkalling: \nAgenda: \nNotater:")
-	    ("e" "Events" entry (file ORG_EVENTS)
-	     "* %? ")
-	    ("j" "Teos TODOS" entry (file ORG_TEOS_TODOS)
-	     "* TODO %?")
-	    ("o" "Ord til Ordliste" entry (file ORG_ORDLISTE)
-	     "* %?") 
- ))
+  (setq org-capture-templates
+	'(("t" "TODO" entry (file ORG_CAPTURE)
+	   "* TODO %?")
+	  ("b" "Bookmark" entry (file ORG_BOOKMARKS)
+	   "* %?\n:PROPERTIES:\n:CREATED: %U\n:END:\n\n" :empty-lines 1)
+	  ("d" "Diary" entry (file+datetree ORG_DIARY)
+	   "* Dagen i går%?")
+	  ("m" "Møtelogg" entry (file+datetree ORG_MOTELOGG)
+	   "* %? \nInnkalling: \nAgenda: \nNotater:")
+	  ("e" "Events" entry (file ORG_EVENTS)
+	   "* %? ")
+	  ("j" "Teos TODOS" entry (file ORG_TEOS_TODOS)
+	   "* TODO %?")
+	  ("o" "Ord til Ordliste" entry (file ORG_ORDLISTE)
+	   "* %?") 
+	  ))
 
-  ;; Org todo workflow
-  (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
+   ;; Org todo workflow
+   (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
 
-  ;; custom command
-  (setq org-agenda-custom-commands
-	'(("j" "Jobbrelaterte TODOS"
-	   tags "+jobb+TODO=\"TODO\"")
-	  ("h" "Handleliste TODOS"
-	   tags "+handle+TODO=\"TODO\"")
-	  ("f" "Filmer TODOS"
-	   tags "+film+TODO=\"TODO\"")
-	  ("b" "Bøker TODOS"
-	   tags "+bok+TODO=\"TODO\"")))
+   ;; custom command
+   (setq org-agenda-custom-commands
+	 '(("j" "Jobbrelaterte TODOS"
+	    tags "+jobb+TODO=\"TODO\"")
+	   ("h" "Handleliste TODOS"
+	    tags "+handle+TODO=\"TODO\"")
+	   ("f" "Filmer TODOS"
+	    tags "+film+TODO=\"TODO\"")
+	   ("b" "Bøker TODOS"
+	    tags "+bok+TODO=\"TODO\"")))
 
 
 #+end_src
@@ -718,7 +720,7 @@ some unbound C-c: u, m
   (global-set-key (kbd "C-c h") 'deft-folder-deft)
 
   ;; org stuff
-  (global-set-key (kbd "C-c i") 'org-show-images)
+  (global-set-key (kbd "C-c i") 'org-insert-link)
 
   ;; Cycle themes
   (global-set-key (kbd "C-c x") 'cycle-themes)
