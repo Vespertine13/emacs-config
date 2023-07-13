@@ -195,10 +195,12 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 ** Backup
 #+begin_src emacs-lisp
-    (setq backup-directory-alist
-          `((".*" . ,TEMP_DIRECTORY)))
-    (setq auto-save-file-name-transforms
-          `((".*" ,TEMP_DIRECTORY t)))
+  (setq backup-directory-alist
+	`((".*" . ,TEMP_DIRECTORY)))
+  (setq auto-save-file-name-transforms
+	`((".*" ,TEMP_DIRECTORY t)))
+  (setq temporary-file-directory
+	TEMP_DIRECTORY)
 #+end_src
 ** Deft
 #+begin_src emacs-lisp
