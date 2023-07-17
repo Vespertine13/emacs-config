@@ -157,7 +157,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	  ("o" "Ord til Ordliste" entry (file ORG_ORDLISTE)
 	   "* %?") 
 	  ("r" "Kontaktinfo" entry (file ORG_ROLODEX)
-	   "* %? \nepost: \ntlf: \n")
+	   "* %?\n:PROPERTIES:\n:EMAIL:\n:TELEPHONE:\n:NOTE:\n:END:\n")
 	  ))
 
    ;; Org todo workflow
