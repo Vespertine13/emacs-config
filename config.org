@@ -139,8 +139,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
      (global-set-key (kbd "C-c a") 'org-agenda)
      (global-set-key (kbd "C-c c") 'org-capture)
 
-     ;; kan denne slettes?
-
   (setq org-capture-templates
 	'(("t" "TODO" entry (file ORG_CAPTURE)
 	   "* TODO %?")
