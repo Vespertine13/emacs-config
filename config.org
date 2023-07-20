@@ -559,7 +559,8 @@ Plays downloaded albums via .bat files in mpv
       "raven"
       "take-me-apart"
       "the-legend-of-the-sun-virgin"
-      "traveler")
+      "traveler"
+      "the-last-door")
     )
 #+end_src
 
