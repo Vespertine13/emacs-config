@@ -431,9 +431,9 @@ REMEMBER fonts need to be installed manually on windows systems.
       (interactive)
       (setq current-theme-idx (mod (1+ current-theme-idx) 7))
       (cond ((= current-theme-idx 0) (set-theme 'base16-greenscreen))
-	    ((= current-theme-idx 1) (set-theme 'silkworm))
+	    ((= current-theme-idx 1) (set-theme 'dream))
 	    ((= current-theme-idx 2) (set-theme 'shaman))
-	    ((= current-theme-idx 3) (set-theme 'dream))
+	    ((= current-theme-idx 3) (set-theme 'silkworm))
 	    ((= current-theme-idx 4) (set-theme 'subtle-blue))
 	    ((= current-theme-idx 5) (set-theme 'birds-of-paradise-plus))
 	    ((= current-theme-idx 6) (set-theme 'bharadwaj-slate))))
@@ -534,7 +534,7 @@ https://github.com/skeeto/elfeed
     (interactive)
     (erc-tls :server "irc.libera.chat" :port 6697 :nick ERC_NICK :password )) ;; set standard username
 #+end_src
-** mpvsupport
+** mpv support
 
 #+begin_src emacs-lisp
   (defun coding-playlist()
