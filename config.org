@@ -561,7 +561,8 @@ Plays downloaded albums via .bat files in mpv
       "the-legend-of-the-sun-virgin"
       "traveler"
       "the-last-door"
-      "wincing-the-night-away")
+      "wincing-the-night-away"
+      "halfaxa")
     )
 #+end_src
 
