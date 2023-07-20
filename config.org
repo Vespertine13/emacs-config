@@ -721,7 +721,7 @@ some unbound C-c: u, m
   (global-set-key (kbd "C-c s") 'shell)
 
   (global-set-key (kbd "C-c z") 'eshell)
-  (global-set-key (kbd "C-c m") 'find-file-read-only)
+  (global-set-key (kbd "C-c m") 'mpv-play-album)
   (global-set-key (kbd "C-c r") 'elfeed)
 
   ;; insert text
