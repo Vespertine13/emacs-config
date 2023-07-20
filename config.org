@@ -534,6 +534,17 @@ https://github.com/skeeto/elfeed
     (interactive)
     (erc-tls :server "irc.libera.chat" :port 6697 :nick ERC_NICK :password )) ;; set standard username
 #+end_src
+** mpvsupport
+
+#+begin_src emacs-lisp
+  (defun coding-playlist()
+    "runs the coding playlist in mpv asynchronously."
+    (interactive)
+    (when (string= (system-name) HOME_SYSTEM)(async-shell-command PATH_CODING_PLAYLIST_HOME))
+    (when (string= (system-name) WORK_SYSTEM)(async-shell-command PATH_CODING_PLAYLIST_WORK))
+    )
+#+end_src
+
 ** Mastodon
 #+begin_src emacs-lisp
   (setq mastodon-instance-url "https://tech.lgbt"
