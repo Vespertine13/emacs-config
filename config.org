@@ -536,23 +536,31 @@ https://github.com/skeeto/elfeed
 #+end_src
 ** mpv support
 
+Plays downloaded albums via .bat files in mpv
 #+begin_src emacs-lisp
   ;; general function that runs a bat file that plays a folder in mpv 
   (defun mpv-play-album(album)
     "plays in mpv asynchronously."
-    (interactive "sAlbum: ")
+    (interactive (list (completing-read "Album: " mpv-albums-list)))
     (when (string= (system-name) HOME_SYSTEM)
       (setq bat_folder (concat BASE_HOME_WIN PATH_MUSIC_WIN)))
     (when (string= (system-name) WORK_SYSTEM)
       (setq bat_folder (concat BASE_WORK_WIN PATH_MUSIC_WIN)))
     (async-shell-command (concat bat_folder "\\" album ".bat"))
     )
-  ;; specific use of mpv-play-album for the coding playlist
-  (defun coding-playlist()
-    (interactive)
-    (mpv-play-album "coding_playlist")
-    )
 
+  ;; list of possible albums
+  (defvar mpv-albums-list
+    '("abzu"
+      "coding_playlist"
+      "deacon"
+      "pillars-of-eternity"
+      "radio-new-vegas"
+      "raven"
+      "take-me-apart"
+      "the-legend-of-the-sun-virgin"
+      "traveler")
+    )
 #+end_src
 
 ** Mastodon
