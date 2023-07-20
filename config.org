@@ -525,7 +525,7 @@ https://github.com/skeeto/elfeed
 	  "https://www.theguardian.com/world/rss"
 	  "https://www.nintendo.co.uk/news.xml"
 	  ))
-
+(elfeed-update)
 #+end_src
 ** ERC Support
 #+begin_src emacs-lisp
