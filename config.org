@@ -537,12 +537,22 @@ https://github.com/skeeto/elfeed
 ** mpv support
 
 #+begin_src emacs-lisp
-  (defun coding-playlist()
-    "runs the coding playlist in mpv asynchronously."
-    (interactive)
-    (when (string= (system-name) HOME_SYSTEM)(async-shell-command PATH_CODING_PLAYLIST_HOME))
-    (when (string= (system-name) WORK_SYSTEM)(async-shell-command PATH_CODING_PLAYLIST_WORK))
+  ;; general function that runs a bat file that plays a folder in mpv 
+  (defun mpv-play-album(album)
+    "plays in mpv asynchronously."
+    (interactive "sAlbum: ")
+    (when (string= (system-name) HOME_SYSTEM)
+      (setq bat_folder (concat BASE_HOME_WIN PATH_MUSIC_WIN)))
+    (when (string= (system-name) WORK_SYSTEM)
+      (setq bat_folder (concat BASE_WORK_WIN PATH_MUSIC_WIN)))
+    (async-shell-command (concat bat_folder "\\" album ".bat"))
     )
+  ;; specific use of mpv-play-album for the coding playlist
+  (defun coding-playlist()
+    (interactive)
+    (mpv-play-album "coding_playlist")
+    )
+
 #+end_src
 
 ** Mastodon
