@@ -58,6 +58,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       mastodon                         ;; mastodon social media
       elfeed                           ;; can be used to read RSS
       nyan-mode                        ;; yes.
+      rainbow-mode                     ;; shows colours
       )
     )
 
@@ -545,6 +546,11 @@ REMEMBER fonts need to be installed manually on windows systems.
     (nyan-toggle-wavy-trail))
   (add-hook 'nyan-mode-hook 'proper-nyan)
 #+end_src
+*** rainbow-mode
+#+begin_src emacs-lisp
+  (add-hook 'prog-mode-hook 'rainbow-mode)
+#+end_src
+
 ** Elfeed
 https://github.com/skeeto/elfeed
 
