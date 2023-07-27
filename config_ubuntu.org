@@ -56,6 +56,9 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       elfeed                           ;; can be used to read RSS
       nyan-mode                        ;; yes.
       rainbow-mode                     ;; shows colours
+      deft                             ;; note system
+      zetteldeft                       ;; note system 2
+      ef-themes                        ;; themes
       )
     )
 
