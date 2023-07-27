@@ -238,9 +238,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 ** R Support
 #+begin_src emacs-lisp
-  ;; checks the system name and sets an R path accordingly
-  (when (string= (system-name) HOME_SYSTEM)(setq inferior-R-program-name PATH_R_HOME))
-  (when (string= (system-name) WORK_SYSTEM)(setq inferior-R-program-name PATH_R_WORK))
   ;; (setq inferior-R-program-name '(
   ;; Shut up compile saves
   (setq compilation-ask-about-save nil)
@@ -275,9 +272,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+begin_src emacs-lisp
   ;; set interpreter
   (require 'python)
-
-  (when (string= (system-name) HOME_SYSTEM)(setq python-shell-interpreter PATH_PYTHON_HOME))
-  (when (string= (system-name) WORK_SYSTEM)(setq python-shell-interpreter PATH_PYTHON_WORK))
 
     ;; add anaconda
     (add-hook 'python-mode-hook 'anaconda-mode)
@@ -563,6 +557,29 @@ https://github.com/skeeto/elfeed
 	  "https://www.nintendo.co.uk/news.xml"
 	  ))
 (elfeed-update)
+#+end_src
+** emms
+Does not work yet.
+#+begin_src emacs-lisp
+;; Enable EMMS
+(require 'emms-setup)
+(emms-all)
+
+;; Enable EMMS browser mode
+(require 'emms-browser)
+
+;; Define keybindings (customize as needed)
+(global-set-key (kbd "C-c m") 'emms)
+
+(require 'emms-player-simple)
+(require 'emms-source-file)
+(require 'emms-source-playlist)
+(setq emms-player-list '(emms-player-mpg321
+                         emms-player-ogg123
+                         emms-player-mplayer))
+
+;; Change the path to your music directory
+(setq emms-source-file-default-directory "~/mega/music/")
 #+end_src
 ** ERC Support
 #+begin_src emacs-lisp
