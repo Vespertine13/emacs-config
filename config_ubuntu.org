@@ -118,14 +118,20 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+begin_src emacs-lisp
   (setq org-image-actual-width nil) ;; do not display images in actual size
 
-   ;; enables pictures in org files
-    (defun org-show-images ()
-      (interactive)
-      (message "Show images")
-      (org-toggle-inline-images t)
-      )
+  ;; enables pictures in org files
+  (defun org-show-images ()
+    (interactive)
+    (message "Show images")
+    (org-toggle-inline-images t)
+    )
 
- (add-hook 'org-mode-hook 'org-show-images)
+  (add-hook 'org-mode-hook 'org-show-images)
+
+  ;; insert images
+  (defun org-insert-image (image-path)
+    "Insert standardized image text for org given path."
+    (interactive "FPath to image: ") ; "F" specifies a file path input
+    (insert "#+ATTR_ORG: :width 500\n[[" image-path "]]"))
 #+end_src
 *** Capture and Agenda
 #+begin_src emacs-lisp
@@ -559,27 +565,15 @@ https://github.com/skeeto/elfeed
 (elfeed-update)
 #+end_src
 ** emms
+
 Does not work yet.
 #+begin_src emacs-lisp
-;; Enable EMMS
-(require 'emms-setup)
-(emms-all)
+  ;; EMMS basic configuration
+  (require 'emms-setup)
+  (emms-all)
+  (emms-default-players)
+  (setq emms-source-file-default-directory "~/mega/music/") ;; Change to your music folder
 
-;; Enable EMMS browser mode
-(require 'emms-browser)
-
-;; Define keybindings (customize as needed)
-(global-set-key (kbd "C-c m") 'emms)
-
-(require 'emms-player-simple)
-(require 'emms-source-file)
-(require 'emms-source-playlist)
-(setq emms-player-list '(emms-player-mpg321
-                         emms-player-ogg123
-                         emms-player-mplayer))
-
-;; Change the path to your music directory
-(setq emms-source-file-default-directory "~/mega/music/")
 #+end_src
 ** ERC Support
 #+begin_src emacs-lisp
