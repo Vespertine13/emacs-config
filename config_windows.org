@@ -121,14 +121,21 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+begin_src emacs-lisp
   (setq org-image-actual-width nil) ;; do not display images in actual size
 
-   ;; enables pictures in org files
-    (defun org-show-images ()
-      (interactive)
-      (message "Show images")
-      (org-toggle-inline-images t)
-      )
+  ;; enables pictures in org files
+  (defun org-show-images ()
+    (interactive)
+    (message "Show images")
+    (org-toggle-inline-images t)
+    )
 
- (add-hook 'org-mode-hook 'org-show-images)
+  (add-hook 'org-mode-hook 'org-show-images)
+
+  ;; inserts a image in org syntax given path
+  (defun org-insert-image (image-path)
+    "Insert standardized image text for org given path."
+    (interactive "FPath to image: ") ; "F" specifies a file path input
+    (insert "#+ATTR_ORG: :width 500\n[[" image-path "]]"))
+
 #+end_src
 *** Capture and Agenda
 #+begin_src emacs-lisp
