@@ -815,13 +815,13 @@ some unbound C-c: u,
   ;; norwegian special characters
   (global-set-key (kbd "C-c æ") 'unhighlight-all)
   (global-set-key (kbd "C-c ø") 'highlight-symbol-at-point)
-  (global-set-key (kbd "C-c å") 'comment-dwim) ;; comments added at end of line (like this)
+;;  (global-set-key (kbd "C-c å") 'comment-dwim) ;; comments added at end of line (like this)
   (global-set-key (kbd "C-ø") 'make-frame-command)
   (global-set-key (kbd "C-æ") 'delete-frame)
-  (global-set-key (kbd "C-å") 'comment-line) ;; comments the line, so it does not run
+  (global-set-key (kbd "C-å") 'toggle-frame-solidity)
   (global-set-key (kbd "M-ø") 'kmacro-start-macro-or-insert-counter)
   (global-set-key (kbd "M-æ") 'kmacro-end-or-call-macro)
-  (global-set-key (kbd "M-å") 'toggle-frame-solidity)
+;;  (global-set-key (kbd "M-å") 'toggle-frame-solidity)
 
   ;; new C-backspace
   (global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace)
@@ -837,4 +837,5 @@ some unbound C-c: u,
   (cd "~/")
   (open-org-agenda-for-current-week)
   (delete-other-windows nil) ;; deletes deft window
+  (toggle-frame-solidity)
 #+end_src
