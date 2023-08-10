@@ -815,13 +815,13 @@ some unbound C-c: u,
   ;; norwegian special characters
   (global-set-key (kbd "C-c æ") 'unhighlight-all)
   (global-set-key (kbd "C-c ø") 'highlight-symbol-at-point)
-;;  (global-set-key (kbd "C-c å") 'comment-dwim) ;; comments added at end of line (like this)
+  (global-set-key (kbd "C-c å") 'org-insert-image)
   (global-set-key (kbd "C-ø") 'make-frame-command)
   (global-set-key (kbd "C-æ") 'delete-frame)
   (global-set-key (kbd "C-å") 'toggle-frame-solidity)
   (global-set-key (kbd "M-ø") 'kmacro-start-macro-or-insert-counter)
   (global-set-key (kbd "M-æ") 'kmacro-end-or-call-macro)
-;;  (global-set-key (kbd "M-å") 'toggle-frame-solidity)
+  (global-set-key (kbd "M-å") 'org-show-images)
 
   ;; new C-backspace
   (global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace)
