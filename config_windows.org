@@ -7,6 +7,10 @@
 The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it contains the following code:
 (org-babel-load-file "~/emacs-config/config_windows.org")
 
+** note on encoding
+if there are any encoding issues with æøå, the try to replace them like this:
+ø -> ø
+
 * Configuration
 ** Load external config
 #+begin_src emacs-lisp
