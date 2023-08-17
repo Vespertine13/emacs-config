@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8-unix -*-
 #+TITLE: 	Config file for Ubuntu/GNU Emacs
 #+AUTHOR:	Eivind Kjeka Broen
 #+STARTUP: content
