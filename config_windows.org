@@ -10,6 +10,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ** note on encoding
 if there are any encoding issues with æøå, the try to replace them like this:
 ø -> ø
+check encoding on the lower left side of the document.
+Maybe the text preferences section should change a bit.
 
 * Configuration
 ** Load external config
