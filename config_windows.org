@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+# -*- coding: utf-8-unix -*-
 #+STARTUP: content
 * Init Setup
 The init.el (path ~/.emacs.d/init.el) file will redirect to this file if
@@ -12,7 +12,7 @@ Maybe the text preferences section should change a bit.
 
 * Configuration
 ** Load external config
-#+begin_src lisp
+#+begin_src emacs-lisp
 ;; constants are written in caps
 (load-file "~/mega/emacs_utilities/config/constants.el")
 (load-file "~/mega/emacs_utilities/config/teos_config.el")
@@ -22,7 +22,7 @@ Maybe the text preferences section should change a bit.
 
 *** Package support
 
-#+begin_src lisp
+#+begin_src emacs-lisp
 ;; Load emacs packages and activate them
 ;; This must come before configurations of installed packages.
 (package-initialize)
@@ -49,7 +49,7 @@ Maybe the text preferences section should change a bit.
 #+end_src
 
 *** Package Installation
-#+begin_src lisp
+#+begin_src emacs-lisp
 ;; Installs packages
 
 ;; myPackages contains a list of package names
@@ -81,7 +81,7 @@ Maybe the text preferences section should change a bit.
 #+end_src
 
 ** Auto Revert
-#+begin_src lisp
+#+begin_src emacs-lisp
 ;; files reload from disc when reopened
 (global-auto-revert-mode t)
 ;; dired automatically updates  
@@ -89,7 +89,7 @@ Maybe the text preferences section should change a bit.
 #+end_src
 
 ** Text Preferences
-#+begin_src lisp
+#+begin_src emacs-lisp
 ;; Electric pair for closing parentheses etc
 (electric-pair-mode t)
 ;; Linum mode
@@ -116,7 +116,7 @@ Maybe the text preferences section should change a bit.
 system with a system that treats undo history as what it is: a branching
 tree of changes."
 
-#+begin_src lisp
+#+begin_src emacs-lisp
 (require 'undo-tree)
 (global-undo-tree-mode)
 ;; Prevent undo tree files from polluting your git repo
@@ -125,7 +125,7 @@ tree of changes."
 
 ** Org Support
 *** Basics
-#+begin_src lisp
+#+begin_src emacs-lisp
 (require 'org)
 (electric-indent-mode -1)       ;; disables electric indent mode
 (setq org-log-done t)
@@ -136,7 +136,7 @@ tree of changes."
 #+end_src
 
 *** Images
-#+begin_src lisp
+#+begin_src emacs-lisp
 (setq org-image-actual-width nil) ;; do not display images in actual size
 
 ;; enables pictures in org files
@@ -157,7 +157,7 @@ tree of changes."
 #+end_src
 
 *** Capture and Agenda
-#+begin_src lisp
+#+begin_src emacs-lisp
    (global-set-key (kbd "C-c a") 'org-agenda)
    (global-set-key (kbd "C-c c") 'org-capture)
    ;; enable tag inheritance
@@ -202,14 +202,14 @@ tree of changes."
 *** Dynamic Blocks
 **** Settings
 
-   #+begin_src lisp
+   #+begin_src emacs-lisp
    (add-hook 'org-mode-hook 'org-update-all-dblocks)
    (add-hook 'before-save-hook 'org-update-all-dblocks)
    #+end_src
 
 ****  Functions
 
-   #+begin_src lisp
+   #+begin_src emacs-lisp
    (defun org-dblock-write:block-update-time (params)
      (let ((fmt (or (plist-get params :format) "%d. %m. %Y")))
        (insert "Last block update at: "
@@ -217,13 +217,13 @@ tree of changes."
    #+end_src
 
 *** Time Stamp
-#+begin_src lisp
+#+begin_src emacs-lisp
 (setq-default org-display-custom-times t)
 (setq org-time-stamp-custom-formats '("<%e.%m.%Y>" . "<%e.%m.%Y %H:%M>"))
 #+end_src
 
 ** Backup
-#+begin_src lisp
+#+begin_src emacs-lisp
 (setq backup-directory-alist
   `((".*" . ,TEMP_DIRECTORY)))
 (setq auto-save-file-name-transforms
@@ -233,7 +233,7 @@ tree of changes."
 #+end_src
 
 ** Deft
-#+begin_src lisp
+#+begin_src emacs-lisp
   ;; general
 (require 'deft)
 (setq deft-directory FOLDER_DEFT)
@@ -248,7 +248,7 @@ tree of changes."
 #+end_src
 
 ** Zetteldeft
-#+begin_src lisp
+#+begin_src emacs-lisp
 (use-package zetteldeft)
 
 ;; zetteldeft wander lets you access a random note
@@ -266,7 +266,7 @@ tree of changes."
 #+end_src
 
 ** Eshell
-#+begin_src lisp
+#+begin_src emacs-lisp
 (add-hook 'eshell-mode-hook
       (lambda ()
         (remove-hook 'completion-at-point-functions 'pcomplete-completions-at-point t)))
@@ -275,7 +275,7 @@ tree of changes."
 #+end_src
 
 ** R Support
-#+begin_src lisp
+#+begin_src emacs-lisp
 ;; checks the system name and sets an R path accordingly
 (setq inferior-R-program-name PATH_R)
 ;; (setq inferior-R-program-name '(
@@ -310,7 +310,7 @@ tree of changes."
 #+end_src
 
 ** Python Support
-#+begin_src lisp
+#+begin_src emacs-lisp
 ;; set interpreter
 (require 'python)
 
@@ -362,14 +362,14 @@ tree of changes."
 #+end_src
 
 ** Scratch
-#+begin_src lisp
+#+begin_src emacs-lisp
 ;; input variable into scratch
 (setq initial-scratch-message "")
 #+end_src
 
 ** Utilities
 *** Calendar Support
-#+begin_src lisp
+#+begin_src emacs-lisp
 (copy-face font-lock-constant-face 'calendar-iso-week-face)
 (set-face-attribute 'calendar-iso-week-face nil
             :height 0.7)
@@ -391,12 +391,12 @@ tree of changes."
 #+end_src
 
 *** Timer
-#+begin_src lisp
+#+begin_src emacs-lisp
 (setq org-clock-sound BELL)
 #+end_src
 
 ** pandoc support
-#+begin_src lisp
+#+begin_src emacs-lisp
   (defun pandoc-convert ()
     "Prompt for input and output paths, and convert using pandoc."
     (interactive)
@@ -425,7 +425,7 @@ tree of changes."
       (shell-command-to-string (format "pandoc -o %s %s" output_var input_var))))
 #+end_src
 ** Garbage Collection
-#+begin_src lisp
+#+begin_src emacs-lisp
 ;; Minimize garbage collection during startup
 (setq gc-cons-threshold most-positive-fixnum)
 
@@ -438,7 +438,7 @@ tree of changes."
 
 ** Appearance
 *** Misc
-#+begin_src lisp
+#+begin_src emacs-lisp
 (add-to-list 'custom-theme-load-path FOLDER_THEMES) ;; set themes dir
 (setq inhibit-startup-message t)    ;; Hide the startup message
 (setq debug-on-error t)             ;; enable in-depth message on error
@@ -450,7 +450,7 @@ tree of changes."
 *** Set font functions
 REMEMBER fonts need to be installed manually on windows systems.
 
-#+begin_src lisp
+#+begin_src emacs-lisp
 (defun font-timesnewroman ()
   (interactive)
   (setq buffer-face-mode-face '(:family "TimesNewRoman"))
@@ -463,7 +463,7 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+end_src
 
 *** Theme functions
-#+begin_src lisp
+#+begin_src emacs-lisp
 (defun disable-all-themes ()
   "Disable all currently active themes."
   (interactive)
@@ -544,7 +544,7 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+end_src
 
 *** ef seasonal themes
-#+begin_src lisp
+#+begin_src emacs-lisp
   ;; ef themes
   (defvar current-ef-theme-idx 0
     "integer representing the current ef theme")
@@ -575,7 +575,7 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+end_src
 
 *** Transparent frames
-#+begin_src lisp
+#+begin_src emacs-lisp
 (defvar-local transparent-frame-enabled nil
   "Flag that indicates if the buffer is transparent.")
 
@@ -599,18 +599,18 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+end_src
 
 *** tabs
-#+begin_src lisp
+#+begin_src emacs-lisp
 (custom-set-faces
   '(tab-bar-tab ((t (:inherit default :font "inconsolata" :height 0.8)))))
 #+end_src
 
 *** emojify
-#+begin_src lisp
+#+begin_src emacs-lisp
 (add-hook 'after-init-hook #'global-emojify-mode)
 #+end_src
 
 *** nyan-mode
-#+begin_src lisp
+#+begin_src emacs-lisp
 (defun proper-nyan ()
   (nyan-start-animation)
   (nyan-toggle-wavy-trail))
@@ -618,14 +618,14 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+end_src
 
 *** rainbow-mode
-#+begin_src lisp
+#+begin_src emacs-lisp
 (add-hook 'prog-mode-hook 'rainbow-mode)
 #+end_src
 
 ** Elfeed
 [[https://github.com/skeeto/elfeed]]
 
-#+begin_src lisp
+#+begin_src emacs-lisp
   (setq elfeed-feeds
     '("https://pitchfork.com/feed/feed-album-reviews/rss" ;; pitchfork album reviews 
       "www.nrk.no/toppsaker.rss"
@@ -640,7 +640,7 @@ REMEMBER fonts need to be installed manually on windows systems.
 #+end_src
 
 ** ERC Support
-#+begin_src lisp
+#+begin_src emacs-lisp
 ;; erc-tls autorun
 (defun run-libera-chat ()
   (interactive)
@@ -650,7 +650,7 @@ REMEMBER fonts need to be installed manually on windows systems.
 ** mpv support
 Plays downloaded albums via .bat files in mpv
 
-#+begin_src lisp
+#+begin_src emacs-lisp
 ;; general function that runs a bat file that plays a folder in mpv 
 (defun mpv-play-album(album)
   "plays in mpv asynchronously."
@@ -680,7 +680,7 @@ Plays downloaded albums via .bat files in mpv
 #+end_src
 
 ** Mastodon
-#+begin_src lisp
+#+begin_src emacs-lisp
 (setq mastodon-instance-url "https://tech.lgbt"
   mastodon-active-user "gray")
 
@@ -691,7 +691,7 @@ Plays downloaded albums via .bat files in mpv
 #+end_src
 
 ** Misc Functions
-#+begin_src lisp
+#+begin_src emacs-lisp
 ;; check/uncheck all checkboxes
 (defun checkbox-all ()
   (interactive)
@@ -821,7 +821,7 @@ Plays downloaded albums via .bat files in mpv
 #+end_src
 
 ** Workout Diary
-#+begin_src lisp
+#+begin_src emacs-lisp
 ;; adds line to workout diary table
 (run-r-script R_WORKOUT_PATH)
 #+end_src
@@ -829,7 +829,7 @@ Plays downloaded albums via .bat files in mpv
 ** Keybindings
 some unbound C-c: u,
 
-#+begin_src lisp
+#+begin_src emacs-lisp
 (global-set-key (kbd "C-.") 'other-window)
 (global-set-key (kbd "C-:") 'other-frame)
 (global-set-key (kbd "C-c a") 'org-agenda)
@@ -898,7 +898,7 @@ some unbound C-c: u,
 #+end_src
 
 ** Start
-#+begin_src lisp
+#+begin_src emacs-lisp
 (set-month-theme)
 (cd "~/")
 (open-org-agenda-for-current-week)
