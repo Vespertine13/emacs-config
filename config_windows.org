@@ -371,6 +371,23 @@ Maybe the text preferences section should change a bit.
 #+begin_src emacs-lisp
   (setq org-clock-sound BELL)
 #+end_src
+** pandoc support
+#+begin_src emacs-lisp
+(defun pandoc-convert ()
+  "Prompt for two paths and insert them at the cursor position."
+  (interactive)
+  (let ((input_var (read-file-name "Enter input document: "))
+        (output_var (read-file-name "Enter output document: "))
+        (replacement-directory BASE_WORK)) ;; my variable
+    (setq input_var (replace-regexp-in-string "^~" replacement-directory input_var))
+    (setq output_var (replace-regexp-in-string "^~" replacement-directory output_var))
+    
+    ;; Replace forward slashes with backslashes
+    (setq input_var (replace-regexp-in-string "/" "\\\\" input_var))
+    (setq output_var (replace-regexp-in-string "/" "\\\\" output_var))
+    (shell-command-to-string (format "pandoc -o %s %s" output_var input_var))))
+#+end_src
+
 ** Garbage Collection
 #+begin_src emacs-lisp
   ;; Minimize garbage collection during startup
