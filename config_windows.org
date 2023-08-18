@@ -394,21 +394,33 @@ tree of changes."
 
 ** pandoc support
 #+begin_src lisp
-(defun pandoc-convert ()
-  "Prompt for two paths and insert them at the cursor position."
-  (interactive)
-  (let ((input_var (read-file-name "Enter input document: "))
-        (output_var (read-file-name "Enter output document: "))
-        (replacement-directory BASE_PATH))
-    (setq input_var (replace-regexp-in-string "^~" replacement-directory input_var))
-    (setq output_var (replace-regexp-in-string "^~" replacement-directory output_var))
+  (defun pandoc-convert ()
+    "Prompt for input and output paths, and convert using pandoc."
+    (interactive)
+    (let* ((input_var (read-file-name "Enter input document: "))
+	   (output_var (read-file-name "Enter output document: "))
+	   (replacement-directory BASE_PATH))
 
-    ;; Replace forward slashes with backslashes
-    (setq input_var (replace-regexp-in-string "/" "\\\\" input_var))
-    (setq output_var (replace-regexp-in-string "/" "\\\\" output_var))
-    (shell-command-to-string (format "pandoc -o %s %s" output_var input_var))))
+      ;; Check if input file exists
+      (unless (file-exists-p input_var)
+	(message "Input file does not exist.")
+	(return))
+
+      (setq input_var (replace-regexp-in-string "^~" replacement-directory input_var))
+      (setq output_var (replace-regexp-in-string "^~" replacement-directory output_var))
+
+      ;; Replace forward slashes with backslashes
+      (setq input_var (replace-regexp-in-string "/" "\\\\" input_var))
+      (setq output_var (replace-regexp-in-string "/" "\\\\" output_var))
+
+      ;; Check if output file exists
+      (when (file-exists-p output_var)
+	(unless (yes-or-no-p "Output file already exists. Override? ")
+	  (message "Conversion cancelled.")
+	  (return)))
+
+      (shell-command-to-string (format "pandoc -o %s %s" output_var input_var))))
 #+end_src
-
 ** Garbage Collection
 #+begin_src lisp
 ;; Minimize garbage collection during startup
