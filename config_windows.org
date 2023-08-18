@@ -1,387 +1,408 @@
-# -*- coding: utf-8-unix -*-
-#+TITLE: 	Config file for Windows 10/64bit/GNU Emacs
-#+AUTHOR:	Eivind Kjeka Broen
 #+STARTUP: content
-
 * Init Setup
-The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it contains the following code:
-(org-babel-load-file "~/emacs-config/config_windows.org")
+The init.el (path ~/.emacs.d/init.el) file will redirect to this file if
+it contains the following code: (org-babel-load-file
+"~/emacs-config/config_{windows}.org")
 
 ** note on encoding
-if there are any encoding issues with æøå, the try to replace them like this:
-ø -> ø
-check encoding on the lower left side of the document.
+if there are any encoding issues with æøå, the try to replace them like
+this: ø -> ø check encoding on the lower left side of the document.
 Maybe the text preferences section should change a bit.
 
 * Configuration
 ** Load external config
-#+begin_src emacs-lisp
-  ;; constants are written in caps
-  (load-file "~/mega/emacs_utilities/config/constants.el")
-  (load-file "~/mega/emacs_utilities/config/teos_config.el")
+#+begin_src lisp
+;; constants are written in caps
+(load-file "~/mega/emacs_utilities/config/constants.el")
+(load-file "~/mega/emacs_utilities/config/teos_config.el")
 #+end_src
+
 ** Packages
+
 *** Package support
-#+begin_src emacs-lisp
-  ;; Load emacs packages and activate them
-  ;; This must come before configurations of installed packages.
-  (package-initialize)
+
+#+begin_src lisp
+;; Load emacs packages and activate them
+;; This must come before configurations of installed packages.
+(package-initialize)
 
 
-  ;; Enables basic packaging support
-  (require 'package)
+;; Enables basic packaging support
+(require 'package)
 
 
-  ;; repositories
-  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
-			   ("melpa" . "http://melpa.org/packages/")
-			   ("org" . "http://orgmode.org/elpa/")))
+;; repositories
+(setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+             ("melpa" . "http://melpa.org/packages/")
+             ("org" . "http://orgmode.org/elpa/")))
 
 
-  ;; If there are no archived package contents, refresh them
-  (if (not (package-installed-p 'use-package))
-      (progn
-	(package-refresh-contents)
-	(package-install 'use-package)))
+;; If there are no archived package contents, refresh them
+(if (not (package-installed-p 'use-package))
+    (progn
+  (package-refresh-contents)
+  (package-install 'use-package)))
 
-  (require 'use-package)
+(require 'use-package)
 
 #+end_src
+
 *** Package Installation
-#+begin_src emacs-lisp
-  ;; Installs packages
+#+begin_src lisp
+;; Installs packages
 
-  ;; myPackages contains a list of package names
-  ;; dont be tempted to use elpy!
-  (defvar myPackages
-    '(ess                              ;; ESS
-      anaconda-mode                    ;; anaconda mode for python
-      company-anaconda                 ;; company anaconda for python
-      flycheck                         ;; flycheck for coding
-      ein                              ;; jupyterlab stuff
-      undo-tree                        ;; advanced undo
-      emojify                          ;; emojis
-      mastodon                         ;; mastodon social media
-      elfeed                           ;; can be used to read RSS
-      nyan-mode                        ;; yes.
-      rainbow-mode                     ;; shows colours
-      )
+;; myPackages contains a list of package names
+;; dont be tempted to use elpy!
+(defvar myPackages
+  '(ess                              ;; ESS
+    anaconda-mode                    ;; anaconda mode for python
+    company-anaconda                 ;; company anaconda for python
+    flycheck                         ;; flycheck for coding
+    ein                              ;; jupyterlab stuff
+    undo-tree                        ;; advanced undo
+    emojify                          ;; emojis
+    mastodon                         ;; mastodon social media
+    elfeed                           ;; can be used to read RSS
+    nyan-mode                        ;; yes.
+    rainbow-mode                     ;; shows colours
     )
+  )
 
-  ;; Scans the list in myPackages
-  ;; If the package listed is not already installed, install it
-  (mapc #'(lambda (package)
+;; Scans the list in myPackages
+;; If the package listed is not already installed, install it
+(mapc #'(lambda (package)
 
-	    (unless (package-installed-p package)
+      (unless (package-installed-p package)
 
-	      (package-install package)))
+        (package-install package)))
 
-	myPackages)
+  myPackages)
 #+end_src
 
-** Auto Revert 
-#+begin_src emacs-lisp
-  ;; files reload from disc when reopened
-  (global-auto-revert-mode t)
-  ;; dired automatically updates  
-  (setq dired-auto-revert-buffer t)
+** Auto Revert
+#+begin_src lisp
+;; files reload from disc when reopened
+(global-auto-revert-mode t)
+;; dired automatically updates  
+(setq dired-auto-revert-buffer t)
 #+end_src
+
 ** Text Preferences
-#+begin_src emacs-lisp
-  ;; Electric pair for closing parentheses etc
-  (electric-pair-mode t)
-  ;; Linum mode
-  (global-display-line-numbers-mode t)
-  ;; setting UTF-8 Encoding
-  (set-language-environment "UTF-8")
-  (prefer-coding-system 'utf-8)
-  (set-terminal-coding-system 'utf-8)
-  ;; hide emphasis markers (bold, italics etc)
-  (setq org-hide-emphasis-markers t)
-  ;; sentences does not end in double space anymore
-  (setq sentence-end-double-space nil)
-  ;; when something is selected it will now be deleted if typed over
-  (delete-selection-mode t)
+#+begin_src lisp
+;; Electric pair for closing parentheses etc
+(electric-pair-mode t)
+;; Linum mode
+(global-display-line-numbers-mode t)
+;; setting UTF-8 Encoding
+(set-language-environment "UTF-8")
+(prefer-coding-system 'utf-8)
+(set-terminal-coding-system 'utf-8)
+;; hide emphasis markers (bold, italics etc)
+(setq org-hide-emphasis-markers t)
+;; sentences does not end in double space anymore
+(setq sentence-end-double-space nil)
+;; when something is selected it will now be deleted if typed over
+(delete-selection-mode t)
 #+end_src
+
 *** undo-tree support
-"The `undo-tree-mode' provided by this package replaces Emacs' undo system with a system that treats undo history as what it is: a branching tree of changes."
-#+begin_src emacs-lisp
-  (require 'undo-tree)
-  (global-undo-tree-mode)
-  ;; Prevent undo tree files from polluting your git repo
-  (setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
+:PROPERTIES:
+:CUSTOM_ID: undo-tree-support
+:END:
+"The `undo-tree-mode' provided by this package replaces Emacs' undo
+system with a system that treats undo history as what it is: a branching
+tree of changes."
+
+#+begin_src lisp
+(require 'undo-tree)
+(global-undo-tree-mode)
+;; Prevent undo tree files from polluting your git repo
+(setq undo-tree-history-directory-alist '(("." . "~/.emacs.d/undo")))
 #+end_src
 
 ** Org Support
 *** Basics
-#+begin_src emacs-lisp
-  (require 'org)
-  (electric-indent-mode -1)       ;; disables electric indent mode
-  (setq org-log-done t)
-  ;; RETURN will follow links in org-mode files
-  (setq org-return-follows-link  t)
-  ;; remove stupid indent
-  (setq org-adapt-indentation nil)
+#+begin_src lisp
+(require 'org)
+(electric-indent-mode -1)       ;; disables electric indent mode
+(setq org-log-done t)
+;; RETURN will follow links in org-mode files
+(setq org-return-follows-link  t)
+;; remove stupid indent
+(setq org-adapt-indentation nil)
 #+end_src
+
 *** Images
-#+begin_src emacs-lisp
-  (setq org-image-actual-width nil) ;; do not display images in actual size
+#+begin_src lisp
+(setq org-image-actual-width nil) ;; do not display images in actual size
 
-  ;; enables pictures in org files
-  (defun org-show-images ()
-    (interactive)
-    (message "Show images")
-    (org-toggle-inline-images t)
-    )
+;; enables pictures in org files
+(defun org-show-images ()
+  (interactive)
+  (message "Show images")
+  (org-toggle-inline-images t)
+  )
 
-  (add-hook 'org-mode-hook 'org-show-images)
+(add-hook 'org-mode-hook 'org-show-images)
 
-  ;; inserts a image in org syntax given path
-  (defun org-insert-image (image-path)
-    "Insert standardized image text for org given path."
-    (interactive "FPath to image: ") ; "F" specifies a file path input
-    (insert "#+ATTR_ORG: :width 500\n[[" image-path "]]"))
+;; inserts a image in org syntax given path
+(defun org-insert-image (image-path)
+  "Insert standardized image text for org given path."
+  (interactive "FPath to image: ") ; "F" specifies a file path input
+  (insert "#+ATTR_ORG: :width 500\n[[" image-path "]]"))
 
 #+end_src
+
 *** Capture and Agenda
-#+begin_src emacs-lisp
-     (global-set-key (kbd "C-c a") 'org-agenda)
-     (global-set-key (kbd "C-c c") 'org-capture)
-     ;; enable tag inheritance
-     (setq org-use-tag-inheritance t)
+#+begin_src lisp
+   (global-set-key (kbd "C-c a") 'org-agenda)
+   (global-set-key (kbd "C-c c") 'org-capture)
+   ;; enable tag inheritance
+   (setq org-use-tag-inheritance t)
 
-  (setq org-capture-templates
-	'(("t" "TODO" entry (file ORG_CAPTURE)
-	   "* TODO %?")
-	  ("b" "Bookmark" entry (file ORG_BOOKMARKS)
-	   "* %? :bookmark: \n:PROPERTIES:\n:CREATED: %U\n:END:\n")
-	  ("d" "Diary" entry (file+datetree ORG_DIARY)
-	   "* Dagen i går%?")
-	  ("m" "Møtelogg" entry (file+datetree ORG_MOTELOGG)
-	   "* %? \nInnkalling: \nAgenda: \nNotater:")
-	  ("e" "Events" entry (file ORG_EVENTS)
-	   "* %? ")
-	  ("j" "Teos TODOS" entry (file ORG_TEOS_TODOS)
-	   "* TODO %?")
-	  ("o" "Ord til Ordliste" entry (file ORG_ORDLISTE)
-	   "* %?") 
-	  ("r" "Kontaktinfo" entry (file ORG_ROLODEX)
-	   "* %? :contact:\n:PROPERTIES:\n:EMAIL:\n:TELEPHONE:\n:NOTE:\n:END:\n")
-	  ))
+(setq org-capture-templates
+  '(("t" "TODO" entry (file ORG_CAPTURE)
+     "* TODO %?")
+    ("b" "Bookmark" entry (file ORG_BOOKMARKS)
+     "* %? :bookmark: \n:PROPERTIES:\n:CREATED: %U\n:END:\n")
+    ("d" "Diary" entry (file+datetree ORG_DIARY)
+     "* Dagen i går%?")
+    ("m" "Møtelogg" entry (file+datetree ORG_MOTELOGG)
+     "* %? \nInnkalling: \nAgenda: \nNotater:")
+    ("e" "Events" entry (file ORG_EVENTS)
+     "* %? ")
+    ("j" "Teos TODOS" entry (file ORG_TEOS_TODOS)
+     "* TODO %?")
+    ("o" "Ord til Ordliste" entry (file ORG_ORDLISTE)
+     "* %?") 
+    ("r" "Kontaktinfo" entry (file ORG_ROLODEX)
+     "* %? :contact:\n:PROPERTIES:\n:EMAIL:\n:TELEPHONE:\n:NOTE:\n:END:\n")
+    ))
 
-   ;; Org todo workflow
-   (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
+ ;; Org todo workflow
+ (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
 
-   ;; custom command
-   (setq org-agenda-custom-commands
-	 '(("j" "Jobbrelaterte TODOS"
-	    tags "+jobb+TODO=\"TODO\"")
-	   ("h" "Handleliste TODOS"
-	    tags "+handle+TODO=\"TODO\"")
-	   ("f" "Filmer TODOS"
-	    tags "+film+TODO=\"TODO\"")
-	   ("b" "Bøker TODOS"
-	    tags "+bok+TODO=\"TODO\"")))
+ ;; custom command
+ (setq org-agenda-custom-commands
+   '(("j" "Jobbrelaterte TODOS"
+      tags "+jobb+TODO=\"TODO\"")
+     ("h" "Handleliste TODOS"
+      tags "+handle+TODO=\"TODO\"")
+     ("f" "Filmer TODOS"
+      tags "+film+TODO=\"TODO\"")
+     ("b" "Bøker TODOS"
+      tags "+bok+TODO=\"TODO\"")))
 
 
 #+end_src
 
 *** Dynamic Blocks
 **** Settings
-#+begin_src emacs-lisp
- (add-hook 'org-mode-hook 'org-update-all-dblocks)
- (add-hook 'before-save-hook 'org-update-all-dblocks)
-#+end_src
-**** Functions
-#+begin_src emacs-lisp
-  (defun org-dblock-write:block-update-time (params)
-    (let ((fmt (or (plist-get params :format) "%d. %m. %Y")))
-      (insert "Last block update at: "
-	      (format-time-string fmt))))
-#+end_src
+
+   #+begin_src lisp
+   (add-hook 'org-mode-hook 'org-update-all-dblocks)
+   (add-hook 'before-save-hook 'org-update-all-dblocks)
+   #+end_src
+
+****  Functions
+
+   #+begin_src lisp
+   (defun org-dblock-write:block-update-time (params)
+     (let ((fmt (or (plist-get params :format) "%d. %m. %Y")))
+       (insert "Last block update at: "
+           (format-time-string fmt))))
+   #+end_src
+
 *** Time Stamp
-#+begin_src emacs-lisp
-  (setq-default org-display-custom-times t)
-  (setq org-time-stamp-custom-formats '("<%e.%m.%Y>" . "<%e.%m.%Y %H:%M>"))
+#+begin_src lisp
+(setq-default org-display-custom-times t)
+(setq org-time-stamp-custom-formats '("<%e.%m.%Y>" . "<%e.%m.%Y %H:%M>"))
 #+end_src
+
 ** Backup
-#+begin_src emacs-lisp
-  (setq backup-directory-alist
-	`((".*" . ,TEMP_DIRECTORY)))
-  (setq auto-save-file-name-transforms
-	`((".*" ,TEMP_DIRECTORY t)))
-  (setq temporary-file-directory
-	TEMP_DIRECTORY)
+#+begin_src lisp
+(setq backup-directory-alist
+  `((".*" . ,TEMP_DIRECTORY)))
+(setq auto-save-file-name-transforms
+  `((".*" ,TEMP_DIRECTORY t)))
+(setq temporary-file-directory
+  TEMP_DIRECTORY)
 #+end_src
+
 ** Deft
-#+begin_src emacs-lisp
-    ;; general
-  (require 'deft)
-  (setq deft-directory FOLDER_DEFT)
-  (setq zetteldeft-home-id "2023-01-24-1155")
-  (setq deft-extensions '("org"))
-  (setq deft-default-extension "org")
-  (setq deft-text-mode 'org-mode)
-  (setq deft-use-filename-as-title t)
-  (setq deft-use-filter-string-for-filename t)
-  (setq deft-auto-save-interval 0)
-  (deft)
+#+begin_src lisp
+  ;; general
+(require 'deft)
+(setq deft-directory FOLDER_DEFT)
+(setq zetteldeft-home-id "2023-01-24-1155")
+(setq deft-extensions '("org"))
+(setq deft-default-extension "org")
+(setq deft-text-mode 'org-mode)
+(setq deft-use-filename-as-title t)
+(setq deft-use-filter-string-for-filename t)
+(setq deft-auto-save-interval 0)
+(deft)
 #+end_src
+
 ** Zetteldeft
-#+begin_src emacs-lisp
-  (use-package zetteldeft)
+#+begin_src lisp
+(use-package zetteldeft)
 
-  ;; zetteldeft wander lets you access a random note
-  (defun zetteldeft-wander ()
-    "Wander through `zetteldeft' notes.
-    Search `deft' for a random `zetteldeft' id."
-      (interactive)
-      (switch-to-buffer deft-buffer)
-      (let ((all-files (deft-find-all-files-no-prefix)))
-	(deft-filter
-	  (zetteldeft--lift-id
-	   (nth (random (length all-files))
-		all-files)))))
+;; zetteldeft wander lets you access a random note
+(defun zetteldeft-wander ()
+  "Wander through `zetteldeft' notes.
+  Search `deft' for a random `zetteldeft' id."
+    (interactive)
+    (switch-to-buffer deft-buffer)
+    (let ((all-files (deft-find-all-files-no-prefix)))
+  (deft-filter
+    (zetteldeft--lift-id
+     (nth (random (length all-files))
+      all-files)))))
 
 #+end_src
+
 ** Eshell
-#+begin_src emacs-lisp
-  (add-hook 'eshell-mode-hook
-	    (lambda ()
-	      (remove-hook 'completion-at-point-functions 'pcomplete-completions-at-point t)))
-  (setenv "LANG" "en_US.UTF-8")
-  (setq eshell-scroll-to-bottom-on-input t)
+#+begin_src lisp
+(add-hook 'eshell-mode-hook
+      (lambda ()
+        (remove-hook 'completion-at-point-functions 'pcomplete-completions-at-point t)))
+(setenv "LANG" "en_US.UTF-8")
+(setq eshell-scroll-to-bottom-on-input t)
 #+end_src
+
 ** R Support
-#+begin_src emacs-lisp
-  ;; checks the system name and sets an R path accordingly
-  (when (string= (system-name) HOME_SYSTEM)(setq inferior-R-program-name PATH_R_HOME))
-  (when (string= (system-name) WORK_SYSTEM)(setq inferior-R-program-name PATH_R_WORK))
-  ;; (setq inferior-R-program-name '(
-  ;; Shut up compile saves
-  (setq compilation-ask-about-save nil)
-  ;; shut up auto ask
-  (setq ess-ask-for-ess-directory nil)
-  (setq ess-startup-directory nil)
-  ;; Don't save *anything*
-  (setq compilation-save-buffers-predicate '(lambda () nil))
-  ;;; ESS
-  (defun my-ess-hook ()
-    ;; ensure company-R-library is in ESS backends
-    (make-local-variable 'company-backends)
-    (cl-delete-if (lambda (x) (and (eq (car-safe x) 'company-R-args))) company-backends)
-    (push (list 'company-R-args 'company-R-objects 'company-R-library :separate)
-	  company-backends))
-  (add-hook 'ess-mode-hook 'my-ess-hook)
-  (with-eval-after-load 'ess
-    (setq ess-use-company t))
-  ;; company
-  (require 'company)
-  (setq tab-always-indent 'complete)
-  (global-set-key (kbd "C-M-/") #'company-complete)
-  (global-company-mode)
-  ;; hotkeys
-  (global-set-key (kbd "M--") " <- ")    ;; alt+-
-  (global-set-key (kbd "C-S-M") " %>% ") ;; control+shift+m
-  ;; run script function
-  (defun run-r-script (script-path)
-    (shell-command (concat "Rscript " (shell-quote-argument script-path))))
+#+begin_src lisp
+;; checks the system name and sets an R path accordingly
+(setq inferior-R-program-name PATH_R)
+;; (setq inferior-R-program-name '(
+;; Shut up compile saves
+(setq compilation-ask-about-save nil)
+;; shut up auto ask
+(setq ess-ask-for-ess-directory nil)
+(setq ess-startup-directory nil)
+;; Don't save *anything*
+(setq compilation-save-buffers-predicate '(lambda () nil))
+;;; ESS
+(defun my-ess-hook ()
+  ;; ensure company-R-library is in ESS backends
+  (make-local-variable 'company-backends)
+  (cl-delete-if (lambda (x) (and (eq (car-safe x) 'company-R-args))) company-backends)
+  (push (list 'company-R-args 'company-R-objects 'company-R-library :separate)
+    company-backends))
+(add-hook 'ess-mode-hook 'my-ess-hook)
+(with-eval-after-load 'ess
+  (setq ess-use-company t))
+;; company
+(require 'company)
+(setq tab-always-indent 'complete)
+(global-set-key (kbd "C-M-/") #'company-complete)
+(global-company-mode)
+;; hotkeys
+(global-set-key (kbd "M--") " <- ")    ;; alt+-
+(global-set-key (kbd "C-S-M") " %>% ") ;; control+shift+m
+;; run script function
+(defun run-r-script (script-path)
+  (shell-command (concat "Rscript " (shell-quote-argument script-path))))
 #+end_src
+
 ** Python Support
-#+begin_src emacs-lisp
-  ;; set interpreter
-  (require 'python)
+#+begin_src lisp
+;; set interpreter
+(require 'python)
 
-  (when (string= (system-name) HOME_SYSTEM)(setq python-shell-interpreter PATH_PYTHON_HOME))
-  (when (string= (system-name) WORK_SYSTEM)(setq python-shell-interpreter PATH_PYTHON_WORK))
+(setq python-shell-interpreter PATH_PYTHON)
+;; add anaconda
+(add-hook 'python-mode-hook 'anaconda-mode)
 
-    ;; add anaconda
-    (add-hook 'python-mode-hook 'anaconda-mode)
+;; add company anaconda
+(eval-after-load "company"
+  '(add-to-list 'company-backends 'company-anaconda))
+(add-hook 'python-mode-hook 'anaconda-mode)
 
-    ;; add company anaconda
-    (eval-after-load "company"
-      '(add-to-list 'company-backends 'company-anaconda))
-    (add-hook 'python-mode-hook 'anaconda-mode)
+;; set standard indent
+(add-hook 'python-mode-hook '(lambda ()
+               (setq python-indent 4)))
+(setq python-indent-guess-indent-offset nil)
 
-    ;; set standard indent
-    (add-hook 'python-mode-hook '(lambda ()
-				   (setq python-indent 4)))
-    (setq python-indent-guess-indent-offset nil)
+(defun my-python-line ()
+  (interactive)
+  (save-excursion
+    (setq the_script_buffer (format (buffer-name)))
+    (end-of-line)
+    (kill-region (point) (progn (back-to-indentation) (point)))
+    (if  (get-buffer  "*Python*")
+    (message "")
+  (run-python "ipython" nil nil))
+    ;; (setq the_py_buffer (format "*Python[%s]*" (buffer-file-name)))
+    (setq the_py_buffer "*Python*")
+    (switch-to-buffer-other-window  the_py_buffer)
+    (goto-char (buffer-end 1))
+    (yank)
+    (comint-send-input)
+    (switch-to-buffer-other-window the_script_buffer)
+    (yank))
+  (end-of-line)
+  (next-line)
+  )
 
-    (defun my-python-line ()
-      (interactive)
-      (save-excursion
-	(setq the_script_buffer (format (buffer-name)))
-	(end-of-line)
-	(kill-region (point) (progn (back-to-indentation) (point)))
-	(if  (get-buffer  "*Python*")
-	    (message "")
-	  (run-python "ipython" nil nil))
-	;; (setq the_py_buffer (format "*Python[%s]*" (buffer-file-name)))
-	(setq the_py_buffer "*Python*")
-	(switch-to-buffer-other-window  the_py_buffer)
-	(goto-char (buffer-end 1))
-	(yank)
-	(comint-send-input)
-	(switch-to-buffer-other-window the_script_buffer)
-	(yank))
-      (end-of-line)
-      (next-line)
-      )
+;; setter send line til C-return
+(add-hook 'python-mode-hook
+      (lambda ()
+        (define-key python-mode-map (kbd "<C-return>") 'my-python-line)))
 
-    ;; setter send line til C-return
-    (add-hook 'python-mode-hook
-	      (lambda ()
-		(define-key python-mode-map (kbd "<C-return>") 'my-python-line)))
-
-    ;; setter send region til M-return
-    (add-hook 'python-mode-hook
-	      (lambda ()
-		(define-key python-mode-map (kbd "<M-return>") 'python-shell-send-region)))
+;; setter send region til M-return
+(add-hook 'python-mode-hook
+      (lambda ()
+        (define-key python-mode-map (kbd "<M-return>") 'python-shell-send-region)))
 
 #+end_src
+
 ** Scratch
-#+begin_src emacs-lisp
+#+begin_src lisp
 ;; input variable into scratch
 (setq initial-scratch-message "")
 #+end_src
+
 ** Utilities
 *** Calendar Support
-#+begin_src emacs-lisp
-  (copy-face font-lock-constant-face 'calendar-iso-week-face)
-  (set-face-attribute 'calendar-iso-week-face nil
-		      :height 0.7)
-  (setq calendar-intermonth-text
-	'(propertize
-	  (format "%2d"
-		  (car
-		   (calendar-iso-from-absolute
-		    (calendar-absolute-from-gregorian (list month day year)))))
-	  'font-lock-face 'calendar-iso-week-face))
+#+begin_src lisp
+(copy-face font-lock-constant-face 'calendar-iso-week-face)
+(set-face-attribute 'calendar-iso-week-face nil
+            :height 0.7)
+(setq calendar-intermonth-text
+  '(propertize
+    (format "%2d"
+        (car
+         (calendar-iso-from-absolute
+          (calendar-absolute-from-gregorian (list month day year)))))
+    'font-lock-face 'calendar-iso-week-face))
 
 
-  (add-hook 'calendar-load-hook
-	    (lambda ()
-	      (calendar-set-date-style 'european)))
+(add-hook 'calendar-load-hook
+      (lambda ()
+        (calendar-set-date-style 'european)))
 
-  (setq calendar-week-start-day 1)
+(setq calendar-week-start-day 1)
 
 #+end_src
+
 *** Timer
-#+begin_src emacs-lisp
-  (setq org-clock-sound BELL)
+#+begin_src lisp
+(setq org-clock-sound BELL)
 #+end_src
+
 ** pandoc support
-#+begin_src emacs-lisp
+#+begin_src lisp
 (defun pandoc-convert ()
   "Prompt for two paths and insert them at the cursor position."
   (interactive)
   (let ((input_var (read-file-name "Enter input document: "))
         (output_var (read-file-name "Enter output document: "))
-        (replacement-directory BASE_WORK)) ;; my variable
+        (replacement-directory BASE_PATH))
     (setq input_var (replace-regexp-in-string "^~" replacement-directory input_var))
     (setq output_var (replace-regexp-in-string "^~" replacement-directory output_var))
-    
+
     ;; Replace forward slashes with backslashes
     (setq input_var (replace-regexp-in-string "/" "\\\\" input_var))
     (setq output_var (replace-regexp-in-string "/" "\\\\" output_var))
@@ -389,406 +410,411 @@ Maybe the text preferences section should change a bit.
 #+end_src
 
 ** Garbage Collection
-#+begin_src emacs-lisp
-  ;; Minimize garbage collection during startup
-  (setq gc-cons-threshold most-positive-fixnum)
+#+begin_src lisp
+;; Minimize garbage collection during startup
+(setq gc-cons-threshold most-positive-fixnum)
 
-  ;; Lower threshold back to 8 MiB (default is 800kB)
-  (add-hook 'emacs-startup-hook
-	    (lambda ()
-	      (setq gc-cons-threshold (expt 2 23))))
+;; Lower threshold back to 8 MiB (default is 800kB)
+(add-hook 'emacs-startup-hook
+      (lambda ()
+        (setq gc-cons-threshold (expt 2 23))))
 
 #+end_src
+
 ** Appearance
 *** Misc
-#+begin_src emacs-lisp
-  (add-to-list 'custom-theme-load-path FOLDER_THEMES) ;; set themes dir
-  (setq inhibit-startup-message t)    ;; Hide the startup message
-  (setq debug-on-error t)             ;; enable in-depth message on error
-  (setq ring-bell-function 'ignore)   ;; ignore annoying bell sounds while in emacs
-  (tool-bar-mode -1)                  ;; removes ugly tool bar
-  (menu-bar-mode -1)                  ;; removes menubar
+#+begin_src lisp
+(add-to-list 'custom-theme-load-path FOLDER_THEMES) ;; set themes dir
+(setq inhibit-startup-message t)    ;; Hide the startup message
+(setq debug-on-error t)             ;; enable in-depth message on error
+(setq ring-bell-function 'ignore)   ;; ignore annoying bell sounds while in emacs
+(tool-bar-mode -1)                  ;; removes ugly tool bar
+(menu-bar-mode -1)                  ;; removes menubar
 #+end_src
+
 *** Set font functions
 REMEMBER fonts need to be installed manually on windows systems.
 
-#+begin_src emacs-lisp
-  (defun font-timesnewroman ()
-    (interactive)
-    (setq buffer-face-mode-face '(:family "TimesNewRoman"))
-    (buffer-face-mode))
+#+begin_src lisp
+(defun font-timesnewroman ()
+  (interactive)
+  (setq buffer-face-mode-face '(:family "TimesNewRoman"))
+  (buffer-face-mode))
 
-  (defun font-inconsolata ()
-    (interactive)
-    (setq buffer-face-mode-face '(:family "Inconsolata")) ;; standard font find it in ~/mega/fonts
-    (buffer-face-mode))
+(defun font-inconsolata ()
+  (interactive)
+  (setq buffer-face-mode-face '(:family "Inconsolata")) ;; standard font find it in ~/mega/fonts
+  (buffer-face-mode))
 #+end_src
+
 *** Theme functions
-#+begin_src emacs-lisp
-  (defun disable-all-themes ()
-    "Disable all currently active themes."
-    (interactive)
-    (dolist (i custom-enabled-themes)
-      (disable-theme i)))
+#+begin_src lisp
+(defun disable-all-themes ()
+  "Disable all currently active themes."
+  (interactive)
+  (dolist (i custom-enabled-themes)
+    (disable-theme i)))
 
-  ;; set theme function
-  (defun set-theme (theme)
-    (disable-all-themes)
-    (load-theme theme t)
-    (set-frame-font "Inconsolata 16" nil t)
-    (message "Theme '%s' set" theme))
+;; set theme function
+(defun set-theme (theme)
+  (disable-all-themes)
+  (load-theme theme t)
+  (set-frame-font "Inconsolata 16" nil t)
+  (message "Theme '%s' set" theme))
 
-  ;; interactive version
-  (defun choose-theme (theme)
-    (interactive (list (completing-read "Theme: " theme-list)))
-    (unless (member theme theme-list)
-      (error "Theme is not in list!"))
-    (set-theme (intern theme)))
+;; interactive version
+(defun choose-theme (theme)
+  (interactive (list (completing-read "Theme: " theme-list)))
+  (unless (member theme theme-list)
+    (error "Theme is not in list!"))
+  (set-theme (intern theme)))
 
-  ;; interactive version of set-theme
-  (defun theme-select (theme)
-    (interactive (list (completing-read "Theme: " theme-list)))
-    (unless (member theme theme-list)
-      (error "Theme not in list!"))
-    (set-theme (intern theme)))
+;; interactive version of set-theme
+(defun theme-select (theme)
+  (interactive (list (completing-read "Theme: " theme-list)))
+  (unless (member theme theme-list)
+    (error "Theme not in list!"))
+  (set-theme (intern theme)))
 
-  ;; List of installed themes
-  (defvar theme-list
-    '("base16-greenscreen"
-      "dream"
-      "shaman"
-      "silkworm"
-      "subtle-blue"
-      "birds-of-paradise-plus"
-      "bharadwaj-slate"
-      "ef-autumn"
-      "ef-cyprus"
-      "ef-day"
-      "ef-deuteranopia-light"
-      "ef-duo-light"
-      "ef-elea-light"
-      "ef-frost"
-      "ef-kassio"
-      "ef-light"
-      "ef-spring"
-      "ef-summer"
-      "ef-trio-light"
-      "ef-tritanopia-light"
-      "ef-bio"
-      "ef-cherie"
-      "ef-dark"
-      "ef-deuteranopia-dark"
-      "ef-duo-dark"
-      "ef-elea-dark"
-      "ef-night"
-      "ef-symbiosis"
-      "ef-trio-dark"
-      "ef-tritanopia-dark"
-      "ef-winter"
-      "orange_wedge"
-      "bubblegum"))
+;; List of installed themes
+(defvar theme-list
+  '("base16-greenscreen"
+    "dream"
+    "shaman"
+    "silkworm"
+    "subtle-blue"
+    "birds-of-paradise-plus"
+    "bharadwaj-slate"
+    "ef-autumn"
+    "ef-cyprus"
+    "ef-day"
+    "ef-deuteranopia-light"
+    "ef-duo-light"
+    "ef-elea-light"
+    "ef-frost"
+    "ef-kassio"
+    "ef-light"
+    "ef-spring"
+    "ef-summer"
+    "ef-trio-light"
+    "ef-tritanopia-light"
+    "ef-bio"
+    "ef-cherie"
+    "ef-dark"
+    "ef-deuteranopia-dark"
+    "ef-duo-dark"
+    "ef-elea-dark"
+    "ef-night"
+    "ef-symbiosis"
+    "ef-trio-dark"
+    "ef-tritanopia-dark"
+    "ef-winter"
+    "orange_wedge"
+    "bubblegum"))
 
-  (defvar current-theme-idx 0
-    "integer representing the current theme")
+(defvar current-theme-idx 0
+  "integer representing the current theme")
 
-  (defun cycle-themes ()
-    "Toggle between different themes"
-    (interactive)
-    (setq current-theme-idx (mod (1+ current-theme-idx) 7))
-    (cond ((= current-theme-idx 0) (set-theme 'base16-greenscreen))
-	  ((= current-theme-idx 1) (set-theme 'dream))
-	  ((= current-theme-idx 2) (set-theme 'shaman))
-	  ((= current-theme-idx 3) (set-theme 'silkworm))
-	  ((= current-theme-idx 4) (set-theme 'subtle-blue))
-	  ((= current-theme-idx 5) (set-theme 'birds-of-paradise-plus))
-	  ((= current-theme-idx 6) (set-theme 'bharadwaj-slate))))
-#+End_src
+(defun cycle-themes ()
+  "Toggle between different themes"
+  (interactive)
+  (setq current-theme-idx (mod (1+ current-theme-idx) 7))
+  (cond ((= current-theme-idx 0) (set-theme 'base16-greenscreen))
+    ((= current-theme-idx 1) (set-theme 'dream))
+    ((= current-theme-idx 2) (set-theme 'shaman))
+    ((= current-theme-idx 3) (set-theme 'silkworm))
+    ((= current-theme-idx 4) (set-theme 'subtle-blue))
+    ((= current-theme-idx 5) (set-theme 'birds-of-paradise-plus))
+    ((= current-theme-idx 6) (set-theme 'bharadwaj-slate))))
+#+end_src
+
 *** ef seasonal themes
-#+begin_src emacs-lisp
-    ;; ef themes
-    (defvar current-ef-theme-idx 0
-      "integer representing the current ef theme")
+#+begin_src lisp
+  ;; ef themes
+  (defvar current-ef-theme-idx 0
+    "integer representing the current ef theme")
 
-  ;; https://protesilaos.com/emacs/ef-themes-pictures
-    (defun set-month-theme ()
-      (setq current-month (format-time-string "%m" (current-time)))
-      (cond 
-       ;; Day
-       ;; Spring
-       ((string-equal current-month "03") (set-theme 'ef-deuteranopia-light))
-       ((string-equal current-month "04") (set-theme 'ef-spring))
-       ((string-equal current-month "05") (set-theme 'ef-kassio))
-       ;; Summer
-       ((string-equal current-month "06") (set-theme 'ef-summer))
-       ((string-equal current-month "07") (set-theme 'ef-elea-light))
-       ((string-equal current-month "08") (set-theme 'ef-day))
-       ;; Night
-       ;; Autumns
-       ((string-equal current-month "09") (set-theme 'ef-cherie))
-       ((string-equal current-month "10") (set-theme 'ef-autumn))
-       ((string-equal current-month "11") (set-theme 'ef-bio))
-       ;; Winter
-       ((string-equal current-month "12") (set-theme 'ef-tritanopia-dark))
-       ((string-equal current-month "01") (set-theme 'ef-winter))
-       ((string-equal current-month "02") (set-theme 'ef-elea-dark))))
+;; https://protesilaos.com/emacs/ef-themes-pictures
+  (defun set-month-theme ()
+    (setq current-month (format-time-string "%m" (current-time)))
+    (cond 
+     ;; Day
+     ;; Spring
+     ((string-equal current-month "03") (set-theme 'ef-deuteranopia-light))
+     ((string-equal current-month "04") (set-theme 'ef-spring))
+     ((string-equal current-month "05") (set-theme 'ef-kassio))
+     ;; Summer
+     ((string-equal current-month "06") (set-theme 'ef-summer))
+     ((string-equal current-month "07") (set-theme 'ef-elea-light))
+     ((string-equal current-month "08") (set-theme 'ef-day))
+     ;; Night
+     ;; Autumns
+     ((string-equal current-month "09") (set-theme 'ef-cherie))
+     ((string-equal current-month "10") (set-theme 'ef-autumn))
+     ((string-equal current-month "11") (set-theme 'ef-bio))
+     ;; Winter
+     ((string-equal current-month "12") (set-theme 'ef-tritanopia-dark))
+     ((string-equal current-month "01") (set-theme 'ef-winter))
+     ((string-equal current-month "02") (set-theme 'ef-elea-dark))))
 
-#+End_src
-
-#+RESULTS:
-: set-month-theme
+#+end_src
 
 *** Transparent frames
-#+begin_src emacs-lisp
-  (defvar-local transparent-frame-enabled nil
-    "Flag that indicates if the buffer is transparent.")
+#+begin_src lisp
+(defvar-local transparent-frame-enabled nil
+  "Flag that indicates if the buffer is transparent.")
 
-  (defun set-frame-solid ()
-    (set-frame-parameter (selected-frame) 'alpha '(100 100))
-    (message "Solid frame"))
+(defun set-frame-solid ()
+  (set-frame-parameter (selected-frame) 'alpha '(100 100))
+  (message "Solid frame"))
 
-  (defun set-frame-transparent ()
-    (set-frame-parameter (selected-frame) 'alpha '(70 70))
-    (message "Transparent frame"))
+(defun set-frame-transparent ()
+  (set-frame-parameter (selected-frame) 'alpha '(70 70))
+  (message "Transparent frame"))
 
-  (defun toggle-frame-solidity ()
-    "Toggle between solid and transparent frame for the current buffer."
-    (interactive)
-    (setq transparent-frame-enabled (not transparent-frame-enabled))
-    (if transparent-frame-enabled
-	(set-frame-transparent)
-      (set-frame-solid)))
+(defun toggle-frame-solidity ()
+  "Toggle between solid and transparent frame for the current buffer."
+  (interactive)
+  (setq transparent-frame-enabled (not transparent-frame-enabled))
+  (if transparent-frame-enabled
+  (set-frame-transparent)
+    (set-frame-solid)))
 
 
 #+end_src
+
 *** tabs
-#+begin_src emacs-lisp
+#+begin_src lisp
 (custom-set-faces
   '(tab-bar-tab ((t (:inherit default :font "inconsolata" :height 0.8)))))
 #+end_src
+
 *** emojify
-#+begin_src emacs-lisp
-  (add-hook 'after-init-hook #'global-emojify-mode)
+#+begin_src lisp
+(add-hook 'after-init-hook #'global-emojify-mode)
 #+end_src
+
 *** nyan-mode
-#+begin_src emacs-lisp
-  (defun proper-nyan ()
-    (nyan-start-animation)
-    (nyan-toggle-wavy-trail))
-  (add-hook 'nyan-mode-hook 'proper-nyan)
+#+begin_src lisp
+(defun proper-nyan ()
+  (nyan-start-animation)
+  (nyan-toggle-wavy-trail))
+(add-hook 'nyan-mode-hook 'proper-nyan)
 #+end_src
+
 *** rainbow-mode
-#+begin_src emacs-lisp
-  (add-hook 'prog-mode-hook 'rainbow-mode)
+#+begin_src lisp
+(add-hook 'prog-mode-hook 'rainbow-mode)
 #+end_src
 
 ** Elfeed
-https://github.com/skeeto/elfeed
+[[https://github.com/skeeto/elfeed]]
 
-#+begin_src emacs-lisp
+#+begin_src lisp
   (setq elfeed-feeds
-	'("https://pitchfork.com/feed/feed-album-reviews/rss" ;; pitchfork album reviews 
-	  "www.nrk.no/toppsaker.rss"
-	  "www.nrk.no/osloogviken/siste.rss"
-	  "https://planet.emacslife.com/atom.xml"
-	  "https://store.steampowered.com/feeds/news.xml"
-	  "https://store.steampowered.com/feeds/newreleases.xml"
-	  "https://www.theguardian.com/world/rss"
-	  "https://www.nintendo.co.uk/news.xml"
-	  ))
+    '("https://pitchfork.com/feed/feed-album-reviews/rss" ;; pitchfork album reviews 
+      "www.nrk.no/toppsaker.rss"
+      "www.nrk.no/osloogviken/siste.rss"
+      "https://planet.emacslife.com/atom.xml"
+      "https://store.steampowered.com/feeds/news.xml"
+      "https://store.steampowered.com/feeds/newreleases.xml"
+      "https://www.theguardian.com/world/rss"
+      "https://www.nintendo.co.uk/news.xml"
+      ))
 (elfeed-update)
 #+end_src
+
 ** ERC Support
-#+begin_src emacs-lisp
-  ;; erc-tls autorun
-  (defun run-libera-chat ()
-    (interactive)
-    (erc-tls :server "irc.libera.chat" :port 6697 :nick ERC_NICK :password )) ;; set standard username
+#+begin_src lisp
+;; erc-tls autorun
+(defun run-libera-chat ()
+  (interactive)
+  (erc-tls :server "irc.libera.chat" :port 6697 :nick ERC_NICK :password )) ;; set standard username
 #+end_src
+
 ** mpv support
-
 Plays downloaded albums via .bat files in mpv
-#+begin_src emacs-lisp
-  ;; general function that runs a bat file that plays a folder in mpv 
-  (defun mpv-play-album(album)
-    "plays in mpv asynchronously."
-    (interactive (list (completing-read "Album: " mpv-albums-list)))
-    ;; Check if the provided album is in the list
-    (unless (member album mpv-albums-list)
-      (error "Album not in list!"))
-    ;; continues otherwise
-    (when (string= (system-name) HOME_SYSTEM)
-      (setq bat_folder (concat BASE_HOME_WIN PATH_MUSIC_WIN)))
-    (when (string= (system-name) WORK_SYSTEM)
-      (setq bat_folder (concat BASE_WORK_WIN PATH_MUSIC_WIN)))
-    (async-shell-command (concat bat_folder "\\" album ".bat"))
-    )
 
-  ;; list of possible albums
-  (defvar mpv-albums-list
-    '("abzu"
-      "coding_playlist"
-      "deacon"
-      "pillars-of-eternity"
-      "radio-new-vegas"
-      "raven"
-      "take-me-apart"
-      "the-legend-of-the-sun-virgin"
-      "traveler"
-      "the-last-door"
-      "wincing-the-night-away"
-      "halfaxa")
-    )
+#+begin_src lisp
+;; general function that runs a bat file that plays a folder in mpv 
+(defun mpv-play-album(album)
+  "plays in mpv asynchronously."
+  (interactive (list (completing-read "Album: " mpv-albums-list)))
+  ;; Check if the provided album is in the list
+  (unless (member album mpv-albums-list)
+    (error "Album not in list!"))
+  ;; continues otherwise
+  (setq bat_folder (concat BASE_PATH_WIN PATH_MUSIC_WIN))
+  (async-shell-command (concat bat_folder "\\" album ".bat")))
+
+;; list of possible albums
+(defvar mpv-albums-list
+  '("abzu"
+    "coding_playlist"
+    "deacon"
+    "pillars-of-eternity"
+    "radio-new-vegas"
+    "raven"
+    "take-me-apart"
+    "the-legend-of-the-sun-virgin"
+    "traveler"
+    "the-last-door"
+    "wincing-the-night-away"
+    "halfaxa")
+  )
 #+end_src
 
 ** Mastodon
-#+begin_src emacs-lisp
-  (setq mastodon-instance-url "https://tech.lgbt"
-	mastodon-active-user "gray")
+#+begin_src lisp
+(setq mastodon-instance-url "https://tech.lgbt"
+  mastodon-active-user "gray")
 
-  (defun my-mastodon-hook ()
-    (visual-line-mode t))
+(defun my-mastodon-hook ()
+  (visual-line-mode t))
 
-  (add-hook 'mastodon-mode-hook 'my-mastodon-hook)
+(add-hook 'mastodon-mode-hook 'my-mastodon-hook)
 #+end_src
+
 ** Misc Functions
-#+begin_src emacs-lisp
-  ;; check/uncheck all checkboxes
-  (defun checkbox-all ()
-    (interactive)
-    (mark-whole-buffer)
-    (org-toggle-checkbox)
-    (message "check/uncheck all"))
+#+begin_src lisp
+;; check/uncheck all checkboxes
+(defun checkbox-all ()
+  (interactive)
+  (mark-whole-buffer)
+  (org-toggle-checkbox)
+  (message "check/uncheck all"))
 
-  ;; unhighlight all
-  (defun unhighlight-all  ()
-    (interactive)
-    (unhighlight-regexp t)
-    (message "Removed all highlights"))
+;; unhighlight all
+(defun unhighlight-all  ()
+  (interactive)
+  (unhighlight-regexp t)
+  (message "Removed all highlights"))
 
-  ;; chatbot
-  (defun open-parla ()
-    (interactive)
-    (find-file PATH_PARLA))
+;; chatbot
+(defun open-parla ()
+  (interactive)
+  (find-file PATH_PARLA))
 
-  ;; flashcards
-  (defun open-flashcards ()
-     (interactive)
-     (find-file PATH_FLASHCARDS))
+;; flashcards
+(defun open-flashcards ()
+   (interactive)
+   (find-file PATH_FLASHCARDS))
 
-  ;; save text as file
-  (defun save-text-as-file (text filename)
-  "Save TEXT as a file named FILENAME."
+;; save text as file
+(defun save-text-as-file (text filename)
+"Save TEXT as a file named FILENAME."
+(with-temp-buffer
+   (insert text)
+   (write-file filename))
+   (message (format "'%s' saved." filename)))
+
+;; mega/org folder
+(defun open-mega ()
+  (interactive)
+  (find-file FOLDER_CLOUD))
+(defun open-org ()
+  (interactive)
+  (find-file FOLDER_ORG))
+(defun open-handleliste ()
+  (interactive)
+  (find-file ORG_HANDLELISTE))
+(defun open-emacs_utilities ()
+  (interactive)
+  (find-file FOLDER_EMACS_UTILITIES))
+
+;; open config
+(defun open-config ()
+  (interactive)
+  (find-file ORG_CONFIG_WINDOWS))
+
+(defun open-sign ()
+  (interactive)
+  (find-file ORG_SIGN))
+
+;; open scratch
+(defun open-scratch ()
+  (interactive)
+  (switch-to-buffer "*scratch*"))
+
+;; deft folders
+(defun deft-folder-deft ()
+  (interactive)
+  (setq deft-directory FOLDER_DEFT)
+  (deft-refresh)
+  (setq zetteldeft-home-id "2023-01-24-1155")
+  (zetteldeft-go-home)
+  )
+
+(defun deft-folder-teos ()
+  (interactive)
+  (setq deft-directory FOLDER_TEOS)
+  (deft-refresh)
+  (setq zetteldeft-home-id "2023-01-24-1156")
+  (zetteldeft-go-home)
+  )
+
+(defun file-content-equal-to-string-p (file string)
+  "Check if the content of FILE is equal to STRING."
   (with-temp-buffer
-     (insert text)
-     (write-file filename))
-     (message (format "'%s' saved." filename)))
+    (insert-file-contents file)
+    (string= (buffer-string) string)))
 
-  ;; mega/org folder
-  (defun open-mega ()
-    (interactive)
-    (find-file FOLDER_CLOUD))
-  (defun open-org ()
-    (interactive)
-    (find-file FOLDER_ORG))
-  (defun open-handleliste ()
-    (interactive)
-    (find-file ORG_HANDLELISTE))
-  (defun open-emacs_utilities ()
-    (interactive)
-    (find-file FOLDER_EMACS_UTILITIES))
+;; delete current file (written by chatgpt so beware)
+;; Useful in zetteldeft
+(defun delete-current-file ()
+  "Deletes the current file being viewed in the buffer"
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (when filename
+  (if (yes-or-no-p (format "Are you sure you want to delete %s?" filename))
+      (progn
+        (delete-file filename)
+        (message "File '%s' deleted." filename)
+        (kill-buffer))
+    (message "File '%s' not deleted." filename)))))
 
-  ;; open config
-  (defun open-config ()
-    (interactive)
-    (find-file ORG_CONFIG_WINDOWS))
+ ;; Function that helps C-backspace be more similar to the windows equivalent
+(defun backward-kill-word-or-whitespace ()
+  "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
+  (interactive)
+  (if (looking-back "\\s-")
+  (progn
+    (delete-region (point) (save-excursion (skip-chars-backward " \t\n") (point))))
+    (backward-kill-word 1)))
 
-  (defun open-sign ()
-    (interactive)
-    (find-file ORG_SIGN))
+(defun write-current-time ()
+  "Writes the current time at the cursor position."
+  (interactive)
+  (insert (current-time-string)))
 
-  ;; open scratch
-  (defun open-scratch ()
-    (interactive)
-    (switch-to-buffer "*scratch*"))
+(defun write-current-date ()
+  "Writes current date at current position"
+  (interactive)
+  (insert (format-time-string "%d-%m-%Y")))
 
-  ;; deft folders
-  (defun deft-folder-deft ()
-    (interactive)
-    (setq deft-directory FOLDER_DEFT)
-    (deft-refresh)
-    (setq zetteldeft-home-id "2023-01-24-1155")
-    (zetteldeft-go-home)
-    )
+(defun write-current-path ()
+  "Writes the path to current buffer at the cursor position."
+  (interactive)
+  (insert (buffer-file-name)))
 
-  (defun deft-folder-teos ()
-    (interactive)
-    (setq deft-directory FOLDER_TEOS)
-    (deft-refresh)
-    (setq zetteldeft-home-id "2023-01-24-1156")
-    (zetteldeft-go-home)
-    )
-
-  (defun file-content-equal-to-string-p (file string)
-    "Check if the content of FILE is equal to STRING."
-    (with-temp-buffer
-      (insert-file-contents file)
-      (string= (buffer-string) string)))
-
-  ;; delete current file (written by chatgpt so beware)
-  ;; Useful in zetteldeft
-  (defun delete-current-file ()
-    "Deletes the current file being viewed in the buffer"
-    (interactive)
-    (let ((filename (buffer-file-name)))
-      (when filename
-	(if (yes-or-no-p (format "Are you sure you want to delete %s?" filename))
-	    (progn
-	      (delete-file filename)
-	      (message "File '%s' deleted." filename)
-	      (kill-buffer))
-	  (message "File '%s' not deleted." filename)))))
-
-   ;; Function that helps C-backspace be more similar to the windows equivalent
-  (defun backward-kill-word-or-whitespace ()
-    "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
-    (interactive)
-    (if (looking-back "\\s-")
-	(progn
-	  (delete-region (point) (save-excursion (skip-chars-backward " \t\n") (point))))
-      (backward-kill-word 1)))
-
-  (defun write-current-time ()
-    "Writes the current time at the cursor position."
-    (interactive)
-    (insert (current-time-string)))
-
-  (defun write-current-date ()
-    "Writes current date at current position"
-    (interactive)
-    (insert (format-time-string "%d-%m-%Y")))
-
-  (defun write-current-path ()
-    "Writes the path to current buffer at the cursor position."
-    (interactive)
-    (insert (buffer-file-name)))
-
-  (defun open-org-agenda-for-current-week ()
-    (interactive)
-    (let ((current-prefix-arg '(4)))
-      (call-interactively 'org-agenda-list))
-    (message "Opening agenda for current week"))
+(defun open-org-agenda-for-current-week ()
+  (interactive)
+  (let ((current-prefix-arg '(4)))
+    (call-interactively 'org-agenda-list))
+  (message "Opening agenda for current week"))
 
 #+end_src
+
 ** Workout Diary
-#+begin_src emacs-lisp
-  ;; adds line to workout diary table
-  (when (string= (system-name) HOME_SYSTEM)(run-r-script R_WORKOUT_HOME))
-  (when (string= (system-name) WORK_SYSTEM)(run-r-script R_WORKOUT_WORK))
+#+begin_src lisp
+;; adds line to workout diary table
+(run-r-script R_WORKOUT_PATH)
 #+end_src
 
 ** Keybindings
 some unbound C-c: u,
-#+begin_src emacs-lisp
+
+#+begin_src lisp
 (global-set-key (kbd "C-.") 'other-window)
 (global-set-key (kbd "C-:") 'other-frame)
 (global-set-key (kbd "C-c a") 'org-agenda)
@@ -854,11 +880,12 @@ some unbound C-c: u,
 (zetteldeft-set-classic-keybindings)
 (global-set-key (kbd "C-c w") 'zetteldeft-wander)
 #+end_src
+
 ** Start
-#+begin_src emacs-lisp
-  (set-month-theme)
-  (cd "~/")
-  (open-org-agenda-for-current-week)
-  (delete-other-windows nil) ;; deletes deft window
-  (toggle-frame-solidity)
+#+begin_src lisp
+(set-month-theme)
+(cd "~/")
+(open-org-agenda-for-current-week)
+(delete-other-windows nil) ;; deletes deft window
+(toggle-frame-solidity)
 #+end_src
