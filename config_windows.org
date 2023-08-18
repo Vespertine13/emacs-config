@@ -1,4 +1,4 @@
-# -*- coding: utf-8-unix -*-
+# -*- coding: utf-8 -*-
 #+STARTUP: content
 * Init Setup
 The init.el (path ~/.emacs.d/init.el) file will redirect to this file if
