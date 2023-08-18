@@ -1,4 +1,3 @@
-# -*- coding: utf-8-unix -*-
 #+STARTUP: content
 * Init Setup
 The init.el (path ~/.emacs.d/init.el) file will redirect to this file if
@@ -6,8 +5,8 @@ it contains the following code: (org-babel-load-file
 "~/emacs-config/config_{windows}.org")
 
 ** note on encoding
-if there are any encoding issues with Ã¦Ã¸Ã¥, the try to replace them like
-this: Ã¸ -> Ã¸ check encoding on the lower left side of the document.
+if there are any encoding issues with øæå, the try to replace them like
+this: æ -> æ check encoding on the lower left side of the document.
 Maybe the text preferences section should change a bit.
 
 * Configuration
@@ -94,12 +93,6 @@ Maybe the text preferences section should change a bit.
 (electric-pair-mode t)
 ;; Linum mode
 (global-display-line-numbers-mode t)
-;; setting UTF-8 Encoding
-(set-language-environment "UTF-8")
-(prefer-coding-system 'utf-8)
-(set-terminal-coding-system 'utf-8)
-(setq-default buffer-file-coding-system 'utf-8)
-(setq default-input-method "UTF-8")
 ;; hide emphasis markers (bold, italics etc)
 (setq org-hide-emphasis-markers t)
 ;; sentences does not end in double space anymore
@@ -169,8 +162,8 @@ tree of changes."
     ("b" "Bookmark" entry (file ORG_BOOKMARKS)
      "* %? :bookmark: \n:PROPERTIES:\n:CREATED: %U\n:END:\n")
     ("d" "Diary" entry (file+datetree ORG_DIARY)
-     "* Dagen i gÃ¥r%?")
-    ("m" "MÃ¸telogg" entry (file+datetree ORG_MOTELOGG)
+     "* Dagen i går%?")
+    ("m" "Mætelogg" entry (file+datetree ORG_MOTELOGG)
      "* %? \nInnkalling: \nAgenda: \nNotater:")
     ("e" "Events" entry (file ORG_EVENTS)
      "* %? ")
@@ -193,7 +186,7 @@ tree of changes."
       tags "+handle+TODO=\"TODO\"")
      ("f" "Filmer TODOS"
       tags "+film+TODO=\"TODO\"")
-     ("b" "BÃ¸ker TODOS"
+     ("b" "Bæker TODOS"
       tags "+bok+TODO=\"TODO\"")))
 
 
@@ -881,15 +874,15 @@ some unbound C-c: u,
 (global-set-key (kbd "C-c x") 'cycle-themes)
 
 ;; norwegian special characters
-(global-set-key (kbd "C-c Ã¦") 'unhighlight-all)
-(global-set-key (kbd "C-c Ã¸") 'highlight-symbol-at-point)
-(global-set-key (kbd "C-c Ã¥") 'org-insert-image)
-(global-set-key (kbd "C-Ã¸") 'make-frame-command)
-(global-set-key (kbd "C-Ã¦") 'delete-frame)
-(global-set-key (kbd "C-Ã¥") 'toggle-frame-solidity)
-(global-set-key (kbd "M-Ã¸") 'kmacro-start-macro-or-insert-counter)
-(global-set-key (kbd "M-Ã¦") 'kmacro-end-or-call-macro)
-(global-set-key (kbd "M-Ã¥") 'org-show-images)
+(global-set-key (kbd "C-c ø") 'unhighlight-all)
+(global-set-key (kbd "C-c æ") 'highlight-symbol-at-point)
+(global-set-key (kbd "C-c å") 'org-insert-image)
+(global-set-key (kbd "C-æ") 'make-frame-command)
+(global-set-key (kbd "C-ø") 'delete-frame)
+(global-set-key (kbd "C-å") 'toggle-frame-solidity)
+(global-set-key (kbd "M-æ") 'kmacro-start-macro-or-insert-counter)
+(global-set-key (kbd "M-ø") 'kmacro-end-or-call-macro)
+(global-set-key (kbd "M-å") 'org-show-images)
 
 ;; new C-backspace
 (global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace)
