@@ -422,7 +422,9 @@ tree of changes."
 	  (message "Conversion cancelled.")
 	  (return)))
 
-      (shell-command-to-string (format "pandoc -o %s %s" output_var input_var))))
+      (shell-command-to-string (format "pandoc -o %s %s" output_var input_var))
+      (find-file output_var)))
+
 #+end_src
 ** Garbage Collection
 #+begin_src emacs-lisp
