@@ -88,7 +88,7 @@ Maybe the text preferences section should change a bit.
 (setq dired-auto-revert-buffer t)
 #+end_src
 ** Encoding
-
+Source: stackoverflow 24904208
 #+begin_src emacs-lisp
 ;; C-h C RET
 ;; M-x describe-current-coding-system
