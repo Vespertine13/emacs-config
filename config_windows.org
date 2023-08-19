@@ -167,17 +167,17 @@ tree of changes."
     ("b" "Bookmark" entry (file ORG_BOOKMARKS)
      "* %? :bookmark: \n:PROPERTIES:\n:CREATED: %U\n:END:\n")
     ("d" "Diary" entry (file+datetree ORG_DIARY)
-     "* Dagen i gaar%?")
-    ("m" "Moetelogg" entry (file+datetree ORG_MOTELOGG)
-     "* %? \nInnkalling: \nAgenda: \nNotater:")
+     "* %?")
     ("e" "Events" entry (file ORG_EVENTS)
      "* %? ")
-    ("j" "Teos TODOS" entry (file ORG_TEOS_TODOS)
-     "* TODO %?")
     ("o" "Ord til Ordliste" entry (file ORG_ORDLISTE)
-     "* %?") 
+     "* %?")
+    ("h" "Handleliste" entry (file ORG_HANDLELISTE)
+     "* TODO %? :handle: \n:PROPERTIES:\n:CREATED: %U\n:END:\n")
     ("r" "Kontaktinfo" entry (file ORG_ROLODEX)
      "* %? :contact:\n:PROPERTIES:\n:EMAIL:\n:TELEPHONE:\n:NOTE:\n:END:\n")
+    ("j" "Teos TODOS" entry (file ORG_TEOS_TODOS)
+     "* TODO %?")
     ))
 
  ;; Org todo workflow
@@ -193,7 +193,6 @@ tree of changes."
       tags "+film+TODO=\"TODO\"")
      ("b" "Books TODOS"
       tags "+bok+TODO=\"TODO\"")))
-
 
 #+end_src
 *** Dynamic Blocks
@@ -889,15 +888,15 @@ some unbound C-c: u,
 (global-set-key (kbd "C-c x") 'cycle-themes)
 
 ;; norwegian special characters
-(global-set-key (kbd "C-c æ") 'unhighlight-all)
-(global-set-key (kbd "C-c ø") 'highlight-symbol-at-point)
-(global-set-key (kbd "C-c å") 'org-insert-image)
-(global-set-key (kbd "C-ø") 'make-frame-command)
-(global-set-key (kbd "C-æ") 'delete-frame)
-(global-set-key (kbd "C-å") 'toggle-frame-solidity)
-(global-set-key (kbd "M-ø") 'kmacro-start-macro-or-insert-counter)
-(global-set-key (kbd "M-æ") 'kmacro-end-or-call-macro)
-(global-set-key (kbd "M-å") 'org-show-images)
+;;(global-set-key (kbd "C-c æ") 'unhighlight-all)
+;;(global-set-key (kbd "C-c ø") 'highlight-symbol-at-point)
+;;(global-set-key (kbd "C-c å") 'org-insert-image)
+;;(global-set-key (kbd "C-ø") 'make-frame-command)
+;;(global-set-key (kbd "C-æ") 'delete-frame)
+;;(global-set-key (kbd "C-å") 'toggle-frame-solidity)
+;;(global-set-key (kbd "M-ø") 'kmacro-start-macro-or-insert-counter)
+;;(global-set-key (kbd "M-æ") 'kmacro-end-or-call-macro)
+;;(global-set-key (kbd "M-å") 'org-show-images)
 
 ;; new C-backspace
 (global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace)
