@@ -690,13 +690,14 @@ Plays downloaded albums via .bat files in mpv
 
 ** parla
 #+begin_src emacs-lisp
-(defun run-parla()
-  (interactive)
-  (let ((input (buffer-substring (line-beginning-position) (line-end-position))))
-    (let ((quoted-input (format "\"%s\"" input)))
-      (shell-command (format "Rscript %s\\parla\\run.R %s %s" BASE_PATH_WIN quoted-input BASE_PATH))
-      (next-line)
-      (insert-buffer-substring "*Shell Command Output*"))))
+    (defun run-parla()
+      (interactive)
+      (let ((input (buffer-substring (line-beginning-position) (line-end-position))))
+	(let ((quoted-input (format "\"%s\"" input)))
+	  (shell-command (format "Rscript %s\\parla\\run.R %s %s" BASE_PATH_WIN quoted-input BASE_PATH))
+	  (move-end-of-line nil) 
+	  (newline)
+	  (insert-buffer-substring "*Shell Command Output*"))))
 
 #+end_src
 ** Misc Functions
@@ -912,5 +913,5 @@ some unbound C-c: u,
 (cd "~/")
 (open-org-agenda-for-current-week)
 (delete-other-windows nil) ;; deletes deft window
-;;(toggle-frame-solidity)
+(toggle-frame-solidity)
 #+end_src
