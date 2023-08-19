@@ -1,3 +1,4 @@
+# -*- coding: utf-8-unix -*-
 #+STARTUP: content
 * Init Setup
 The init.el (path ~/.emacs.d/init.el) file will redirect to this file if
@@ -5,8 +6,8 @@ it contains the following code: (org-babel-load-file
 "~/emacs-config/config_{windows}.org")
 
 ** note on encoding
-if there are any encoding issues with øæå, the try to replace them like
-this: æ -> æ check encoding on the lower left side of the document.
+if there are any encoding issues with Ã¦Ã¸Ã¥, the try to replace them like
+this: Ã¸ -> Ã¸ check encoding on the lower left side of the document.
 Maybe the text preferences section should change a bit.
 
 * Configuration
@@ -86,6 +87,73 @@ Maybe the text preferences section should change a bit.
 ;; dired automatically updates  
 (setq dired-auto-revert-buffer t)
 #+end_src
+** Encoding
+
+#+begin_src emacs-lisp
+;; C-h C RET
+;; M-x describe-current-coding-system
+
+(add-to-list 'file-coding-system-alist '("\\.tex" . utf-8-unix) )
+(add-to-list 'file-coding-system-alist '("\\.txt" . utf-8-unix) )
+(add-to-list 'file-coding-system-alist '("\\.el" . utf-8-unix) )
+(add-to-list 'file-coding-system-alist '("\\.scratch" . utf-8-unix) )
+(add-to-list 'file-coding-system-alist '("user_prefs" . utf-8-unix) )
+
+(add-to-list 'process-coding-system-alist '("\\.txt" . utf-8-unix) )
+
+(add-to-list 'network-coding-system-alist '("\\.txt" . utf-8-unix) )
+
+(prefer-coding-system 'utf-8-unix)
+(set-default-coding-systems 'utf-8-unix)
+(set-terminal-coding-system 'utf-8-unix)
+(set-keyboard-coding-system 'utf-8-unix)
+(set-selection-coding-system 'utf-8-unix)
+(setq-default buffer-file-coding-system 'utf-8-unix)
+
+;; Treat clipboard input as UTF-8 string first; compound text next, etc.
+(setq x-select-request-type '(UTF8_STRING COMPOUND_TEXT TEXT STRING))
+
+;; mnemonic for utf-8 is "U", which is defined in the mule.el
+(setq eol-mnemonic-dos ":CRLF")
+(setq eol-mnemonic-mac ":CR")
+(setq eol-mnemonic-undecided ":?")
+(setq eol-mnemonic-unix ":LF")
+
+(defalias 'read-buffer-file-coding-system 'lawlist-read-buffer-file-coding-system)
+(defun lawlist-read-buffer-file-coding-system ()
+  (let* ((bcss (find-coding-systems-region (point-min) (point-max)))
+         (css-table
+          (unless (equal bcss '(undecided))
+            (append '("dos" "unix" "mac")
+                    (delq nil (mapcar (lambda (cs)
+                                        (if (memq (coding-system-base cs) bcss)
+                                            (symbol-name cs)))
+                                      coding-system-list)))))
+         (combined-table
+          (if css-table
+              (completion-table-in-turn css-table coding-system-alist)
+            coding-system-alist))
+         (auto-cs
+          (unless find-file-literally
+            (save-excursion
+              (save-restriction
+                (widen)
+                (goto-char (point-min))
+                (funcall set-auto-coding-function
+                         (or buffer-file-name "") (buffer-size))))))
+         (preferred 'utf-8-unix)
+         (default 'utf-8-unix)
+         (completion-ignore-case t)
+         (completion-pcm--delim-wild-regex ; Let "u8" complete to "utf-8".
+          (concat completion-pcm--delim-wild-regex
+                  "\\|\\([[:alpha:]]\\)[[:digit:]]"))
+         (cs (completing-read
+              (format "Coding system for saving file (default %s): " default)
+              combined-table
+              nil t nil 'coding-system-history
+              (if default (symbol-name default)))))
+    (unless (zerop (length cs)) (intern cs))))
+#+end_src
 
 ** Text Preferences
 #+begin_src emacs-lisp
@@ -162,8 +230,8 @@ tree of changes."
     ("b" "Bookmark" entry (file ORG_BOOKMARKS)
      "* %? :bookmark: \n:PROPERTIES:\n:CREATED: %U\n:END:\n")
     ("d" "Diary" entry (file+datetree ORG_DIARY)
-     "* Dagen i går%?")
-    ("m" "Mætelogg" entry (file+datetree ORG_MOTELOGG)
+     "* Dagen i gÃ¥r%?")
+    ("m" "MÃ¸telogg" entry (file+datetree ORG_MOTELOGG)
      "* %? \nInnkalling: \nAgenda: \nNotater:")
     ("e" "Events" entry (file ORG_EVENTS)
      "* %? ")
@@ -186,7 +254,7 @@ tree of changes."
       tags "+handle+TODO=\"TODO\"")
      ("f" "Filmer TODOS"
       tags "+film+TODO=\"TODO\"")
-     ("b" "Bæker TODOS"
+     ("b" "BÃ¸ker TODOS"
       tags "+bok+TODO=\"TODO\"")))
 
 
@@ -200,7 +268,7 @@ tree of changes."
    (add-hook 'before-save-hook 'org-update-all-dblocks)
    #+end_src
 
-****  Functions
+**** Functions
 
    #+begin_src emacs-lisp
    (defun org-dblock-write:block-update-time (params)
@@ -874,15 +942,15 @@ some unbound C-c: u,
 (global-set-key (kbd "C-c x") 'cycle-themes)
 
 ;; norwegian special characters
-(global-set-key (kbd "C-c ø") 'unhighlight-all)
-(global-set-key (kbd "C-c æ") 'highlight-symbol-at-point)
-(global-set-key (kbd "C-c å") 'org-insert-image)
-(global-set-key (kbd "C-æ") 'make-frame-command)
-(global-set-key (kbd "C-ø") 'delete-frame)
-(global-set-key (kbd "C-å") 'toggle-frame-solidity)
-(global-set-key (kbd "M-æ") 'kmacro-start-macro-or-insert-counter)
-(global-set-key (kbd "M-ø") 'kmacro-end-or-call-macro)
-(global-set-key (kbd "M-å") 'org-show-images)
+(global-set-key (kbd "C-c Ã¦") 'unhighlight-all)
+(global-set-key (kbd "C-c Ã¸") 'highlight-symbol-at-point)
+(global-set-key (kbd "C-c Ã¥") 'org-insert-image)
+(global-set-key (kbd "C-Ã¸") 'make-frame-command)
+(global-set-key (kbd "C-Ã¦") 'delete-frame)
+(global-set-key (kbd "C-Ã¥") 'toggle-frame-solidity)
+(global-set-key (kbd "M-Ã¸") 'kmacro-start-macro-or-insert-counter)
+(global-set-key (kbd "M-Ã¦") 'kmacro-end-or-call-macro)
+(global-set-key (kbd "M-Ã¥") 'org-show-images)
 
 ;; new C-backspace
 (global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace)
