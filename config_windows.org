@@ -837,34 +837,12 @@ Plays downloaded albums via .bat files in mpv
 #+end_src
 
 ** Keybindings
-some unbound C-c: u,
-
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-.") 'other-window)
 (global-set-key (kbd "C-:") 'other-frame)
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c c") 'org-capture)
-(global-set-key (kbd "C-c f") 'font-inconsolata)
-(global-set-key (kbd "C-c q") 'query-replace)
-(global-set-key (kbd "C-c e") 'emojify-apropos-emoji)
 (global-set-key "\M- " 'hippie-expand)
-(global-set-key (kbd "C-c g") 'goto-line)
-(global-set-key (kbd "C-c b") 'checkbox-all) ;; Clear checkboxes
-(global-set-key (kbd "C-c t") 'org-timer-set-timer)
-(global-set-key (kbd "C-c n") 'nyan-mode)
-(global-set-key (kbd "C-c v") 'run-parla)
-(global-set-key (kbd "C-c k") 'delete-current-file)
-(global-set-key (kbd "C-c l") 'sort-lines)
-(global-set-key (kbd "C-c s") 'shell)
-(global-set-key (kbd "C-c u") 'pandoc-convert)
 
-(global-set-key (kbd "C-c z") 'eshell)
-(global-set-key (kbd "C-c m") 'mpv-play-album)
-(global-set-key (kbd "C-c r") 'elfeed)
-
-;; insert text
-(global-set-key (kbd "C-c o") 'write-current-time)
-(global-set-key (kbd "C-c p") 'write-current-path)
+(global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace) ;; new C-backspace
 
 ;; open files/programs 0:9
 (global-set-key (kbd "C-c 1") 'zetteldeft-go-home)
@@ -875,30 +853,40 @@ some unbound C-c: u,
 (global-set-key (kbd "C-c 6") 'run-libera-chat)
 (global-set-key (kbd "C-c 7") 'open-sign)
 (global-set-key (kbd "C-c 8") 'open-flashcards)
-(global-set-key (kbd "C-c 9") 'open-parla)
+(global-set-key (kbd "C-c 9") 'elfeed)
 (global-set-key (kbd "C-c 0") 'open-scratch)
 
-;; deft
-(global-set-key (kbd "C-c j") 'deft-folder-teos)
+;; misc a-z
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c b") 'checkbox-all) ;; Clear checkboxes
+(global-set-key (kbd "C-c c") 'org-capture)
+(zetteldeft-set-classic-keybindings) ;; d is for zetteldeft
+(global-set-key (kbd "C-c e") 'emojify-apropos-emoji)
+(global-set-key (kbd "C-c f") 'font-inconsolata)
+(global-set-key (kbd "C-c g") 'goto-line)
 (global-set-key (kbd "C-c h") 'deft-folder-deft)
-
-;; org stuff
 (global-set-key (kbd "C-c i") 'org-insert-link)
-
-;; Cycle themes
-(global-set-key (kbd "C-c x") 'cycle-themes)
-
-
-;; new C-backspace
-(global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace)
-
-;; all zetteldeft keybindings start with C-c d
-(zetteldeft-set-classic-keybindings)
+(global-set-key (kbd "C-c j") 'deft-folder-teos)
+(global-set-key (kbd "C-c k") 'delete-current-file)
+(global-set-key (kbd "C-c l") 'sort-lines)
+(global-set-key (kbd "C-c m") 'mpv-play-album)
+(global-set-key (kbd "C-c n") 'nyan-mode)
+(global-set-key (kbd "C-c o") 'write-current-time)
+(global-set-key (kbd "C-c p") 'write-current-path)
+(global-set-key (kbd "C-c q") 'query-replace)
+;; r is undefined
+(global-set-key (kbd "C-c s") 'shell)
+(global-set-key (kbd "C-c t") 'org-timer-set-timer)
+(global-set-key (kbd "C-c u") 'pandoc-convert)
+(global-set-key (kbd "C-c v") 'run-parla)
 (global-set-key (kbd "C-c w") 'zetteldeft-wander)
+(global-set-key (kbd "C-c x") 'cycle-themes)
+;; y is undefined
+(global-set-key (kbd "C-c z") 'eshell)
 
+;; norwegian letters (in el file in case of encoding error)
 (load-file "~/mega/emacs_utilities/config/keybinding_nor.el")
 #+end_src
-
 ** Start
 #+begin_src emacs-lisp
 (set-month-theme)
