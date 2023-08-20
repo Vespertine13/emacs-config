@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 #+STARTUP: content
 * Init Setup
 The init.el (path ~/.emacs.d/init.el) file will redirect to this file if
@@ -888,16 +887,6 @@ some unbound C-c: u,
 ;; Cycle themes
 (global-set-key (kbd "C-c x") 'cycle-themes)
 
-;; norwegian special characters
-;;(global-set-key (kbd "C-c æ") 'unhighlight-all)
-;;(global-set-key (kbd "C-c ø") 'highlight-symbol-at-point)
-;;(global-set-key (kbd "C-c å") 'org-insert-image)
-;;(global-set-key (kbd "C-ø") 'make-frame-command)
-;;(global-set-key (kbd "C-æ") 'delete-frame)
-;;(global-set-key (kbd "C-å") 'toggle-frame-solidity)
-;;(global-set-key (kbd "M-ø") 'kmacro-start-macro-or-insert-counter)
-;;(global-set-key (kbd "M-æ") 'kmacro-end-or-call-macro)
-;;(global-set-key (kbd "M-å") 'org-show-images)
 
 ;; new C-backspace
 (global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace)
@@ -905,6 +894,8 @@ some unbound C-c: u,
 ;; all zetteldeft keybindings start with C-c d
 (zetteldeft-set-classic-keybindings)
 (global-set-key (kbd "C-c w") 'zetteldeft-wander)
+
+(load-file "~/mega/emacs_utilities/config/keybinding_nor.el")
 #+end_src
 
 ** Start
