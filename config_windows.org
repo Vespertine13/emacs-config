@@ -169,13 +169,13 @@ tree of changes."
      "* %?")
     ("e" "Events" entry (file ORG_EVENTS)
      "* %? ")
-    ("o" "Ord til Ordliste" entry (file ORG_ORDLISTE)
+    ("o" "Ordliste" entry (file ORG_ORDLISTE)
      "* %?")
     ("h" "Handleliste" entry (file ORG_HANDLELISTE)
      "* TODO %? :handle: \n:PROPERTIES:\n:CREATED: %U\n:END:\n")
     ("r" "Kontaktinfo" entry (file ORG_ROLODEX)
      "* %? :contact:\n:PROPERTIES:\n:EMAIL:\n:TELEPHONE:\n:NOTE:\n:END:\n")
-    ("j" "Teos TODOS" entry (file ORG_TEOS_TODOS)
+    ("j" "Teos" entry (file ORG_TEOS_TODOS)
      "* TODO %?")
     ))
 
@@ -184,7 +184,7 @@ tree of changes."
 
  ;; custom command
  (setq org-agenda-custom-commands
-   '(("j" "Jobbrelaterte TODOS"
+   '(("j" "Jobb TODOS"
       tags "+jobb+TODO=\"TODO\"")
      ("h" "Handleliste TODOS"
       tags "+handle+TODO=\"TODO\"")
@@ -558,7 +558,7 @@ REMEMBER fonts need to be installed manually on windows systems.
      ;; Summer
      ((string-equal current-month "06") (set-theme 'ef-summer))
      ((string-equal current-month "07") (set-theme 'ef-elea-light))
-     ((string-equal current-month "08") (set-theme 'ef-day))
+     ((string-equal current-month "08") (set-theme 'ef-deuteranopia-dark))
      ;; Night
      ;; Autumns
      ((string-equal current-month "09") (set-theme 'ef-cherie))
@@ -617,6 +617,7 @@ REMEMBER fonts need to be installed manually on windows systems.
 *** rainbow-mode
 #+begin_src emacs-lisp
 (add-hook 'prog-mode-hook 'rainbow-mode)
+(add-hook 'org-mode-hook 'rainbow-mode)
 #+end_src
 
 ** Elfeed
