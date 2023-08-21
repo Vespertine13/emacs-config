@@ -624,17 +624,18 @@ REMEMBER fonts need to be installed manually on windows systems.
 [[https://github.com/skeeto/elfeed]]
 
 #+begin_src emacs-lisp
+  (setq elfeed-search-filter "@1-week-ago +unread") ;; avoid old news
   (setq elfeed-feeds
-    '("https://pitchfork.com/feed/feed-album-reviews/rss" ;; pitchfork album reviews 
-      "www.nrk.no/toppsaker.rss"
-      "www.nrk.no/osloogviken/siste.rss"
-      "https://planet.emacslife.com/atom.xml"
-      "https://store.steampowered.com/feeds/news.xml"
-      "https://store.steampowered.com/feeds/newreleases.xml"
-      "https://www.theguardian.com/world/rss"
-      "https://www.nintendo.co.uk/news.xml"
-      ))
-(elfeed-update)
+	'("https://pitchfork.com/feed/feed-album-reviews/rss" ;; pitchfork album reviews 
+	  "www.nrk.no/toppsaker.rss"
+	  "www.nrk.no/osloogviken/siste.rss"
+	  "https://planet.emacslife.com/atom.xml"
+	  "https://store.steampowered.com/feeds/news.xml"
+	  "https://store.steampowered.com/feeds/newreleases.xml"
+	  "https://www.theguardian.com/world/rss"
+	  "https://www.nintendo.co.uk/news.xml"
+	  ))
+  (elfeed-update)
 #+end_src
 
 ** ERC Support
