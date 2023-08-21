@@ -164,7 +164,7 @@ tree of changes."
   '(("t" "TODO" entry (file ORG_CAPTURE)
      "* TODO %?")
     ("b" "Bookmark" entry (file ORG_BOOKMARKS)
-     "* %? :bookmark: \n:PROPERTIES:\n:CREATED: %U\n:END:\n")
+     "* %? :bookmark: \n:PROPERTIES:\n:CREATED: %U\n:DOMAIN:\n:NOTE:\n:END:\n")
     ("d" "Diary" entry (file+datetree ORG_DIARY)
      "* %?")
     ("e" "Events" entry (file ORG_EVENTS)
@@ -174,7 +174,7 @@ tree of changes."
     ("h" "Handleliste" entry (file ORG_HANDLELISTE)
      "* TODO %? :handle: \n:PROPERTIES:\n:CREATED: %U\n:END:\n")
     ("r" "Kontaktinfo" entry (file ORG_ROLODEX)
-     "* %? :contact:\n:PROPERTIES:\n:EMAIL:\n:TELEPHONE:\n:NOTE:\n:END:\n")
+     "* %? :contact:\n:PROPERTIES:\n:EMAIL:\n:TELEPHONE:\n:ORGANIZATION:\n:NOTE:\n:END:\n")
     ("j" "Teos" entry (file ORG_TEOS_TODOS)
      "* TODO %?")
     ))
@@ -836,57 +836,56 @@ Plays downloaded albums via .bat files in mpv
 ;; adds line to workout diary table
 (run-r-script R_WORKOUT_PATH)
 #+end_src
-
 ** Keybindings
 #+begin_src emacs-lisp
-(global-set-key (kbd "C-.") 'other-window)
-(global-set-key (kbd "C-:") 'other-frame)
-(global-set-key "\M- " 'hippie-expand)
+  (global-set-key (kbd "C-.") 'other-window)
+  (global-set-key (kbd "C-:") 'other-frame)
+  (global-set-key "\M- " 'hippie-expand)
 
-(global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace) ;; new C-backspace
+  (global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace) ;; new C-backspace
 
-;; open files/programs 0:9
-(global-set-key (kbd "C-c 1") 'zetteldeft-go-home)
-(global-set-key (kbd "C-c 2") 'open-config)
-(global-set-key (kbd "C-c 3") 'open-mega)
-(global-set-key (kbd "C-c 4") 'open-emacs_utilities)
-(global-set-key (kbd "C-c 5") 'mastodon)
-(global-set-key (kbd "C-c 6") 'run-libera-chat)
-(global-set-key (kbd "C-c 7") 'open-sign)
-(global-set-key (kbd "C-c 8") 'open-flashcards)
-(global-set-key (kbd "C-c 9") 'elfeed)
-(global-set-key (kbd "C-c 0") 'open-scratch)
+  ;; open files/programs 0:9
+  (global-set-key (kbd "C-c 1") 'zetteldeft-go-home)
+  (global-set-key (kbd "C-c 2") 'open-config)
+  (global-set-key (kbd "C-c 3") 'open-mega)
+  (global-set-key (kbd "C-c 4") 'open-emacs_utilities)
+  (global-set-key (kbd "C-c 5") 'mastodon)
+  (global-set-key (kbd "C-c 6") 'run-libera-chat)
+  (global-set-key (kbd "C-c 7") 'open-sign)
+  (global-set-key (kbd "C-c 8") 'open-flashcards)
+  (global-set-key (kbd "C-c 9") 'elfeed)
+  (global-set-key (kbd "C-c 0") 'open-scratch)
 
-;; misc a-z
-(global-set-key (kbd "C-c a") 'org-agenda)
-(global-set-key (kbd "C-c b") 'checkbox-all) ;; Clear checkboxes
-(global-set-key (kbd "C-c c") 'org-capture)
-(zetteldeft-set-classic-keybindings) ;; d is for zetteldeft
-(global-set-key (kbd "C-c e") 'emojify-apropos-emoji)
-(global-set-key (kbd "C-c f") 'font-inconsolata)
-(global-set-key (kbd "C-c g") 'goto-line)
-(global-set-key (kbd "C-c h") 'deft-folder-deft)
-(global-set-key (kbd "C-c i") 'org-insert-link)
-(global-set-key (kbd "C-c j") 'deft-folder-teos)
-(global-set-key (kbd "C-c k") 'delete-current-file)
-(global-set-key (kbd "C-c l") 'sort-lines)
-(global-set-key (kbd "C-c m") 'mpv-play-album)
-(global-set-key (kbd "C-c n") 'nyan-mode)
-(global-set-key (kbd "C-c o") 'write-current-time)
-(global-set-key (kbd "C-c p") 'write-current-path)
-(global-set-key (kbd "C-c q") 'query-replace)
-;; r is undefined
-(global-set-key (kbd "C-c s") 'shell)
-(global-set-key (kbd "C-c t") 'org-timer-set-timer)
-(global-set-key (kbd "C-c u") 'pandoc-convert)
-(global-set-key (kbd "C-c v") 'run-parla)
-(global-set-key (kbd "C-c w") 'zetteldeft-wander)
-(global-set-key (kbd "C-c x") 'cycle-themes)
-;; y is undefined
-(global-set-key (kbd "C-c z") 'eshell)
+  ;; misc a-z
+  (global-set-key (kbd "C-c a") 'org-agenda)
+  (global-set-key (kbd "C-c b") 'checkbox-all) ;; Clear checkboxes
+  (global-set-key (kbd "C-c c") 'org-capture)
+  (zetteldeft-set-classic-keybindings) ;; d is for zetteldeft
+  (global-set-key (kbd "C-c e") 'emojify-apropos-emoji)
+  (global-set-key (kbd "C-c f") 'font-inconsolata)
+  (global-set-key (kbd "C-c g") 'goto-line)
+  (global-set-key (kbd "C-c h") 'deft-folder-deft)
+  (global-set-key (kbd "C-c i") 'org-insert-link)
+  (global-set-key (kbd "C-c j") 'deft-folder-teos)
+  (global-set-key (kbd "C-c k") 'delete-current-file)
+  (global-set-key (kbd "C-c l") 'sort-lines)
+  (global-set-key (kbd "C-c m") 'mpv-play-album)
+  (global-set-key (kbd "C-c n") 'nyan-mode)
+  (global-set-key (kbd "C-c o") 'write-current-time)
+  (global-set-key (kbd "C-c p") 'write-current-path)
+  (global-set-key (kbd "C-c q") 'query-replace)
+  (global-set-key (kbd "C-c r") 'visual-line-mode)
+  (global-set-key (kbd "C-c s") 'shell)
+  (global-set-key (kbd "C-c t") 'org-timer-set-timer)
+  (global-set-key (kbd "C-c u") 'pandoc-convert)
+  (global-set-key (kbd "C-c v") 'run-parla)
+  (global-set-key (kbd "C-c w") 'zetteldeft-wander)
+  (global-set-key (kbd "C-c x") 'cycle-themes)
+  ;; y is undefined
+  (global-set-key (kbd "C-c z") 'eshell)
 
-;; norwegian letters (in el file in case of encoding error)
-(load-file "~/mega/emacs_utilities/config/keybinding_nor.el")
+  ;; norwegian letters (in el file in case of encoding error)
+  (load-file "~/mega/emacs_utilities/config/keybinding_nor.el")
 #+end_src
 ** Start
 #+begin_src emacs-lisp
