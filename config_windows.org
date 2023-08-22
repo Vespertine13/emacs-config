@@ -687,8 +687,8 @@ Plays downloaded albums via .bat files in mpv
   (visual-line-mode t))
 
 (add-hook 'mastodon-mode-hook 'my-mastodon-hook)
+;;(setq mastodon-tl--highlight-current-toot 1)
 #+end_src
-
 ** parla
 #+begin_src emacs-lisp
     (defun run-parla()
