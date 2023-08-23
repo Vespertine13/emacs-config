@@ -1,0 +1,50 @@
+#+STARTUP: content
+* the manual stuff
+1) configure the archives need to be configured
+2) M-x package-install RET use-package RET
+3) restart, hope this works...
+
+* configure package repositories
+#+begin_src emacs-lisp
+(require 'package)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
+#+end_src
+
+* list of my packages
+#+begin_src emacs-lisp
+(setq package-list
+  '(ess                              ;; ESS
+    anaconda-mode                    ;; anaconda mode for python
+    company-anaconda                 ;; company anaconda for python
+    flycheck                         ;; flycheck for coding
+    ein                              ;; jupyterlab stuff
+    undo-tree                        ;; advanced undo
+    emojify                          ;; emojis
+    mastodon                         ;; mastodon social media
+    elfeed                           ;; can be used to read RSS
+    nyan-mode                        ;; yes.
+    rainbow-mode                     ;; shows colours
+    )
+  )
+#+end_src
+
+* activate and install
+#+begin_src emacs-lisp
+  ;; activate all the packages
+  (package-initialize)
+
+  ;; fetch the list of packages available 
+  (unless package-archive-contents
+    (package-refresh-contents))
+
+  ;; install the missing packages
+  (dolist (package package-list)
+    (unless (package-installed-p package)
+      (package-install package)))
+#+end_src
+
+* loaded-modules
+#+begin_src emacs-lisp
+  (add-to-list 'loaded-modules "packages")
+#+end_src

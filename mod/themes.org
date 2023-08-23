@@ -1,0 +1,104 @@
+* Theme Functions
+#+begin_src emacs-lisp
+  (defun disable-all-themes ()
+    "Disable all currently active themes."
+    (interactive)
+    (dolist (i custom-enabled-themes)
+      (disable-theme i)))
+  ;; set theme function
+  (defun set-theme (theme)
+    (disable-all-themes)
+    (load-theme theme t)
+    (set-frame-font "Inconsolata 16" nil t)
+    (message "Theme '%s' set" theme))
+  ;; interactive version
+  (defun choose-theme (theme)
+    (interactive (list (completing-read "Theme: " theme-list)))
+    (unless (member theme theme-list)
+      (error "Theme is not in list!"))
+    (set-theme (intern theme)))
+  ;; interactive version of set-theme
+  (defun theme-select (theme)
+    (interactive (list (completing-read "Theme: " theme-list)))
+    (unless (member theme theme-list)
+      (error "Theme not in list!"))
+    (set-theme (intern theme)))
+  ;; List of installed themes
+  (defvar theme-list
+    '("base16-greenscreen"
+      "dream"
+      "shaman"
+      "silkworm"
+      "subtle-blue"
+      "birds-of-paradise-plus"
+      "bharadwaj-slate"
+      "ef-autumn"
+      "ef-cyprus"
+      "ef-day"
+      "ef-deuteranopia-light"
+      "ef-duo-light"
+      "ef-elea-light"
+      "ef-frost"
+      "ef-kassio"
+      "ef-light"
+      "ef-spring"
+      "ef-summer"
+      "ef-trio-light"
+      "ef-tritanopia-light"
+      "ef-bio"
+      "ef-cherie"
+      "ef-dark"
+      "ef-deuteranopia-dark"
+      "ef-duo-dark"
+      "ef-elea-dark"
+      "ef-night"
+      "ef-symbiosis"
+      "ef-trio-dark"
+      "ef-tritanopia-dark"
+      "ef-winter"
+      "orange_wedge"
+      "bubblegum"))
+  (defvar current-theme-idx 0
+    "integer representing the current theme")
+  (defun cycle-themes ()
+    "Toggle between different themes"
+    (interactive)
+    (setq current-theme-idx (mod (1+ current-theme-idx) 7))
+    (cond ((= current-theme-idx 0) (set-theme 'base16-greenscreen))
+      ((= current-theme-idx 1) (set-theme 'dream))
+      ((= current-theme-idx 2) (set-theme 'shaman))
+      ((= current-theme-idx 3) (set-theme 'silkworm))
+      ((= current-theme-idx 4) (set-theme 'subtle-blue))
+      ((= current-theme-idx 5) (set-theme 'birds-of-paradise-plus))
+      ((= current-theme-idx 6) (set-theme 'bharadwaj-slate))))
+#+end_src
+* ef Seasonal Themes
+#+begin_src emacs-lisp
+  ;; ef themes
+  (defvar current-ef-theme-idx 0
+    "integer representing the current ef theme")
+  ;; https://protesilaos.com/emacs/ef-themes-pictures
+  (defun set-month-theme ()
+    (setq current-month (format-time-string "%m" (current-time)))
+    (cond 
+     ;; Spring
+     ((string-equal current-month "03") (set-theme 'ef-deuteranopia-light))
+     ((string-equal current-month "04") (set-theme 'ef-spring))
+     ((string-equal current-month "05") (set-theme 'ef-kassio))
+     ;; Summer
+     ((string-equal current-month "06") (set-theme 'ef-summer))
+     ((string-equal current-month "07") (set-theme 'ef-elea-light))
+     ((string-equal current-month "08") (set-theme 'ef-deuteranopia-dark))
+     ;; Autumns
+     ((string-equal current-month "09") (set-theme 'ef-cherie))
+     ((string-equal current-month "10") (set-theme 'ef-autumn))
+     ((string-equal current-month "11") (set-theme 'ef-bio))
+     ;; Winter
+     ((string-equal current-month "12") (set-theme 'ef-tritanopia-dark))
+     ((string-equal current-month "01") (set-theme 'ef-winter))
+     ((string-equal current-month "02") (set-theme 'ef-elea-dark))))
+#+end_src
+* loaded-modules
+#+begin_src emacs-lisp
+  (add-to-list 'loaded-modules "themes")
+#+end_src

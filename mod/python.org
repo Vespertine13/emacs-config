@@ -1,0 +1,28 @@
+* Python Settings
+#+begin_src emacs-lisp
+  ;; set interpreter
+  (require 'python)
+  (setq python-shell-interpreter EXE_PYTHON)
+  ;; set standard indent
+  (add-hook 'python-mode-hook '(lambda ()
+				 (setq python-indent 4)))
+  (setq python-indent-guess-indent-offset nil)
+  (defun python--send-line ()
+    "Send the current line or marked region to a Python shell."
+    (interactive)
+    (if (use-region-p)
+	(python-shell-send-region (region-beginning) (region-end))
+      (let ((line-start (line-beginning-position))
+	    (line-end (line-end-position)))
+	(push-mark line-start t t)
+	(goto-char line-end)
+	(python-shell-send-region line-start line-end))))
+  ;; setter send line til C-return
+  (add-hook 'python-mode-hook
+	    (lambda ()
+	      (define-key python-mode-map (kbd "<C-return>") 'python-send-line)))
+#+end_src
+* loaded-modules
+#+begin_src emacs-lisp
+  (add-to-list 'loaded-modules "Python")
+#+end_src
