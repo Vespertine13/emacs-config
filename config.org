@@ -297,12 +297,12 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 *** Mastodon
 #+begin_src emacs-lisp
-  (setq mastodon-instance-url "https://tech.lgbt"
-    mastodon-active-user "gray")
-  (defun my-mastodon-hook ()
-    (visual-line-mode t))
-  (add-hook 'mastodon-mode-hook 'my-mastodon-hook)
-  ;;(setq mastodon-tl--highlight-current-toot 1)
+  (when (member "packages" loaded-modules)
+    (setq mastodon-instance-url "https://tech.lgbt"
+      mastodon-active-user "gray")
+    (defun my-mastodon-hook ()
+      (visual-line-mode t))
+    (add-hook 'mastodon-mode-hook 'my-mastodon-hook))
 #+end_src
 *** Startup
 #+begin_src emacs-lisp
