@@ -38,10 +38,11 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/python.org"))
   ;; loading themes
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/themes.org"))
-  ;; loading keybinding
-  (ignore-errors (org-babel-load-file "~/emacs-config/mod/keybinding.org"))
   ;; misc
   (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/misc.org"))
+  ;; loading keybinding
+  (ignore-errors (org-babel-load-file "~/emacs-config/mod/keybinding.org"))
+
 #+end_src
 ** Basic Setup
 (print loaded-modules)
