@@ -1,7 +1,8 @@
 * R settings
 #+begin_src emacs-lisp
   ;; checks the system name and sets an R path accordingly
-  (setq inferior-R-program-name EXE_R)
+  (when (eq system-type 'windows-nt)
+    (setq inferior-R-program-name EXE_R))
   ;; (setq inferior-R-program-name '(
   ;; Shut up compile saves
   (setq compilation-ask-about-save nil)
