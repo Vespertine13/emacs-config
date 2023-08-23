@@ -27,7 +27,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   ;; loading packages
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/packages.org"))
   ;; loading teos
-  (ignore-errors (org-babel-load-file "~~/mega/emacs_utilities/config/teos.org"))
+  (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/teos.org"))
   ;; loading zetteldeft
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/zetteldeft.org"))
   ;; loading agenda
@@ -166,7 +166,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 
 *** Appearance
 #+begin_src emacs-lisp
-  (add-to-list 'custom-theme-load-path FOLDER_THEMES) ;; set themes dir
   (setq inhibit-startup-message t)    ;; Hide the startup message
   (setq debug-on-error t)             ;; enable in-depth message on error
   (setq ring-bell-function 'ignore)   ;; ignore annoying bell sounds while in emacs
@@ -312,7 +311,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (open-scratch)
   (when (member "zetteldeft" loaded-modules)
     (deft))
-  (when (member "constants" loaded-modules)
+  (when (member "agenda" loaded-modules)
     (open-org-agenda-for-current-week)
     (delete-other-windows nil)) ;; deletes deft window
   (toggle-frame-solidity)

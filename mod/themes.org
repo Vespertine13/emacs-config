@@ -1,5 +1,6 @@
 * Theme Functions
 #+begin_src emacs-lisp
+  (add-to-list 'custom-theme-load-path FOLDER_THEMES) ;; set themes dir
   (defun disable-all-themes ()
     "Disable all currently active themes."
     (interactive)
