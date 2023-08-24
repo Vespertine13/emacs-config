@@ -3,6 +3,7 @@ config.el
 
 # Compiled
 *.elc
+*.el
 
 # Packaging
 .cask
