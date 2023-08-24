@@ -6,7 +6,7 @@
   (global-set-key (kbd "C-c 4") 'open-emacs_utilities)
   (global-set-key (kbd "C-c 5") 'mastodon)
   (global-set-key (kbd "C-c 6") 'run-libera-chat)
-  (global-set-key (kbd "C-c 7") 'open-sign)
+  (global-set-key (kbd "C-c 7") 'open-token)
   (global-set-key (kbd "C-c 8") 'open-flashcards)
   (global-set-key (kbd "C-c 9") 'elfeed)
   (global-set-key (kbd "C-c 0") 'open-scratch)
