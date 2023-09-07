@@ -1,3 +1,5 @@
+#+TITLE: Themes
+#+STARTUP: overview
 * Theme Functions
 #+begin_src emacs-lisp
   (add-to-list 'custom-theme-load-path FOLDER_THEMES) ;; set themes dir

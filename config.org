@@ -220,7 +220,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (when (member "constants" loaded-modules)
     (defun run-libera-chat ()
       (interactive)
-      (erc-tls :server "irc.libera.chat" :port 6697 :nick ERC_NICK :password )))
+      (erc-tls :server "irc.libera.chat" :port 6697 :nick NICK_ERC :password )))
 #+end_src
 *** Custom Function
 #+begin_src emacs-lisp
@@ -318,5 +318,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
     (open-org-agenda-for-current-week)
     (delete-other-windows nil)) ;; deletes deft window
   (toggle-frame-solidity)
+  (print loaded-modules)
 #+end_src
 

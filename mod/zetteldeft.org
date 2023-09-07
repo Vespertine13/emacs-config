@@ -12,6 +12,7 @@
   (setq deft-use-filename-as-title t)
   (setq deft-use-filter-string-for-filename t)
   (setq deft-auto-save-interval 0)
+  (setq deft-file-limit 25)
   (use-package zetteldeft)
 #+end_src
 ** Functions
