@@ -15,7 +15,7 @@
     (set-frame-font "Inconsolata 16" nil t)
     (message "Theme '%s' set" theme))
   ;; interactive version
-  (defun choose-theme (theme)
+  (defun select-theme (theme)
     (interactive (list (completing-read "Theme: " theme-list)))
     (unless (member theme theme-list)
       (error "Theme is not in list!"))
