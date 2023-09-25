@@ -215,6 +215,11 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
     (setq buffer-face-mode-face '(:family "Inconsolata")) ;; standard font find it in ~/mega/fonts
     (buffer-face-mode))
 #+end_src
+*** Undo-tree
+#+begin_src emacs-lisp
+  (when (member "packages" loaded-modules)
+    (add-hook 'after-init-hook #'global-undo-tree-mode))
+#+end_src
 *** ERC
 #+begin_src emacs-lisp
   (when (member "constants" loaded-modules)
