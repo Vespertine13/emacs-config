@@ -302,6 +302,12 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
     "Writes the path to current buffer at the cursor position."
     (interactive)
     (insert (buffer-file-name)))
+  (defun write-read-only ()
+    "Write the syntax necessary for activating read only on top of file"
+    (interactive)
+    (save-excursion
+      (goto-char (point-min))
+      (insert "# -*- buffer-read-only: t -*-\n")))
 #+end_src
 *** Mastodon
 #+begin_src emacs-lisp
