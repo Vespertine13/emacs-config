@@ -326,9 +326,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (open-scratch)
   (when (member "zetteldeft" loaded-modules)
     (deft))
-  (when (member "agenda" loaded-modules)
-    (open-org-agenda-for-current-week)
-    (delete-other-windows nil)) ;; deletes deft window
+  (delete-window)
   (toggle-frame-solidity)
   (print loaded-modules)
 #+end_src
