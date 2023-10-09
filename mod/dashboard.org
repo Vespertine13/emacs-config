@@ -17,9 +17,9 @@
   (setq dashboard-center-content t)
 
   ;; Set the footer
-  (setq dashboard-footer-messages '("Eivind"))
+  (setq dashboard-footer-messages '(""))
   ;; Set the title
-  (setq dashboard-banner-logo-title "Welcome")
+  (setq dashboard-banner-logo-title "")
 #+end_src
 * Custom widget
 #+begin_src emacs-lisp
@@ -54,10 +54,34 @@
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
 		   "Elfeed")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
+			     (shell))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   "Shell")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
+			     (eshell))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   "Eshell")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
+			     (run-r))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   "R")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
+			     (run-python))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   "Python")
     )
 
   (add-to-list 'dashboard-item-generators '(custom . dashboard-insert-custom))
-  (setq dashboard-items '((custom) (agenda)))
+  (setq dashboard-items '((custom) (agenda . 10)))
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
