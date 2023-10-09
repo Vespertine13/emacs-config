@@ -25,6 +25,7 @@
     elfeed                           ;; can be used to read RSS
     nyan-mode                        ;; yes.
     rainbow-mode                     ;; shows colours
+    dashboard                        ;; startup dashboard
     )
   )
 #+end_src

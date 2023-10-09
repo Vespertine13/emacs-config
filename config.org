@@ -45,7 +45,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/misc.org"))
   ;; loading keybinding
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/keybinding.org"))
-
+  ;; Loading dashboard
+  (ignore-errors (org-babel-load-file "~/emacs-config/mod/dashboard.org"))
 #+end_src
 ** Basic Setup
 (print loaded-modules)
