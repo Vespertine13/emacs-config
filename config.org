@@ -328,7 +328,5 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (when (member "zetteldeft" loaded-modules)
     (deft))
   (delete-window)
-  (toggle-frame-solidity)
-  (print loaded-modules)
 #+end_src
 
