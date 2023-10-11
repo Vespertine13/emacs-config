@@ -66,6 +66,13 @@
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
 		   ":purple_heart: Eshell")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
+			     (find-file "~/mega/workout_log.png"))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   ":lifter: Workout Log")
+
     )
 
   (defun dashboard-loaded-modules (list-size)
