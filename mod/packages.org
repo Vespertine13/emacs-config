@@ -13,21 +13,21 @@
 
 * list of my packages
 #+begin_src emacs-lisp
-(setq package-list
-  '(ess                              ;; ESS
-    anaconda-mode                    ;; anaconda mode for python
-    company-anaconda                 ;; company anaconda for python
-    flycheck                         ;; flycheck for coding
-    ein                              ;; jupyterlab stuff
-    undo-tree                        ;; advanced undo
-    emojify                          ;; emojis
-    mastodon                         ;; mastodon social media
-    elfeed                           ;; can be used to read RSS
-    nyan-mode                        ;; yes.
-    rainbow-mode                     ;; shows colours
-    dashboard                        ;; startup dashboard
+  (setq package-list
+    '(ess                              ;; ESS
+      anaconda-mode                    ;; anaconda mode for python
+      company-anaconda                 ;; company anaconda for python
+      flycheck                         ;; flycheck for coding
+      ein                              ;; jupyterlab stuff
+      undo-tree                        ;; advanced undo
+      emojify                          ;; emojis
+      mastodon                         ;; mastodon social media
+      elfeed                           ;; can be used to read RSS
+      nyan-mode                        ;; yes.
+      rainbow-mode                     ;; shows colours
+      dashboard                        ;; startup dashboard
+      )
     )
-  )
 #+end_src
 
 * activate and install
