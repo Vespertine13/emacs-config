@@ -222,7 +222,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 *** Undo-tree
 #+begin_src emacs-lisp
   (when (member "packages" loaded-modules)
-    (add-hook 'after-init-hook #'global-undo-tree-mode))
+    (require 'undo-tree)
+    (global-undo-tree-mode))
 #+end_src
 *** ERC
 #+begin_src emacs-lisp
