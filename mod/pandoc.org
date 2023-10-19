@@ -16,7 +16,7 @@
 	  (unless (yes-or-no-p "Output file already exists. Override? ")
 	    (message "Conversion cancelled.")
 	    (return)))
-	(shell-command-to-string (format "pandoc -o %s %s" output_var input_var))
+	(shell-command-to-string (format "pandoc -o \"%s\" \"%s\"" output_var input_var))
 	(find-file output_var))))
   ;; for windows
   (when (string-equal system-type "windows-nt")
@@ -40,7 +40,7 @@
 	  (unless (yes-or-no-p "Output file already exists. Override? ")
 	    (message "Conversion cancelled.")
 	    (return)))
-	(shell-command-to-string (format "pandoc -o %s %s" output_var input_var))
+	(shell-command-to-string (format "pandoc -o \"%s\" \"%s\"" output_var input_var))
 	(find-file output_var))))
 #+end_src
 * loaded-modules
