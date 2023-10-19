@@ -66,40 +66,39 @@
   (defun cycle-themes ()
     "Toggle between different themes"
     (interactive)
-    (setq current-theme-idx (mod (1+ current-theme-idx) 7))
+    (setq current-theme-idx (mod (1+ current-theme-idx) 13))
     (cond ((= current-theme-idx 0) (set-theme 'base16-greenscreen))
       ((= current-theme-idx 1) (set-theme 'dream))
       ((= current-theme-idx 2) (set-theme 'shaman))
       ((= current-theme-idx 3) (set-theme 'silkworm))
       ((= current-theme-idx 4) (set-theme 'subtle-blue))
       ((= current-theme-idx 5) (set-theme 'birds-of-paradise-plus))
-      ((= current-theme-idx 6) (set-theme 'bharadwaj-slate))))
+      ((= current-theme-idx 6) (set-theme 'bharadwaj-slate))
+      ((= current-theme-idx 7) (set-theme 'ef-summer))
+      ((= current-theme-idx 8) (set-theme 'ef-elea-light))
+      ((= current-theme-idx 9) (set-theme 'ef-elea-dark))
+      ((= current-theme-idx 10) (set-theme 'ef-tritanopia-dark))
+      ((= current-theme-idx 11) (set-theme 'ef-bio))
+      ((= current-theme-idx 12) (set-theme 'ef-deuteranopia-dark))))
 #+end_src
-* ef Seasonal Themes
+* Hourly themes
 #+begin_src emacs-lisp
-  ;; ef themes
-  (defvar current-ef-theme-idx 0
-    "integer representing the current ef theme")
-  ;; https://protesilaos.com/emacs/ef-themes-pictures
-  (defun set-month-theme ()
-    (setq current-month (format-time-string "%m" (current-time)))
-    (cond 
-     ;; Spring
-     ((string-equal current-month "03") (set-theme 'ef-deuteranopia-light))
-     ((string-equal current-month "04") (set-theme 'ef-spring))
-     ((string-equal current-month "05") (set-theme 'ef-kassio))
-     ;; Summer
-     ((string-equal current-month "06") (set-theme 'ef-summer))
-     ((string-equal current-month "07") (set-theme 'ef-elea-light))
-     ((string-equal current-month "08") (set-theme 'ef-deuteranopia-dark))
-     ;; Autumns
-     ((string-equal current-month "09") (set-theme 'ef-cherie))
-     ((string-equal current-month "10") (set-theme 'ef-autumn))
-     ((string-equal current-month "11") (set-theme 'ef-bio))
-     ;; Winter
-     ((string-equal current-month "12") (set-theme 'ef-tritanopia-dark))
-     ((string-equal current-month "01") (set-theme 'ef-winter))
-     ((string-equal current-month "02") (set-theme 'ef-elea-dark))))
+  (defun set-hourly-theme ()
+    (interactive)
+    (setq current-hour (string-to-number (format-time-string "%H" (current-time))))
+    (cond
+     ;; Morning
+     ((and (>= current-hour 6) (< current-hour 10)) (set-theme 'subtle-blue))
+     ;; Midday
+     ((and (>= current-hour 10) (< current-hour 14)) (set-theme 'silkworm))
+     ;; Afternoon
+     ((and (>= current-hour 14) (< current-hour 18)) (set-theme 'shaman))
+     ;; Evening
+     ((and (>= current-hour 18) (< current-hour 23)) (set-theme 'birds-of-paradise-plus))
+     ;; Night
+     ((or (< current-hour 3) (>= current-hour 23)) (set-theme 'base16-greenscreen))
+     ;; Dawn
+     ((and (>= current-hour 3) (< current-hour 6)) (set-theme 'dream))))
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp

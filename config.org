@@ -325,7 +325,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 *** Startup
 #+begin_src emacs-lisp
   (when (member "themes" loaded-modules)
-    (set-month-theme))
+    (set-hourly-theme))
   (cd "~/")
   (open-scratch)
   (when (member "zetteldeft" loaded-modules)
