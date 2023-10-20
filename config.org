@@ -41,6 +41,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/themes.org"))
   ;; loading pandoc
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/pandoc.org"))
+  ;; loading emojis
+  (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/emojis.org"))
   ;; misc
   (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/misc.org"))
   ;; loading keybinding
@@ -199,7 +201,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
    '(tab-bar-tab ((t (:inherit default :font "inconsolata" :height 0.8)))))
   ;; appereance related packages
   (when (member "packages" loaded-modules)
-    (add-hook 'after-init-hook #'global-emojify-mode)
     (defun proper-nyan ()
       (nyan-start-animation)
       (nyan-toggle-wavy-trail))
