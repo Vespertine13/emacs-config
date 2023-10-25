@@ -15,7 +15,7 @@
 	  ("o" "Ordliste" entry (file ORG_ORDLISTE)
 	   "* %?")
 	  ("h" "Handleliste" entry (file ORG_HANDLELISTE)
-	   "* TODO %? :handle: \n:PROPERTIES:\n:CREATED: %U\n:END:\n")
+	   "* TODO %? :handle: \n:PROPERTIES:\n:ITEMS:\n:CREATED: %U\n:END:\n")
 	  ("r" "Kontaktinfo" entry (file ORG_ROLODEX)
 	   "* %? :contact:\n:PROPERTIES:\n:EMAIL:\n:TELEPHONE:\n:ORGANIZATION:\n:NOTE:\n:END:\n")
 	  ("j" "Teos" entry (file ORG_TEOS_TODOS)
