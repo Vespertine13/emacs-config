@@ -9,7 +9,7 @@
 	  ("b" "Bookmark" entry (file ORG_BOOKMARKS)
 	   "* %? :bookmark: \n:PROPERTIES:\n:CREATED: %U\n:DOMAIN:\n:NOTE:\n:END:\n")
 	  ("d" "Diary" entry (file+datetree ORG_DIARY)
-	   "* %?")
+	   "* Dagen i går\n%?")
 	  ("e" "Events" entry (file ORG_EVENTS)
 	   "* %? ")
 	  ("o" "Ordliste" entry (file ORG_ORDLISTE)
