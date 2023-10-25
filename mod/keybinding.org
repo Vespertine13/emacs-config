@@ -3,7 +3,7 @@
   (global-set-key (kbd "C-c 1") 'dashboard-open)
   (global-set-key (kbd "C-c 2") 'open-config)
   (global-set-key (kbd "C-c 3") 'open-mega)
-  (global-set-key (kbd "C-c 4") 'open-emacs_utilities)
+  (global-set-key (kbd "C-c 4") 'open-org)
   (global-set-key (kbd "C-c 5") 'mastodon)
   (global-set-key (kbd "C-c 6") 'run-libera-chat)
   (global-set-key (kbd "C-c 7") 'open-token)
