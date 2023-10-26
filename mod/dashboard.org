@@ -2,7 +2,7 @@
 * Dashboard
 #+begin_src emacs-lisp
   (require 'dashboard)
-  (dashboard-setup-startup-hook)
+  ;; (dashboard-setup-startup-hook)
   ;; Set the banner
   (setq dashboard-startup-banner "~/mega/emacs_utilities/emacs_startup.txt")
   ;; Value can be

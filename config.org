@@ -334,6 +334,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (open-scratch)
   (when (member "zetteldeft" loaded-modules)
     (deft))
-  (delete-window)
+  (delete-window) ;; if the starup begins with split screen
+  (dashboard-open)
 #+end_src
 
