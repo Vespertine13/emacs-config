@@ -96,3 +96,7 @@
      ;; Night
      ((< current-hour 6) (set-theme 'dream))))
 #+end_src
+* Loaded-modules
+#+begin_src emacs-lisp
+  (add-to-list 'loaded-modules "themes")
+#+end_src
