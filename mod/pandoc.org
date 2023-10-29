@@ -1,3 +1,4 @@
+#+STARTUP: overview
 * Pandoc Settings
 #+begin_src emacs-lisp
   ;; for ubuntu

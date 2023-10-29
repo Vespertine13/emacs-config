@@ -45,6 +45,6 @@
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
-  (add-to-list 'loaded-modules "zetteldeft")
+  (add-to-list 'loaded-modules "Zetteldeft")
 #+end_src
 

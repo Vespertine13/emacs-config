@@ -47,5 +47,5 @@
 
 * loaded-modules
 #+begin_src emacs-lisp
-  (add-to-list 'loaded-modules "packages")
+  (add-to-list 'loaded-modules "Packages")
 #+end_src

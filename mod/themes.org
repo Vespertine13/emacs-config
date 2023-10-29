@@ -98,5 +98,5 @@
 #+end_src
 * Loaded-modules
 #+begin_src emacs-lisp
-  (add-to-list 'loaded-modules "themes")
+  (add-to-list 'loaded-modules "Themes")
 #+end_src

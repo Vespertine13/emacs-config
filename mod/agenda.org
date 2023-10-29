@@ -42,6 +42,6 @@
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
-  (add-to-list 'loaded-modules "agenda")
+  (add-to-list 'loaded-modules "Agenda")
 #+end_src
 

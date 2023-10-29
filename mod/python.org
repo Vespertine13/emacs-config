@@ -1,3 +1,4 @@
+#+STARTUP: overview
 * Python Settings
 #+begin_src emacs-lisp
   ;; set interpreter

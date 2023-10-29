@@ -21,6 +21,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 ** Loading Modules
 #+begin_src emacs-lisp
+  ;; set expected modules
+  (setq my-init-modules '("Dashboard" "Keybinding" "Misc" "Emojis" "Pandoc" "Themes" "Python" "R" "Agenda" "Zetteldeft" "Teos" "Packages" "Constants" "Elfeed" "MPV"))
   ;; make a list of loaded modules
   (setq loaded-modules ())
   ;; loading constants 
@@ -43,6 +45,10 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/pandoc.org"))
   ;; loading emojis
   (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/emojis.org"))
+  ;; loading emojis
+  (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/elfeed.org"))
+  ;; loading emojis
+  (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/mpv.org"))
   ;; misc
   (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/misc.org"))
   ;; loading keybinding
@@ -80,7 +86,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 
 *** Backup
 #+begin_src emacs-lisp
-(when (member "constants" loaded-modules)
+(when (member "Constants" loaded-modules)
   (setq backup-directory-alist
     `((".*" . ,FOLDER_TEMP)))
   (setq auto-save-file-name-transforms
@@ -117,7 +123,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (add-hook 'org-mode-hook 'org-update-all-dblocks)
      (add-hook 'before-save-hook 'org-update-all-dblocks)
   ;; org agenda files
-  (when (member "constants" loaded-modules)
+  (when (member "Constants" loaded-modules)
     (setq org-agenda-files FOLDER_ORG_LIST))
   ;; related custom functins
   (defun checkbox-all ()
@@ -160,7 +166,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 *** Timer
 #+begin_src emacs-lisp
-  (when (member "constants" loaded-modules)
+  (when (member "Constants" loaded-modules)
     (setq org-clock-sound WAV_BELL))
 #+end_src
 *** Garbage Collection
@@ -200,7 +206,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (custom-set-faces
    '(tab-bar-tab ((t (:inherit default :font "inconsolata" :height 0.8)))))
   ;; appereance related packages
-  (when (member "packages" loaded-modules)
+  (when (member "Packages" loaded-modules)
     (defun proper-nyan ()
       (nyan-start-animation)
       (nyan-toggle-wavy-trail))
@@ -220,9 +226,36 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
     (setq buffer-face-mode-face '(:family "Inconsolata")) ;; standard font find it in ~/mega/fonts
     (buffer-face-mode))
 #+end_src
+*** paste fix
+A function that can be used to replace æøå with proper encoded æøå.
+#+begin_src emacs-lisp
+  (defun paste-fix ()
+    "Replace characters with specific code points with other letters in the current buffer."
+    (interactive)
+    (save-excursion
+      (goto-char (point-min))
+      (while (re-search-forward "[\x3FFFE5]" nil t)
+	(replace-match "å" nil nil))
+      (goto-char (point-min)) ; Reset to the beginning of the buffer
+      (while (re-search-forward "[\x3FFFE6]" nil t)
+	(replace-match "æ" nil nil))
+      (goto-char (point-min)) ; Reset to the beginning of the buffer
+      (while (re-search-forward "[\x3FFFF8]" nil t)
+	(replace-match "ø" nil nil))
+      (goto-char (point-min)) ; Reset to the beginning of the buffer
+      (while (re-search-forward "[\x3FFFC5]" nil t)
+	(replace-match "Å" nil nil))
+      (goto-char (point-min)) ; Reset to the beginning of the buffer
+      (while (re-search-forward "[\x3FFFC6]" nil t)
+	(replace-match "Æ" nil nil))
+      (goto-char (point-min)) ; Reset to the beginning of the buffer
+      (while (re-search-forward "[\x3FFFD8]" nil t)
+	(replace-match "Ø" nil nil))))
+  (add-hook 'before-save-hook 'paste-fix)
+#+end_src
 *** Undo-tree
 #+begin_src emacs-lisp
-  (when (member "packages" loaded-modules)
+  (when (member "Packages" loaded-modules)
     (require 'undo-tree)
     (global-undo-tree-mode)
     (setq undo-tree-history-directory-alist
@@ -231,7 +264,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 *** ERC
 #+begin_src emacs-lisp
-  (when (member "constants" loaded-modules)
+  (when (member "Constants" loaded-modules)
     (defun run-libera-chat ()
       (interactive)
       (erc-tls :server "irc.libera.chat" :port 6697 :nick NICK_ERC :password )))
@@ -239,7 +272,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 *** Custom Function
 #+begin_src emacs-lisp
   ;; folders and files
-  (when (member "constants" loaded-modules)
+  (when (member "Constants" loaded-modules)
     (defun open-mega ()
       (interactive)
       (find-file FOLDER_MEGA))
@@ -319,7 +352,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 *** Mastodon
 #+begin_src emacs-lisp
-  (when (member "packages" loaded-modules)
+  (when (member "Packages" loaded-modules)
     (setq mastodon-instance-url "https://tech.lgbt"
       mastodon-active-user "gray")
     (defun my-mastodon-hook ()
@@ -328,11 +361,11 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 *** Startup
 #+begin_src emacs-lisp
-  (when (member "themes" loaded-modules)
+  (when (member "Themes" loaded-modules)
     (set-hourly-theme))
   (cd "~/")
   (open-scratch)
-  (when (member "zetteldeft" loaded-modules)
+  (when (member "Zetteldeft" loaded-modules)
     (deft))
   (delete-window) ;; if the starup begins with split screen
   (dashboard-open)
