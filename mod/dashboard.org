@@ -1,4 +1,27 @@
 #+STARTUP: content
+
+* Modules text
+Yes it is not ok that this code is at the end, but Dashboard is unfortunately a 
+#+begin_src emacs-lisp
+    ;; system text
+    (setq dashboard-system-text (concat (emacs-version) " | " (symbol-name system-type)))
+    ;; set expected modules
+    (setq my-init-modules '("dashboard" "keybinding" "misc" "emojis" "Pandoc" "themes" "Python" "R" "agenda" "zetteldeft" "teos" "packages" "constants"))
+    ;; check completion and make text
+    (let ((n-total-modules (length my-init-modules))
+	  (n-loaded-modules (length loaded-modules)))
+      (setq mydashtext-1 (format "Loaded Init Modules (%d/%d)\n" n-loaded-modules n-total-modules)))
+    ;; create list of loaded modules
+    (setq dashboard-loaded-mods (concat mydashtext-1 (mapconcat 'identity loaded-modules "\n- ")))
+    (setq list-missing-mods (cl-remove-if (lambda (item) (member item loaded-modules)) my-init-modules))
+
+    (let ((n-total-modules (length my-init-modules))
+	  (n-loaded-modules (length loaded-modules)))
+    (if (< n-loaded-modules n-total-modules)
+	(setq dashboard-missing-mods (concat "\n\nMissing:\n"(mapconcat 'identity list-missing-mods "\n- ")))
+      (setq dashboard-missing-mods (concat "\n\nMissing:\n" "none"))))
+
+#+end_src
 * Dashboard
 #+begin_src emacs-lisp
   (require 'dashboard)
@@ -14,13 +37,13 @@
   ;; - a cons of '("path/to/your/image.png" . "path/to/your/text.txt")
 
   ;; put content in centre
-  (setq dashboard-center-content t)
+  ;; (setq dashboard-center-content t)
 
   ;; Set the footer
   (setq dashboard-footer-messages (list (concat "Startup at: " (current-time-string))))
 
   ;; Set the title
-  (setq dashboard-banner-logo-title "Eivind/Gray/DIVINE")
+  (setq dashboard-banner-logo-title dashboard-system-text)
 #+end_src
 * Custom widget
 #+begin_src emacs-lisp
@@ -65,7 +88,8 @@
     )
 
   (defun dashboard-loaded-modules (list-size)
-    (insert (concat "Config modules loaded:" "\n" (mapconcat 'identity loaded-modules ":"))))
+    (insert (concat dashboard-loaded-mods dashboard-missing-mods)))
+
 
   (defun dashboard-line (list-size)
     (insert "------------------------------------------------------------------------------------------"))
@@ -74,9 +98,10 @@
   (add-to-list 'dashboard-item-generators '(line2 . dashboard-line))
   (add-to-list 'dashboard-item-generators '(custom1 . dashboard-links))
   (add-to-list 'dashboard-item-generators '(custom2 . dashboard-loaded-modules))
-  (setq dashboard-items '((custom1) (line1) (agenda . 10) (line2) (custom2)))
+  (setq dashboard-items '((custom1) (line1)(custom2)))
 #+end_src
 * Loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "dashboard")
 #+end_src
+
