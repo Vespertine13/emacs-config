@@ -1,12 +1,9 @@
 #+STARTUP: content
 
 * Modules text
-Yes it is not ok that this code is at the end, but Dashboard is unfortunately a 
 #+begin_src emacs-lisp
     ;; system text
-    (setq dashboard-system-text (concat (emacs-version) " | " (symbol-name system-type)))
-    ;; set expected modules
-    (setq my-init-modules '("dashboard" "keybinding" "misc" "emojis" "Pandoc" "themes" "Python" "R" "agenda" "zetteldeft" "teos" "packages" "constants"))
+    (setq dash-sys-text (concat "GNU Emacs " emacs-version "/" (symbol-name system-type)))
     ;; check completion and make text
     (let ((n-total-modules (length my-init-modules))
 	  (n-loaded-modules (length loaded-modules)))
@@ -43,7 +40,7 @@ Yes it is not ok that this code is at the end, but Dashboard is unfortunately a
   (setq dashboard-footer-messages (list (concat "Startup at: " (current-time-string))))
 
   ;; Set the title
-  (setq dashboard-banner-logo-title dashboard-system-text)
+  (setq dashboard-banner-logo-title dash-sys-text)
 #+end_src
 * Custom widget
 #+begin_src emacs-lisp
@@ -89,7 +86,6 @@ Yes it is not ok that this code is at the end, but Dashboard is unfortunately a
 
   (defun dashboard-loaded-modules (list-size)
     (insert (concat dashboard-loaded-mods dashboard-missing-mods)))
-
 
   (defun dashboard-line (list-size)
     (insert "------------------------------------------------------------------------------------------"))
