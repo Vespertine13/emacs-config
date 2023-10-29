@@ -3,7 +3,7 @@
 * Modules text
 #+begin_src emacs-lisp
     ;; system text
-    (setq dash-sys-text (concat "GNU Emacs " emacs-version "/" (symbol-name system-type)))
+    (setq dash-sys-text (concat "GNU Emacs " emacs-version "|" (symbol-name system-type)))
     ;; check completion and make text
     (let ((n-total-modules (length my-init-modules))
 	  (n-loaded-modules (length loaded-modules)))

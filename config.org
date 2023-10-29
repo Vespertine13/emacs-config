@@ -48,7 +48,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   ;; loading emojis
   (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/elfeed.org"))
   ;; loading emojis
-  (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/mpv.org"))
+  (when (eq system-type 'windows-nt)
+   (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/mpv.org")))
   ;; misc
   (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/misc.org"))
   ;; loading keybinding
@@ -367,7 +368,7 @@ A function that can be used to replace æøå with proper encoded æøå.
   (open-scratch)
   (when (member "Zetteldeft" loaded-modules)
     (deft))
-  (delete-window) ;; if the starup begins with split screen
+  ;; (delete-window) ;; if the starup begins with split screen
   (dashboard-open)
 #+end_src
 
