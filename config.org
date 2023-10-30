@@ -45,9 +45,9 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/pandoc.org"))
   ;; loading emojis
   (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/emojis.org"))
-  ;; loading emojis
+  ;; loading elfeed
   (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/elfeed.org"))
-  ;; loading emojis
+  ;; loading MPV
   (when (eq system-type 'windows-nt)
    (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/mpv.org")))
   ;; misc

@@ -13,7 +13,7 @@ Yes, this not make much sense.
     ;; check completion and make text
     (let ((n-total-modules (length my-init-modules))
 	  (n-loaded-modules (length loaded-modules)))
-      (setq mydashtext-1 (format "LOADED INIT MODULES (%d/%d):\n    " n-loaded-modules n-total-modules)))
+      (setq mydashtext-1 (format " LOADED INIT MODULES (%d/%d):\n\n    " n-loaded-modules n-total-modules)))
     ;; create list of loaded modules
     (setq dashboard-loaded-mods (concat mydashtext-1 (mapconcat 'identity loaded-modules "\n    ")))
     (setq list-missing-mods (cl-remove-if (lambda (item) (member item loaded-modules)) my-init-modules))
@@ -21,7 +21,7 @@ Yes, this not make much sense.
     (let ((n-total-modules (length my-init-modules))
 	  (n-loaded-modules (length loaded-modules)))
     (if (< n-loaded-modules n-total-modules)
-	(setq dashboard-missing-mods (concat "\n\nMISSING:\n    "(mapconcat 'identity list-missing-mods "\n    ")))
+	(setq dashboard-missing-mods (concat "\n\n MISSING:\n\n    "(mapconcat 'identity list-missing-mods "\n    ")))
       (setq dashboard-missing-mods "")))
 
 #+end_src
