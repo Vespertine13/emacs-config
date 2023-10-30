@@ -49,46 +49,21 @@ Yes, this not make much sense.
   ;; Set the title
   (setq dashboard-banner-logo-title dash-sys-text)
 #+end_src
-* Custom widget
+* Customization
 #+begin_src emacs-lisp
   (defun dashboard-links (list-size)
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
-			     (deft-folder-deft))
+			     (zetteldeft-go-home))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
 		   "Home")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
-			     (deft-folder-teos))
-		   :mouse-face 'highlight
-		   :follow-link "\C-m"
-		   "Teos")
-    (widget-create 'link
-		   :notify (lambda (&rest ignore)
 			     (find-file "~/emacs-config/mod/dashboard.org"))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
-		   "Dashboard Config")
-    (widget-create 'link
-		   :notify (lambda (&rest ignore)
-			     (mastodon))
-		   :mouse-face 'highlight
-		   :follow-link "\C-m"
-		   "Mastodon")
-    (widget-create 'link
-		   :notify (lambda (&rest ignore)
-			     (elfeed))
-		   :mouse-face 'highlight
-		   :follow-link "\C-m"
-		   "Elfeed")
-    (widget-create 'link
-		   :notify (lambda (&rest ignore)
-			     (find-file "~/mega/workout_log.png"))
-		   :mouse-face 'highlight
-		   :follow-link "\C-m"
-		   "Workout Log")
-
+		   "Configuration")
     )
 
   (defun dashboard-loaded-modules (list-size)
