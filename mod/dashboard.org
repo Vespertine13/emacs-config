@@ -1,5 +1,11 @@
 #+STARTUP: content
 
+* Loaded-modules
+Yes, this not make much sense.
+#+begin_src emacs-lisp
+  (add-to-list 'loaded-modules "Dashboard")
+#+end_src
+
 * Modules text
 #+begin_src emacs-lisp
     ;; system text
@@ -16,7 +22,7 @@
 	  (n-loaded-modules (length loaded-modules)))
     (if (< n-loaded-modules n-total-modules)
 	(setq dashboard-missing-mods (concat "\n\nMISSING:\n    "(mapconcat 'identity list-missing-mods "\n    ")))
-      (setq dashboard-missing-mods (concat "\n\nMISSING:\n" "   none"))))
+      (setq dashboard-missing-mods "")))
 
 #+end_src
 * Dashboard
@@ -95,8 +101,3 @@
   (add-to-list 'dashboard-item-generators '(custom-loaded-modules . dashboard-loaded-modules))
   (setq dashboard-items '((custom-loaded-modules) (line) (custom-links)))
 #+end_src
-* Loaded-modules
-#+begin_src emacs-lisp
-  (add-to-list 'loaded-modules "Dashboard")
-#+end_src
-
