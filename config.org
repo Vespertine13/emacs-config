@@ -256,7 +256,7 @@ A function that can be used to replace æøå with proper encoded æøå.
 #+end_src
 *** Undo-tree
 #+begin_src emacs-lisp
-  (when (member "Packages" loaded-modules)
+  (when (and (member "Packages" loaded-modules) (member "Constants" loaded-modules))
     (require 'undo-tree)
     (global-undo-tree-mode)
     (setq undo-tree-history-directory-alist
