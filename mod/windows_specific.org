@@ -1,0 +1,61 @@
+#+STARTUP: content
+Windows spefific code.
+* workout_log
+#+begin_src emacs-lisp
+    ;; adds line to workout diary table
+(when (eq system-type 'windows-nt)
+    (run-r-script R_WORKOUT_WIN))
+#+end_src
+
+* parla
+#+begin_src emacs-lisp
+  ;; sets function that can be used interactively
+  (when (eq system-type 'windows-nt)
+    (defun run-parla()
+      (interactive)
+      (message "Sending message...")
+      (let ((input (buffer-substring (line-beginning-position) (line-end-position))))
+	(let ((quoted-input (format "\"%s\"" input)))
+	  (shell-command (format "Rscript %s\\parla\\run.R %s %s" BASE_PATH_WIN quoted-input BASE_PATH))
+	  (move-end-of-line nil) 
+	  (newline)
+	  (insert-buffer-substring "*Shell Command Output*"))))
+    )
+#+end_src
+
+* MPV
+#+begin_src emacs-lisp
+  ;; general function that runs a bat file that plays a folder in mpv 
+  ;; run again to quit
+  (defun mpv-play-album (album)
+    "Kill *Async Shell Command* buffer if it exists, otherwise play the given album with mpv."
+    (interactive (list (completing-read "Album: " mpv-albums-list)))
+    (let ((async-shell-command-buffer (get-buffer "*Async Shell Command*")))
+      (if async-shell-command-buffer
+	  (progn
+	    (kill-buffer async-shell-command-buffer))
+	(unless (member album mpv-albums-list)
+	  (error "Album not in list!"))
+	;; continues otherwise
+	(setq bat_folder (concat BASE_PATH_WIN FOLDER_MUSIC_BAT_WIN))
+	(async-shell-command (concat bat_folder "\\" album ".bat")))))
+  ;; list of possible albums
+  (defvar mpv-albums-list
+    '("abzu"
+      "coding_playlist"
+      "deacon"
+      "pillars-of-eternity"
+      "radio-new-vegas"
+      "raven"
+      "take-me-apart"
+      "the-legend-of-the-sun-virgin"
+      "traveler"
+      "the-last-door"
+      "wincing-the-night-away"
+      "halfaxa")
+    )
+#+end_src
+* loaded-modules
+#+begin_src emacs-lisp
+  (add-to-list 'loaded-modules "Windows_specific")
+#+end_src

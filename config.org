@@ -22,7 +22,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ** Loading Modules
 #+begin_src emacs-lisp
   ;; set expected modules
-  (setq my-init-modules '("Dashboard" "Keybinding" "Misc" "Emojis" "Pandoc" "Themes" "Python" "R" "Agenda" "Zetteldeft" "Teos" "Packages" "Constants" "Elfeed" "MPV"))
+  (setq my-init-modules '("Dashboard" "Keybinding" "Experimental" "Emojis" "Pandoc" "Themes" "Python" "R" "Agenda" "Zetteldeft" "Teos" "Packages" "Constants" "Elfeed" "Windows_specific"))
   ;; make a list of loaded modules
   (setq loaded-modules ())
   ;; loading constants 
@@ -47,11 +47,11 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/emojis.org"))
   ;; loading elfeed
   (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/elfeed.org"))
-  ;; loading MPV
+  ;; loading windows specific code
   (when (eq system-type 'windows-nt)
-   (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/mpv.org")))
-  ;; misc
-  (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/misc.org"))
+   (ignore-errors (org-babel-load-file "~/emacs-config/mod/windows_specific.org")))
+  ;; experimental
+  (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/experimental.org"))
   ;; loading keybinding
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/keybinding.org"))
   ;; Loading dashboard

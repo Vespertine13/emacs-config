@@ -60,6 +60,12 @@ Yes, this not make much sense.
 		   "Home")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
+			     (find-file "~/emacs-config/mod/keybinding.org"))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   "Keybindings")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
 			     (find-file "~/emacs-config/mod/dashboard.org"))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
