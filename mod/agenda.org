@@ -40,6 +40,43 @@
       (call-interactively 'org-agenda-list))
     (message "Opening agenda for current week"))
 #+end_src
+* Daily Todos
+#+begin_src emacs-lisp
+  ;; functions
+  (when (member "Constants" loaded-modules)
+    (defun replace-file-contents (file-path new-content)
+      "Replace the contents of the FILE-PATH with NEW-CONTENT."
+      (with-temp-file file-path
+	(insert new-content)))
+    (defun create-empty-file (file-path)
+	"Create an empty file at FILE-PATH."
+	(write-region "" nil file-path))
+    (defun file-content-equal-to-string (file string)
+      "Check if the content of FILE is equal to STRING."
+      (with-temp-buffer
+	(insert-file-contents file)
+	(string= (buffer-string) string)))
+    ;; text and variables
+    ;; defines today's date as a variable
+    (setq today-scheduled (format-time-string "<%Y-%m-%d %a>"))
+    (setq today-var (format-time-string "%Y-%m-%d"))
+    (let ((daily-todo1 (format "* TODO Stemple inn\nSCHEDULED: %s\n" today-scheduled))
+	  (daily-todo2 (format "* TODO Git pull\nSCHEDULED: %s\n" today-scheduled))
+	  (daily-todo3 (format "* TODO Sjekk kalender\nSCHEDULED: %s\n" today-scheduled))
+	  (daily-todo4 (format "* TODO Skriv dagbok\nSCHEDULED: %s\n" today-scheduled))
+	  )
+      (setq daily-todos (concat daily-todo1 daily-todo2 daily-todo3 daily-todo4)))
+
+    ;; run checks and replace
+    ;; check if today's date file exists, if not it creates an empty file
+    (unless (file-exists-p TXT_DATE)
+      (create-empty-file TXT_DATE))
+
+    (when (not (file-content-equal-to-string TXT_DATE today-var))
+      (replace-file-contents TXT_DATE today-var)
+	  (replace-file-contents ORG_DAILY daily-todos))
+  )
+#+end_src
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "Agenda")
