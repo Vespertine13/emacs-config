@@ -66,6 +66,12 @@ Yes, this not make much sense.
 		   "Keybindings")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
+			     (find-file "~/parla/training.R"))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   "Parla")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
 			     (find-file "~/emacs-config/mod/dashboard.org"))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
