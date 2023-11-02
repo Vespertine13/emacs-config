@@ -308,11 +308,18 @@ A function that can be used to replace æøå with proper encoded æøå.
      (insert text)
      (write-file filename))
      (message (format "'%s' saved." filename)))
-  (defun file-content-equal-to-string-p (file string)
-    "Check if the content of FILE is equal to STRING."
-    (with-temp-buffer
-      (insert-file-contents file)
-      (string= (buffer-string) string)))
+  (defun replace-file-contents (file-path new-content)
+    "Replace the contents of the FILE-PATH with NEW-CONTENT."
+    (with-temp-file file-path
+      (insert new-content)))
+  (defun create-empty-file (file-path)
+    "Create an empty file at FILE-PATH."
+    (write-region "" nil file-path))
+  (defun file-content-equal-to-string (file string)
+      "Check if the content of FILE is equal to STRING."
+      (with-temp-buffer
+	(insert-file-contents file)
+	(string= (buffer-string) string)))
   (defun delete-current-file ()
     "Deletes the current file being viewed in the buffer"
     (interactive)
