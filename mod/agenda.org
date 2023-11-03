@@ -61,7 +61,7 @@
     (setq today-scheduled (format-time-string "<%Y-%m-%d %a>"))
     (setq today-var (format-time-string "%Y-%m-%d"))
     (let ((daily-todo1 (format "* TODO Stemple inn\nSCHEDULED: %s\n" today-scheduled))
-	  (daily-todo2 (format "* TODO Git pull\nSCHEDULED: %s\n" today-scheduled))
+	  (daily-todo2 (format "* TODO git pull\nSCHEDULED: %s\n" today-scheduled))
 	  (daily-todo3 (format "* TODO Sjekk kalender\nSCHEDULED: %s\n" today-scheduled))
 	  (daily-todo4 (format "* TODO Skriv dagbok\nSCHEDULED: %s\n" today-scheduled))
 	  )
