@@ -66,20 +66,14 @@
   (defun cycle-themes ()
     "Toggle between different themes"
     (interactive)
-    (setq current-theme-idx (mod (1+ current-theme-idx) 13))
+    (setq current-theme-idx (mod (1+ current-theme-idx) 7))
     (cond ((= current-theme-idx 0) (set-theme 'base16-greenscreen))
       ((= current-theme-idx 1) (set-theme 'dream))
       ((= current-theme-idx 2) (set-theme 'shaman))
       ((= current-theme-idx 3) (set-theme 'silkworm))
       ((= current-theme-idx 4) (set-theme 'subtle-blue))
       ((= current-theme-idx 5) (set-theme 'birds-of-paradise-plus))
-      ((= current-theme-idx 6) (set-theme 'bharadwaj-slate))
-      ((= current-theme-idx 7) (set-theme 'ef-summer))
-      ((= current-theme-idx 8) (set-theme 'ef-elea-light))
-      ((= current-theme-idx 9) (set-theme 'ef-elea-dark))
-      ((= current-theme-idx 10) (set-theme 'ef-tritanopia-dark))
-      ((= current-theme-idx 11) (set-theme 'ef-bio))
-      ((= current-theme-idx 12) (set-theme 'ef-deuteranopia-dark))))
+      ((= current-theme-idx 6) (set-theme 'bharadwaj-slate))))
 #+end_src
 * Hourly themes
 #+begin_src emacs-lisp
@@ -88,13 +82,13 @@
     (setq current-hour (string-to-number (format-time-string "%H" (current-time))))
     (cond
      ;; Morning
-     ((and (>= current-hour 6) (< current-hour 12)) (set-theme 'subtle-blue))
+     ((and (>= current-hour 6) (< current-hour 12)) (set-theme 'ef-summer))
      ;; Afternoon
-     ((and (>= current-hour 12) (< current-hour 18)) (set-theme 'silkworm))
+     ((and (>= current-hour 12) (< current-hour 18)) (set-theme 'ef-elea-light))
      ;; Evening
-     ((>= current-hour 18) (set-theme 'birds-of-paradise-plus))
+     ((>= current-hour 18) (set-theme 'ef-tritanopia-dark))
      ;; Night
-     ((< current-hour 6) (set-theme 'dream))))
+     ((< current-hour 6) (set-theme 'ef-night))))
 #+end_src
 * Loaded-modules
 #+begin_src emacs-lisp

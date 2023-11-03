@@ -18,6 +18,8 @@
 	   "* TODO %? :handle: \n:PROPERTIES:\n:ITEMS: \n:CREATED: %U\n:END:\n")
 	  ("r" "Kontaktinfo" entry (file ORG_ROLODEX)
 	   "* %? :contact:\n:PROPERTIES:\n:EMAIL: \n:TELEPHONE: \n:ORGANIZATION: \n:NOTE: \n:END:\n")
+	  ("c" "Code Notes" entry (file ORG_CODE_NOTES)
+	   "* %? :code_example:\n:PROPERTIES:\n:CREATED: %U\n:LANGUAGE: \n:LIBRARY: \n:NOTE: \n:END:\n")
 	  ))
   ;; Org todo workflow
   (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
