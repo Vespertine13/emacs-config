@@ -26,6 +26,9 @@
       nyan-mode                        ;; yes.
       rainbow-mode                     ;; shows colours
       dashboard                        ;; startup dashboard
+      ef-themes                        ;; beautiful themes
+      deft                             ;; file manager
+      zetteldeft                       ;; zettelkast
       )
     )
 #+end_src
