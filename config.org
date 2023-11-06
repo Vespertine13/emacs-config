@@ -374,9 +374,11 @@ A function that can be used to replace æøå with proper encoded æøå.
   (cd "~/")
   (open-scratch)
   (when (member "Zetteldeft" loaded-modules)
-    (deft))
+      (deft))
+  (when (eq system-type 'windows-nt)
+    (delete-window)) ;; if the starup begins with split screen
   (when (string= (system-name) SYSTEM_HOME)
-    (toggle-frame-solidity)) ;; if the starup begins with split screen
+    (toggle-frame-solidity))
   (dashboard-open)
 #+end_src
 
