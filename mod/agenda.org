@@ -16,8 +16,12 @@
 	   "* %?")
 	  ("h" "Handleliste" entry (file ORG_HANDLELISTE)
 	   "* TODO %? :handle: \n:PROPERTIES:\n:ITEMS: \n:CREATED: %U\n:END:\n")
-	  ("r" "Kontaktinfo" entry (file ORG_ROLODEX)
+	  ("k" "Kontaktinfo" entry (file ORG_ROLODEX)
 	   "* %? :contact:\n:PROPERTIES:\n:EMAIL: \n:TELEPHONE: \n:ORGANIZATION: \n:NOTE: \n:END:\n")
+	  ("w" "Watch" entry (file ORG_CAPTURE)
+	   "* TODO %? :watch:\n:PROPERTIES:\n:TYPE: \n:GENRE: \n:YEAR: \n:NOTE: \n:END:\n")
+	  ("r" "Read" entry (file ORG_CAPTURE)
+	   "* TODO %? :read:\n:PROPERTIES:\n:TYPE: \n:GENRE: \n:YEAR: \n:NOTE: \n:END:\n")
 	  ("c" "Code Notes" entry (file ORG_CODE_NOTES)
 	   "* %? :code_example:\n:PROPERTIES:\n:CREATED: %U\n:LANGUAGE: \n:LIBRARY: \n:NOTE: \n:END:\n")
 	  ))
@@ -29,10 +33,10 @@
 	   tags "+jobb+TODO=\"TODO\"")
 	  ("h" "Handleliste TODOS"
 	   tags "+handle+TODO=\"TODO\"")
-	  ("f" "Filmer TODOS"
-	   tags "+film+TODO=\"TODO\"")
-	  ("b" "Books TODOS"
-	   tags "+bok+TODO=\"TODO\"")))
+	  ("w" "Watch TODOS"
+	   tags "+watch+TODO=\"TODO\"")
+	  ("r" "Read TODOS"
+	   tags "+read+TODO=\"TODO\"")))
   ;; custom function
   (defun open-org-agenda-for-current-week ()
     (interactive)
