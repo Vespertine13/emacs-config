@@ -10,7 +10,7 @@
 	   "* %? :bookmark:\n:PROPERTIES:\n:CREATED: %U\n:DOMAIN: \n:NOTE: \n:END:\n")
 	  ("d" "Diary" entry (file+datetree ORG_DIARY)
 	   "* Dagen i går\n%?")
-	  ("e" "Events" entry (file ORG_EVENTS)
+	  ("e" "Events" entry (file ORG_CAPTURE)
 	   "* %? :event:\n:PROPERTIES:\n:DATE: \n:TIME: \n:PLACE: \n:NOTE: \n:END:\n")
 	  ("o" "Ordliste" entry (file ORG_ORDLISTE)
 	   "* %?")
@@ -22,21 +22,19 @@
 	   "* TODO %? :watch:\n:PROPERTIES:\n:TYPE: \n:GENRE: \n:YEAR: \n:NOTE: \n:END:\n")
 	  ("r" "Read" entry (file ORG_CAPTURE)
 	   "* TODO %? :read:\n:PROPERTIES:\n:TYPE: \n:GENRE: \n:YEAR: \n:NOTE: \n:END:\n")
-	  ("c" "Code Notes" entry (file ORG_CODE_NOTES)
-	   "* %? :code_example:\n:PROPERTIES:\n:CREATED: %U\n:LANGUAGE: \n:LIBRARY: \n:NOTE: \n:END:\n")
+	  ("c" "Code" entry (file ORG_CAPTURE)
+	   "* TODO %? :code:\n:PROPERTIES:\n:CREATED: %U\n:LANGUAGE: \n:LIBRARY: \n:NOTE: \n:END:\n")
 	  ))
   ;; Org todo workflow
   (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
   ;; custom command
   (setq org-agenda-custom-commands
-	'(("j" "Jobb TODOS"
-	   tags "+jobb+TODO=\"TODO\"")
-	  ("h" "Handleliste TODOS"
-	   tags "+handle+TODO=\"TODO\"")
-	  ("w" "Watch TODOS"
+	'(("w" "Watch TODOS"
 	   tags "+watch+TODO=\"TODO\"")
 	  ("r" "Read TODOS"
-	   tags "+read+TODO=\"TODO\"")))
+	   tags "+read+TODO=\"TODO\"")
+	  ("c" "Code TODOS"
+	   tags "+code+TODO=\"TODO\"")))
   ;; custom function
   (defun open-org-agenda-for-current-week ()
     (interactive)
