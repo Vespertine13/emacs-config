@@ -134,6 +134,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
     (message "check/uncheck all"))
   ;; hide leading stars in org mode
   (setq org-hide-leading-stars 1)
+  ;; shift select
+  (setq org-support-shift-select 1)
 #+end_src
 *** Eshell
 #+begin_src emacs-lisp
@@ -375,8 +377,6 @@ A function that can be used to replace æøå with proper encoded æøå.
   (open-scratch)
   (when (member "Zetteldeft" loaded-modules)
       (deft))
-  (when (string= (system-name) SYSTEM_WORK)
-    (delete-window)) ;; if the starup begins with split screen
   (when (string= (system-name) SYSTEM_HOME)
     (toggle-frame-solidity))
   (dashboard-open)
