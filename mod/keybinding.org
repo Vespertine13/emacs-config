@@ -55,8 +55,8 @@
   (global-set-key (kbd "M-ø") 'kmacro-start-macro-or-insert-counter)
   (global-set-key (kbd "M-æ") 'kmacro-end-or-call-macro)
   (global-set-key (kbd "M-å") 'org-show-images)
-;;  (global-set-key (kbd "C-M-ø") 'my-func)
-;;  (global-set-key (kbd "C-M-æ") 'my-func)
+  (global-set-key (kbd "C-M-ø") 'replace-regexp)
+  (global-set-key (kbd "C-M-æ") 'occur)
 ;;  (global-set-key (kbd "C-M-å") 'my-func)
 #+end_src
 * Misc

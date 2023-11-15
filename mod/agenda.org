@@ -8,7 +8,7 @@
 	   "* TODO %?")
 	  ("b" "Bookmark" entry (file ORG_BOOKMARKS)
 	   "* %? :bookmark:\n:PROPERTIES:\n:CREATED: %U\n:DOMAIN: \n:NOTE: \n:END:\n")
-	  ("d" "Diary" entry (file+datetree ORG_DIARY)
+	  ("d" "Diary" entry (file+olp+datetree ORG_DIARY)
 	   "* Dagen i går\n%?")
 	  ("e" "Events" entry (file ORG_CAPTURE)
 	   "* %? :event:\n:PROPERTIES:\n:DATE: \n:TIME: \n:PLACE: \n:NOTE: \n:END:\n")
