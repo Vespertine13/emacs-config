@@ -1,12 +1,5 @@
 #+STARTUP: content
 Windows spefific code.
-* workout_log
-#+begin_src emacs-lisp
-    ;; adds line to workout diary table
-(when (eq system-type 'windows-nt)
-    (run-r-script R_WORKOUT_WIN))
-#+end_src
-
 * parla
 #+begin_src emacs-lisp
   ;; sets function that can be used interactively
