@@ -24,6 +24,12 @@
 	    (lambda ()
 	      (define-key python-mode-map (kbd "<C-return>") 'python-send-line)))
 #+end_src
+* org-babel
+#+begin_src emacs-lisp
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((python . t)))
+#+end_src
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "Python")

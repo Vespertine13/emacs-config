@@ -33,6 +33,12 @@
   (defun run-r-script (script-path)
     (shell-command (concat "Rscript " (shell-quote-argument script-path))))
 #+end_src
+* org-babel
+#+begin_src emacs-lisp
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((R . t)))
+#+end_src
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "R")
