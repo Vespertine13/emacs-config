@@ -87,5 +87,5 @@ Yes, this not make much sense.
   (add-to-list 'dashboard-item-generators '(line . dashboard-line))
   (add-to-list 'dashboard-item-generators '(custom-links . dashboard-links))
   (add-to-list 'dashboard-item-generators '(custom-loaded-modules . dashboard-loaded-modules))
-  (setq dashboard-items '((custom-loaded-modules) (line) (custom-links)))
+  (setq dashboard-items '((custom-loaded-modules) (custom-links)))
 #+end_src
