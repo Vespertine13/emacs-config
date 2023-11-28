@@ -35,6 +35,7 @@
       "subtle-blue"
       "birds-of-paradise-plus"
       "bharadwaj-slate"
+      "misterioso"
       "ef-autumn"
       "ef-cyprus"
       "ef-day"
@@ -73,6 +74,7 @@
       ((= current-theme-idx 3) (set-theme 'silkworm))
       ((= current-theme-idx 4) (set-theme 'subtle-blue))
       ((= current-theme-idx 5) (set-theme 'birds-of-paradise-plus))
+      ((= current-theme-idx 6) (set-theme 'misterioso))
       ((= current-theme-idx 6) (set-theme 'bharadwaj-slate))))
 #+end_src
 * Hourly themes
