@@ -369,6 +369,7 @@ A function that can be used to replace æøå with proper encoded æøå.
     (setq mastodon-instance-url "https://tech.lgbt"
       mastodon-active-user "gray")
     (defun my-mastodon-hook ()
+      (emojify-mode t)
       (visual-line-mode t))
     (add-hook 'mastodon-mode-hook 'my-mastodon-hook))
 #+end_src
