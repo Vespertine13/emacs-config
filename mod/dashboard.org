@@ -72,6 +72,12 @@ Yes, this not make much sense.
 		   "Parla")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
+			     (org-agenda-list))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   "Agenda")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
 			     (find-file "~/emacs-config/mod/dashboard.org"))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
