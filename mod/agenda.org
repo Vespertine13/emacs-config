@@ -21,7 +21,7 @@
 	  ("w" "Watch" entry (file ORG_CAPTURE)
 	   "* TODO %? :watch:\n:PROPERTIES:\n:TYPE: \n:GENRE: \n:YEAR: \n:NOTE: \n:END:\n")
 	  ("r" "Read" entry (file ORG_CAPTURE)
-	   "* TODO %? :read:\n:PROPERTIES:\n:TYPE: \n:GENRE: \n:YEAR: \n:NOTE: \n:END:\n")
+	   "* TODO %? :read:\n:PROPERTIES:\n:TYPE: \n:GENRE: \n:YEAR: \n:AUTHOR: \n:NOTE: \n:END:\n")
 	  ("c" "Code" entry (file ORG_CAPTURE)
 	   "* TODO %? :code:\n:PROPERTIES:\n:CREATED: %U\n:LANGUAGE: \n:LIBRARY: \n:NOTE: \n:END:\n")
 	  ))
