@@ -3,9 +3,13 @@
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c c") 'org-capture)
+  ;; defines today's date as a variable
+  (setq today-scheduled (format-time-string "<%Y-%m-%d %a>"))
+  (setq handleliste-agenda-content (concat "* TODO %? "(format ":handle:\nSCHEDULED: %s\n:PROPERTIES:\n:ITEMS: \n:CREATED:" today-scheduled) "%U\n:END:\n"))
+  (setq todo-agenda-content (concat "* TODO %? "(format "\nSCHEDULED: %s" today-scheduled)))
   (setq org-capture-templates
-	'(("t" "TODO" entry (file ORG_CAPTURE)
-	   "* TODO %?")
+	`(("t" "TODO" entry (file ORG_CAPTURE)
+	   ,todo-agenda-content)
 	  ("b" "Bookmark" entry (file ORG_BOOKMARKS)
 	   "* %? :bookmark:\n:PROPERTIES:\n:CREATED: %U\n:DOMAIN: \n:NOTE: \n:END:\n")
 	  ("d" "Diary" entry (file+olp+datetree ORG_DIARY)
@@ -15,7 +19,7 @@
 	  ("o" "Ordliste" entry (file ORG_ORDLISTE)
 	   "* %?")
 	  ("h" "Handleliste" entry (file ORG_HANDLELISTE)
-	   "* TODO %? :handle: \n:PROPERTIES:\n:ITEMS: \n:CREATED: %U\n:END:\n")
+	   ,handleliste-agenda-content)
 	  ("k" "Kontaktinfo" entry (file ORG_ROLODEX)
 	   "* %? :contact:\n:PROPERTIES:\n:EMAIL: \n:TELEPHONE: \n:ORGANIZATION: \n:NOTE: \n:END:\n")
 	  ("w" "Watch" entry (file ORG_CAPTURE)
@@ -25,22 +29,22 @@
 	  ("c" "Code" entry (file ORG_CAPTURE)
 	   "* TODO %? :code:\n:PROPERTIES:\n:CREATED: %U\n:LANGUAGE: \n:LIBRARY: \n:NOTE: \n:END:\n")
 	  ))
-  ;; Org todo workflow
-  (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
-  ;; custom command
-  (setq org-agenda-custom-commands
-	'(("w" "Watch TODOS"
-	   tags "+watch+TODO=\"TODO\"")
-	  ("r" "Read TODOS"
-	   tags "+read+TODO=\"TODO\"")
-	  ("c" "Code TODOS"
-	   tags "+code+TODO=\"TODO\"")))
-  ;; custom function
-  (defun open-org-agenda-for-current-week ()
-    (interactive)
-    (let ((current-prefix-arg '(4)))
-      (call-interactively 'org-agenda-list))
-    (message "Opening agenda for current week"))
+    ;; Org todo workflow
+    (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
+    ;; custom command
+    (setq org-agenda-custom-commands
+	  '(("w" "Watch TODOS"
+	     tags "+watch+TODO=\"TODO\"")
+	    ("r" "Read TODOS"
+	     tags "+read+TODO=\"TODO\"")
+	    ("c" "Code TODOS"
+	     tags "+code+TODO=\"TODO\"")))
+    ;; custom function
+    (defun open-org-agenda-for-current-week ()
+      (interactive)
+      (let ((current-prefix-arg '(4)))
+	(call-interactively 'org-agenda-list))
+      (message "Opening agenda for current week"))
 #+end_src
 * Daily Todos
 #+begin_src emacs-lisp
@@ -59,8 +63,6 @@
 	(insert-file-contents file)
 	(string= (buffer-string) string)))
     ;; text and variables
-    ;; defines today's date as a variable
-    (setq today-scheduled (format-time-string "<%Y-%m-%d %a>"))
     (setq today-var (format-time-string "%Y-%m-%d"))
     (let ((daily-todo1 (format "* TODO Stemple inn\nSCHEDULED: %s\n" today-scheduled))
 	  (daily-todo2 (format "* TODO git pull\nSCHEDULED: %s\n" today-scheduled))
