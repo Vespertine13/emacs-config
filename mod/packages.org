@@ -10,7 +10,6 @@
 (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
 (add-to-list 'package-archives '("gnu" . "https://elpa.gnu.org/packages/") t)
 #+end_src
-
 * list of my packages
 #+begin_src emacs-lisp
   (setq package-list
@@ -29,6 +28,8 @@
       ef-themes                        ;; beautiful themes
       deft                             ;; file manager
       zetteldeft                       ;; zettelkast
+      org-roam                         ;; zettelkast II
+      org-roam-ui                      ;; org-roam visualization
       )
     )
 #+end_src
