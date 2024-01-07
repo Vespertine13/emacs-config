@@ -30,7 +30,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ** Loading Modules
 #+begin_src emacs-lisp
   ;; set expected modules
-  (setq my-init-modules '("Dashboard" "Keybinding" "Experimental" "Emojis" "Pandoc" "Themes" "Python" "R" "Agenda" "Zetteldeft" "Teos" "Packages" "Constants" "Elfeed" "Windows_specific"))
+  (setq my-init-modules '("Dashboard" "Keybinding" "Experimental" "Emojis" "Pandoc" "Themes" "Python" "R" "Agenda" "Zettelkasten" "Teos" "Packages" "Constants" "Elfeed" "Windows_specific"))
   ;; make a list of loaded modules
   (setq loaded-modules ())
   ;; loading constants 
@@ -39,8 +39,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/packages.org"))
   ;; loading teos
   (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/teos.org"))
-  ;; loading zetteldeft
-  (ignore-errors (org-babel-load-file "~/emacs-config/mod/zetteldeft.org"))
+  ;; loading zettelkasten
+  (ignore-errors (org-babel-load-file "~/emacs-config/mod/zettelkasten.org"))
   ;; loading agenda
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/agenda.org"))
   ;; loading R
@@ -379,10 +379,8 @@ A function that can be used to replace æøå with proper encoded æøå.
     (set-hourly-theme))
   (cd "~/")
   (open-scratch)
-  (when (member "Zetteldeft" loaded-modules)
+  (when (member "Zettelkasten" loaded-modules)
       (deft))
-  (when (string= (system-name) SYSTEM_HOME)
-    (toggle-frame-solidity))
   (dashboard-open)
 #+end_src
 

@@ -1,0 +1,143 @@
+#+STARTUP: content
+* Naming convention
+foldernames
+functions
+variable names
+
+Things to consider:
+- Renaming org roam folders later is hard
+
+for home, DnD and Teos
+(aka h, j, u)
+
+** folders
+home
+dnd
+teos
+home_zd
+dnd_zd
+teos_zd
+
+** functions
+roam-home
+roam-dnd
+roam-teos
+zetteldeft-home
+zetteldeft-dnd
+zetteldeft-teos
+
+** constants
+FOLDER_ROAM_HOME
+FOLDER_ROAM_DND
+FOLDER_ROAM_TEOS
+FOLDER_ZETTELDEFT_HOME
+FOLDER_ZETTELDEFT_DND
+FOLDER_ZETTELDEFT_TEOS
+
+* Deft and Zetteldeft
+** General Settings
+#+begin_src emacs-lisp
+  (require 'deft)
+  (setq deft-directory FOLDER_ROAM_HOME)
+  (setq zetteldeft-home-id "20240107102607")
+  (setq deft-extensions '("org"))
+  (setq deft-default-extension "org")
+  (setq deft-text-mode 'org-mode)
+  (setq deft-use-filename-as-title t)
+  (setq deft-use-filter-string-for-filename t)
+  (setq deft-auto-save-interval 0)
+  (setq deft-file-limit 25)
+  (use-package zetteldeft)
+#+end_src
+** Functions
+#+begin_src emacs-lisp
+  (defun zetteldeft-home ()
+    (interactive)
+    (setq deft-directory FOLDER_ZETTELDEFT_HOME)
+    (deft-refresh)
+    (setq zetteldeft-home-id "2023-01-24-1155")
+    (zetteldeft-go-home)
+    )
+  (defun zetteldeft-teos ()
+    (interactive)
+    (setq deft-directory FOLDER_ZETTELDEFT_TEOS)
+    (deft-refresh)
+    (setq zetteldeft-home-id "2023-01-24-1156")
+    (zetteldeft-go-home)
+    )
+  (defun zetteldeft-dnd ()
+    (interactive)
+    (setq deft-directory FOLDER_ZETTELDEFT_DND)
+    (deft-refresh)
+    (setq zetteldeft-home-id "2023-10-10-1409")
+    (zetteldeft-go-home)
+    )
+  ;; zetteldeft wander lets you access a random note
+  (defun zetteldeft-wander ()
+    "Wander through `zetteldeft' notes.
+    Search `deft' for a random `zetteldeft' id."
+    (interactive)
+    (switch-to-buffer deft-buffer)
+    (let ((all-files (deft-find-all-files-no-prefix)))
+      (deft-filter
+	(zetteldeft--lift-id
+	 (nth (random (length all-files))
+	      all-files)))))
+#+end_src
+* Org-Roam
+** General Settings
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory FOLDER_ROAM_HOME)
+    (org-roam-completion-everywhere t)
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+	   ("C-c n f" . org-roam-node-find)
+	   ("C-c n i" . org-roam-node-insert)
+	   :map org-mode-map
+	   ("C-M-i"    . completion-at-point))
+    :config
+    (org-roam-setup))
+#+end_src
+** Functions
+#+begin_src emacs-lisp
+  (defun roam-home ()
+    (interactive)
+    (setq deft-directory FOLDER_ROAM_HOME)
+    (setq org-roam-directory FOLDER_ROAM_HOME)
+    (deft-refresh)
+    (setq zetteldeft-home-id "20240107102607")
+    (zetteldeft-go-home)
+    )
+
+  (defun roam-dnd ()
+    (interactive)
+    (setq deft-directory FOLDER_ROAM_DND)
+    (setq org-roam-directory FOLDER_ROAM_DND)
+    (deft-refresh)
+    (setq zetteldeft-home-id "20240107102607")
+    (zetteldeft-go-home)
+    )
+
+  (defun roam-teos ()
+    (interactive)
+    (setq deft-directory FOLDER_ROAM_TEOS)
+    (setq org-roam-directory FOLDER_ROAM_TEOS)
+    (deft-refresh)
+    (setq zetteldeft-home-id "20240107102607")
+    (zetteldeft-go-home)
+    )
+
+#+end_src
+** Org Roam Ui
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c n u") 'org-roam-ui-mode)
+#+end_src
+* loaded-modules
+#+begin_src emacs-lisp
+  (add-to-list 'loaded-modules "Zettelkasten")
+#+end_src
+
