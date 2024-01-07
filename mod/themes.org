@@ -16,18 +16,18 @@
     (message "Theme '%s' set" theme))
   ;; interactive version
   (defun select-theme (theme)
-    (interactive (list (completing-read "Theme: " theme-list)))
-    (unless (member theme theme-list)
+    (interactive (list (completing-read "Theme: " my-theme-list)))
+    (unless (member theme my-theme-list)
       (error "Theme is not in list!"))
     (set-theme (intern theme)))
   ;; interactive version of set-theme
   (defun theme-select (theme)
-    (interactive (list (completing-read "Theme: " theme-list)))
-    (unless (member theme theme-list)
+    (interactive (list (completing-read "Theme: " my-theme-list)))
+    (unless (member theme my-theme-list)
       (error "Theme not in list!"))
     (set-theme (intern theme)))
   ;; List of installed themes
-  (defvar theme-list
+  (defvar my-theme-list
     '("base16-greenscreen"
       "dream"
       "shaman"
@@ -36,30 +36,6 @@
       "birds-of-paradise-plus"
       "bharadwaj-slate"
       "misterioso"
-      "ef-autumn"
-      "ef-cyprus"
-      "ef-day"
-      "ef-deuteranopia-light"
-      "ef-duo-light"
-      "ef-elea-light"
-      "ef-frost"
-      "ef-kassio"
-      "ef-light"
-      "ef-spring"
-      "ef-summer"
-      "ef-trio-light"
-      "ef-tritanopia-light"
-      "ef-bio"
-      "ef-cherie"
-      "ef-dark"
-      "ef-deuteranopia-dark"
-      "ef-duo-dark"
-      "ef-elea-dark"
-      "ef-night"
-      "ef-symbiosis"
-      "ef-trio-dark"
-      "ef-tritanopia-dark"
-      "ef-winter"
       "orange_wedge"
       "bubblegum"))
   (defvar current-theme-idx 0
@@ -67,7 +43,7 @@
   (defun cycle-themes ()
     "Toggle between different themes"
     (interactive)
-    (setq current-theme-idx (mod (1+ current-theme-idx) 7))
+    (setq current-theme-idx (mod (1+ current-theme-idx) 8))
     (cond ((= current-theme-idx 0) (set-theme 'base16-greenscreen))
       ((= current-theme-idx 1) (set-theme 'dream))
       ((= current-theme-idx 2) (set-theme 'shaman))
@@ -75,18 +51,18 @@
       ((= current-theme-idx 4) (set-theme 'subtle-blue))
       ((= current-theme-idx 5) (set-theme 'birds-of-paradise-plus))
       ((= current-theme-idx 6) (set-theme 'misterioso))
-      ((= current-theme-idx 6) (set-theme 'bharadwaj-slate))))
+      ((= current-theme-idx 7) (set-theme 'bharadwaj-slate))))
 #+end_src
-* Hourly themes
+* Day/Night Themes
 #+begin_src emacs-lisp
   (defun set-day-night-theme ()
     (interactive)
     (setq current-hour (string-to-number (format-time-string "%H" (current-time))))
     (cond
      ;; day
-     ((and (>= current-hour 6) (< current-hour 18)) (set-theme 'ef-summer))
+     ((and (>= current-hour 6) (< current-hour 18)) (set-theme 'silkworm))
      ;; Afternoon
-     ((and (>= current-hour 18) (< current-hour 6)) (set-theme 'ef-tritanopia-dark))))
+     ((or (>= current-hour 18) (< current-hour 6)) (set-theme 'birds-of-paradise-plus))))
 #+end_src
 * Loaded-modules
 #+begin_src emacs-lisp
