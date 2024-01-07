@@ -120,7 +120,7 @@ FOLDER_ZETTELDEFT_TEOS
     (setq org-roam-directory FOLDER_ROAM_DND)
     (deft-refresh)
     (org-roam-update-org-id-locations)
-    (setq zetteldeft-home-id "20240107102607")
+    (setq zetteldeft-home-id "20240107152712")
     (zetteldeft-go-home)
     )
 
