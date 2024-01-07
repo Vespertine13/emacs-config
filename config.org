@@ -376,7 +376,7 @@ A function that can be used to replace æøå with proper encoded æøå.
 *** Startup
 #+begin_src emacs-lisp
   (when (member "Themes" loaded-modules)
-    (set-hourly-theme))
+    (set-day-night-theme))
   (cd "~/")
   (open-scratch)
   (when (member "Zettelkasten" loaded-modules)
