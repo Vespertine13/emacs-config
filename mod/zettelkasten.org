@@ -1,35 +1,10 @@
 #+STARTUP: content
-* Naming convention
-foldernames
-functions
-variable names
-
-Things to consider:
-- Renaming org roam folders later is hard
-
-for home, DnD and Teos
-(aka h, j, u)
-
-** folders
-home
-home_zd
-teos
-
-** functions
-roam-home (TRENGS IKKE LENGRE)
-zetteldeft-home
-zetteldeft-teos
-
-** constants
-FOLDER_ROAM
-FOLDER_ZETTELDEFT_HOME
-FOLDER_ZETTELDEFT_TEOS
+An unholy combination of Org Roam, Deft and Zettelkasten.
+Please forgive me gods of emacs.
 * Deft and Zetteldeft
 ** General Settings
 #+begin_src emacs-lisp
   (require 'deft)
-  (setq deft-directory FOLDER_ROAM)
-  (setq zetteldeft-home-id "20240107102607")
   (setq deft-extensions '("org"))
   (setq deft-default-extension "org")
   (setq deft-text-mode 'org-mode)
@@ -41,13 +16,6 @@ FOLDER_ZETTELDEFT_TEOS
 #+end_src
 ** Functions
 #+begin_src emacs-lisp
-  (defun zetteldeft-home ()
-    (interactive)
-    (setq deft-directory FOLDER_ZETTELDEFT_HOME)
-    (deft-refresh)
-    (setq zetteldeft-home-id "2023-01-24-1155")
-    (zetteldeft-go-home)
-    )
   (defun zetteldeft-teos ()
     (interactive)
     (setq deft-directory FOLDER_ZETTELDEFT_TEOS)
@@ -80,6 +48,7 @@ FOLDER_ZETTELDEFT_TEOS
     :bind (("C-c n l" . org-roam-buffer-toggle)
 	   ("C-c n f" . org-roam-node-find)
 	   ("C-c n i" . org-roam-node-insert)
+	   ("C-c n c" . org-id-get-create)
 	   :map org-mode-map
 	   ("C-M-i"    . completion-at-point))
     :config

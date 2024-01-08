@@ -59,12 +59,6 @@
   (global-set-key (kbd "C-M-æ") 'occur)
 ;;  (global-set-key (kbd "C-M-å") 'my-func)
 #+end_src
-* Zetteldeft
-I am phasing out zetteldeft, but it is nice to keep old notes handy.
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-c M-h") 'zetteldeft-home)
-#+end_src
-
 * Misc
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-.") 'other-window)

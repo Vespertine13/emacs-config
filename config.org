@@ -380,7 +380,8 @@ A function that can be used to replace æøå with proper encoded æøå.
   (cd "~/")
   (open-scratch)
   (when (member "Zettelkasten" loaded-modules)
-      (deft))
+      (deft)
+      (roam-home))
   (dashboard-open)
 #+end_src
 
