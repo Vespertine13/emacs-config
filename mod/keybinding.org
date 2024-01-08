@@ -23,18 +23,18 @@
   (global-set-key (kbd "C-c g") 'goto-line)
   (global-set-key (kbd "C-c h") 'roam-home)
   (global-set-key (kbd "C-c i") 'org-insert-link)
-  (global-set-key (kbd "C-c j") 'roam-teos)
+  (global-set-key (kbd "C-c j") 'zetteldeft-teos)
   (global-set-key (kbd "C-c k") 'delete-current-file)
   (global-set-key (kbd "C-c l") 'sort-lines)
   (global-set-key (kbd "C-c m") 'mpv-play-album)
-;;  (global-set-key (kbd "C-c n") 'nyan-mode) ;; n is for Org Roam
+;; C-c n is for Org Roam related keybindings
   (global-set-key (kbd "C-c o") 'write-current-time)
   (global-set-key (kbd "C-c p") 'write-current-path)
   (global-set-key (kbd "C-c q") 'query-replace)
   (global-set-key (kbd "C-c r") 'visual-line-mode)
   (global-set-key (kbd "C-c s") 'shell)
   (global-set-key (kbd "C-c t") 'org-timer-set-timer)
-  (global-set-key (kbd "C-c u") 'roam-dnd)
+;;  (global-set-key (kbd "C-c u") 'xxxxxxxxxx)
   (global-set-key (kbd "C-c v") 'run-parla)
   (global-set-key (kbd "C-c w") 'zetteldeft-wander)
   (global-set-key (kbd "C-c x") 'cycle-themes)
@@ -63,8 +63,6 @@
 I am phasing out zetteldeft, but it is nice to keep old notes handy.
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c M-h") 'zetteldeft-home)
-  (global-set-key (kbd "C-c M-j") 'zetteldeft-teos)
-  (global-set-key (kbd "C-c M-u") 'zetteldeft-dnd)
 #+end_src
 
 * Misc
