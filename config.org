@@ -240,6 +240,8 @@ A function that can be used to replace æøå with proper encoded æøå.
     (interactive)
     (save-excursion
       (goto-char (point-min))
+      (while (re-search-forward "[\x3FFF92]" nil t)
+	(replace-match "'" nil nil))
       (while (re-search-forward "[\x3FFFE5]" nil t)
 	(replace-match "å" nil nil))
       (goto-char (point-min)) ; Reset to the beginning of the buffer
