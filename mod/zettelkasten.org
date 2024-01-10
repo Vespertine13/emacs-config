@@ -7,6 +7,7 @@ Please forgive me gods of emacs.
   (require 'deft)
   (setq deft-extensions '("org"))
   (setq deft-default-extension "org")
+  (setq deft-directory FOLDER_ROAM)
   (setq deft-text-mode 'org-mode)
   (setq deft-use-filename-as-title t)
   (setq deft-use-filter-string-for-filename t)
