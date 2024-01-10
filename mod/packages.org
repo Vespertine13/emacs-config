@@ -12,40 +12,42 @@
 #+end_src
 * list of my packages
 #+begin_src emacs-lisp
-  (setq package-list
-    '(ess                              ;; ESS
-      anaconda-mode                    ;; anaconda mode for python
-      company-anaconda                 ;; company anaconda for python
-      flycheck                         ;; flycheck for coding
-      ein                              ;; jupyterlab stuff
-      undo-tree                        ;; advanced undo
-      emojify                          ;; emojis
-      mastodon                         ;; mastodon social media
-      elfeed                           ;; can be used to read RSS
-      nyan-mode                        ;; yes.
-      rainbow-mode                     ;; shows colours
-      dashboard                        ;; startup dashboard
-      deft                             ;; file manager
-      zetteldeft                       ;; zettelkast
-      org-roam                         ;; zettelkast II
-      org-roam-ui                      ;; org-roam visualization
+    (setq package-list
+      '(use-package
+	ess                              ;; ESS
+	anaconda-mode                    ;; anaconda mode for python
+	company-anaconda                 ;; company anaconda for python
+	flycheck                         ;; flycheck for coding
+	ein                              ;; jupyterlab stuff
+	undo-tree                        ;; advanced undo
+	emojify                          ;; emojis
+	mastodon                         ;; mastodon social media
+	elfeed                           ;; can be used to read RSS
+	nyan-mode                        ;; yes.
+	rainbow-mode                     ;; shows colours
+	dashboard                        ;; startup dashboard
+	deft                             ;; file manager
+	zetteldeft                       ;; zettelkast
+	org-roam                         ;; zettelkast II
+	org-roam-ui                      ;; org-roam visualization
+	)
       )
-    )
 #+end_src
 
 * activate and install
 #+begin_src emacs-lisp
-  ;; activate all the packages
-  (package-initialize)
+    ;; activate all the packages
+    (package-initialize)
 
-  ;; fetch the list of packages available 
-  (unless package-archive-contents
-    (package-refresh-contents))
+    ;; fetch the list of packages available 
+    (unless package-archive-contents
+      (package-refresh-contents))
 
-  ;; install the missing packages
-  (dolist (package package-list)
-    (unless (package-installed-p package)
-      (package-install package)))
+    ;; install the missing packages
+    (dolist (package package-list)
+      (unless (package-installed-p package)
+	(package-install package)))
+  (require 'use-package)
 #+end_src
 
 * loaded-modules
