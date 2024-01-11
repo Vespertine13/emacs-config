@@ -15,8 +15,6 @@
     (setq package-list
       '(use-package
 	ess                              ;; ESS
-	anaconda-mode                    ;; anaconda mode for python
-	company-anaconda                 ;; company anaconda for python
 	flycheck                         ;; flycheck for coding
 	ein                              ;; jupyterlab stuff
 	undo-tree                        ;; advanced undo

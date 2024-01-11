@@ -9,20 +9,8 @@
   (add-hook 'python-mode-hook '(lambda ()
 				 (setq python-indent 4)))
   (setq python-indent-guess-indent-offset nil)
-  (defun python-send-line ()
-    "Send the current line or marked region to a Python shell."
-    (interactive)
-    (if (use-region-p)
-	(python-shell-send-region (region-beginning) (region-end))
-      (let ((line-start (line-beginning-position))
-	    (line-end (line-end-position)))
-	(push-mark line-start t t)
-	(goto-char line-end)
-	(python-shell-send-region line-start line-end))))
-  ;; setter send line til C-return
-  (add-hook 'python-mode-hook
-	    (lambda ()
-	      (define-key python-mode-map (kbd "<C-return>") 'python-send-line)))
+  ;; setting standard virtual environment
+  (pyvenv-activate "~/mega/pydir/main_venv/")
 #+end_src
 * org-babel
 #+begin_src emacs-lisp

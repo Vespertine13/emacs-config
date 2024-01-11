@@ -220,13 +220,25 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 *** Fonts
 #+begin_src emacs-lisp
   ;; fonts need to be manually installed
-  (defun font-timesnewroman ()
-    (interactive)
-    (setq buffer-face-mode-face '(:family "TimesNewRoman"))
-    (buffer-face-mode))
   (defun font-inconsolata ()
     (interactive)
     (setq buffer-face-mode-face '(:family "Inconsolata")) ;; standard font find it in ~/mega/fonts
+    (buffer-face-mode))
+  (defun font-courier ()
+    (interactive)
+    (setq buffer-face-mode-face '(:family "Courier"))
+    (buffer-face-mode))
+  (defun font-iosevka ()
+    (interactive)
+    (setq buffer-face-mode-face '(:family "Iosevka"))
+    (buffer-face-mode))
+  (defun font-robotomono ()
+    (interactive)
+    (setq buffer-face-mode-face '(:family "Roboto Mono"))
+    (buffer-face-mode))
+  (defun font-vcrosdmono()
+    (interactive)
+    (setq buffer-face-mode-face '(:family "VCR OSD Mono"))
     (buffer-face-mode))
 #+end_src
 *** paste fix
