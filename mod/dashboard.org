@@ -66,10 +66,10 @@ Yes, this not make much sense.
 		   "Keybindings")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
-			     (find-file "~/parla/training.R"))
+			     (find-file "~/venn/run.R"))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
-		   "Parla")
+		   "Venn")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
 			     (org-agenda-list))
