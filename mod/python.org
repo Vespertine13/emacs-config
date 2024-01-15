@@ -3,8 +3,8 @@
 #+begin_src emacs-lisp
   ;; set interpreter
   (require 'python)
-  (when (eq system-type 'windows-nt)
-    (setq python-shell-interpreter EXE_PYTHON))
+;;  (when (eq system-type 'windows-nt)
+;;    (setq python-shell-interpreter EXE_PYTHON))
   ;; set standard indent
   (add-hook 'python-mode-hook '(lambda ()
 				 (setq python-indent 4)))

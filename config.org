@@ -30,7 +30,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ** Loading Modules
 #+begin_src emacs-lisp
   ;; set expected modules
-  (setq my-init-modules '("Dashboard" "Keybinding" "Experimental" "Emojis" "Pandoc" "Themes" "Python" "R" "Agenda" "Zettelkasten" "Teos" "Packages" "Constants" "Elfeed"))
+  (setq my-init-modules '("Dashboard" "Keybinding" "Experimental" "Emojis" "Pandoc" "Themes" "Python" "R" "Agenda" "Zettelkasten" "Teos" "Packages" "Constants" "Elfeed", "Company"))
   ;; make a list of loaded modules
   (setq loaded-modules ())
   ;; loading constants 
@@ -43,6 +43,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/zettelkasten.org"))
   ;; loading agenda
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/agenda.org"))
+  ;; loading company
+  (ignore-errors (org-babel-load-file "~/emacs-config/mod/company.org"))
   ;; loading R
   (ignore-errors (org-babel-load-file "~/emacs-config/mod/R.org"))
   ;; loading python

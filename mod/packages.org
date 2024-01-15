@@ -12,24 +12,25 @@
 #+end_src
 * list of my packages
 #+begin_src emacs-lisp
-    (setq package-list
-      '(use-package
-	ess                              ;; ESS
-	flycheck                         ;; flycheck for coding
-	ein                              ;; jupyterlab stuff
-	undo-tree                        ;; advanced undo
-	emojify                          ;; emojis
-	mastodon                         ;; mastodon social media
-	elfeed                           ;; can be used to read RSS
-	nyan-mode                        ;; yes.
-	rainbow-mode                     ;; shows colours
-	dashboard                        ;; startup dashboard
-	deft                             ;; file manager
-	zetteldeft                       ;; zettelkast
-	org-roam                         ;; zettelkast II
-	org-roam-ui                      ;; org-roam visualization
-	)
+  (setq package-list
+    '(use-package
+      ess                              ;; ESS
+      flycheck                         ;; flycheck for coding
+      ein                              ;; jupyterlab stuff
+      undo-tree                        ;; advanced undo
+      emojify                          ;; emojis
+      mastodon                         ;; mastodon social media
+      elfeed                           ;; can be used to read RSS
+      nyan-mode                        ;; yes.
+      rainbow-mode                     ;; shows colours
+      dashboard                        ;; startup dashboard
+      deft                             ;; file manager
+      zetteldeft                       ;; zettelkast
+      org-roam                         ;; zettelkast II
+      org-roam-ui                      ;; org-roam visualization
+      company                          ;; auto-complete any
       )
+    )
 #+end_src
 
 * activate and install
