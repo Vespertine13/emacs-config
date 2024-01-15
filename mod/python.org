@@ -10,7 +10,7 @@
 				 (setq python-indent 4)))
   (setq python-indent-guess-indent-offset nil)
   ;; setting standard virtual environment
-  (pyvenv-activate "~/mega/pydir/main_venv/")
+  (pyvenv-activate FOLDER_PYVENV)
 #+end_src
 * org-babel
 #+begin_src emacs-lisp
