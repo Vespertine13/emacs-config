@@ -22,10 +22,10 @@
   (global-set-key (kbd "C-c f") 'font-inconsolata)
   (global-set-key (kbd "C-c g") 'goto-line)
   (global-set-key (kbd "C-c h") 'roam-home)
-  (global-set-key (kbd "C-c i") 'org-insert-link)
+  (global-set-key (kbd "C-c i") 'ispell)
   (global-set-key (kbd "C-c j") 'zetteldeft-teos)
   (global-set-key (kbd "C-c k") 'delete-current-file)
-  (global-set-key (kbd "C-c l") 'sort-lines)
+  (global-set-key (kbd "C-c l") 'org-insert-link)
   (global-set-key (kbd "C-c m") 'mpv-play-album)
 ;; C-c n is for Org Roam related keybindings
   (global-set-key (kbd "C-c o") 'write-current-time)
@@ -34,7 +34,7 @@
   (global-set-key (kbd "C-c r") 'visual-line-mode)
   (global-set-key (kbd "C-c s") 'shell)
   (global-set-key (kbd "C-c t") 'org-timer-set-timer)
-;;  (global-set-key (kbd "C-c u") 'xxxxxxxxxx)
+  (global-set-key (kbd "C-c u") 'flyspell-mode) ;; underline
   (global-set-key (kbd "C-c v") 'run-parla)
   (global-set-key (kbd "C-c w") 'zetteldeft-wander)
   (global-set-key (kbd "C-c x") 'cycle-themes)
