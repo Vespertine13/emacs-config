@@ -23,7 +23,7 @@
   (global-set-key (kbd "C-c g") 'goto-line)
   (global-set-key (kbd "C-c h") 'roam-home)
   (global-set-key (kbd "C-c i") 'ispell)
-  (global-set-key (kbd "C-c j") 'zetteldeft-teos)
+;;  (global-set-key (kbd "C-c j") 'zetteldeft-teos)
   (global-set-key (kbd "C-c k") 'delete-current-file)
   (global-set-key (kbd "C-c l") 'org-insert-link)
   (global-set-key (kbd "C-c m") 'mpv-play-album)
