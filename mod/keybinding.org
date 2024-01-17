@@ -73,8 +73,8 @@ Overwrite some of the zetteldeft keybinding with new ones suiting org-roam
     (global-set-key (kbd "C-c d l")  'org-roam-buffer-toggle)
     (global-set-key (kbd "C-c d f")  'org-roam-node-find)
     (global-set-key (kbd "C-c d i")  'org-roam-node-insert)
+    (global-set-key (kbd "C-c d u") 'org-roam-ui-mode)
     (global-set-key (kbd "C-c d c")  'org-id-get-create))
-
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp

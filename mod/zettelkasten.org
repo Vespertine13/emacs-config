@@ -67,10 +67,6 @@ Please forgive me gods of emacs.
     (zetteldeft-go-home)
     )
 #+end_src
-** Org Roam Ui
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-c n u") 'org-roam-ui-mode)
-#+end_src
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "Zettelkasten")
