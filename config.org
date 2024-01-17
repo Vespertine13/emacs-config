@@ -78,7 +78,10 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (setq sentence-end-double-space nil)
   ;; when something is selected it will now be deleted if typed over
   (delete-selection-mode t)
-  ;; flyspell
+#+end_src
+**** Flyspell
+#+begin_src emacs-lisp
+  (setq ispell-program-name (executable-find "hunspell"))
   (add-hook 'text-mode-hook 'flyspell-mode)
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
   (eval-after-load "flyspell"
