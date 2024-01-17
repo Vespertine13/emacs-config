@@ -23,11 +23,11 @@
   (global-set-key (kbd "C-c g") 'goto-line)
   (global-set-key (kbd "C-c h") 'roam-home)
   (global-set-key (kbd "C-c i") 'ispell)
-;;  (global-set-key (kbd "C-c j") 'zetteldeft-teos)
+;;  (global-set-key (kbd "C-c j") 'xxxxx)
   (global-set-key (kbd "C-c k") 'delete-current-file)
   (global-set-key (kbd "C-c l") 'org-insert-link)
-  (global-set-key (kbd "C-c m") 'mpv-play-album)
-;; C-c n is for Org Roam related keybindings
+;;  (global-set-key (kbd "C-c m") 'xxxxx)
+;;  (global-set-key (kbd "C-c n") 'xxxxx)
   (global-set-key (kbd "C-c o") 'write-current-time)
   (global-set-key (kbd "C-c p") 'write-current-path)
   (global-set-key (kbd "C-c q") 'query-replace)
@@ -65,6 +65,16 @@
   (global-set-key (kbd "C-:") 'other-frame)
   (global-set-key "\M- " 'hippie-expand)
   (global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace) ;; new C-backspace
+#+end_src
+** Zettelkasten extra
+Overwrite some of the zetteldeft keybinding with new ones suiting org-roam
+#+begin_src emacs-lisp
+  (when (member "zettelkasten" loaded-modules)
+    (global-set-key (kbd "C-c d l")  'org-roam-buffer-toggle)
+    (global-set-key (kbd "C-c d f")  'org-roam-node-find)
+    (global-set-key (kbd "C-c d i")  'org-roam-node-insert)
+    (global-set-key (kbd "C-c d c")  'org-id-get-create))
+
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp

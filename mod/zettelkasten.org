@@ -52,21 +52,9 @@ Please forgive me gods of emacs.
 	:if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n")
 	:unnarrowed t)
        ))
-    :bind (("C-c n l" . org-roam-buffer-toggle)
-	   ("C-c n f" . org-roam-node-find)
-	   ("C-c n i" . org-roam-node-insert)
-	   ("C-c n c" . org-id-get-create)
-	   ;; the following are duplicates from zetteldeft
-	   ("C-c n s" . zetteldeft-search-at-point)
-	   ("C-c n d" . zetteldeft-deft-new-search)
-	   ("C-c n r" . deft-refresh)
-	   ("C-c n h" . zetteldeft-go-home)
-	   ("C-c n x" . zetteldeft-count-words)
-	   :map org-mode-map)
     :config
     (org-roam-setup))
 #+end_src
-
 ** Functions
 #+begin_src emacs-lisp
   (defun roam-home ()
