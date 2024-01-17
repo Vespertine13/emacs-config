@@ -47,9 +47,21 @@ Please forgive me gods of emacs.
     (org-roam-directory FOLDER_ROAM)
     (org-roam-capture-templates
      '(
-       ("d" "default" plain
+       ("c" "common" plain
 	"%?"
 	:if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n")
+	:unnarrowed t)
+       ("o" "OUS" plain
+	"%?"
+	:if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n#OUS\n[[id:a40c3cda-6e61-40f0-b53d-fea162219825][OUS]]\n")
+	:unnarrowed t)
+       ("t" "Teos" plain
+	"%?"
+	:if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n#Teos\n[[id:a9eea227-1915-4c38-ae40-65b01a33328c][Teos]]\n")
+	:unnarrowed t)
+       ("d" "DnD" plain
+	"%?"
+	:if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n#DnD\n[[id:284c9904-1342-4361-97be-fd688ce23514][DnD]]\n")
 	:unnarrowed t)
        ))
     :config
@@ -67,6 +79,22 @@ Please forgive me gods of emacs.
     (zetteldeft-go-home)
     )
 #+end_src
+** Keybindings
+Overwrite some of the zetteldeft keybinding with new ones suiting org-roam
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c d l")  'org-roam-buffer-toggle)
+  (global-set-key (kbd "C-c d f")  'org-roam-node-find)
+  (global-set-key (kbd "C-c d i")  'org-roam-node-insert)
+  (global-set-key (kbd "C-c d u") 'org-roam-ui-mode)
+  (global-set-key (kbd "C-c d c")  'org-id-get-create)
+  (global-set-key (kbd "C-c d d")  'zetteldeft-new-search)
+  (global-set-key (kbd "C-c d h")  'zetteldeft-go-home)
+  (global-set-key (kbd "C-c d r")  'deft-refresh)
+  (global-set-key (kbd "C-c d s")  'zetteldeft-search-at-point)
+  (global-set-key (kbd "C-c d t")  'zetteldeft-tag-buffer)
+  (global-set-key (kbd "C-c d x")  'zetteldeft-count-words)
+#+end_src
+
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "Zettelkasten")

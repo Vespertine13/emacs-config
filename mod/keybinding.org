@@ -17,7 +17,7 @@
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c b") 'checkbox-all) ;; Clear checkboxes
   (global-set-key (kbd "C-c c") 'org-capture)
-  (zetteldeft-set-classic-keybindings) ;; d is for zetteldeft
+;;  (global-set-key (kbd "C-c d") 'xxxxx) ;; d is for zettelkasten and deft
 ;;  (global-set-key (kbd "C-c e") 'xxxxx)
   (global-set-key (kbd "C-c f") 'font-inconsolata)
 ;;  (global-set-key (kbd "C-c g") 'xxxxx)
@@ -65,16 +65,6 @@
   (global-set-key (kbd "C-:") 'other-frame)
   (global-set-key "\M- " 'hippie-expand)
   (global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace) ;; new C-backspace
-#+end_src
-** Zettelkasten extra
-Overwrite some of the zetteldeft keybinding with new ones suiting org-roam
-#+begin_src emacs-lisp
-  (when (member "Zettelkasten" loaded-modules)
-    (global-set-key (kbd "C-c d l")  'org-roam-buffer-toggle)
-    (global-set-key (kbd "C-c d f")  'org-roam-node-find)
-    (global-set-key (kbd "C-c d i")  'org-roam-node-insert)
-    (global-set-key (kbd "C-c d u") 'org-roam-ui-mode)
-    (global-set-key (kbd "C-c d c")  'org-id-get-create))
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
