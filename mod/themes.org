@@ -1,8 +1,12 @@
 #+TITLE: Themes
 #+STARTUP: overview
+* Themes folders
+#+begin_src emacs-lisp
+  (add-to-list 'custom-theme-load-path FOLDER_THEMES)
+  (add-to-list 'custom-theme-load-path FOLDER_THEMES_II)
+#+end_src
 * Theme Functions
 #+begin_src emacs-lisp
-  (add-to-list 'custom-theme-load-path FOLDER_THEMES) ;; set themes dir
   (defun disable-all-themes ()
     "Disable all currently active themes."
     (interactive)
@@ -14,44 +18,23 @@
     (load-theme theme t)
     (set-frame-font "Inconsolata 16" nil t)
     (message "Theme '%s' set" theme))
-  ;; interactive version
-  (defun select-theme (theme)
-    (interactive (list (completing-read "Theme: " my-theme-list)))
-    (unless (member theme my-theme-list)
-      (error "Theme is not in list!"))
-    (set-theme (intern theme)))
   ;; interactive version of set-theme
-  (defun theme-select (theme)
-    (interactive (list (completing-read "Theme: " my-theme-list)))
-    (unless (member theme my-theme-list)
+  (defun select-theme (theme)
+    (interactive (list (completing-read "Theme: " (mapcar 'symbol-name (custom-available-themes)))))
+    (unless (member theme (mapcar 'symbol-name (custom-available-themes)))
       (error "Theme not in list!"))
     (set-theme (intern theme)))
-  ;; List of installed themes
-  (defvar my-theme-list
-    '("base16-greenscreen"
-      "dream"
-      "shaman"
-      "silkworm"
-      "subtle-blue"
-      "birds-of-paradise-plus"
-      "bharadwaj-slate"
-      "misterioso"
-      "orange_wedge"
-      "bubblegum"))
   (defvar current-theme-idx 0
     "integer representing the current theme")
   (defun cycle-themes ()
     "Toggle between different themes"
     (interactive)
-    (setq current-theme-idx (mod (1+ current-theme-idx) 8))
-    (cond ((= current-theme-idx 0) (set-theme 'base16-greenscreen))
+    (setq current-theme-idx (mod (1+ current-theme-idx) 5))
+    (cond ((= current-theme-idx 0) (set-theme 'silkworm))
       ((= current-theme-idx 1) (set-theme 'dream))
       ((= current-theme-idx 2) (set-theme 'shaman))
-      ((= current-theme-idx 3) (set-theme 'silkworm))
-      ((= current-theme-idx 4) (set-theme 'subtle-blue))
-      ((= current-theme-idx 5) (set-theme 'birds-of-paradise-plus))
-      ((= current-theme-idx 6) (set-theme 'misterioso))
-      ((= current-theme-idx 7) (set-theme 'bharadwaj-slate))))
+      ((= current-theme-idx 3) (set-theme 'subtle-blue))
+      ((= current-theme-idx 4) (set-theme 'birds-of-paradise-plus))))
 #+end_src
 * Day/Night Themes
 #+begin_src emacs-lisp
