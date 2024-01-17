@@ -30,7 +30,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ** Loading Modules
 #+begin_src emacs-lisp
   ;; set expected modules
-  (setq my-init-modules '("Dashboard" "Keybinding" "Experimental" "Emojis" "Pandoc" "Themes" "Python" "R" "Agenda" "Zettelkasten" "Teos" "Packages" "Constants" "Elfeed", "Company"))
+  (setq my-init-modules '("Dashboard" "Keybinding" "Experimental" "Elfeed" "Emojis" "Pandoc" "Themes" "Python" "R" "Company" "Agenda" "Zettelkasten" "Teos" "Packages" "Constants"))
   ;; make a list of loaded modules
   (setq loaded-modules ())
   ;; loading constants 
