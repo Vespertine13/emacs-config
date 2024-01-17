@@ -38,7 +38,7 @@
   (global-set-key (kbd "C-c v") 'run-parla)
   (global-set-key (kbd "C-c w") 'zetteldeft-wander)
   (global-set-key (kbd "C-c x") 'cycle-themes)
-  (global-set-key (kbd "C-c y") 'occur)
+  (global-set-key (kbd "C-c y") 'my-save-word)
   (global-set-key (kbd "C-c z") 'eshell)
 #+end_src
 * Keybinding æ-å
