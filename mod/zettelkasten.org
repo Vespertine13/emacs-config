@@ -39,33 +39,53 @@ Please forgive me gods of emacs.
 * Org-Roam
 ** General Settings
 #+begin_src emacs-lisp
-  (use-package org-roam
-    :ensure t
-    :init
-    (setq org-roam-v2-ack t)
-    :custom
-    (org-roam-directory FOLDER_ROAM)
-    (org-roam-capture-templates
-     '(
-       ("c" "common" plain
-	"%?"
-	:if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n")
-	:unnarrowed t)
-       ("o" "OUS" plain
-	"%?"
-	:if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n#OUS\n[[id:a40c3cda-6e61-40f0-b53d-fea162219825][OUS]]\n")
-	:unnarrowed t)
-       ("t" "Teos" plain
-	"%?"
-	:if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n#Teos\n[[id:a9eea227-1915-4c38-ae40-65b01a33328c][Teos]]\n")
-	:unnarrowed t)
-       ("d" "DnD" plain
-	"%?"
-	:if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+date: %U\n#DnD\n[[id:284c9904-1342-4361-97be-fd688ce23514][DnD]]\n")
-	:unnarrowed t)
-       ))
-    :config
-    (org-roam-setup))
+    (use-package org-roam
+      :ensure t
+      :init
+      (setq org-roam-v2-ack t)
+      :custom
+      (org-roam-directory FOLDER_ROAM)
+      :config
+      (org-roam-setup))
+  ;; org-roam capture templates
+  (setq org-roam-capture-templates
+	  '(
+	    ;; common
+	    ("c" "Common" plain
+	     "%?"
+	     :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+				":PROPERTIES:\n:HOMELINK: \n:TAGS: \n:DATE: %U\n:END:\n#+title: ${title}\n")
+	     :unnarrowed t
+	     :immediate-finish t)
+	    ;; Notes
+	    ("n" "Notes" plain
+	     "%?"
+	     :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+				":PROPERTIES:\n:HOMELINK: [[id:47644bb9-9716-44c6-a10b-01964c4cf529][Notes]] \n:TAGS: #notes \n:DATE: %U\n:END:\n#+title: ${title}\n")
+	     :unnarrowed t
+	     :immediate-finish t)
+	    ;; common
+	    ("o" "OUS" plain
+	     "%?"
+	     :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+				":PROPERTIES:\n:HOMELINK: [[id:a40c3cda-6e61-40f0-b53d-fea162219825][OUS]] \n:TAGS: #ous \n:DATE: %U\n:END:\n#+title: ${title}\n")
+	     :unnarrowed t
+	     :immediate-finish t)
+	    ;; common
+	    ("t" "Teos" plain
+	     "%?"
+	     :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+				":PROPERTIES:\n:HOMELINK: [[id:a9eea227-1915-4c38-ae40-65b01a33328c][Teos]] \n:TAGS: #teos \n:DATE: %U\n:END:\n#+title: ${title}\n")
+	     :unnarrowed t
+	     :immediate-finish t)
+	    ;; common
+	    ("d" "DnD" plain
+	     "%?"
+	     :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+				":PROPERTIES:\n:HOMELINK: [[id:284c9904-1342-4361-97be-fd688ce23514][DnD]] \n:TAGS: #dnd \n:DATE: %U\n:END:\n#+title: ${title}\n")
+	     :unnarrowed t
+	     :immediate-finish t)
+	    ))
 #+end_src
 ** Functions
 #+begin_src emacs-lisp
@@ -87,7 +107,7 @@ Overwrite some of the zetteldeft keybinding with new ones suiting org-roam
   (global-set-key (kbd "C-c d i")  'org-roam-node-insert)
   (global-set-key (kbd "C-c d u") 'org-roam-ui-mode)
   (global-set-key (kbd "C-c d c")  'org-id-get-create)
-  (global-set-key (kbd "C-c d d")  'zetteldeft-new-search)
+  (global-set-key (kbd "C-c d d")  'zetteldeft-deft-new-search)
   (global-set-key (kbd "C-c d h")  'zetteldeft-go-home)
   (global-set-key (kbd "C-c d r")  'deft-refresh)
   (global-set-key (kbd "C-c d s")  'zetteldeft-search-at-point)
