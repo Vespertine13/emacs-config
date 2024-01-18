@@ -1,4 +1,4 @@
-# -*- buffer-read-only: t -*-
+
 #+STARTUP: content
 
 Eivind Kjeka Broen
@@ -29,40 +29,50 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 ** Loading Modules
 #+begin_src emacs-lisp
-  ;; set expected modules
-  (setq my-init-modules '("Dashboard" "Keybinding" "Experimental" "Elfeed" "Emojis" "Pandoc" "Themes" "Python" "R" "Company" "Agenda" "Zettelkasten" "Teos" "Packages" "Constants"))
-  ;; make a list of loaded modules
+  ;; Function to load a module and measure the time
+  (setq loaded-modules-with-time ())
+  (defun load-module-and-measure-time (module file)
+    (let* ((start-time (current-time))
+	   (result (ignore-errors (org-babel-load-file file)))
+	   (end-time (current-time))
+	   (elapsed-time (if result (float-time (time-subtract end-time start-time)) 0.0))
+	   (formatted-string (format "%s - %.3f" module elapsed-time)))
+      (if (member formatted-string loaded-modules-with-time)
+	  loaded-modules-with-time
+	(setq loaded-modules-with-time (cons formatted-string loaded-modules-with-time)))))
+
+  ;; Set expected modules
+  (setq my-init-modules '("Keybinding" "Experimental" "Elfeed" "Emojis" "Pandoc" "Themes" "Python" "R" "Company" "Agenda" "Zettelkasten" "Teos" "Packages" "Constants"))
+  ;; Make a list of loaded modules
   (setq loaded-modules ())
-  ;; loading constants 
-  (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/constants.org"))
-  ;; loading packages
-  (ignore-errors (org-babel-load-file "~/emacs-config/mod/packages.org"))
-  ;; loading teos
-  (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/teos.org"))
-  ;; loading zettelkasten
-  (ignore-errors (org-babel-load-file "~/emacs-config/mod/zettelkasten.org"))
-  ;; loading agenda
-  (ignore-errors (org-babel-load-file "~/emacs-config/mod/agenda.org"))
-  ;; loading company
-  (ignore-errors (org-babel-load-file "~/emacs-config/mod/company.org"))
-  ;; loading R
-  (ignore-errors (org-babel-load-file "~/emacs-config/mod/R.org"))
-  ;; loading python
-  (ignore-errors (org-babel-load-file "~/emacs-config/mod/python.org"))
-  ;; loading themes
-  (ignore-errors (org-babel-load-file "~/emacs-config/mod/themes.org"))
-  ;; loading pandoc
-  (ignore-errors (org-babel-load-file "~/emacs-config/mod/pandoc.org"))
-  ;; loading emojis
-  (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/emojis.org"))
-  ;; loading elfeed
-  (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/elfeed.org"))
-  ;; experimental
-  (ignore-errors (org-babel-load-file "~/mega/emacs_utilities/config/experimental.org"))
-  ;; loading keybinding
-  (ignore-errors (org-babel-load-file "~/emacs-config/mod/keybinding.org"))
-  ;; Loading dashboard
-  (ignore-errors (org-babel-load-file "~/emacs-config/mod/dashboard.org"))
+  ;; Loading constants
+  (load-module-and-measure-time "Constants" "~/mega/emacs_utilities/config/constants.org")
+  ;; Loading packages
+  (load-module-and-measure-time "Packages" "~/emacs-config/mod/packages.org")
+  ;; Loading teos
+  (load-module-and-measure-time "Teos" "~/mega/emacs_utilities/config/teos.org")
+  ;; Loading zettelkasten
+  (load-module-and-measure-time "Zettelkasten" "~/emacs-config/mod/zettelkasten.org")
+  ;; Loading agenda
+  (load-module-and-measure-time "Agenda" "~/emacs-config/mod/agenda.org")
+  ;; Loading company
+  (load-module-and-measure-time "Company" "~/emacs-config/mod/company.org")
+  ;; Loading R
+  (load-module-and-measure-time "R" "~/emacs-config/mod/R.org")
+  ;; Loading Python
+  (load-module-and-measure-time "Python" "~/emacs-config/mod/python.org")
+  ;; Loading themes
+  (load-module-and-measure-time "Themes" "~/emacs-config/mod/themes.org")
+  ;; Loading pandoc
+  (load-module-and-measure-time "Pandoc" "~/emacs-config/mod/pandoc.org")
+  ;; Loading emojis
+  (load-module-and-measure-time "Emojis" "~/mega/emacs_utilities/config/emojis.org")
+  ;; Loading elfeed
+  (load-module-and-measure-time "Elfeed" "~/mega/emacs_utilities/config/elfeed.org")
+  ;; Experimental
+  (load-module-and-measure-time "Experimental" "~/mega/emacs_utilities/config/experimental.org")
+  ;; Loading keybinding
+  (load-module-and-measure-time "Keybinding" "~/emacs-config/mod/keybinding.org")
 #+end_src
 ** Basic Setup
 (print loaded-modules)
@@ -401,15 +411,105 @@ A function that can be used to replace æøå with proper encoded æøå.
       (visual-line-mode t))
     (add-hook 'mastodon-mode-hook 'my-mastodon-hook))
 #+end_src
-*** Startup
+*** Dashboard
+
+**** Modules text
+#+begin_src emacs-lisp
+    ;; system text
+    (setq dash-sys-text (concat "GNU Emacs " emacs-version "|" (symbol-name system-type)))
+    ;; check completion and make text
+    (let ((n-total-modules (length my-init-modules))
+	  (n-loaded-modules (length loaded-modules)))
+      (setq mydashtext-1 (format " LOADED INIT MODULES (%d/%d):\n\n    " n-loaded-modules n-total-modules)))
+    ;; create list of loaded modules
+    (setq loaded-modules-with-time (reverse loaded-modules-with-time))
+    (setq dashboard-loaded-mods (concat mydashtext-1 (mapconcat 'identity loaded-modules-with-time "\n    ")))
+    (setq list-missing-mods (cl-remove-if (lambda (item) (member item loaded-modules)) my-init-modules))
+
+    (let ((n-total-modules (length my-init-modules))
+	  (n-loaded-modules (length loaded-modules)))
+    (if (< n-loaded-modules n-total-modules)
+	(setq dashboard-missing-mods (concat "\n\n MISSING:\n\n    "(mapconcat 'identity list-missing-mods "\n    ")))
+      (setq dashboard-missing-mods "")))
+
+
+#+end_src
+**** Dashboard
+#+begin_src emacs-lisp
+  (require 'dashboard)
+  ;; (dashboard-setup-startup-hook)
+  ;; Set the banner
+  (setq dashboard-startup-banner "~/mega/emacs_utilities/emacs_startup.txt")
+  ;; Value can be
+  ;; - nil to display no banner
+  ;; - 'official which displays the official emacs logo
+  ;; - 'logo which displays an alternative emacs logo
+  ;; - 1, 2 or 3 which displays one of the text banners
+  ;; - "path/to/your/image.gif", "path/to/your/image.png" or "path/to/your/text.txt" which displays whatever gif/image/text you would prefer
+  ;; - a cons of '("path/to/your/image.png" . "path/to/your/text.txt")
+
+  ;; put content in centre
+  ;; (setq dashboard-center-content t)
+
+  ;; Set the footer
+  (setq dashboard-footer-messages (list (concat "Startup at: " (current-time-string))))
+
+  ;; Set the title
+  (setq dashboard-banner-logo-title dash-sys-text)
+#+end_src
+**** Customization
+#+begin_src emacs-lisp
+  (defun dashboard-links (list-size)
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
+			     (zetteldeft-go-home))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   "Home")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
+			     (find-file "~/emacs-config/mod/keybinding.org"))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   "Keybindings")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
+			     (find-file "~/venn/run.R"))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   "Venn")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
+			     (org-agenda-list))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   "Agenda")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
+			     (find-file "~/emacs-config/config.org"))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   "Configuration")
+    )
+
+  (defun dashboard-loaded-modules (list-size)
+    (insert (concat dashboard-loaded-mods dashboard-missing-mods)))
+
+  (defun dashboard-line (list-size)
+    (insert "------------------------------------------------------------------------------------------"))
+
+  (add-to-list 'dashboard-item-generators '(line . dashboard-line))
+  (add-to-list 'dashboard-item-generators '(custom-links . dashboard-links))
+  (add-to-list 'dashboard-item-generators '(custom-loaded-modules . dashboard-loaded-modules))
+  (setq dashboard-items '((custom-loaded-modules) (custom-links)))
+#+end_src
+
+* Startup
 #+begin_src emacs-lisp
   (when (member "Themes" loaded-modules)
     (set-day-night-theme))
   (cd "~/")
   (open-scratch)
-  (when (member "Zettelkasten" loaded-modules)
-      (deft)
-      (roam-home))
   (dashboard-open)
 #+end_src
 

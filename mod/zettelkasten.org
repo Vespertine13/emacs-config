@@ -134,6 +134,11 @@ Overwrite some of the zetteldeft keybinding with new ones suiting org-roam
   (global-set-key (kbd "C-c d x")  'zetteldeft-count-words)
 #+end_src
 
+** Initialize
+#+begin_src emacs-lisp
+      (deft)
+      (roam-home)
+#+end_src
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "Zettelkasten")
