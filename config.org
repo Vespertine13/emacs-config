@@ -29,50 +29,52 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 ** Loading Modules
 #+begin_src emacs-lisp
-  ;; Function to load a module and measure the time
-  (setq loaded-modules-with-time ())
-  (defun load-module-and-measure-time (module file)
-    (let* ((start-time (current-time))
-	   (result (ignore-errors (org-babel-load-file file)))
-	   (end-time (current-time))
-	   (elapsed-time (if result (float-time (time-subtract end-time start-time)) 0.0))
-	   (formatted-string (format "%s - %.3f" module elapsed-time)))
-      (if (member formatted-string loaded-modules-with-time)
-	  loaded-modules-with-time
-	(setq loaded-modules-with-time (cons formatted-string loaded-modules-with-time)))))
+    ;; Function to load a module and measure the time
+    (setq loaded-modules-with-time ())
+(defun load-module-and-measure-time (module file)
+  (let* ((start-time (current-time))
+         (result (ignore-errors (org-babel-load-file file)))
+         (end-time (current-time))
+         (elapsed-time (if result (float-time (time-subtract end-time start-time)) 0.0))
+         (formatted-string (format "%s - %.3fs" module elapsed-time)))
+    (if (member formatted-string loaded-modules-with-time)
+        loaded-modules-with-time
+      (if (> elapsed-time 0)
+          (setq loaded-modules-with-time (cons formatted-string loaded-modules-with-time))
+        loaded-modules-with-time))))
 
-  ;; Set expected modules
-  (setq my-init-modules '("Keybinding" "Experimental" "Elfeed" "Emojis" "Pandoc" "Themes" "Python" "R" "Company" "Agenda" "Zettelkasten" "Teos" "Packages" "Constants"))
-  ;; Make a list of loaded modules
-  (setq loaded-modules ())
-  ;; Loading constants
-  (load-module-and-measure-time "Constants" "~/mega/emacs_utilities/config/constants.org")
-  ;; Loading packages
-  (load-module-and-measure-time "Packages" "~/emacs-config/mod/packages.org")
-  ;; Loading teos
-  (load-module-and-measure-time "Teos" "~/mega/emacs_utilities/config/teos.org")
-  ;; Loading zettelkasten
-  (load-module-and-measure-time "Zettelkasten" "~/emacs-config/mod/zettelkasten.org")
-  ;; Loading agenda
-  (load-module-and-measure-time "Agenda" "~/emacs-config/mod/agenda.org")
-  ;; Loading company
-  (load-module-and-measure-time "Company" "~/emacs-config/mod/company.org")
-  ;; Loading R
-  (load-module-and-measure-time "R" "~/emacs-config/mod/R.org")
-  ;; Loading Python
-  (load-module-and-measure-time "Python" "~/emacs-config/mod/python.org")
-  ;; Loading themes
-  (load-module-and-measure-time "Themes" "~/emacs-config/mod/themes.org")
-  ;; Loading pandoc
-  (load-module-and-measure-time "Pandoc" "~/emacs-config/mod/pandoc.org")
-  ;; Loading emojis
-  (load-module-and-measure-time "Emojis" "~/mega/emacs_utilities/config/emojis.org")
-  ;; Loading elfeed
-  (load-module-and-measure-time "Elfeed" "~/mega/emacs_utilities/config/elfeed.org")
-  ;; Experimental
-  (load-module-and-measure-time "Experimental" "~/mega/emacs_utilities/config/experimental.org")
-  ;; Loading keybinding
-  (load-module-and-measure-time "Keybinding" "~/emacs-config/mod/keybinding.org")
+    ;; Set expected modules
+    (setq my-init-modules '("Keybinding" "Experimental" "Elfeed" "Emojis" "Pandoc" "Themes" "Python" "R" "Company" "Agenda" "Zettelkasten" "Teos" "Packages" "Constants"))
+    ;; Make a list of loaded modules
+    (setq loaded-modules ())
+    ;; Loading constants
+    (load-module-and-measure-time "Constants" "~/mega/emacs_utilities/config/constants.org")
+    ;; Loading packages
+    (load-module-and-measure-time "Packages" "~/emacs-config/mod/packages.org")
+    ;; Loading teos
+    (load-module-and-measure-time "Teos" "~/mega/emacs_utilities/config/teos.org")
+    ;; Loading zettelkasten
+    (load-module-and-measure-time "Zettelkasten" "~/emacs-config/mod/zettelkasten.org")
+    ;; Loading agenda
+    (load-module-and-measure-time "Agenda" "~/emacs-config/mod/agenda.org")
+    ;; Loading company
+    (load-module-and-measure-time "Company" "~/emacs-config/mod/company.org")
+    ;; Loading R
+    (load-module-and-measure-time "R" "~/emacs-config/mod/R.org")
+    ;; Loading Python
+    (load-module-and-measure-time "Python" "~/emacs-config/mod/python.org")
+    ;; Loading themes
+    (load-module-and-measure-time "Themes" "~/emacs-config/mod/themes.org")
+    ;; Loading pandoc
+    (load-module-and-measure-time "Pandoc" "~/emacs-config/mod/pandoc.org")
+    ;; Loading emojis
+    (load-module-and-measure-time "Emojis" "~/mega/emacs_utilities/config/emojis.org")
+    ;; Loading elfeed
+    (load-module-and-measure-time "Elfeed" "~/mega/emacs_utilities/config/elfeed.org")
+    ;; Experimental
+    (load-module-and-measure-time "Experimental" "~/mega/emacs_utilities/config/experimental.org")
+    ;; Loading keybinding
+    (load-module-and-measure-time "Keybinding" "~/emacs-config/mod/keybinding.org")
 #+end_src
 ** Basic Setup
 (print loaded-modules)
