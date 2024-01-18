@@ -16,29 +16,13 @@
 	   "* Dagen i går\n%?")
 	  ("e" "Events" entry (file ORG_CAPTURE)
 	   "* %? :event:\n:PROPERTIES:\n:DATE: \n:TIME: \n:PLACE: \n:NOTE: \n:END:\n")
-	  ("o" "Ordliste" entry (file ORG_ORDLISTE)
-	   "* %?")
 	  ("h" "Handleliste" entry (file ORG_HANDLELISTE)
 	   ,handleliste-agenda-content)
 	  ("k" "Kontaktinfo" entry (file ORG_ROLODEX)
 	   "* %? :contact:\n:PROPERTIES:\n:EMAIL: \n:TELEPHONE: \n:ORGANIZATION: \n:NOTE: \n:END:\n")
-	  ("w" "Watch" entry (file ORG_CAPTURE)
-	   "* TODO %? :watch:\n:PROPERTIES:\n:TYPE: \n:GENRE: \n:YEAR: \n:NOTE: \n:END:\n")
-	  ("r" "Read" entry (file ORG_CAPTURE)
-	   "* TODO %? :read:\n:PROPERTIES:\n:TYPE: \n:GENRE: \n:YEAR: \n:AUTHOR: \n:NOTE: \n:END:\n")
-	  ("c" "Code" entry (file ORG_CAPTURE)
-	   "* TODO %? :code:\n:PROPERTIES:\n:CREATED: %U\n:LANGUAGE: \n:LIBRARY: \n:NOTE: \n:END:\n")
 	  ))
     ;; Org todo workflow
     (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
-    ;; custom command
-    (setq org-agenda-custom-commands
-	  '(("w" "Watch TODOS"
-	     tags "+watch+TODO=\"TODO\"")
-	    ("r" "Read TODOS"
-	     tags "+read+TODO=\"TODO\"")
-	    ("c" "Code TODOS"
-	     tags "+code+TODO=\"TODO\"")))
     ;; custom function
     (defun open-org-agenda-for-current-week ()
       (interactive)

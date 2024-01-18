@@ -39,53 +39,72 @@ Please forgive me gods of emacs.
 * Org-Roam
 ** General Settings
 #+begin_src emacs-lisp
-    (use-package org-roam
-      :ensure t
-      :init
-      (setq org-roam-v2-ack t)
-      :custom
-      (org-roam-directory FOLDER_ROAM)
-      :config
-      (org-roam-setup))
+  (use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory FOLDER_ROAM)
+    :config
+    (org-roam-setup))
   ;; org-roam capture templates
   (setq org-roam-capture-templates
-	  '(
-	    ;; common
-	    ("c" "Common" plain
-	     "%?"
-	     :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-				":PROPERTIES:\n:HOMELINK: \n:TAGS: \n:DATE: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
-	     :unnarrowed t
-	     :immediate-finish t)
-	    ;; Notes
-	    ("n" "Notes" plain
-	     "%?"
-	     :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-				":PROPERTIES:\n:HOMELINK: [[id:47644bb9-9716-44c6-a10b-01964c4cf529][Notes]] \n:TAGS: #notes \n:DATE: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
-	     :unnarrowed t
-	     :immediate-finish t)
-	    ;; common
-	    ("o" "OUS" plain
-	     "%?"
-	     :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-				":PROPERTIES:\n:HOMELINK: [[id:a40c3cda-6e61-40f0-b53d-fea162219825][OUS]] \n:TAGS: #ous \n:DATE: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
-	     :unnarrowed t
-	     :immediate-finish t)
-	    ;; common
-	    ("t" "Teos" plain
-	     "%?"
-	     :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-				":PROPERTIES:\n:HOMELINK: [[id:a9eea227-1915-4c38-ae40-65b01a33328c][Teos]] \n:TAGS: #teos \n:DATE: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
-	     :unnarrowed t
-	     :immediate-finish t)
-	    ;; common
-	    ("d" "DnD" plain
-	     "%?"
-	     :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-				":PROPERTIES:\n:HOMELINK: [[id:284c9904-1342-4361-97be-fd688ce23514][DnD]] \n:TAGS: #dnd \n:DATE: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
-	     :unnarrowed t
-	     :immediate-finish t)
-	    ))
+	'(
+	  ;; Standard
+	  ("s" "Standard" plain
+	   "%?"
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			      ":PROPERTIES:\n:BACKLINK: \n:TAGS: \n:CREATED: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+	   :unnarrowed t)
+	  ;; Notes
+	  ("n" "Notes" plain
+	   "%?"
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			      ":PROPERTIES:\n:BACKLINK: [[id:47644bb9-9716-44c6-a10b-01964c4cf529][Notes]] \n:TAGS: #notes \n:CREATED: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+	   :unnarrowed t)
+	  ;; Work
+	  ("o" "OUS" plain
+	   "%?"
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			      ":PROPERTIES:\n:BACKLINK: [[id:a40c3cda-6e61-40f0-b53d-fea162219825][OUS]] \n:TAGS: #ous \n:CREATED: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+	   :unnarrowed t)
+	  ;; Teos
+	  ("t" "Teos" plain
+	   "%?"
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			      ":PROPERTIES:\n:BACKLINK: [[id:a9eea227-1915-4c38-ae40-65b01a33328c][Teos]] \n:TAGS: #teos \n:CREATED: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+	   :unnarrowed t)
+	  ;; DnD
+	  ("d" "DnD" plain
+	   "%?"
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			      ":PROPERTIES:\n:BACKLINK: [[id:284c9904-1342-4361-97be-fd688ce23514][DnD]] \n:TAGS: #dnd \n:CREATED: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+	   :unnarrowed t)
+	  ;; Code
+	  ("c" "Code" plain
+	   "%?"
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			      ":PROPERTIES:\n:BACKLINK: [[id:30c78d9d-2895-4723-b279-9c588f34aed6][Code]] \n:TAGS: #code \n:CREATED: %U\n:LANGUAGE: \n:LIBRARY: \n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+	   :unnarrowed t)
+	  ;; Read
+	  ("r" "Read" plain
+	   "%?"
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			      ":PROPERTIES:\n:BACKLINK: [[id:433ac683-afbd-44bd-b1af-ffacf9801d44][Literature]] \n:TAGS: #notes #read \n:CREATED: %U\n:TYPE: \n:GENRE: \n:YEAR: \n:AUTHOR: \n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+	   :unnarrowed t)
+	  ;; Watch
+	  ("w" "Watch" plain
+	   "%?"
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			      ":PROPERTIES:\n:BACKLINK: [[id:f06f0cf8-a3ea-4c7d-9007-aaac0c0a35ae][Video]] \n:TAGS: #notes #watch \n:CREATED: %U\n:TYPE: \n:GENRE: \n:YEAR: \n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+	   :unnarrowed t)
+	  ;; Listen
+	  ("l" "Listen" plain
+	   "%?"
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			      ":PROPERTIES:\n:BACKLINK: [[id:b0c15b68-cf92-4804-a3c0-8c2906623e55][Music]] \n:TAGS: #notes #listen \n:CREATED: %U\n:TYPE: \n:GENRE: \n:YEAR: \n:Artist: \n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+	   :unnarrowed t)
+	  ))
 #+end_src
 ** Functions
 #+begin_src emacs-lisp
