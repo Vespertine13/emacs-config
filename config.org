@@ -216,10 +216,10 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (defvar-local transparent-frame-enabled nil
     "Flag that indicates if the buffer is transparent.")
   (defun set-frame-solid ()
-    (set-frame-parameter (selected-frame) 'alpha '(100 100))
+    (set-frame-parameter (selected-frame) 'alpha-background '100)
     (message "Solid frame"))
   (defun set-frame-transparent ()
-    (set-frame-parameter (selected-frame) 'alpha '(70 70))
+    (set-frame-parameter (selected-frame) 'alpha-background '50)
     (message "Transparent frame"))
   (defun toggle-frame-solidity ()
     "Toggle between solid and transparent frame for the current buffer."
@@ -228,6 +228,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
     (if transparent-frame-enabled
 	(set-frame-transparent)
       (set-frame-solid)))
+  ;; standard font
+  (add-to-list 'default-frame-alist '(font . "Inconsolata-18"))
   ;; tabs
   (custom-set-faces
    '(tab-bar-tab ((t (:inherit default :font "inconsolata" :height 0.8)))))
