@@ -229,7 +229,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	(set-frame-transparent)
       (set-frame-solid)))
   ;; standard font
-  (add-to-list 'default-frame-alist '(font . "Inconsolata-18"))
+  (add-to-list 'default-frame-alist '(font . "Inconsolata-16"))
   ;; tabs
   (custom-set-faces
    '(tab-bar-tab ((t (:inherit default :font "inconsolata" :height 0.8)))))
