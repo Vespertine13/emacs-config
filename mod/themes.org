@@ -33,9 +33,9 @@
     (cond ((= current-theme-idx 0) (set-theme 'silkworm))
       ((= current-theme-idx 1) (set-theme 'dream))
       ((= current-theme-idx 2) (set-theme 'shaman))
-      ((= current-theme-idx 4) (set-theme 'subtle-blue))
-      ((= current-theme-idx 5) (set-theme 'gnome))
-      ((= current-theme-idx 6) (set-theme 'birds-of-paradise-plus))))
+      ((= current-theme-idx 3) (set-theme 'subtle-blue))
+      ((= current-theme-idx 4) (set-theme 'gnome))
+      ((= current-theme-idx 5) (set-theme 'birds-of-paradise-plus))))
 #+end_src
 * Day/Night Themes
 #+begin_src emacs-lisp
