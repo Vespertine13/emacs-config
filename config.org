@@ -42,39 +42,27 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	(if (> elapsed-time 0)
 	    (setq loaded-modules-with-time (cons formatted-string loaded-modules-with-time))
 	  loaded-modules-with-time))))
-
-
       ;; Set expected modules
-      (setq my-init-modules '("Keybinding" "Experimental" "Elfeed" "Emojis" "Pandoc" "Themes" "Python" "R" "Company" "Agenda" "Zettelkasten" "Teos" "Packages" "Constants"))
+      (setq my-init-modules '("Keybinding" "Experimental" "Functions" "ERC" "Mastodon" "Elfeed" "Emojis" "Pandoc" "Themes" "Python" "R" "Company" "Agenda" "Zettelkasten" "Teos" "Packages" "Constants"))
       ;; Make a list of loaded modules
       (setq loaded-modules ())
-      ;; Loading constants
+      ;; Loading modules
       (load-module-and-measure-time "Constants" "~/mega/emacs_utilities/config/constants.org")
-      ;; Loading packages
       (load-module-and-measure-time "Packages" "~/emacs-config/mod/packages.org")
-      ;; Loading teos
       (load-module-and-measure-time "Teos" "~/mega/emacs_utilities/config/teos.org")
-      ;; Loading zettelkasten
       (load-module-and-measure-time "Zettelkasten" "~/emacs-config/mod/zettelkasten.org")
-      ;; Loading agenda
       (load-module-and-measure-time "Agenda" "~/emacs-config/mod/agenda.org")
-      ;; Loading company
       (load-module-and-measure-time "Company" "~/emacs-config/mod/company.org")
-      ;; Loading R
       (load-module-and-measure-time "R" "~/emacs-config/mod/R.org")
-      ;; Loading Python
       (load-module-and-measure-time "Python" "~/emacs-config/mod/python.org")
-      ;; Loading themes
       (load-module-and-measure-time "Themes" "~/emacs-config/mod/themes.org")
-      ;; Loading pandoc
       (load-module-and-measure-time "Pandoc" "~/emacs-config/mod/pandoc.org")
-      ;; Loading emojis
       (load-module-and-measure-time "Emojis" "~/mega/emacs_utilities/config/emojis.org")
-      ;; Loading elfeed
       (load-module-and-measure-time "Elfeed" "~/mega/emacs_utilities/config/elfeed.org")
-      ;; Experimental
+      (load-module-and-measure-time "Mastodon" "~/emacs-config/mod/mastodon.org")
+      (load-module-and-measure-time "ERC" "~/emacs-config/mod/erc.org")
+      (load-module-and-measure-time "Functions" "~/emacs-config/mod/functions.org")
       (load-module-and-measure-time "Experimental" "~/mega/emacs_utilities/config/experimental.org")
-      ;; Loading keybinding
       (load-module-and-measure-time "Keybinding" "~/emacs-config/mod/keybinding.org")
 #+end_src
 ** Basic Setup
@@ -266,35 +254,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
     (setq buffer-face-mode-face '(:family "VCR OSD Mono"))
     (buffer-face-mode))
 #+end_src
-*** paste fix
-A function that can be used to replace æøå with proper encoded æøå.
-#+begin_src emacs-lisp
-  (defun paste-fix ()
-    "Replace characters with specific code points with other letters in the current buffer."
-    (interactive)
-    (save-excursion
-      (goto-char (point-min))
-      (while (re-search-forward "[\x3FFF92]" nil t)
-	(replace-match "'" nil nil))
-      (while (re-search-forward "[\x3FFFE5]" nil t)
-	(replace-match "å" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFE6]" nil t)
-	(replace-match "æ" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFF8]" nil t)
-	(replace-match "ø" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFC5]" nil t)
-	(replace-match "Å" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFC6]" nil t)
-	(replace-match "Æ" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFD8]" nil t)
-	(replace-match "Ø" nil nil))))
-  (add-hook 'before-save-hook 'paste-fix)
-#+end_src
 *** Undo-tree
 #+begin_src emacs-lisp
   (when (and (member "Packages" loaded-modules) (member "Constants" loaded-modules))
@@ -303,118 +262,6 @@ A function that can be used to replace æøå with proper encoded æøå.
     (setq undo-tree-history-directory-alist
       '(("." . "~/.emacs.d/undo-tree-history/")))
     )
-#+end_src
-*** ERC
-#+begin_src emacs-lisp
-  (when (member "Constants" loaded-modules)
-    (defun run-libera-chat ()
-      (interactive)
-      (erc-tls :server "irc.libera.chat" :port 6697 :nick NICK_ERC :password )))
-#+end_src
-*** Custom Function
-#+begin_src emacs-lisp
-  ;; folders and files
-  (when (member "Constants" loaded-modules)
-    (defun open-mega ()
-      (interactive)
-      (find-file FOLDER_MEGA))
-    (defun open-org ()
-      (interactive)
-      (find-file FOLDER_ORG))
-    (defun open-bookmarks ()
-      (interactive)
-      (find-file ORG_BOOKMARKS))
-    (defun open-emacs_utilities ()
-      (interactive)
-      (find-file FOLDER_EMACS_UTILITIES))
-    ;; open config
-    (defun open-config ()
-      (interactive)
-      (find-file ORG_CONFIG))
-    (defun open-token ()
-      (interactive)
-      (find-file ORG_TOKENS)))
-  ;; open scratch
-  (defun open-scratch ()
-    (interactive)
-    (switch-to-buffer "*scratch*"))
-  ;; other custom functions
-  (defun unhighlight-all ()
-    (interactive)
-    (unhighlight-regexp t)
-    (message "Removed all highlights"))
-  (defun save-text-as-file (text filename)
-  "Save TEXT as a file named FILENAME."
-  (with-temp-buffer
-     (insert text)
-     (write-file filename))
-     (message (format "'%s' saved." filename)))
-  (defun replace-file-contents (file-path new-content)
-    "Replace the contents of the FILE-PATH with NEW-CONTENT."
-    (with-temp-file file-path
-      (insert new-content)))
-  (defun create-empty-file (file-path)
-    "Create an empty file at FILE-PATH."
-    (write-region "" nil file-path))
-  (defun file-content-equal-to-string (file string)
-      "Check if the content of FILE is equal to STRING."
-      (with-temp-buffer
-	(insert-file-contents file)
-	(string= (buffer-string) string)))
-  (defun delete-current-file ()
-    "Deletes the current file being viewed in the buffer"
-    (interactive)
-    (let ((filename (buffer-file-name)))
-      (when filename
-    (if (yes-or-no-p (format "Are you sure you want to delete %s?" filename))
-	(progn
-	  (delete-file filename)
-	  (message "File '%s' deleted." filename)
-	  (kill-buffer))
-      (message "File '%s' not deleted." filename)))))
-  (defun backward-kill-word-or-whitespace ()
-    "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
-    (interactive)
-    (if (looking-back "\\s-")
-    (progn
-      (delete-region (point) (save-excursion (skip-chars-backward " \t\n") (point))))
-      (backward-kill-word 1)))
-  ;; write functions
-  (defun write-current-time ()
-    "Writes the current time at the cursor position."
-    (interactive)
-    (insert (current-time-string)))
-  (defun write-current-date ()
-    "Writes current date at current position"
-    (interactive)
-    (insert (format-time-string "%d-%m-%Y")))
-  (defun write-current-path ()
-    "Writes the path to current buffer at the cursor position."
-    (interactive)
-    (insert (buffer-file-name)))
-  (defun write-read-only ()
-    "Write the syntax necessary for activating read only on top of file"
-    (interactive)
-    (save-excursion
-      (goto-char (point-min))
-      (insert "# -*- buffer-read-only: t -*-\n")))
-  ;; Ispell save word
-  (defun my-save-word ()
-    (interactive)
-    (let ((current-location (point))
-	  (word (flyspell-get-word)))
-      (when (consp word)    
-	(flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
-#+end_src
-*** Mastodon
-#+begin_src emacs-lisp
-  (when (member "Packages" loaded-modules)
-    (setq mastodon-instance-url "https://tech.lgbt"
-      mastodon-active-user "gray")
-    (defun my-mastodon-hook ()
-      (emojify-mode t)
-      (visual-line-mode t))
-    (add-hook 'mastodon-mode-hook 'my-mastodon-hook))
 #+end_src
 *** Dashboard
 

@@ -1,0 +1,15 @@
+#+STARTUP: overview
+* Mastodon
+#+begin_src emacs-lisp
+  (when (member "Packages" loaded-modules)
+    (setq mastodon-instance-url "https://tech.lgbt"
+      mastodon-active-user "gray")
+    (defun my-mastodon-hook ()
+      (emojify-mode t)
+      (visual-line-mode t))
+    (add-hook 'mastodon-mode-hook 'my-mastodon-hook))
+#+end_src
+* loaded-modules
+#+begin_src emacs-lisp
+  (add-to-list 'loaded-modules "Mastodon")
+#+end_src

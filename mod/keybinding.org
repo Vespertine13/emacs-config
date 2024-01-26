@@ -27,7 +27,7 @@
   (global-set-key (kbd "C-c k") 'delete-current-file)
   (global-set-key (kbd "C-c l") 'org-insert-link)
 ;;  (global-set-key (kbd "C-c m") 'xxxxx)
-;;  (global-set-key (kbd "C-c n") 'xxxxx)
+  (global-set-key (kbd "C-c n") 'nyan-mode)
   (global-set-key (kbd "C-c o") 'write-current-time)
   (global-set-key (kbd "C-c p") 'write-current-path)
   (global-set-key (kbd "C-c q") 'query-replace)
