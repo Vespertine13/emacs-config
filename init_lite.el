@@ -4,6 +4,8 @@
 ;; Eivind Kjeka Broen
 ;; eivind.kb@hotmail.com
 
+;; TODO remove all ÆØÅs
+
 ;; Basics
   (setq inhibit-startup-message t)    ;; Hide the startup message
   (setq debug-on-error t)             ;; enable in-depth message on error
