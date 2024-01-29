@@ -1,9 +1,9 @@
-# el file
-config.el
-
 # Compiled
 *.elc
 *.el
+
+# except lite_init
+!init_lite.el
 
 # Packaging
 .cask
