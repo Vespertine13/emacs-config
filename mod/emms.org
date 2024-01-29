@@ -1,0 +1,18 @@
+* Basics
+#+begin_src emacs-lisp
+(emms-all)
+(setq emms-player-list '(emms-player-vlc)
+      emms-info-functions '(emms-info-native))
+
+(setq emms-source-file-default-directory FOLDER_MUSIC)
+#+end_src
+* Keybinding
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c e l")  'emms-volume-lower)
+#+end_src
+
+* loaded-modules
+#+begin_src emacs-lisp
+  (add-to-list 'loaded-modules "EMMS")
+#+end_src
+

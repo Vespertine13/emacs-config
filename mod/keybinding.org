@@ -18,7 +18,7 @@
   (global-set-key (kbd "C-c b") 'checkbox-all) ;; Clear checkboxes
   (global-set-key (kbd "C-c c") 'org-capture)
 ;;  (global-set-key (kbd "C-c d") 'xxxxx) ;; d is for zettelkasten and deft
-;;  (global-set-key (kbd "C-c e") 'xxxxx)
+;;  (global-set-key (kbd "C-c e") 'xxxxx) ;; e is used for emms
   (global-set-key (kbd "C-c f") 'font-inconsolata)
 ;;  (global-set-key (kbd "C-c g") 'xxxxx)
   (global-set-key (kbd "C-c h") 'roam-home)
