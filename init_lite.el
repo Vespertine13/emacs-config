@@ -272,6 +272,11 @@
   (global-set-key (kbd "C-M-æ") 'occur)
 ;;  (global-set-key (kbd "C-M-å") 'my-func)
 
+;; Other keybindings
+  (global-set-key (kbd "C-.") 'other-window)
+  (global-set-key (kbd "C-:") 'other-frame)
+  (global-set-key "\M- " 'hippie-expand)
+  (global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace) ;; new C-backspace
 
 ;; Theme
 (load-theme 'tsdh-dark)
