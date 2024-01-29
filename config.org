@@ -66,7 +66,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       (load-module-and-measure-time "Keybinding" "~/emacs-config/mod/keybinding.org")
 #+end_src
 ** Basic Setup
-(print loaded-modules)
+
 *** Text and Writing
 #+begin_src emacs-lisp
   ;; Electric pair for closing parentheses etc
