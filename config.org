@@ -153,6 +153,12 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (setq org-hide-leading-stars 1)
   ;; shift select
   (setq org-support-shift-select 1)
+  ;; header sizes
+  (custom-set-faces
+   '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
+   '(org-level-2 ((t (:inherit outline-2 :height 1.25))))
+   '(org-level-3 ((t (:inherit outline-3 :height 1.1))))
+   )
 #+end_src
 *** Eshell
 #+begin_src emacs-lisp
