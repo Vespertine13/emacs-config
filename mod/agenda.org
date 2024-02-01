@@ -53,8 +53,7 @@
 	  (daily-todo3 (format "* TODO Sjekk kalender\nSCHEDULED: %s\n" today-scheduled))
 	  (daily-todo4 (format "* TODO Sjekk Teams og mail på Citrix\nSCHEDULED: %s\n[[https://ekstern.ous-hf.no][ekstern-ous]]\n" today-scheduled))
 	  (daily-todo5 (format "* TODO Skriv dagbok\nSCHEDULED: %s\n" today-scheduled))
-	  (daily-todo6 (format "* TODO Standup 0900\nSCHEDULED: %s\n[[https://uio.zoom.us/j/6308330806?pwd=ZXJaZnh3QWh6RHVaclNpbkVrTGFiZz09][Zoom-room]]\n" today-scheduled))
-	  (daily-todo7 (format "* TODO Stemple ut\nSCHEDULED: %s\n" today-scheduled))
+	  (daily-todo6 (format "* TODO Stemple ut\nSCHEDULED: %s\n" today-scheduled))
 	  )
       (setq daily-todos (concat daily-todo1 daily-todo2 daily-todo3 daily-todo4 daily-todo5 daily-todo6)))
 
