@@ -80,6 +80,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (setq sentence-end-double-space nil)
   ;; when something is selected it will now be deleted if typed over
   (delete-selection-mode t)
+  ;; global visual line mode
+  (global-visual-line-mode t)
 #+end_src
 **** Flyspell
 #+begin_src emacs-lisp
