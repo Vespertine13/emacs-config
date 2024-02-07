@@ -29,6 +29,7 @@
       org-roam                         ;; zettelkast II
       org-roam-ui                      ;; org-roam visualization
       company                          ;; auto-complete any
+      ef-themes                          ;; some nice themes
       )
     )
 #+end_src
