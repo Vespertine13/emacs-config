@@ -137,7 +137,8 @@ Overwrite some of the zetteldeft keybinding with new ones suiting org-roam
 ** Initialize
 #+begin_src emacs-lisp
       (deft)
-      (roam-home)
+;;    (roam-home) 
+;;    disabled for quicker startup
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp

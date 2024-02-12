@@ -323,10 +323,10 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (defun dashboard-links (list-size)
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
-			     (zetteldeft-go-home))
+			     (roam-home))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
-		   "Home")
+		   "Roam")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
 			     (find-file "~/emacs-config/mod/keybinding.org"))
