@@ -20,7 +20,7 @@
 ;;  (global-set-key (kbd "C-c d") 'xxxxx) ;; d is for zettelkasten and deft
 ;;  (global-set-key (kbd "C-c e") 'xxxxx) ;; e is used for emms
   (global-set-key (kbd "C-c f") 'font-inconsolata)
-;;  (global-set-key (kbd "C-c g") 'xxxxx)
+  (global-set-key (kbd "C-c g") 'undo-tree-visualize)
   (global-set-key (kbd "C-c h") 'roam-home)
   (global-set-key (kbd "C-c i") 'ispell)
 ;;  (global-set-key (kbd "C-c j") 'xxxxx)
