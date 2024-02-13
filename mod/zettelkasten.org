@@ -68,6 +68,18 @@ Please forgive me gods of emacs.
 	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
 			      ":PROPERTIES:\n:BACKLINK: [[id:a40c3cda-6e61-40f0-b53d-fea162219825][OUS]] \n:TAGS: #ous \n:CREATED: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
 	   :unnarrowed t)
+	  ;; Code
+	  ("c" "Code" plain
+	   "%?"
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			      ":PROPERTIES:\n:BACKLINK: [[id:30c78d9d-2895-4723-b279-9c588f34aed6][Code]] \n:TAGS: #code \n:CREATED: %U\n:LANGUAGE: \n:LIBRARY: \n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+	   :unnarrowed t)
+	  ;; Bioinformatics
+	  ("b" "Bioinformatics" plain
+	   "%?"
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			      ":PROPERTIES:\n:BACKLINK: [[id:56484c3a-e69b-42e7-984a-265eb69ed635][Bioinformatics]] \n:TAGS: #notes #bioinformatics \n:CREATED: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+	   :unnarrowed t)
 	  ;; Teos
 	  ("t" "Teos" plain
 	   "%?"
@@ -80,11 +92,11 @@ Please forgive me gods of emacs.
 	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
 			      ":PROPERTIES:\n:BACKLINK: [[id:284c9904-1342-4361-97be-fd688ce23514][DnD]] \n:TAGS: #dnd \n:CREATED: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
 	   :unnarrowed t)
-	  ;; Code
-	  ("c" "Code" plain
+	  ;; Lurkwoods Skjebne
+	  ("x" "Lurkwoods Skjebne" plain
 	   "%?"
 	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-			      ":PROPERTIES:\n:BACKLINK: [[id:30c78d9d-2895-4723-b279-9c588f34aed6][Code]] \n:TAGS: #code \n:CREATED: %U\n:LANGUAGE: \n:LIBRARY: \n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+			      ":PROPERTIES:\n:BACKLINK: [[id:20c1f6f3-2e69-4637-aff4-af6e5895f837][Lurkwoods Skjebne]] \n:TAGS: #dnd #lurkwoodsskjebne \n:CREATED: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
 	   :unnarrowed t)
 	  ;; Read
 	  ("r" "Read" plain
@@ -110,6 +122,7 @@ Please forgive me gods of emacs.
 #+begin_src emacs-lisp
   (defun roam-home ()
     (interactive)
+    (deft)
     (setq deft-directory FOLDER_ROAM)
     (setq org-roam-directory FOLDER_ROAM)
     (deft-refresh)
@@ -136,9 +149,7 @@ Overwrite some of the zetteldeft keybinding with new ones suiting org-roam
 
 ** Initialize
 #+begin_src emacs-lisp
-      (deft)
-;;    (roam-home) 
-;;    disabled for quicker startup
+  (roam-home) 
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
