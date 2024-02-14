@@ -74,6 +74,12 @@ Please forgive me gods of emacs.
 	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
 			      ":PROPERTIES:\n:BACKLINK: [[id:30c78d9d-2895-4723-b279-9c588f34aed6][Code]] \n:TAGS: #code \n:CREATED: %U\n:LANGUAGE: \n:LIBRARY: \n:END:\n#+title: ${title}\n#+STARTUP: content\n")
 	   :unnarrowed t)
+	  ;; Emacs
+	  ("e" "Emacs" plain
+	   "%?"
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			      ":PROPERTIES:\n:BACKLINK: [[id:3f119e5c-43b0-4773-ab73-c1ee45453e09][Emacs]] \n:TAGS: #emacs \n:CREATED: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+	   :unnarrowed t)
 	  ;; Bioinformatics
 	  ("b" "Bioinformatics" plain
 	   "%?"
