@@ -16,10 +16,12 @@
     (defun open-emacs_utilities ()
       (interactive)
       (find-file FOLDER_EMACS_UTILITIES))
-    ;; open config
     (defun open-config ()
       (interactive)
       (find-file ORG_CONFIG))
+    (defun open-timeliste ()
+      (interactive)
+      (find-file ORG_TIMELISTE))
     (defun open-token ()
       (interactive)
       (find-file ORG_TOKENS)))
@@ -33,11 +35,11 @@
     (unhighlight-regexp t)
     (message "Removed all highlights"))
   (defun save-text-as-file (text filename)
-  "Save TEXT as a file named FILENAME."
-  (with-temp-buffer
-     (insert text)
-     (write-file filename))
-     (message (format "'%s' saved." filename)))
+    "Save TEXT as a file named FILENAME."
+    (with-temp-buffer
+      (insert text)
+      (write-file filename))
+    (message (format "'%s' saved." filename)))
   (defun replace-file-contents (file-path new-content)
     "Replace the contents of the FILE-PATH with NEW-CONTENT."
     (with-temp-file file-path
@@ -46,27 +48,27 @@
     "Create an empty file at FILE-PATH."
     (write-region "" nil file-path))
   (defun file-content-equal-to-string (file string)
-      "Check if the content of FILE is equal to STRING."
-      (with-temp-buffer
-	(insert-file-contents file)
-	(string= (buffer-string) string)))
+    "Check if the content of FILE is equal to STRING."
+    (with-temp-buffer
+      (insert-file-contents file)
+      (string= (buffer-string) string)))
   (defun delete-current-file ()
     "Deletes the current file being viewed in the buffer"
     (interactive)
     (let ((filename (buffer-file-name)))
       (when filename
-    (if (yes-or-no-p (format "Are you sure you want to delete %s?" filename))
-	(progn
-	  (delete-file filename)
-	  (message "File '%s' deleted." filename)
-	  (kill-buffer))
-      (message "File '%s' not deleted." filename)))))
+	(if (yes-or-no-p (format "Are you sure you want to delete %s?" filename))
+	    (progn
+	      (delete-file filename)
+	      (message "File '%s' deleted." filename)
+	      (kill-buffer))
+	  (message "File '%s' not deleted." filename)))))
   (defun backward-kill-word-or-whitespace ()
     "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
     (interactive)
     (if (looking-back "\\s-")
-    (progn
-      (delete-region (point) (save-excursion (skip-chars-backward " \t\n") (point))))
+	(progn
+	  (delete-region (point) (save-excursion (skip-chars-backward " \t\n") (point))))
       (backward-kill-word 1)))
   ;; write functions
   (defun write-current-time ()
@@ -94,6 +96,13 @@
 	  (word (flyspell-get-word)))
       (when (consp word)    
 	(flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
+  ;; write total time
+  (defun write-total-time (days)
+    "Calculate the total hours based on DAYS and HOURS-PER-DAY."
+    (interactive "nEnter the number of days: ")
+    (let ((mydays 23)
+	  (myhours (ceiling (* mydays 7.5))))
+      (insert (format "%dd %d:00" (/ myhours 24) (% myhours 24)))))
 #+end_src
 ** paste fix
 A function that can be used to replace æøå with proper encoded æøå.
