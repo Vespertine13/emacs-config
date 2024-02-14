@@ -67,7 +67,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       (load-module-and-measure-time "Keybinding" "~/emacs-config/mod/keybinding.org")
 #+end_src
 ** Basic Setup
-
 *** Text and Writing
 #+begin_src emacs-lisp
   ;; Electric pair for closing parentheses etc
@@ -90,11 +89,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
     (add-hook 'prog-mode-hook 'flyspell-prog-mode)
     (eval-after-load "flyspell"
       '(define-key flyspell-mode-map (kbd "C-.") nil)))
-#+end_src
-*** Time
-#+begin_src emacs-lisp
-  (setq-default org-display-custom-times t)
-  (setq org-time-stamp-custom-formats '("<%e.%m.%Y>" . "<%e.%m.%Y %H:%M>"))
 #+end_src
 *** Auto Revert
 #+begin_src emacs-lisp
