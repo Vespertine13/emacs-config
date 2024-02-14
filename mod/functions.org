@@ -4,9 +4,9 @@
 #+begin_src emacs-lisp
   ;; folders and files
   (when (member "Constants" loaded-modules)
-    (defun open-mega ()
+    (defun open-dropbox ()
       (interactive)
-      (find-file FOLDER_MEGA))
+      (find-file FOLDER_DROPBOX))
     (defun open-org ()
       (interactive)
       (find-file FOLDER_ORG))
