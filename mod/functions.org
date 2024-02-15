@@ -2,33 +2,6 @@
 #+STARTUP: overview
 * Custom Function
 #+begin_src emacs-lisp
-  ;; folders and files
-  (when (member "Constants" loaded-modules)
-    (defun open-dropbox ()
-      (interactive)
-      (find-file FOLDER_DROPBOX))
-    (defun open-org ()
-      (interactive)
-      (find-file FOLDER_ORG))
-    (defun open-bookmarks ()
-      (interactive)
-      (find-file ORG_BOOKMARKS))
-    (defun open-emacs_utilities ()
-      (interactive)
-      (find-file FOLDER_EMACS_UTILITIES))
-    (defun open-config ()
-      (interactive)
-      (find-file ORG_CONFIG))
-    (defun open-timeliste ()
-      (interactive)
-      (find-file ORG_TIMELISTE))
-    (defun open-token ()
-      (interactive)
-      (find-file ORG_TOKENS)))
-  ;; open scratch
-  (defun open-scratch ()
-    (interactive)
-    (switch-to-buffer "*scratch*"))
   ;; other custom functions
   (defun unhighlight-all ()
     (interactive)
@@ -63,13 +36,45 @@
 	      (message "File '%s' deleted." filename)
 	      (kill-buffer))
 	  (message "File '%s' not deleted." filename)))))
-  (defun backward-kill-word-or-whitespace ()
-    "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
+  ;; Ispell save word
+  (defun my-save-word ()
     (interactive)
-    (if (looking-back "\\s-")
-	(progn
-	  (delete-region (point) (save-excursion (skip-chars-backward " \t\n") (point))))
-      (backward-kill-word 1)))
+    (let ((current-location (point))
+	  (word (flyspell-get-word)))
+      (when (consp word)    
+	(flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
+#+end_src
+** Folders and files shortcuts
+#+begin_src emacs-lisp
+  (when (member "Constants" loaded-modules)
+    (defun open-dropbox ()
+      (interactive)
+      (find-file FOLDER_DROPBOX))
+    (defun open-org ()
+      (interactive)
+      (find-file FOLDER_ORG))
+    (defun open-bookmarks ()
+      (interactive)
+      (find-file ORG_BOOKMARKS))
+    (defun open-emacs_utilities ()
+      (interactive)
+      (find-file FOLDER_EMACS_UTILITIES))
+    (defun open-config ()
+      (interactive)
+      (find-file ORG_CONFIG))
+    (defun open-timeliste ()
+      (interactive)
+      (find-file ORG_TIMELISTE))
+    (defun open-token ()
+      (interactive)
+      (find-file ORG_TOKENS)))
+  ;; open scratch
+  (defun open-scratch ()
+    (interactive)
+    (switch-to-buffer "*scratch*"))
+#+end_src
+** Insert/write functions
+#+begin_src emacs-lisp
   ;; write functions
   (defun write-current-time ()
     "Writes the current time at the cursor position."
@@ -89,14 +94,7 @@
     (save-excursion
       (goto-char (point-min))
       (insert "# -*- buffer-read-only: t -*-\n")))
-  ;; Ispell save word
-  (defun my-save-word ()
-    (interactive)
-    (let ((current-location (point))
-	  (word (flyspell-get-word)))
-      (when (consp word)    
-	(flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
-  ;; write total time
+  ;; write total time used to calculate flexitid
   (defun write-total-time (days)
     "Calculate the total hours based on DAYS and HOURS-PER-DAY."
     (interactive "nEnter the number of days: ")
@@ -132,6 +130,20 @@ A function that can be used to replace æøå with proper encoded æøå.
       (while (re-search-forward "[\x3FFFD8]" nil t)
 	(replace-match "Ø" nil nil))))
   (add-hook 'before-save-hook 'paste-fix)
+#+end_src
+** Normal backspace
+#+begin_src emacs-lisp
+  (defun ryanmarcus/backward-kill-word ()
+    "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
+    (interactive)
+    (if (looking-back "[ \n]")
+	;; delete horizontal space before us and then check to see if we
+	;; are looking at a newline
+	(progn (delete-horizontal-space 't)
+	       (while (looking-back "[ \n]")
+		 (backward-delete-char 1)))
+      ;; otherwise, just do the normal kill word.
+      (backward-kill-word 1)))
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
