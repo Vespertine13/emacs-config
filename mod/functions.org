@@ -100,9 +100,9 @@
   (defun write-total-time (days)
     "Calculate the total hours based on DAYS and HOURS-PER-DAY."
     (interactive "nEnter the number of days: ")
-    (let ((mydays 23)
-	  (myhours (ceiling (* mydays 7.5))))
-      (insert (format "%dd %d:00" (/ myhours 24) (% myhours 24)))))
+    (let ((days 23)
+	  (hours (ceiling (* days 7.5))))
+      (insert (format "%dd %d:00" (/ hours 24) (% hours 24)))))
 #+end_src
 ** paste fix
 A function that can be used to replace æøå with proper encoded æøå.
