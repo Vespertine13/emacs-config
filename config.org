@@ -136,9 +136,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   ;; dynamic blocks
   (add-hook 'org-mode-hook 'org-update-all-dblocks)
      (add-hook 'before-save-hook 'org-update-all-dblocks)
-  ;; org agenda files
-  (when (member "Constants" loaded-modules)
-    (setq org-agenda-files FOLDER_ORG_LIST))
   ;; related custom functins
   (defun checkbox-all ()
     (interactive)
