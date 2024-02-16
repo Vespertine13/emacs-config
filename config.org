@@ -7,6 +7,14 @@ eivind.kb@hotmail.com
 * Init Setup
 The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it contains the following code: 
 (org-babel-load-file "~/emacs-config/config.org")
+** suggested init.el
+;; Set your cloud path here
+(setq FOLDER_CLOUD "//path/to/cloud//")
+;; loads the full config if the cloud is set
+;; loads the lite init othwervise
+(if (file-directory-p FOLDER_CLOUD)
+    (org-babel-load-file "~/emacs-config/config.org")
+  (load-file "~/emacs-config/init_lite.el"))
 
 * Configuration
 ** Basic Customization
@@ -47,9 +55,9 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       ;; Make a list of loaded modules
       (setq loaded-modules ())
       ;; Loading modules
-      (load-module-and-measure-time "Constants" "~/cloud/Dropbox/config/constants.org")
+      (load-module-and-measure-time "Constants" (concat FOLDER_CLOUD "config/constants.org"))
       (load-module-and-measure-time "Packages" "~/emacs-config/mod/packages.org")
-      (load-module-and-measure-time "Teos" "~/cloud/Dropbox/config/teos.org")
+      (load-module-and-measure-time "Teos" (concat FOLDER_CLOUD "config/teos.org"))
       (load-module-and-measure-time "Zettelkasten" "~/emacs-config/mod/zettelkasten.org")
       (load-module-and-measure-time "Agenda" "~/emacs-config/mod/agenda.org")
       (load-module-and-measure-time "Company" "~/emacs-config/mod/company.org")
@@ -57,13 +65,13 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       (load-module-and-measure-time "Python" "~/emacs-config/mod/python.org")
       (load-module-and-measure-time "Themes" "~/emacs-config/mod/themes.org")
       (load-module-and-measure-time "Pandoc" "~/emacs-config/mod/pandoc.org")
-      (load-module-and-measure-time "Emojis" "~/cloud/Dropbox/config/emojis.org")
-      (load-module-and-measure-time "Elfeed" "~/cloud/Dropbox/config/elfeed.org")
+      (load-module-and-measure-time "Emojis" (concat FOLDER_CLOUD "config/emojis.org"))
+      (load-module-and-measure-time "Elfeed" (concat FOLDER_CLOUD "config/elfeed.org"))
       (load-module-and-measure-time "Mastodon" "~/emacs-config/mod/mastodon.org")
       (load-module-and-measure-time "ERC" "~/emacs-config/mod/erc.org")
       (load-module-and-measure-time "EMMS" "~/emacs-config/mod/emms.org")
       (load-module-and-measure-time "Functions" "~/emacs-config/mod/functions.org")
-      (load-module-and-measure-time "Experimental" "~/cloud/Dropbox/config/experimental.org")
+      (load-module-and-measure-time "Experimental" (concat FOLDER_CLOUD "config/experimental.org"))
       (load-module-and-measure-time "Keybinding" "~/emacs-config/mod/keybinding.org")
 #+end_src
 ** Basic Setup
@@ -291,7 +299,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (require 'dashboard)
   ;; (dashboard-setup-startup-hook)
   ;; Set the banner
-  (setq dashboard-startup-banner "~/cloud/Dropbox/emacs_startup.txt")
+  (setq dashboard-startup-banner (concat FOLDER_CLOUD "emacs_startup.txt"))
   ;; Value can be
   ;; - nil to display no banner
   ;; - 'official which displays the official emacs logo

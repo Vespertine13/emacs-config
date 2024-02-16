@@ -3,7 +3,7 @@
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c 1") 'dashboard-open)
   (global-set-key (kbd "C-c 2") 'open-config)
-  (global-set-key (kbd "C-c 3") 'open-dropbox)
+  (global-set-key (kbd "C-c 3") 'open-cloud)
   (global-set-key (kbd "C-c 4") 'open-timeliste)
   (global-set-key (kbd "C-c 5") 'mastodon)
   (global-set-key (kbd "C-c 6") 'run-libera-chat)
