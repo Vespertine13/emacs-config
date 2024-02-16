@@ -41,10 +41,6 @@
     (eval-after-load "flyspell"
       '(define-key flyspell-mode-map (kbd "C-.") nil)))
 
-;; Time  
-(setq-default org-display-custom-times t)
-(setq org-time-stamp-custom-formats '("<%e.%m.%Y>" . "<%e.%m.%Y %H:%M>"))
-
 ;; Auto-revert
   ;; files reload from disc when reopened
   (global-auto-revert-mode t)
@@ -220,69 +216,30 @@
 
 
 ;; Keybindings
-;; 0-9
-;;  (global-set-key (kbd "C-c 1") 'dashboard-open)
-;;  (global-set-key (kbd "C-c 2") 'open-config)
-;;  (global-set-key (kbd "C-c 3") 'open-mega)
-;;  (global-set-key (kbd "C-c 4") 'open-org)
-;;  (global-set-key (kbd "C-c 5") 'mastodon)
-;;  (global-set-key (kbd "C-c 6") 'run-libera-chat)
-;;  (global-set-key (kbd "C-c 7") 'open-token)
-;;  (global-set-key (kbd "C-c 8") 'open-bookmarks)
-;;  (global-set-key (kbd "C-c 9") 'elfeed)
   (global-set-key (kbd "C-c 0") 'open-scratch)
 
 ;; a-z
-;;  (global-set-key (kbd "C-c a") 'org-agenda)
-  (global-set-key (kbd "C-c b") 'checkbox-all) ;; Clear checkboxes
-;;  (global-set-key (kbd "C-c c") 'org-capture)
-;;  (global-set-key (kbd "C-c d") 'xxxxx) ;; d is for zettelkasten and deft
-;;  (global-set-key (kbd "C-c e") 'xxxxx)
-;;  (global-set-key (kbd "C-c f") 'font-inconsolata)
-;;  (global-set-key (kbd "C-c g") 'xxxxx)
-;;  (global-set-key (kbd "C-c h") 'roam-home)
-;;  (global-set-key (kbd "C-c i") 'ispell)
-;;  (global-set-key (kbd "C-c j") 'xxxxx)
+  (global-set-key (kbd "C-c b") 'checkbox-all)
   (global-set-key (kbd "C-c k") 'delete-current-file)
   (global-set-key (kbd "C-c l") 'org-insert-link)
-;;  (global-set-key (kbd "C-c m") 'xxxxx)
-;;  (global-set-key (kbd "C-c n") 'nyan-mode)
+  (global-set-key (kbd "C-c m") 'kmacro-end-or-call-macro)
+  (global-set-key (kbd "C-c n") 'kmacro-start-macro-or-insert-counter)
   (global-set-key (kbd "C-c o") 'write-current-time)
   (global-set-key (kbd "C-c p") 'write-current-path)
   (global-set-key (kbd "C-c q") 'query-replace)
   (global-set-key (kbd "C-c r") 'visual-line-mode)
   (global-set-key (kbd "C-c s") 'shell)
   (global-set-key (kbd "C-c t") 'org-timer-set-timer)
-;;  (global-set-key (kbd "C-c u") 'flyspell-mode) ;; underline
   (global-set-key (kbd "C-c v") 'goto-line)
-;;  (global-set-key (kbd "C-c w") 'zetteldeft-wander)
-;;  (global-set-key (kbd "C-c x") 'cycle-themes)
-;;  (global-set-key (kbd "C-c y") 'my-save-word)
+  (global-set-key (kbd "C-c w") 'read-only-mode)
   (global-set-key (kbd "C-c z") 'eshell)
-
-
-;; æ-å
-  (global-set-key (kbd "C-c ø") 'write-read-only)
-  (global-set-key (kbd "C-c æ") 'read-only-mode)
-;;  (global-set-key (kbd "C-c å") 'pandoc-convert)
-  (global-set-key (kbd "C-ø") 'make-frame-command)
-  (global-set-key (kbd "C-æ") 'delete-frame)
-;;  (global-set-key (kbd "C-å") 'toggle-frame-solidity)
-  (global-set-key (kbd "C-c M-ø") 'highlight-symbol-at-point)
-  (global-set-key (kbd "C-c M-æ") 'unhighlight-all)
-  (global-set-key (kbd "C-c M-å") 'org-insert-image)
-  (global-set-key (kbd "M-ø") 'kmacro-start-macro-or-insert-counter)
-  (global-set-key (kbd "M-æ") 'kmacro-end-or-call-macro)
-  (global-set-key (kbd "M-å") 'org-show-images)
-  (global-set-key (kbd "C-M-ø") 'replace-regexp)
-  (global-set-key (kbd "C-M-æ") 'occur)
-;;  (global-set-key (kbd "C-M-å") 'my-func)
 
 ;; Other keybindings
   (global-set-key (kbd "C-.") 'other-window)
   (global-set-key (kbd "C-:") 'other-frame)
   (global-set-key "\M- " 'hippie-expand)
-  (global-set-key (kbd "<C-backspace>") 'backward-kill-word-or-whitespace) ;; new C-backspace
-
+  (global-set-key  [C-backspace] 'ryanmarcus/backward-kill-word)
+  (global-set-key (kbd "C-|") 'make-frame-command)
+  (global-set-key (kbd "C-<escape>") 'delete-frame)
 ;; Theme
 (load-theme 'tsdh-dark)

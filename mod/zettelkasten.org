@@ -150,6 +150,7 @@ Overwrite some of the zetteldeft keybinding with new ones suiting org-roam
   (global-set-key (kbd "C-c d r")  'deft-refresh)
   (global-set-key (kbd "C-c d s")  'zetteldeft-search-at-point)
   (global-set-key (kbd "C-c d t")  'zetteldeft-tag-buffer)
+  (global-set-key (kbd "C-c d w")  'zetteldeft-wander)
   (global-set-key (kbd "C-c d x")  'zetteldeft-count-words)
 #+end_src
 
