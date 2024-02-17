@@ -30,13 +30,16 @@
   (defun cycle-themes ()
     "Toggle between different themes"
     (interactive)
-    (setq current-theme-idx (mod (1+ current-theme-idx) 6))
+    (setq current-theme-idx (mod (1+ current-theme-idx) 9))
     (cond ((= current-theme-idx 0) (set-theme 'silkworm))
       ((= current-theme-idx 1) (set-theme 'dream))
       ((= current-theme-idx 2) (set-theme 'shaman))
-      ((= current-theme-idx 3) (set-theme 'subtle-blue))
-      ((= current-theme-idx 4) (set-theme 'gnome))
-      ((= current-theme-idx 5) (set-theme 'birds-of-paradise-plus))))
+      ((= current-theme-idx 3) (set-theme 'julie))
+      ((= current-theme-idx 4) (set-theme 'subtle-blue))
+      ((= current-theme-idx 5) (set-theme 'charcoal-black))
+      ((= current-theme-idx 6) (set-theme 'gnome))
+      ((= current-theme-idx 7) (set-theme 'late-night))
+      ((= current-theme-idx 8) (set-theme 'birds-of-paradise-plus))))
 #+end_src
 * Day/Night Themes
 #+begin_src emacs-lisp
@@ -45,9 +48,9 @@
     (setq current-hour (string-to-number (format-time-string "%H" (current-time))))
     (cond
      ;; day
-     ((and (>= current-hour 6) (< current-hour 18)) (set-theme 'gnome))
+     ((and (>= current-hour 6) (< current-hour 18)) (set-theme 'julie))
      ;; Afternoon
-     ((or (>= current-hour 18) (< current-hour 6)) (set-theme 'birds-of-paradise-plus))))
+     ((or (>= current-hour 18) (< current-hour 6)) (set-theme 'late-night))))
 #+end_src
 * Loaded-modules
 #+begin_src emacs-lisp
