@@ -63,8 +63,9 @@
   (global-set-key (kbd "C-:") 'other-frame)
   (global-set-key "\M- " 'hippie-expand)
   (global-set-key  [C-backspace] 'ryanmarcus/backward-kill-word)
-  (global-set-key (kbd "C-|") 'make-frame-command)
-  (global-set-key (kbd "C-<escape>") 'delete-frame)
+  (global-set-key (kbd "C-+") 'make-frame-command)
+  (global-set-key (kbd "M-+") 'delete-frame)
+  (global-set-key (kbd "C-|") 'delete-frame)
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
