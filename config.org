@@ -19,7 +19,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 * Configuration
 ** Basic Customization
 #+begin_src emacs-lisp
-  (setq inhibit-startup-message t)    ;; Hide the startup message
+;;  (setq inhibit-startup-message t)    ;; Hide the startup message
   (setq debug-on-error t)             ;; enable in-depth message on error
   (setq ring-bell-function 'ignore)   ;; ignore annoying bell sounds while in emacs
   (tool-bar-mode -1)                  ;; removes ugly tool bar

@@ -1,6 +1,7 @@
 #+TITLE: Functions
 #+STARTUP: overview
 * Custom Function
+** Misc 
 #+begin_src emacs-lisp
   ;; other custom functions
   (defun unhighlight-all ()
@@ -72,6 +73,14 @@
   (defun open-scratch ()
     (interactive)
     (switch-to-buffer "*scratch*"))
+  ;; open init
+  (defun open-init ()
+    (interactive)
+    (find-file "~/.emacs.d/init.el"))
+  ;; open fancy about screen
+  (defun open-fancy-about-screen ()
+    (interactive)
+    (fancy-about-screen))
 #+end_src
 ** Insert/write functions
 #+begin_src emacs-lisp

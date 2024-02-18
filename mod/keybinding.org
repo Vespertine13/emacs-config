@@ -1,33 +1,17 @@
 #+STARTUP: content
 * Keybinding 0-9
 #+begin_src emacs-lisp
-  (global-set-key (kbd "C-c 1") 'dashboard-open)
-  (global-set-key (kbd "C-c 2") 'open-config)
+  (global-set-key (kbd "C-c 1") 'shell)
+  (global-set-key (kbd "C-c 2") 'eshell)
   (global-set-key (kbd "C-c 3") 'open-cloud)
   (global-set-key (kbd "C-c 4") 'open-timeliste)
   (global-set-key (kbd "C-c 5") 'mastodon)
   (global-set-key (kbd "C-c 6") 'run-libera-chat)
   (global-set-key (kbd "C-c 7") 'open-token)
-  (global-set-key (kbd "C-c 8") 'open-bookmarks)
-  (global-set-key (kbd "C-c 9") 'elfeed)
+  (global-set-key (kbd "C-c 8") 'open-init)
+  (global-set-key (kbd "C-c 9") 'open-fancy-about-screen)
   (global-set-key (kbd "C-c 0") 'open-scratch)
 #+end_src
-* Keybinding æøå
-#+begin_src emacs-lisp
-;; basic paths
-  (global-set-key (kbd "C-æ") 'open-config)
-  (global-set-key (kbd "C-ø") 'dashboard-open)
-  (global-set-key (kbd "C-å") 'open-cloud)
-;; social
-  (global-set-key (kbd "C-c æ") 'elfeed)
-  (global-set-key (kbd "C-c ø") 'mastodon)
-  (global-set-key (kbd "C-c å") 'run-libera-chat)
-;; appearence
-  (global-set-key (kbd "M-æ") 'theme-select)
-  (global-set-key (kbd "M-ø") 'cycle-themes)
-  (global-set-key (kbd "M-å") 'toggle-frame-solidity)
-#+end_src
-
 * Keybinding a-z
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c a") 'org-agenda)
@@ -57,6 +41,22 @@
   (global-set-key (kbd "C-c y") 'my-save-word)
   (global-set-key (kbd "C-c z") 'eshell)
 #+end_src
+* Keybinding æøå
+#+begin_src emacs-lisp
+;; basic paths
+  (global-set-key (kbd "C-æ") 'open-config)
+  (global-set-key (kbd "C-ø") 'dashboard-open)
+  (global-set-key (kbd "C-å") 'open-cloud)
+;; social
+  (global-set-key (kbd "C-c æ") 'elfeed)
+  (global-set-key (kbd "C-c ø") 'mastodon)
+  (global-set-key (kbd "C-c å") 'run-libera-chat)
+;; appearence
+  (global-set-key (kbd "M-æ") 'theme-select)
+  (global-set-key (kbd "M-ø") 'cycle-themes)
+  (global-set-key (kbd "M-å") 'toggle-frame-solidity)
+#+end_src
+
 * Misc
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-.") 'other-window)
