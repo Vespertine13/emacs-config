@@ -140,6 +140,13 @@ A function that can be used to replace æøå with proper encoded æøå.
 	(replace-match "Ø" nil nil))))
   (add-hook 'before-save-hook 'paste-fix)
 #+end_src
+** ERC
+#+begin_src emacs-lisp
+  (defun run-libera-chat ()
+    (interactive)
+    (erc-tls :server "irc.libera.chat" :port 6697 :nick "gray")
+    (switch-to-buffer "Libera.Chat"))
+#+end_src
 ** Normal backspace
 #+begin_src emacs-lisp
   (defun ryanmarcus/backward-kill-word ()

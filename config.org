@@ -51,7 +51,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	    (setq loaded-modules-with-time (cons formatted-string loaded-modules-with-time))
 	  loaded-modules-with-time))))
       ;; Set expected modules
-      (setq my-init-modules '("Keybinding" "Experimental" "Functions" "EMMS" "ERC" "Mastodon" "Elfeed" "Emojis" "Pandoc" "Themes" "Python" "R" "Company" "Agenda" "Zettelkasten" "Teos" "Packages" "Constants"))
+      (setq my-init-modules '("Keybinding" "Experimental" "Functions" "EMMS" "Abbrev" "Mastodon" "Elfeed" "Emojis" "Pandoc" "Themes" "Python" "R" "Company" "Agenda" "Zettelkasten" "Teos" "Packages" "Constants"))
       ;; Make a list of loaded modules
       (setq loaded-modules ())
       ;; Loading modules
@@ -68,7 +68,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       (load-module-and-measure-time "Emojis" (concat FOLDER_CLOUD "config/emojis.org"))
       (load-module-and-measure-time "Elfeed" (concat FOLDER_CLOUD "config/elfeed.org"))
       (load-module-and-measure-time "Mastodon" "~/emacs-config/mod/mastodon.org")
-      (load-module-and-measure-time "ERC" "~/emacs-config/mod/erc.org")
+      (load-module-and-measure-time "Abbrev" "~/emacs-config/mod/abbrev.org")
       (load-module-and-measure-time "EMMS" "~/emacs-config/mod/emms.org")
       (load-module-and-measure-time "Functions" "~/emacs-config/mod/functions.org")
       (load-module-and-measure-time "Experimental" (concat FOLDER_CLOUD "config/experimental.org"))

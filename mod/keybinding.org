@@ -3,11 +3,11 @@
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c 1") 'shell)
   (global-set-key (kbd "C-c 2") 'eshell)
-  (global-set-key (kbd "C-c 3") 'open-cloud)
-  (global-set-key (kbd "C-c 4") 'open-timeliste)
+  (global-set-key (kbd "C-c 3") 'run-libera-chat)
+  (global-set-key (kbd "C-c 4") 'elfeed)
   (global-set-key (kbd "C-c 5") 'mastodon)
-  (global-set-key (kbd "C-c 6") 'run-libera-chat)
-  (global-set-key (kbd "C-c 7") 'open-token)
+  (global-set-key (kbd "C-c 6") 'snake)
+  (global-set-key (kbd "C-c 7") 'tetris)
   (global-set-key (kbd "C-c 8") 'open-init)
   (global-set-key (kbd "C-c 9") 'open-fancy-about-screen)
   (global-set-key (kbd "C-c 0") 'open-scratch)
@@ -21,7 +21,7 @@
 ;;  (global-set-key (kbd "C-c e") 'xxxxx) ;; e is used for emms
   (global-set-key (kbd "C-c f") 'font-inconsolata)
   (global-set-key (kbd "C-c g") 'undo-tree-visualize)
-  (global-set-key (kbd "C-c h") 'roam-home)
+;;  (global-set-key (kbd "C-c h") 'xxxxx)
   (global-set-key (kbd "C-c i") 'ispell)
 ;;  (global-set-key (kbd "C-c j") 'xxxxx)
   (global-set-key (kbd "C-c k") 'delete-current-file)
@@ -32,14 +32,14 @@
   (global-set-key (kbd "C-c p") 'write-current-path)
   (global-set-key (kbd "C-c q") 'query-replace)
   (global-set-key (kbd "C-c r") 'visual-line-mode)
-  (global-set-key (kbd "C-c s") 'shell)
+;;  (global-set-key (kbd "C-c s") 'xxxxx)
   (global-set-key (kbd "C-c t") 'org-timer-set-timer)
   (global-set-key (kbd "C-c u") 'flyspell-mode) ;; underline
   (global-set-key (kbd "C-c v") 'goto-line)
   (global-set-key (kbd "C-c w") 'read-only-mode)
   (global-set-key (kbd "C-c x") 'cycle-themes)
   (global-set-key (kbd "C-c y") 'my-save-word)
-  (global-set-key (kbd "C-c z") 'eshell)
+  (global-set-key (kbd "C-c z") 'zone)
 #+end_src
 * Keybinding æøå
 #+begin_src emacs-lisp
@@ -48,24 +48,29 @@
   (global-set-key (kbd "C-ø") 'dashboard-open)
   (global-set-key (kbd "C-å") 'open-cloud)
 ;; social
-  (global-set-key (kbd "C-c æ") 'elfeed)
-  (global-set-key (kbd "C-c ø") 'mastodon)
-  (global-set-key (kbd "C-c å") 'run-libera-chat)
+  (global-set-key (kbd "C-c æ") 'open-token)
+  (global-set-key (kbd "C-c ø") 'open-timeliste)
+  (global-set-key (kbd "C-c å") 'roam-home)
 ;; appearence
   (global-set-key (kbd "M-æ") 'theme-select)
   (global-set-key (kbd "M-ø") 'cycle-themes)
   (global-set-key (kbd "M-å") 'toggle-frame-solidity)
 #+end_src
-
+* Arrow keys
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-x <up>") 'make-frame-command)
+  (global-set-key (kbd "C-x <down>") 'delete-frame)
+;;  (global-set-key (kbd "C-c <up>") 'xxxx)
+;;  (global-set-key (kbd "C-c <down>") 'xxxx)
+;;  (global-set-key (kbd "C-c <left>") 'xxxx)
+;;  (global-set-key (kbd "C-c <right>") 'xxxx)
+#+end_src
 * Misc
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-.") 'other-window)
   (global-set-key (kbd "C-:") 'other-frame)
   (global-set-key "\M- " 'hippie-expand)
   (global-set-key  [C-backspace] 'ryanmarcus/backward-kill-word)
-  (global-set-key (kbd "C-+") 'make-frame-command)
-  (global-set-key (kbd "M-+") 'delete-frame)
-  (global-set-key (kbd "C-|") 'delete-frame)
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
