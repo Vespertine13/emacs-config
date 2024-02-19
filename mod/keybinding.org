@@ -52,8 +52,8 @@
   (global-set-key (kbd "C-c ø") 'open-timeliste)
   (global-set-key (kbd "C-c å") 'roam-home)
 ;; appearence
-  (global-set-key (kbd "M-æ") 'theme-select)
-  (global-set-key (kbd "M-ø") 'cycle-themes)
+  (global-set-key (kbd "M-æ") 'cycle-themes)
+  (global-set-key (kbd "M-ø") 'theme-select)
   (global-set-key (kbd "M-å") 'toggle-frame-solidity)
 #+end_src
 * Arrow keys
