@@ -144,8 +144,8 @@ A function that can be used to replace æøå with proper encoded æøå.
 #+begin_src emacs-lisp
   (defun run-libera-chat ()
     (interactive)
-    (erc-tls :server "irc.libera.chat" :port 6697 :nick "gray")
-    (switch-to-buffer "Libera.Chat"))
+    (erc-tls :server "irc.libera.chat" :port 6697 :nick "gray13")
+    (switch-to-buffer "irc.libera.chat:6697"))
 #+end_src
 ** Normal backspace
 #+begin_src emacs-lisp
