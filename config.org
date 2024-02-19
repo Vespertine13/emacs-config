@@ -331,7 +331,10 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (add-to-list 'dashboard-item-generators '(custom-loaded-modules . dashboard-loaded-modules))
   (setq dashboard-items '((custom-loaded-modules) (custom-links)))
 #+end_src
-
+* Encryption
+#+begin_src emacs-lisp
+  (setq epg-pinentry-mode 'loopback) 
+#+end_src
 * Startup
 #+begin_src emacs-lisp
   (when (member "Themes" loaded-modules)
