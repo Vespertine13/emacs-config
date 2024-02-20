@@ -4,23 +4,12 @@
 ;; Eivind Kjeka Broen
 ;; eivind.kb@hotmail.com
 
-;; TODO remove all ÆØÅs
-
 ;; Basics
   (setq inhibit-startup-message t)    ;; Hide the startup message
   (setq debug-on-error t)             ;; enable in-depth message on error
   (setq ring-bell-function 'ignore)   ;; ignore annoying bell sounds while in emacs
   (tool-bar-mode -1)                  ;; removes ugly tool bar
   (menu-bar-mode -1)                  ;; removes menubar
-
-;; Encoding
-  (set-language-environment "utf-8")
-  (prefer-coding-system 'utf-8)
-  (set-default-coding-systems 'utf-8)
-  (set-terminal-coding-system 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
-  (set-selection-coding-system 'utf-8)
-  (setq-default buffer-file-coding-system 'utf-8)
 
 ;; Text and Writing
   ;; Electric pair for closing parentheses etc
@@ -102,6 +91,16 @@
 
 ;; Scratch
   (setq initial-scratch-message "")
+;; open files functions
+  ;; open init
+  (defun open-init ()
+    (interactive)
+    (find-file "~/.emacs.d/init.el"))
+  ;; open fancy about screen
+  (defun open-fancy-about-screen ()
+    (interactive)
+    (fancy-about-screen))
+  ;; open scratch
   (defun open-scratch ()
     (interactive)
     (switch-to-buffer "*scratch*"))
@@ -213,13 +212,49 @@
       (while (re-search-forward "[\x3FFFD8]" nil t)
 	(replace-match "Ø" nil nil))))
   (add-hook 'before-save-hook 'paste-fix)
+  ;; erc
+  (defun run-libera-chat ()
+    (interactive)
+    (erc-tls :server "irc.libera.chat" :port 6697 :nick "gray13")
+    (switch-to-buffer "irc.libera.chat:6697"))
+  ;; normal backspace
+  (defun ryanmarcus/backward-kill-word ()
+    "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
+    (interactive)
+    (if (looking-back "[ \n]")
+	;; delete horizontal space before us and then check to see if we
+	;; are looking at a newline
+	(progn (delete-horizontal-space 't)
+	       (while (looking-back "[ \n]")
+		 (backward-delete-char 1)))
+      ;; otherwise, just do the normal kill word.
+      (backward-kill-word 1)))
 
 
 ;; Keybindings
+;; 0-9
+  (global-set-key (kbd "C-c 1") 'shell)
+  (global-set-key (kbd "C-c 2") 'eshell)
+  (global-set-key (kbd "C-c 3") 'run-libera-chat)
+  (global-set-key (kbd "C-c 4") 'elfeed)
+  (global-set-key (kbd "C-c 5") 'mastodon)
+  (global-set-key (kbd "C-c 6") 'snake)
+  (global-set-key (kbd "C-c 7") 'tetris)
+  (global-set-key (kbd "C-c 8") 'open-init)
+  (global-set-key (kbd "C-c 9") 'open-fancy-about-screen)
   (global-set-key (kbd "C-c 0") 'open-scratch)
 
 ;; a-z
+  (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c b") 'checkbox-all)
+  (global-set-key (kbd "C-c c") 'org-capture)
+;;  (global-set-key (kbd "C-c d") 'xxxxx) ;; d is for zettelkasten and deft
+;;  (global-set-key (kbd "C-c e") 'xxxxx) ;; e is used for emms
+  (global-set-key (kbd "C-c f") 'font-inconsolata)
+  (global-set-key (kbd "C-c g") 'undo-tree-visualize)
+;;  (global-set-key (kbd "C-c h") 'xxxxx)
+  (global-set-key (kbd "C-c i") 'ispell)
+;;  (global-set-key (kbd "C-c j") 'xxxxx)
   (global-set-key (kbd "C-c k") 'delete-current-file)
   (global-set-key (kbd "C-c l") 'org-insert-link)
   (global-set-key (kbd "C-c m") 'kmacro-end-or-call-macro)
@@ -228,18 +263,28 @@
   (global-set-key (kbd "C-c p") 'write-current-path)
   (global-set-key (kbd "C-c q") 'query-replace)
   (global-set-key (kbd "C-c r") 'visual-line-mode)
-  (global-set-key (kbd "C-c s") 'shell)
+;;  (global-set-key (kbd "C-c s") 'xxxxx)
   (global-set-key (kbd "C-c t") 'org-timer-set-timer)
+  (global-set-key (kbd "C-c u") 'flyspell-mode) ;; underline
   (global-set-key (kbd "C-c v") 'goto-line)
   (global-set-key (kbd "C-c w") 'read-only-mode)
-  (global-set-key (kbd "C-c z") 'eshell)
+  (global-set-key (kbd "C-c x") 'cycle-themes)
+  (global-set-key (kbd "C-c y") 'my-save-word)
+  (global-set-key (kbd "C-c z") 'zone)
+
+;; Arrow keys
+  (global-set-key (kbd "C-x <up>") 'make-frame-command)
+  (global-set-key (kbd "C-x <down>") 'delete-frame)
+;;  (global-set-key (kbd "C-c <up>") 'xxxx)
+;;  (global-set-key (kbd "C-c <down>") 'xxxx)
+;;  (global-set-key (kbd "C-c <left>") 'xxxx)
+;;  (global-set-key (kbd "C-c <right>") 'xxxx)
 
 ;; Other keybindings
   (global-set-key (kbd "C-.") 'other-window)
   (global-set-key (kbd "C-:") 'other-frame)
   (global-set-key "\M- " 'hippie-expand)
   (global-set-key  [C-backspace] 'ryanmarcus/backward-kill-word)
-  (global-set-key (kbd "C-|") 'make-frame-command)
-  (global-set-key (kbd "C-<escape>") 'delete-frame)
+
 ;; Theme
 (load-theme 'tsdh-dark)
