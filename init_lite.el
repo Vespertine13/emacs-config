@@ -240,7 +240,6 @@
 (defun set-theme (theme)
   (disable-all-themes)
   (load-theme theme t)
-  (set-frame-font "Inconsolata 16" nil t)
   (message "Theme '%s' set" theme))
 ;; interactive version of set-theme
 (defun theme-select (theme)
