@@ -230,6 +230,24 @@
       ;; otherwise, just do the normal kill word.
       (backward-kill-word 1)))
 
+;; select theme function  
+(defun disable-all-themes ()
+  "Disable all currently active themes."
+  (interactive)
+  (dolist (i custom-enabled-themes)
+    (disable-theme i)))
+;; set theme function
+(defun set-theme (theme)
+  (disable-all-themes)
+  (load-theme theme t)
+  (set-frame-font "Inconsolata 16" nil t)
+  (message "Theme '%s' set" theme))
+;; interactive version of set-theme
+(defun theme-select (theme)
+  (interactive (list (completing-read "Theme: " (mapcar 'symbol-name (custom-available-themes)))))
+  (unless (member theme (mapcar 'symbol-name (custom-available-themes)))
+    (error "Theme not in list!"))
+  (set-theme (intern theme)))
 
 ;; Keybindings
 ;; 0-9
