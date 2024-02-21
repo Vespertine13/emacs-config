@@ -16,6 +16,8 @@
   (electric-pair-mode t)
   ;; Linum mode
   (global-display-line-numbers-mode t)
+  ;; use linum mode on old versions
+  ;;(global-linum-mode t)
   ;; hide emphasis markers (bold, italics etc)
   (setq org-hide-emphasis-markers t)
   ;; sentences does not end in double space anymore
