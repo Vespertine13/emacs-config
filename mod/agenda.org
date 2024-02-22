@@ -77,7 +77,7 @@ Make the org mode a bit more chill.
    '(org-agenda-done ((t (:inherit default))))
    '(org-done ((t (:inherit default))))
    '(org-headline-done ((t (:inherit org-level-1))))
-   '(org-todo ((t (:inherit org-agenda-date-today))))
+   '(org-todo ((t (:inherit org-agenda-date))))
    '(org-done ((t (:inherit default))))
    )
 ;; wdok
