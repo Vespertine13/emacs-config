@@ -68,7 +68,10 @@
       (find-file ORG_TIMELISTE))
     (defun open-token ()
       (interactive)
-      (find-file ORG_TOKENS)))
+      (find-file ORG_TOKENS))
+    (defun open-org-temp ()
+      (interactive)
+      (find-file ORG_TEMP)))
   ;; open scratch
   (defun open-scratch ()
     (interactive)

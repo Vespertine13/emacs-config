@@ -82,7 +82,6 @@
   (global-set-key (kbd "C-|") 'previous-buffer)
   (global-set-key (kbd "C-+") 'make-frame-command)
   (global-set-key (kbd "M-+") 'delete-frame)
-
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
