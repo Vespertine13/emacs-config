@@ -67,6 +67,21 @@
 	  (replace-file-contents ORG_DAILY daily-todos))
   )
 #+end_src
+* Visuals
+Make the org mode a bit more chill.
+# refiojreoig
+#+begin_src emacs-lisp
+  (custom-set-faces
+   '(org-scheduled-today ((t (:inherit default))))
+   '(org-scheduled-previously ((t (:inherit default))))
+   '(org-agenda-done ((t (:inherit default))))
+   '(org-done ((t (:inherit default))))
+   '(org-headline-done ((t (:inherit org-level-1))))
+   '(org-todo ((t (:inherit org-agenda-date-today))))
+   '(org-done ((t (:inherit default))))
+   )
+;; wdok
+#+end_src
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "Agenda")
