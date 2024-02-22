@@ -61,8 +61,8 @@
   (global-set-key (kbd "<f5>") 'bookmark-jump)
   (global-set-key (kbd "<f6>") 'bookmark-set)
   (global-set-key (kbd "<f7>") 'list-bookmarks)
-  (global-set-key (kbd "<f8>") 'bookmark-delete)
-  (global-set-key (kbd "<f9>") 'bookmark-save)
+  (global-set-key (kbd "<f8>") 'bookmark-save)
+  (global-set-key (kbd "<f9>") 'bookmark-delete)
 #+end_src 
 * Arrow keys
 #+begin_src emacs-lisp
