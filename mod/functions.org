@@ -47,7 +47,6 @@
 #+end_src
 ** Folders and files shortcuts
 #+begin_src emacs-lisp
-  (when (member "Constants" loaded-modules)
     (defun open-cloud ()
       (interactive)
       (find-file FOLDER_CLOUD))
@@ -71,7 +70,7 @@
       (find-file ORG_TOKENS))
     (defun open-org-temp ()
       (interactive)
-      (find-file ORG_TEMP)))
+      (find-file ORG_TEMP))
   ;; open scratch
   (defun open-scratch ()
     (interactive)

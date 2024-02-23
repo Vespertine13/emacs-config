@@ -35,6 +35,12 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (set-selection-coding-system 'utf-8)
   (setq-default buffer-file-coding-system 'utf-8)
 #+end_src
+** Load from cloud
+Constants and experimental loads from cloud
+#+begin_src emacs-lisp
+  (ignore-errors (load-file (concat FOLDER_CLOUD "config/constants.el")))
+  (ignore-errors (load-file (concat FOLDER_CLOUD "config/experimental.el")))
+#+end_src
 ** Loading Modules
 #+begin_src emacs-lisp
       ;; Function to load a module and measure the time
@@ -51,13 +57,11 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	    (setq loaded-modules-with-time (cons formatted-string loaded-modules-with-time))
 	  loaded-modules-with-time))))
       ;; Set expected modules
-      (setq my-init-modules '("Keybinding" "Experimental" "Functions" "EMMS" "Abbrev" "Mastodon" "Elfeed" "Emojis" "Pandoc" "Themes" "Python" "R" "Company" "Agenda" "Zettelkasten" "Teos" "Packages" "Constants"))
+      (setq my-init-modules '("Keybinding" "Functions" "EMMS" "Abbrev" "Mastodon" "Emojis" "Pandoc" "Themes" "Python" "R" "Company" "Agenda" "Zettelkasten" "Packages"))
       ;; Make a list of loaded modules
       (setq loaded-modules ())
       ;; Loading modules
-      (load-module-and-measure-time "Constants" (concat FOLDER_CLOUD "config/constants.org"))
       (load-module-and-measure-time "Packages" "~/emacs-config/mod/packages.org")
-      (load-module-and-measure-time "Teos" (concat FOLDER_CLOUD "config/teos.org"))
       (load-module-and-measure-time "Zettelkasten" "~/emacs-config/mod/zettelkasten.org")
       (load-module-and-measure-time "Agenda" "~/emacs-config/mod/agenda.org")
       (load-module-and-measure-time "Company" "~/emacs-config/mod/company.org")
@@ -65,13 +69,10 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       (load-module-and-measure-time "Python" "~/emacs-config/mod/python.org")
       (load-module-and-measure-time "Themes" "~/emacs-config/mod/themes.org")
       (load-module-and-measure-time "Pandoc" "~/emacs-config/mod/pandoc.org")
-      (load-module-and-measure-time "Emojis" (concat FOLDER_CLOUD "config/emojis.org"))
-      (load-module-and-measure-time "Elfeed" (concat FOLDER_CLOUD "config/elfeed.org"))
       (load-module-and-measure-time "Mastodon" "~/emacs-config/mod/mastodon.org")
       (load-module-and-measure-time "Abbrev" "~/emacs-config/mod/abbrev.org")
       (load-module-and-measure-time "EMMS" "~/emacs-config/mod/emms.org")
       (load-module-and-measure-time "Functions" "~/emacs-config/mod/functions.org")
-      (load-module-and-measure-time "Experimental" (concat FOLDER_CLOUD "config/experimental.org"))
       (load-module-and-measure-time "Keybinding" "~/emacs-config/mod/keybinding.org")
 #+end_src
 ** Basic Setup
@@ -108,13 +109,12 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 
 *** Backup
 #+begin_src emacs-lisp
-(when (member "Constants" loaded-modules)
   (setq backup-directory-alist
     `((".*" . ,FOLDER_TEMP)))
   (setq auto-save-file-name-transforms
     `((".*" ,FOLDER_TEMP t)))
   (setq temporary-file-directory
-    FOLDER_TEMP))
+    FOLDER_TEMP)
 #+end_src
 *** ORG
 #+begin_src emacs-lisp
@@ -153,8 +153,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   ;; shift select
   (setq org-support-shift-select 1)
   ;; org temp file reset
-  (when (member "Constants" loaded-modules)
-    (write-region "" nil ORG_TEMP))
+    (write-region "" nil ORG_TEMP)
 #+end_src
 *** Eshell
 #+begin_src emacs-lisp
@@ -163,6 +162,13 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	      (remove-hook 'completion-at-point-functions 'pcomplete-completions-at-point t)))
   (setenv "LANG" "en_US.UTF-8")
   (setq eshell-scroll-to-bottom-on-input t)
+#+end_src
+*** Elfeed
+#+begin_src emacs-lisp
+  (setq elfeed-search-filter "@1-week-ago +unread") ;; avoid old news
+  (add-hook 'elfeed-show-mode-hook 'visual-line-mode)
+  (add-hook 'elfeed-search-mode-hook 'visual-line-mode)
+  (elfeed-update)
 #+end_src
 *** Scratch
 #+begin_src emacs-lisp
@@ -188,8 +194,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 *** Timer
 #+begin_src emacs-lisp
-  (when (member "Constants" loaded-modules)
-    (setq org-clock-sound WAV_BELL))
+    (setq org-clock-sound WAV_BELL)
 #+end_src
 *** Garbage Collection
 #+begin_src emacs-lisp
@@ -227,12 +232,10 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 *** Undo-tree
 #+begin_src emacs-lisp
-  (when (and (member "Packages" loaded-modules) (member "Constants" loaded-modules))
-    (require 'undo-tree)
-    (global-undo-tree-mode)
-    (setq undo-tree-history-directory-alist
-      '(("." . "~/.emacs.d/undo-tree-history/")))
-    )
+  (require 'undo-tree)
+  (global-undo-tree-mode)
+  (setq undo-tree-history-directory-alist
+    '(("." . "~/.emacs.d/undo-tree-history/")))
 #+end_src
 *** Dashboard
 **** Modules text
@@ -274,9 +277,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   ;; (setq dashboard-center-content t)
 
   ;; Set the footer
-  (when (member "Experimental" loaded-modules)
-    (setq dashboard-footer-messages (list (concat "" (random-item my-emacs-tips)))))
-
+  (setq dashboard-footer-messages (list (concat "" (random-item my-emacs-tips))))
   ;; Set the title
   (setq dashboard-banner-logo-title dash-sys-text)
 #+end_src
