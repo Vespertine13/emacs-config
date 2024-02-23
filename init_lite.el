@@ -254,11 +254,11 @@
 ;; 0-9
   (global-set-key (kbd "C-c 1") 'shell)
   (global-set-key (kbd "C-c 2") 'eshell)
-  (global-set-key (kbd "C-c 3") 'run-libera-chat)
-  (global-set-key (kbd "C-c 4") 'elfeed)
-  (global-set-key (kbd "C-c 5") 'mastodon)
-  (global-set-key (kbd "C-c 6") 'snake)
-  (global-set-key (kbd "C-c 7") 'tetris)
+;;  (global-set-key (kbd "C-c 3") 'list-bookmarks)
+;;  (global-set-key (kbd "C-c 4") 'bookmark-save)
+;;  (global-set-key (kbd "C-c 5") 'bookmark-delete)
+;;  (global-set-key (kbd "C-c 6") 'shell)
+;;  (global-set-key (kbd "C-c 7") 'eshell)
   (global-set-key (kbd "C-c 8") 'open-init)
   (global-set-key (kbd "C-c 9") 'open-fancy-about-screen)
   (global-set-key (kbd "C-c 0") 'open-scratch)
@@ -291,6 +291,14 @@
   (global-set-key (kbd "C-c y") 'my-save-word)
   (global-set-key (kbd "C-c z") 'zone)
 
+;; Function keys
+  (global-set-key (kbd "<f5>") 'bookmark-jump)
+  (global-set-key (kbd "<f6>") 'bookmark-set)
+  (global-set-key (kbd "<f7>") 'list-bookmarks)
+  (global-set-key (kbd "<f8>") 'bookmark-save)
+  (global-set-key (kbd "<f9>") 'bookmark-delete)
+
+
 ;; Arrow keys
   (global-set-key (kbd "C-x <up>") 'make-frame-command)
   (global-set-key (kbd "C-x <down>") 'delete-frame)
@@ -304,6 +312,8 @@
   (global-set-key (kbd "C-:") 'other-frame)
   (global-set-key "\M- " 'hippie-expand)
   (global-set-key  [C-backspace] 'ryanmarcus/backward-kill-word)
-
+  (global-set-key (kbd "C-|") 'previous-buffer)
+  (global-set-key (kbd "C-+") 'make-frame-command)
+  (global-set-key (kbd "M-+") 'delete-frame)
 ;; Theme
 (load-theme 'tsdh-dark)
