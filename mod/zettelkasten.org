@@ -7,6 +7,7 @@ Please forgive me gods of emacs.
   (require 'deft)
   (setq deft-extensions '("org"))
   (setq deft-default-extension "org")
+  (setq zetteldeft-home-id "20240107102607")
   (setq deft-directory FOLDER_ROAM)
   (setq deft-text-mode 'org-mode)
   (setq deft-use-filename-as-title t)
@@ -17,13 +18,6 @@ Please forgive me gods of emacs.
 #+end_src
 ** Functions
 #+begin_src emacs-lisp
-  (defun zetteldeft-teos ()
-    (interactive)
-    (setq deft-directory FOLDER_ZETTELDEFT_TEOS)
-    (deft-refresh)
-    (setq zetteldeft-home-id "2023-01-24-1156")
-    (zetteldeft-go-home)
-    )
   ;; zetteldeft wander lets you access a random note
   (defun zetteldeft-wander ()
     "Wander through `zetteldeft' notes.
@@ -129,11 +123,8 @@ Please forgive me gods of emacs.
   (defun roam-home ()
     (interactive)
     (deft)
-    (setq deft-directory FOLDER_ROAM)
-    (setq org-roam-directory FOLDER_ROAM)
     (deft-refresh)
     (org-roam-update-org-id-locations)
-    (setq zetteldeft-home-id "20240107102607")
     (zetteldeft-go-home)
     )
 #+end_src
@@ -156,7 +147,7 @@ Overwrite some of the zetteldeft keybinding with new ones suiting org-roam
 
 ** Initialize
 #+begin_src emacs-lisp
-  (roam-home) 
+  ;;(roam-home) 
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
