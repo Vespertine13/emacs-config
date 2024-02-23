@@ -150,8 +150,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
     (mark-whole-buffer)
     (org-toggle-checkbox)
     (message "check/uncheck all"))
-  ;; hide leading stars in org mode
-  (setq org-hide-leading-stars 1)
   ;; shift select
   (setq org-support-shift-select 1)
   ;; org temp file reset
