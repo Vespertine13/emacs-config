@@ -195,6 +195,15 @@ A function that can be used to replace æøå with proper encoded æøå.
     (add-hook 'prog-mode-hook 'rainbow-mode)
     (add-hook 'org-mode-hook 'rainbow-mode))
 #+end_src
+** random item for dashboard
+#+begin_src emacs-lisp
+(defun random-item (list)
+  "Return a random item from the given list."
+  (if list
+      (let ((index (random (length list))))
+	(elt list index))
+    nil))
+#+end_src
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "Functions")

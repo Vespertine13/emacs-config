@@ -2,9 +2,7 @@
 #+STARTUP: overview
 * Themes folders
 #+begin_src emacs-lisp
-  (add-to-list 'custom-theme-load-path FOLDER_THEMES)
-  (add-to-list 'custom-theme-load-path FOLDER_THEMES_II)
-  (add-to-list 'custom-theme-load-path FOLDER_THEMES_III)
+(add-to-list 'custom-theme-load-path (concat FOLDER_CLOUD "themes/"))
 #+end_src
 * Theme Functions
 #+begin_src emacs-lisp
