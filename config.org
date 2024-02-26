@@ -31,16 +31,9 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 (setq ORG_ROLODEX (concat FOLDER_CLOUD "org/rolodex.org"))
 ;; daily todos
 (setq ORG_DAILY (concat FOLDER_CLOUD "org/daily.org"))
-;; other
-;; abbrev defs 
-(setq FILE_ABBREV (concat FOLDER_CLOUD "config/abbrev_defs"))
-;; bell sound for timer
+;; Misc
 (setq WAV_BELL (concat FOLDER_CLOUD "bell.wav"))
-;; today's date
-(setq TXT_DATE (concat FOLDER_CLOUD "temp/today.txt"))
-;; timeliste
 (setq ORG_TIMELISTE (concat FOLDER_CLOUD "org/timeliste.org"))
-;; temp
 (setq ORG_TEMP (concat FOLDER_CLOUD "org/temp.org"))
 #+end_src
 * Configuration
@@ -78,7 +71,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	    (setq loaded-modules-with-time (cons formatted-string loaded-modules-with-time))
 	  loaded-modules-with-time))))
       ;; Set expected modules
-      (setq my-init-modules '("Keybinding" "Functions" "EMMS" "Abbrev" "Mastodon" "Pandoc" "Themes" "Python" "R" "Company" "Agenda" "Zettelkasten" "Packages"))
+      (setq my-init-modules '("Keybinding" "Misc" "Functions" "EMMS" "Abbrev" "Mastodon" "Pandoc" "Themes" "Python" "R" "Company" "Agenda" "Zettelkasten" "Packages"))
       ;; Make a list of loaded modules
       (setq loaded-modules ())
       ;; Loading modules
@@ -94,194 +87,11 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       (load-module-and-measure-time "Abbrev" "~/emacs-config/mod/abbrev.org")
       (load-module-and-measure-time "EMMS" "~/emacs-config/mod/emms.org")
       (load-module-and-measure-time "Functions" "~/emacs-config/mod/functions.org")
+      (load-module-and-measure-time "Misc" "~/emacs-config/mod/misc.org")
       (load-module-and-measure-time "Keybinding" "~/emacs-config/mod/keybinding.org")
 #+end_src
-** Basic Setup
-*** Text and Writing
-#+begin_src emacs-lisp
-  ;; Electric pair for closing parentheses etc
-  (electric-pair-mode t)
-  ;; Linum mode
-  (global-display-line-numbers-mode t)
-  ;; hide emphasis markers (bold, italics etc)
-  (setq org-hide-emphasis-markers t)
-  ;; sentences does not end in double space anymore
-  (setq sentence-end-double-space nil)
-  ;; when something is selected it will now be deleted if typed over
-  (delete-selection-mode t)
-  ;; global visual line mode
-  (global-visual-line-mode t)
-#+end_src
-**** Flyspell
-#+begin_src emacs-lisp
-  (when (string= system-type "gnu/linux")
-    (add-hook 'text-mode-hook 'flyspell-mode)
-    (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-    (eval-after-load "flyspell"
-      '(define-key flyspell-mode-map (kbd "C-.") nil)))
-#+end_src
-*** Auto Revert
-#+begin_src emacs-lisp
-  ;; files reload from disc when reopened
-  (global-auto-revert-mode t)
-  ;; dired automatically updates  
-  (setq dired-auto-revert-buffer t)
-#+end_src
-
-*** Backup
-#+begin_src emacs-lisp
-  (setq backup-directory-alist
-    `((".*" . ,FOLDER_TEMP)))
-  (setq auto-save-file-name-transforms
-    `((".*" ,FOLDER_TEMP t)))
-  (setq temporary-file-directory
-    FOLDER_TEMP)
-#+end_src
-*** ORG
-#+begin_src emacs-lisp
-  (require 'org)
-  (electric-indent-mode -1)       ;; disables electric indent mode
-  (setq org-log-done t)
-  ;; RETURN will follow links in org-mode files
-  (setq org-return-follows-link  t)
-  ;; remove stupid indent
-  (setq org-adapt-indentation nil)
-     ;; enable tag inheritance
-     (setq org-use-tag-inheritance t)
-  ;; images
-  (setq org-image-actual-width nil) ;; do not display images in actual size
-  ;; enables pictures in org files
-  (defun org-show-images ()
-    (interactive)
-    (message "Show images")
-    (org-toggle-inline-images t)
-    )
-  (add-hook 'org-mode-hook 'org-show-images)
-  ;; inserts a image in org syntax given path
-  (defun org-insert-image (image-path)
-    "Insert standardized image text for org given path."
-    (interactive "FPath to image: ") ; "F" specifies a file path input
-    (insert "#+ATTR_ORG: :width 500\n[[" image-path "]]"))
-  ;; dynamic blocks
-  (add-hook 'org-mode-hook 'org-update-all-dblocks)
-     (add-hook 'before-save-hook 'org-update-all-dblocks)
-  ;; related custom functins
-  (defun checkbox-all ()
-    (interactive)
-    (mark-whole-buffer)
-    (org-toggle-checkbox)
-    (message "check/uncheck all"))
-  ;; shift select
-  (setq org-support-shift-select 1)
-  ;; org temp file reset
-    (write-region "" nil ORG_TEMP)
-#+end_src
-**** org crypt 
-#+begin_src emacs-lisp
-
-(require 'org-crypt)
-(org-crypt-use-before-save-magic)
-(setq org-tags-exclude-from-inheritance '("crypt"))
-
-(setq org-crypt-key nil)
-;; GPG key to use for encryption.
-;; nil means  use symmetric encryption unconditionally.
-;; "" means use symmetric encryption unless heading sets CRYPTKEY property.
-
-(setq auto-save-default nil)
-;; Auto-saving does not cooperate with org-crypt.el: so you need to
-;; turn it off if you plan to use org-crypt.el quite often.  Otherwise,
-;; you'll get an (annoying) message each time you start Org.
-
-;; To turn it off only locally, you can insert this:
-;;
-;; # -*- buffer-auto-save-file-name: nil; -*-
-
-#+end_src 
-*** Eshell
-#+begin_src emacs-lisp
-  (add-hook 'eshell-mode-hook
-	    (lambda ()
-	      (remove-hook 'completion-at-point-functions 'pcomplete-completions-at-point t)))
-  (setenv "LANG" "en_US.UTF-8")
-  (setq eshell-scroll-to-bottom-on-input t)
-#+end_src
-*** Elfeed
-#+begin_src emacs-lisp
-  (setq elfeed-search-filter "@1-week-ago +unread") ;; avoid old news
-  (add-hook 'elfeed-show-mode-hook 'visual-line-mode)
-  (add-hook 'elfeed-search-mode-hook 'visual-line-mode)
-  (elfeed-update)
-#+end_src
-*** Scratch
-#+begin_src emacs-lisp
-  ;; input variable into scratch
-  (setq initial-scratch-message "")
-#+end_src
-*** Calendar
-#+begin_src emacs-lisp
-  (copy-face font-lock-constant-face 'calendar-iso-week-face)
-  (set-face-attribute 'calendar-iso-week-face nil
-		      :height 0.7)
-  (setq calendar-intermonth-text
-	'(propertize
-	  (format "%2d"
-		  (car
-		   (calendar-iso-from-absolute
-		    (calendar-absolute-from-gregorian (list month day year)))))
-	  'font-lock-face 'calendar-iso-week-face))
-  (add-hook 'calendar-load-hook
-	    (lambda ()
-	  (calendar-set-date-style 'european)))
-  (setq calendar-week-start-day 1)
-#+end_src
-*** Timer
-#+begin_src emacs-lisp
-    (setq org-clock-sound WAV_BELL)
-#+end_src
-*** Garbage Collection
-#+begin_src emacs-lisp
-  ;; Minimize garbage collection during startup
-  (setq gc-cons-threshold most-positive-fixnum)
-  ;; Lower threshold back to 8 MiB (default is 800kB)
-  (add-hook 'emacs-startup-hook
-	(lambda ()
-	  (setq gc-cons-threshold (expt 2 23))))
-#+end_src
-
-*** Fonts
-#+begin_src emacs-lisp
-  ;; fonts need to be manually installed
-  (defun font-inconsolata ()
-    (interactive)
-    (setq buffer-face-mode-face '(:family "Inconsolata")) ;; standard font find it in ~/mega/fonts
-    (buffer-face-mode))
-  (defun font-courier ()
-    (interactive)
-    (setq buffer-face-mode-face '(:family "Courier"))
-    (buffer-face-mode))
-  (defun font-iosevka ()
-    (interactive)
-    (setq buffer-face-mode-face '(:family "Iosevka"))
-    (buffer-face-mode))
-  (defun font-robotomono ()
-    (interactive)
-    (setq buffer-face-mode-face '(:family "Roboto Mono"))
-    (buffer-face-mode))
-  (defun font-vcrosdmono()
-    (interactive)
-    (setq buffer-face-mode-face '(:family "VCR OSD Mono"))
-    (buffer-face-mode))
-#+end_src
-*** Undo-tree
-#+begin_src emacs-lisp
-  (require 'undo-tree)
-  (global-undo-tree-mode)
-  (setq undo-tree-history-directory-alist
-    '(("." . "~/.emacs.d/undo-tree-history/")))
-#+end_src
-*** Dashboard
-**** Modules text
+* Dashboard
+** Modules text
 #+begin_src emacs-lisp
     ;; system text
     (setq dash-sys-text (concat "GNU Emacs " emacs-version "|" (symbol-name system-type)))
@@ -302,7 +112,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 
 
 #+end_src
-**** Dashboard
+** Dashboard
 #+begin_src emacs-lisp
   (require 'dashboard)
   ;; (dashboard-setup-startup-hook)
@@ -320,11 +130,11 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   ;; (setq dashboard-center-content t)
 
   ;; Set the footer
-  (setq dashboard-footer-messages (list (concat "" (random-item my-emacs-tips))))
+  (setq dashboard-footer-messages (list (concat "Startup at: " (current-time-string))))
   ;; Set the title
   (setq dashboard-banner-logo-title dash-sys-text)
 #+end_src
-**** Customization
+** Customization
 #+begin_src emacs-lisp
   (defun dashboard-links (list-size)
     (widget-create 'link
@@ -367,21 +177,13 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (defun dashboard-loaded-modules (list-size)
     (insert (concat dashboard-loaded-mods dashboard-missing-mods)))
 
-  (defun dashboard-startup-time (list-size)
-    (insert (concat " Startup at: " (current-time-string))))
-
   (defun dashboard-line (list-size)
     (insert "------------------------------------------------------------------------------------------"))
 
   (add-to-list 'dashboard-item-generators '(line . dashboard-line))
-  (add-to-list 'dashboard-item-generators '(custom-startup-time . dashboard-startup-time))
   (add-to-list 'dashboard-item-generators '(custom-links . dashboard-links))
   (add-to-list 'dashboard-item-generators '(custom-loaded-modules . dashboard-loaded-modules))
-  (setq dashboard-items '((custom-startup-time) (custom-loaded-modules) (custom-links)))
-#+end_src
-* Encryption
-#+begin_src emacs-lisp
-  (setq epg-pinentry-mode 'loopback) 
+  (setq dashboard-items '((custom-loaded-modules) (custom-links)))
 #+end_src
 * Startup
 #+begin_src emacs-lisp
