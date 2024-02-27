@@ -2,6 +2,14 @@
 All other settings, uncategorized.
 
 * Basic Setup
+** Basics
+#+begin_src emacs-lisp
+  (setq inhibit-startup-message t)    ;; Hide the startup message
+  (setq debug-on-error t)             ;; enable in-depth message on error
+  (setq ring-bell-function 'ignore)   ;; ignore annoying bell sounds while in emacs
+  (tool-bar-mode -1)                  ;; removes ugly tool bar
+  (menu-bar-mode -1)                  ;; removes menubar
+#+end_src 
 ** Text and Writing
 #+begin_src emacs-lisp
   ;; Electric pair for closing parentheses etc

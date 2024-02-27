@@ -147,7 +147,7 @@ Overwrite some of the zetteldeft keybinding with new ones suiting org-roam
 
 ** Initialize
 #+begin_src emacs-lisp
-  ;;(roam-home) 
+  (roam-home) 
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp

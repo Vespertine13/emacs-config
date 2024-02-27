@@ -36,16 +36,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 (setq ORG_TIMELISTE (concat FOLDER_CLOUD "org/timeliste.org"))
 (setq ORG_TEMP (concat FOLDER_CLOUD "org/temp.org"))
 #+end_src
-* Configuration
-** Basic Customization
-#+begin_src emacs-lisp
-;;  (setq inhibit-startup-message t)    ;; Hide the startup message
-  (setq debug-on-error t)             ;; enable in-depth message on error
-  (setq ring-bell-function 'ignore)   ;; ignore annoying bell sounds while in emacs
-  (tool-bar-mode -1)                  ;; removes ugly tool bar
-  (menu-bar-mode -1)                  ;; removes menubar
-#+end_src
-** Encoding
+* Encoding
 #+begin_src emacs-lisp
   (set-language-environment "utf-8")
   (prefer-coding-system 'utf-8)
@@ -55,10 +46,10 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (set-selection-coding-system 'utf-8)
   (setq-default buffer-file-coding-system 'utf-8)
 #+end_src
-** Loading Modules
+* Loading Modules
 #+begin_src emacs-lisp
-      ;; Function to load a module and measure the time
-      (setq loaded-modules-with-time ())
+  ;; Function to load a module and measure the time
+  (setq loaded-modules-with-time ())
   (defun load-module-and-measure-time (module file)
     (let* ((start-time (current-time))
 	   (result (ignore-errors (org-babel-load-file file)))
