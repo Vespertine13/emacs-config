@@ -1,10 +1,9 @@
 * Basics
 #+begin_src emacs-lisp
 (emms-all)
-(setq emms-player-list '(emms-player-mpv)
+(setq emms-player-list '(emms-player-vlc)
       emms-info-functions '(emms-info-native))
 
-(setq emms-source-file-default-directory FOLDER_MUSIC)
 #+end_src
 * Keybinding
 Find basic commands in section 8: [[https://www.gnu.org/software/emms/manual/][emms manual]].
