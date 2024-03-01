@@ -5,7 +5,7 @@
   (global-set-key (kbd "C-c b") 'checkbox-all)
   (global-set-key (kbd "C-c c") 'org-capture)
 ;;  (global-set-key (kbd "C-c d") 'xxxxx) ;; d is for zettelkasten and deft
-;;  (global-set-key (kbd "C-c e") 'xxxxx) ;; e is used for emms
+  (global-set-key (kbd "C-c e") 'emms-add-playlist-directory)
   (global-set-key (kbd "C-c f") 'set-frame-font)
   (global-set-key (kbd "C-c g") 'undo-tree-visualize)
 ;;  (global-set-key (kbd "C-c h") 'xxxxx)

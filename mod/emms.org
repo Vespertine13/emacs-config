@@ -5,16 +5,6 @@
       emms-info-functions '(emms-info-native))
 
 #+end_src
-* Keybinding
-Find basic commands in section 8: [[https://www.gnu.org/software/emms/manual/][emms manual]].
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-c e l")  'emms-volume-lower)
-  (global-set-key (kbd "C-c e r")  'emms-volume-raise)
-  (global-set-key (kbd "C-c e e")  'emms)
-  (global-set-key (kbd "C-c e n")  'emms-next)
-  (global-set-key (kbd "C-c e s")  'emms-start)
-  (global-set-key (kbd "C-c e q")  'emms-stop)
-#+end_src
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "EMMS")
