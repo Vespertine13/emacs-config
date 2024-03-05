@@ -56,6 +56,12 @@ Please forgive me gods of emacs.
 	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
 			      ":PROPERTIES:\n:BACKLINK: [[id:47644bb9-9716-44c6-a10b-01964c4cf529][Notes]] \n:TAGS: #notes \n:CREATED: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
 	   :unnarrowed t)
+	  ;; Genomisk medisin (midlertidig)
+	  ("g" "Genomisk Medisin" plain
+	   "%?"
+	   :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
+			      ":PROPERTIES:\n:BACKLINK: [[id:b8b2ee36-364b-4d43-960b-89a9f3964f67][Genomisk Medisin]] \n:TAGS: #genomiskmedisin \n:CREATED: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+	   :unnarrowed t)
 	  ;; Work
 	  ("o" "OUS" plain
 	   "%?"
