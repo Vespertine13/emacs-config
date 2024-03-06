@@ -97,14 +97,6 @@
   (setenv "LANG" "en_US.UTF-8")
   (setq eshell-scroll-to-bottom-on-input t)
 
-
-;; ELFEED
-  (setq elfeed-search-filter "@1-week-ago +unread") ;; avoid old news
-  (add-hook 'elfeed-show-mode-hook 'visual-line-mode)
-  (add-hook 'elfeed-search-mode-hook 'visual-line-mode)
-  (elfeed-update)
-
-
 ;; Scratch
   (setq initial-scratch-message "")
 ;; open files functions
@@ -377,7 +369,7 @@
   (global-set-key (kbd "C-c b") 'checkbox-all)
   (global-set-key (kbd "C-c c") 'org-capture)
 ;;  (global-set-key (kbd "C-c d") 'xxxxx) ;; d is for zettelkasten and deft
-;;  (global-set-key (kbd "C-c e") 'xxxxx) ;; e is used for emms
+  (global-set-key (kbd "C-c e") 'emms-add-playlist-directory)
   (global-set-key (kbd "C-c f") 'set-frame-font)
   (global-set-key (kbd "C-c g") 'undo-tree-visualize)
 ;;  (global-set-key (kbd "C-c h") 'xxxxx)
@@ -399,6 +391,18 @@
   (global-set-key (kbd "C-c x") 'cycle-themes)
   (global-set-key (kbd "C-c y") 'my-save-word)
   (global-set-key (kbd "C-c z") 'eshell)
+
+;; 0-9 
+  (global-set-key (kbd "C-c 1") 'dashboard-open)
+  (global-set-key (kbd "C-c 2") 'open-config)
+  (global-set-key (kbd "C-c 3") 'open-cloud)
+  (global-set-key (kbd "C-c 4") 'elfeed)
+  (global-set-key (kbd "C-c 5") 'mastodon)
+  (global-set-key (kbd "C-c 6") 'run-libera-chat)
+  (global-set-key (kbd "C-c 7") 'org-agenda)
+  (global-set-key (kbd "C-c 8") 'open-init)
+  (global-set-key (kbd "C-c 9") 'open-fancy-about-screen)
+  (global-set-key (kbd "C-c 0") 'open-scratch)
 
 ;; Function keys
   (global-set-key (kbd "<f5>") 'bookmark-jump)

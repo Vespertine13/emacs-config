@@ -75,7 +75,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	    (setq loaded-modules-with-time (cons formatted-string loaded-modules-with-time))
 	  loaded-modules-with-time))))
       ;; Set expected modules
-      (setq my-init-modules '("Keybinding" "EMMS" "Abbrev" "Mastodon" "Pandoc" "Python" "R" "Company" "Agenda" "Zettelkasten" "Packages"))
+      (setq my-init-modules '("EMMS" "Abbrev" "Mastodon" "Pandoc" "Python" "R" "Company" "Agenda" "Zettelkasten" "Packages"))
       ;; Make a list of loaded modules
       (setq loaded-modules ())
       ;; Loading modules
@@ -89,7 +89,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       (load-module-and-measure-time "Mastodon" "~/emacs-config/mod/mastodon.org")
       (load-module-and-measure-time "Abbrev" "~/emacs-config/mod/abbrev.org")
       (load-module-and-measure-time "EMMS" "~/emacs-config/mod/emms.org")
-      (load-module-and-measure-time "Keybinding" "~/emacs-config/mod/keybinding.org")
 #+end_src
 * Debris
 ** org crypt 
@@ -188,12 +187,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 		   "Roam")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
-			     (find-file "~/emacs-config/mod/keybinding.org"))
-		   :mouse-face 'highlight
-		   :follow-link "\C-m"
-		   "Keybindings")
-    (widget-create 'link
-		   :notify (lambda (&rest ignore)
 			     (find-file "~/venn/run.R"))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
@@ -210,12 +203,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
 		   "Configuration")
-    (widget-create 'link
-		   :notify (lambda (&rest ignore)
-			     (open-org-temp))
-		   :mouse-face 'highlight
-		   :follow-link "\C-m"
-		   "Temp")
     )
   (defun dashboard-loaded-modules (list-size)
     (insert (concat dashboard-loaded-mods dashboard-missing-mods)))
@@ -230,8 +217,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 * Startup
 #+begin_src emacs-lisp
-  (when (member "Themes" loaded-modules)
-    (set-day-night-theme))
+  (set-day-night-theme)
   (cd "~/")
   (open-scratch)
   (dashboard-open)
