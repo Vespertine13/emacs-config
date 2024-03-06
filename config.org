@@ -36,6 +36,19 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 (setq ORG_TIMELISTE (concat FOLDER_CLOUD "org/timeliste.org"))
 (setq ORG_TEMP (concat FOLDER_CLOUD "org/temp.org"))
 #+end_src
+* Paths
+#+begin_src emacs-lisp
+  ;; other path settings
+  (add-to-list 'custom-theme-load-path (concat FOLDER_CLOUD "themes/"))
+  ;; backup and temp
+  (setq backup-directory-alist
+	`((".*" . ,FOLDER_TEMP)))
+  (setq auto-save-file-name-transforms
+	`((".*" ,FOLDER_TEMP t)))
+  (setq temporary-file-directory
+	FOLDER_TEMP)
+#+end_src
+
 * Encoding
 #+begin_src emacs-lisp
   (set-language-environment "utf-8")
@@ -62,7 +75,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	    (setq loaded-modules-with-time (cons formatted-string loaded-modules-with-time))
 	  loaded-modules-with-time))))
       ;; Set expected modules
-      (setq my-init-modules '("Keybinding" "Misc" "Functions" "EMMS" "Abbrev" "Mastodon" "Pandoc" "Themes" "Python" "R" "Company" "Agenda" "Zettelkasten" "Packages"))
+      (setq my-init-modules '("Keybinding" "EMMS" "Abbrev" "Mastodon" "Pandoc" "Python" "R" "Company" "Agenda" "Zettelkasten" "Packages"))
       ;; Make a list of loaded modules
       (setq loaded-modules ())
       ;; Loading modules
@@ -72,15 +85,54 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       (load-module-and-measure-time "Company" "~/emacs-config/mod/company.org")
       (load-module-and-measure-time "R" "~/emacs-config/mod/R.org")
       (load-module-and-measure-time "Python" "~/emacs-config/mod/python.org")
-      (load-module-and-measure-time "Themes" "~/emacs-config/mod/themes.org")
       (load-module-and-measure-time "Pandoc" "~/emacs-config/mod/pandoc.org")
       (load-module-and-measure-time "Mastodon" "~/emacs-config/mod/mastodon.org")
       (load-module-and-measure-time "Abbrev" "~/emacs-config/mod/abbrev.org")
       (load-module-and-measure-time "EMMS" "~/emacs-config/mod/emms.org")
-      (load-module-and-measure-time "Functions" "~/emacs-config/mod/functions.org")
-      (load-module-and-measure-time "Misc" "~/emacs-config/mod/misc.org")
       (load-module-and-measure-time "Keybinding" "~/emacs-config/mod/keybinding.org")
 #+end_src
+* Debris
+** org crypt 
+#+begin_src emacs-lisp
+
+(require 'org-crypt)
+(org-crypt-use-before-save-magic)
+(setq org-tags-exclude-from-inheritance '("crypt"))
+
+(setq org-crypt-key nil)
+;; GPG key to use for encryption.
+;; nil means  use symmetric encryption unconditionally.
+;; "" means use symmetric encryption unless heading sets CRYPTKEY property.
+
+(setq auto-save-default nil)
+;; Auto-saving does not cooperate with org-crypt.el: so you need to
+;; turn it off if you plan to use org-crypt.el quite often.  Otherwise,
+;; you'll get an (annoying) message each time you start Org.
+
+;; To turn it off only locally, you can insert this:
+;;
+;; # -*- buffer-auto-save-file-name: nil; -*-
+
+#+end_src 
+** Undo-tree
+#+begin_src emacs-lisp
+  (require 'undo-tree)
+  (global-undo-tree-mode)
+  (setq undo-tree-history-directory-alist
+    '(("." . "~/.emacs.d/undo-tree-history/")))
+#+end_src
+** Encryption
+#+begin_src emacs-lisp
+  (setq epg-pinentry-mode 'loopback) 
+#+end_src
+** elfeed
+#+begin_src emacs-lisp
+;; ELFEED
+  (setq elfeed-search-filter "@1-week-ago +unread") ;; avoid old news
+  (add-hook 'elfeed-show-mode-hook 'visual-line-mode)
+  (add-hook 'elfeed-search-mode-hook 'visual-line-mode)
+  (elfeed-update)
+#+end_src 
 * Dashboard
 ** Modules text
 #+begin_src emacs-lisp

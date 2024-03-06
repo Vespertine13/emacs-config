@@ -24,6 +24,8 @@
   (setq sentence-end-double-space nil)
   ;; when something is selected it will now be deleted if typed over
   (delete-selection-mode t)
+  ;; global visual line mode
+  (global-visual-line-mode t)
 
 ;; flyspell
   (when (string= system-type "gnu/linux")
@@ -38,7 +40,9 @@
   ;; dired automatically updates  
   (setq dired-auto-revert-buffer t)
 
-;; ORG  
+;; ---------------------------------------------------------------------------------------------------------------
+;; ORG
+;; ---------------------------------------------------------------------------------------------------------------
 (require 'org)
   (electric-indent-mode -1)       ;; disables electric indent mode
   (setq org-log-done t)
@@ -83,13 +87,23 @@
   ;; shift select
   (setq org-support-shift-select 1)
 
-
-;; Eshell
+;; ---------------------------------------------------------------------------------------------------------------
+;; OTHER
+;; ---------------------------------------------------------------------------------------------------------------
+;; eshell
   (add-hook 'eshell-mode-hook
 	    (lambda ()
 	      (remove-hook 'completion-at-point-functions 'pcomplete-completions-at-point t)))
   (setenv "LANG" "en_US.UTF-8")
   (setq eshell-scroll-to-bottom-on-input t)
+
+
+;; ELFEED
+  (setq elfeed-search-filter "@1-week-ago +unread") ;; avoid old news
+  (add-hook 'elfeed-show-mode-hook 'visual-line-mode)
+  (add-hook 'elfeed-search-mode-hook 'visual-line-mode)
+  (elfeed-update)
+
 
 ;; Scratch
   (setq initial-scratch-message "")
@@ -124,22 +138,23 @@
 	  (calendar-set-date-style 'european)))
   (setq calendar-week-start-day 1)
 
-;; Custom functions
-  ;; open scratch
-  (defun open-scratch ()
-    (interactive)
-    (switch-to-buffer "*scratch*"))
+;; ---------------------------------------------------------------------------------------------------------------
+;; CUSTOM FUNCTIONS
+;; ---------------------------------------------------------------------------------------------------------------
+
+
+;; MISC
   ;; other custom functions
   (defun unhighlight-all ()
     (interactive)
     (unhighlight-regexp t)
     (message "Removed all highlights"))
   (defun save-text-as-file (text filename)
-  "Save TEXT as a file named FILENAME."
-  (with-temp-buffer
-     (insert text)
-     (write-file filename))
-     (message (format "'%s' saved." filename)))
+    "Save TEXT as a file named FILENAME."
+    (with-temp-buffer
+      (insert text)
+      (write-file filename))
+    (message (format "'%s' saved." filename)))
   (defun replace-file-contents (file-path new-content)
     "Replace the contents of the FILE-PATH with NEW-CONTENT."
     (with-temp-file file-path
@@ -148,28 +163,68 @@
     "Create an empty file at FILE-PATH."
     (write-region "" nil file-path))
   (defun file-content-equal-to-string (file string)
-      "Check if the content of FILE is equal to STRING."
-      (with-temp-buffer
-	(insert-file-contents file)
-	(string= (buffer-string) string)))
+    "Check if the content of FILE is equal to STRING."
+    (with-temp-buffer
+      (insert-file-contents file)
+      (string= (buffer-string) string)))
   (defun delete-current-file ()
     "Deletes the current file being viewed in the buffer"
     (interactive)
     (let ((filename (buffer-file-name)))
       (when filename
-    (if (yes-or-no-p (format "Are you sure you want to delete %s?" filename))
-	(progn
-	  (delete-file filename)
-	  (message "File '%s' deleted." filename)
-	  (kill-buffer))
-      (message "File '%s' not deleted." filename)))))
-  (defun backward-kill-word-or-whitespace ()
-    "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
+	(if (yes-or-no-p (format "Are you sure you want to delete %s?" filename))
+	    (progn
+	      (delete-file filename)
+	      (message "File '%s' deleted." filename)
+	      (kill-buffer))
+	  (message "File '%s' not deleted." filename)))))
+  ;; Ispell save word
+  (defun my-save-word ()
     (interactive)
-    (if (looking-back "\\s-")
-    (progn
-      (delete-region (point) (save-excursion (skip-chars-backward " \t\n") (point))))
-      (backward-kill-word 1)))
+    (let ((current-location (point))
+	  (word (flyspell-get-word)))
+      (when (consp word)    
+	(flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
+
+;; FOLDER AND FILE SHORTCUTS
+    (defun open-cloud ()
+      (interactive)
+      (find-file FOLDER_CLOUD))
+    (defun open-org ()
+      (interactive)
+      (find-file FOLDER_ORG))
+    (defun open-bookmarks ()
+      (interactive)
+      (find-file ORG_BOOKMARKS))
+    (defun open-emacs_utilities ()
+      (interactive)
+      (find-file FOLDER_EMACS_UTILITIES))
+    (defun open-config ()
+      (interactive)
+      (find-file ORG_CONFIG))
+    (defun open-timeliste ()
+      (interactive)
+      (find-file ORG_TIMELISTE))
+    (defun open-token ()
+      (interactive)
+      (find-file ORG_TOKENS))
+    (defun open-org-temp ()
+      (interactive)
+      (find-file ORG_TEMP))
+  ;; open scratch
+  (defun open-scratch ()
+    (interactive)
+    (switch-to-buffer "*scratch*"))
+  ;; open init
+  (defun open-init ()
+    (interactive)
+    (find-file "~/.emacs.d/init.el"))
+  ;; open fancy about screen
+  (defun open-fancy-about-screen ()
+    (interactive)
+    (fancy-about-screen))
+
+;; INSERT FUNCTIONS
   ;; write functions
   (defun write-current-time ()
     "Writes the current time at the cursor position."
@@ -189,6 +244,16 @@
     (save-excursion
       (goto-char (point-min))
       (insert "# -*- buffer-read-only: t -*-\n")))
+  ;; write total time used to calculate flexitid
+  (defun write-total-time (days)
+    "Calculate the total hours based on DAYS and HOURS-PER-DAY."
+    (interactive "nEnter the number of days: ")
+    (let ((days 23)
+	  (hours (ceiling (* days 7.5))))
+      (insert (format "%dd %d:00" (/ hours 24) (% hours 24))))
+)
+
+;; PASTE FIX
   (defun paste-fix ()
     "Replace characters with specific code points with other letters in the current buffer."
     (interactive)
@@ -214,12 +279,14 @@
       (while (re-search-forward "[\x3FFFD8]" nil t)
 	(replace-match "Ø" nil nil))))
   (add-hook 'before-save-hook 'paste-fix)
-  ;; erc
+
+;; ERC
   (defun run-libera-chat ()
     (interactive)
     (erc-tls :server "irc.libera.chat" :port 6697 :nick "gray13")
     (switch-to-buffer "irc.libera.chat:6697"))
-  ;; normal backspace
+
+;; NORMAL BACKSPACE
   (defun ryanmarcus/backward-kill-word ()
     "Remove all whitespace if the character behind the cursor is whitespace, otherwise remove a word."
     (interactive)
@@ -232,37 +299,79 @@
       ;; otherwise, just do the normal kill word.
       (backward-kill-word 1)))
 
-;; select theme function  
-(defun disable-all-themes ()
-  "Disable all currently active themes."
-  (interactive)
-  (dolist (i custom-enabled-themes)
-    (disable-theme i)))
-;; set theme function
-(defun set-theme (theme)
-  (disable-all-themes)
-  (load-theme theme t)
-  (message "Theme '%s' set" theme))
-;; interactive version of set-theme
-(defun theme-select (theme)
-  (interactive (list (completing-read "Theme: " (mapcar 'symbol-name (custom-available-themes)))))
-  (unless (member theme (mapcar 'symbol-name (custom-available-themes)))
-    (error "Theme not in list!"))
-  (set-theme (intern theme)))
+;; APPEARANCE
+  ;; Transparent frames
+  (defvar-local transparent-frame-enabled nil
+    "Flag that indicates if the buffer is transparent.")
+  (defun set-frame-solid ()
+    (set-frame-parameter (selected-frame) 'alpha-background '100)
+    (message "Solid frame"))
+  (defun set-frame-transparent ()
+    (set-frame-parameter (selected-frame) 'alpha-background '50)
+    (message "Transparent frame"))
+  (defun toggle-frame-solidity ()
+    "Toggle between solid and transparent frame for the current buffer."
+    (interactive)
+    (setq transparent-frame-enabled (not transparent-frame-enabled))
+    (if transparent-frame-enabled
+	(set-frame-transparent)
+      (set-frame-solid)))
+  ;; standard font
+  (add-to-list 'default-frame-alist '(font . "Inconsolata-16"))
+  ;; tabs
+  (custom-set-faces
+   '(tab-bar-tab ((t (:inherit default :font "inconsolata" :height 0.8)))))
 
-;; Keybindings
-;; 0-9
-  (global-set-key (kbd "C-c 1") 'shell)
-  (global-set-key (kbd "C-c 2") 'eshell)
-;;  (global-set-key (kbd "C-c 3") 'list-bookmarks)
-;;  (global-set-key (kbd "C-c 4") 'bookmark-save)
-;;  (global-set-key (kbd "C-c 5") 'bookmark-delete)
-;;  (global-set-key (kbd "C-c 6") 'shell)
-;;  (global-set-key (kbd "C-c 7") 'eshell)
-  (global-set-key (kbd "C-c 8") 'open-init)
-  (global-set-key (kbd "C-c 9") 'open-fancy-about-screen)
-  (global-set-key (kbd "C-c 0") 'open-scratch)
+;; ---------------------------------------------------------------------------------------------------------------
+;; THEMES
+;; ---------------------------------------------------------------------------------------------------------------
+  (defun disable-all-themes ()
+    "Disable all currently active themes."
+    (interactive)
+    (dolist (i custom-enabled-themes)
+      (disable-theme i)))
+  ;; set theme function
+  (defun set-theme (theme)
+    (disable-all-themes)
+    (load-theme theme t)
+    (set-frame-font "Inconsolata 16" nil t)
+    (message "Theme '%s' set" theme))
+  ;; interactive version of set-theme
+  (defun theme-select (theme)
+    (interactive (list (completing-read "Theme: " (mapcar 'symbol-name (custom-available-themes)))))
+    (unless (member theme (mapcar 'symbol-name (custom-available-themes)))
+      (error "Theme not in list!"))
+    (set-theme (intern theme)))
+  (defvar current-theme-idx 0
+    "integer representing the current theme")
+  (defun cycle-themes ()
+    "Toggle between different themes"
+    (interactive)
+    (setq current-theme-idx (mod (1+ current-theme-idx) 10))
+    (cond ((= current-theme-idx 0) (set-theme 'lawrence))
+      ((= current-theme-idx 1) (set-theme 'dark-font-lock))
+      ((= current-theme-idx 2) (set-theme 'silkworm))
+      ((= current-theme-idx 3) (set-theme 'subtle-blue))
+      ((= current-theme-idx 4) (set-theme 'gnome))
+      ((= current-theme-idx 5) (set-theme 'shaman))
+      ((= current-theme-idx 6) (set-theme 'birds-of-paradise-plus))
+      ((= current-theme-idx 7) (set-theme 'desert))
+      ((= current-theme-idx 8) (set-theme 'dream))
+      ((= current-theme-idx 9) (set-theme 'late-night))))
+;; day and night theme
+  (defun set-day-night-theme ()
+    (interactive)
+    (setq current-hour (string-to-number (format-time-string "%H" (current-time))))
+    (cond
+     ;; day
+     ((and (>= current-hour 6) (< current-hour 18)) (set-theme 'silkworm))
+     ;; Afternoon
+     ((or (>= current-hour 18) (< current-hour 6)) (set-theme 'late-night))))
 
+
+;; ---------------------------------------------------------------------------------------------------------------
+;; KEYBINDINGS
+;; ---------------------------------------------------------------------------------------------------------------
 ;; a-z
   (global-set-key (kbd "C-c a") 'org-agenda)
   (global-set-key (kbd "C-c b") 'checkbox-all)
@@ -298,7 +407,6 @@
   (global-set-key (kbd "<f8>") 'bookmark-save)
   (global-set-key (kbd "<f9>") 'bookmark-delete)
 
-
 ;; Arrow keys
   (global-set-key (kbd "C-x <up>") 'make-frame-command)
   (global-set-key (kbd "C-x <down>") 'delete-frame)
@@ -315,5 +423,3 @@
   (global-set-key (kbd "C-|") 'previous-buffer)
   (global-set-key (kbd "C-+") 'make-frame-command)
   (global-set-key (kbd "M-+") 'delete-frame)
-;; Theme
-(load-theme 'tsdh-dark)
