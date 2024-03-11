@@ -1,4 +1,8 @@
 #+STARTUP: content
+* setup
+#+begin_src emacs-lisp
+(add-hook 'org-agenda-mode-hook (lambda () (visual-line-mode -1) (setq truncate-lines 1)))
+#+end_src
 * Capture and Agenda
 #+begin_src emacs-lisp
   ;; set org folder
@@ -7,17 +11,18 @@
   (setq today-scheduled (format-time-string "<%Y-%m-%d %a>"))
   (setq handleliste-agenda-content (concat "* TODO %? "(format ":handle:\nSCHEDULED: %s\n:PROPERTIES:\n:ITEMS: \n:CREATED:" today-scheduled) "%U\n:END:\n"))
   (setq todo-agenda-content (concat "* TODO %? "(format "\nSCHEDULED: %s" today-scheduled)))
+  (setq todo-event-content (concat "* TODO %? "(format ":event: \nSCHEDULED: %s\n:PROPERTIES:\n:TIME: \n:PLACE: \n:NOTE:" today-scheduled) "%U\n:END:\n"))
   (setq org-capture-templates
 	`(("t" "TODO" entry (file ORG_CAPTURE)
-	   ,todo-agenda-content)
+	   , todo-agenda-content)
 	  ("b" "Bookmark" entry (file ORG_BOOKMARKS)
 	   "* %? :bookmark:\n:PROPERTIES:\n:CREATED: %U\n:DOMAIN: \n:NOTE: \n:END:\n")
 	  ("d" "Diary" entry (file+olp+datetree ORG_DIARY)
 	   "* Dagen i går\n%?")
-	  ("e" "Events" entry (file ORG_CAPTURE)
-	   "* %? :event:\n:PROPERTIES:\n:DATE: \n:TIME: \n:PLACE: \n:NOTE: \n:END:\n")
+	  ("e" "Events" entry (file ORG_EVENTS)
+	   , todo-event-content)
 	  ("h" "Handleliste" entry (file ORG_HANDLELISTE)
-	   ,handleliste-agenda-content)
+	   , handleliste-agenda-content)
 	  ("k" "Kontaktinfo" entry (file ORG_ROLODEX)
 	   "* %? :contact:\n:PROPERTIES:\n:EMAIL: \n:TELEPHONE: \n:ORGANIZATION: \n:NOTE: \n:END:\n")
 	  ))
