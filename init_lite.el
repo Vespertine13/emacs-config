@@ -69,13 +69,6 @@
   ;; dynamic blocks
   (add-hook 'org-mode-hook 'org-update-all-dblocks)
      (add-hook 'before-save-hook 'org-update-all-dblocks)
-  ;; header sizes
-  (custom-set-faces
-   '(org-level-1 ((t (:inherit outline-1 :height 1.5))))
-   '(org-level-2 ((t (:inherit outline-2 :height 1.25))))
-   '(org-level-3 ((t (:inherit outline-3 :height 1.1))))
-   ) 
-
   ;; related custom functins
   (defun checkbox-all ()
     (interactive)
@@ -200,9 +193,6 @@
     (defun open-token ()
       (interactive)
       (find-file ORG_TOKENS))
-    (defun open-org-temp ()
-      (interactive)
-      (find-file ORG_TEMP))
   ;; open scratch
   (defun open-scratch ()
     (interactive)
