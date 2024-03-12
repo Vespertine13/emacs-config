@@ -80,16 +80,16 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       ;; Make a list of loaded modules
       (setq loaded-modules ())
       ;; Loading modules
-      (load-module-and-measure-time "Packages" "~/emacs-config/mod/packages.org")
-      (load-module-and-measure-time "Zettelkasten" "~/emacs-config/mod/zettelkasten.org")
-      (load-module-and-measure-time "Agenda" "~/emacs-config/mod/agenda.org")
-      (load-module-and-measure-time "Company" "~/emacs-config/mod/company.org")
-      (load-module-and-measure-time "R" "~/emacs-config/mod/R.org")
-      (load-module-and-measure-time "Python" "~/emacs-config/mod/python.org")
-      (load-module-and-measure-time "Pandoc" "~/emacs-config/mod/pandoc.org")
-      (load-module-and-measure-time "Mastodon" "~/emacs-config/mod/mastodon.org")
-      (load-module-and-measure-time "Abbrev" "~/emacs-config/mod/abbrev.org")
-      (load-module-and-measure-time "EMMS" "~/emacs-config/mod/emms.org")
+      (load-module-and-measure-time "Packages" "~/emacs-config/mods/packages.org")
+      (load-module-and-measure-time "Zettelkasten" "~/emacs-config/mods/zettelkasten.org")
+      (load-module-and-measure-time "Agenda" "~/emacs-config/mods/agenda.org")
+      (load-module-and-measure-time "Company" "~/emacs-config/mods/company.org")
+      (load-module-and-measure-time "R" "~/emacs-config/mods/R.org")
+      (load-module-and-measure-time "Python" "~/emacs-config/mods/python.org")
+      (load-module-and-measure-time "Pandoc" "~/emacs-config/mods/pandoc.org")
+      (load-module-and-measure-time "Mastodon" "~/emacs-config/mods/mastodon.org")
+      (load-module-and-measure-time "Abbrev" "~/emacs-config/mods/abbrev.org")
+      (load-module-and-measure-time "EMMS" "~/emacs-config/mods/emms.org")
 #+end_src
 * Debris
 ** org crypt 
