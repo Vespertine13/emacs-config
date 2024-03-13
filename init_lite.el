@@ -235,32 +235,6 @@
       (insert (format "%dd %d:00" (/ hours 24) (% hours 24))))
 )
 
-;; PASTE FIX
-  (defun paste-fix ()
-    "Replace characters with specific code points with other letters in the current buffer."
-    (interactive)
-    (save-excursion
-      (goto-char (point-min))
-      (while (re-search-forward "[\x3FFF92]" nil t)
-	(replace-match "'" nil nil))
-      (while (re-search-forward "[\x3FFFE5]" nil t)
-	(replace-match "å" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFE6]" nil t)
-	(replace-match "æ" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFF8]" nil t)
-	(replace-match "ø" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFC5]" nil t)
-	(replace-match "Å" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFC6]" nil t)
-	(replace-match "Æ" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFD8]" nil t)
-	(replace-match "Ø" nil nil))))
-  (add-hook 'before-save-hook 'paste-fix)
 
 ;; ERC
   (defun run-libera-chat ()
@@ -298,11 +272,6 @@
     (if transparent-frame-enabled
 	(set-frame-transparent)
       (set-frame-solid)))
-  ;; standard font
-  (add-to-list 'default-frame-alist '(font . "Inconsolata-16"))
-  ;; tabs
-  (custom-set-faces
-   '(tab-bar-tab ((t (:inherit default :font "inconsolata" :height 0.8)))))
 
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; THEMES
@@ -316,7 +285,6 @@
   (defun set-theme (theme)
     (disable-all-themes)
     (load-theme theme t)
-    (set-frame-font "Inconsolata 16" nil t)
     (message "Theme '%s' set" theme))
   ;; interactive version of set-theme
   (defun theme-select (theme)
