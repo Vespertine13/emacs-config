@@ -62,10 +62,10 @@
     (setq daily-todos (concat daily-todo1 daily-todo2 daily-todo3 daily-todo4 daily-todo5 daily-todo6)))
   ;; run checks and replace
   ;; check if today's date file exists, if not it creates an empty file
-  (unless (file-exists-p "~/.emacs.d/today.txt")
-    (create-empty-file "~/.emacs.d/today.txt"))
-  (when (not (file-content-equal-to-string "~/.emacs.d/today.txt" today-var))
-    (replace-file-contents "~/.emacs.d/today.txt" today-var)
+  (unless (file-exists-p TXT_TODAY)
+    (create-empty-file TXT_TODAY))
+  (when (not (file-content-equal-to-string TXT_TODAY today-var))
+    (replace-file-contents TXT_TODAY today-var)
     (replace-file-contents ORG_DAILY daily-todos))
 #+end_src
 * Visuals

@@ -235,6 +235,8 @@
       (insert (format "%dd %d:00" (/ hours 24) (% hours 24))))
 )
 
+;; pin entry
+  (setq epg-pinentry-mode 'loopback)
 
 ;; ERC
   (defun run-libera-chat ()

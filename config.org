@@ -35,7 +35,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ;; Misc
 (setq WAV_BELL (concat FOLDER_CLOUD "bell.wav"))
 (setq ORG_TIMELISTE (concat FOLDER_CLOUD "org/timeliste.org"))
-(setq ORG_TEMP (concat FOLDER_CLOUD "org/temp.org"))
+(setq TXT_TODAY (concat FOLDER_CLOUD "today.txt"))
 #+end_src
 * Paths
 #+begin_src emacs-lisp
@@ -92,6 +92,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       (load-module-and-measure-time "EMMS" "~/emacs-config/mods/emms.org")
 #+end_src
 * Debris
+
 ** org crypt 
 #+begin_src emacs-lisp
 
@@ -103,16 +104,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ;; GPG key to use for encryption.
 ;; nil means  use symmetric encryption unconditionally.
 ;; "" means use symmetric encryption unless heading sets CRYPTKEY property.
-
-(setq auto-save-default nil)
-;; Auto-saving does not cooperate with org-crypt.el: so you need to
-;; turn it off if you plan to use org-crypt.el quite often.  Otherwise,
-;; you'll get an (annoying) message each time you start Org.
-
-;; To turn it off only locally, you can insert this:
-;;
-;; # -*- buffer-auto-save-file-name: nil; -*-
-
 #+end_src 
 ** Undo-tree
 #+begin_src emacs-lisp
@@ -121,10 +112,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (setq undo-tree-history-directory-alist
     '(("." . "~/.emacs.d/undo-tree-history/")))
 #+end_src
-** Encryption
-#+begin_src emacs-lisp
-  (setq epg-pinentry-mode 'loopback) 
-#+end_src
+
 ** elfeed
 #+begin_src emacs-lisp
 ;; ELFEED
