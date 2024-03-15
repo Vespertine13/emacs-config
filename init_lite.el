@@ -1,44 +1,39 @@
 ;; My lightweight emacs init
 ;; Should work on emacs 26.1
-;; Requires no packages, additional files or internet connection
+;; Should not require any packages, additional files or internet connection.
 ;; Eivind Kjeka Broen
 ;; eivind.kb@hotmail.com
 
-;; Basics
+;; ---------------------------------------------------------------------------------------------------------------
+;; UI
+;; ---------------------------------------------------------------------------------------------------------------
   (setq inhibit-startup-message t)    ;; Hide the startup message
   (setq debug-on-error t)             ;; enable in-depth message on error
   (setq ring-bell-function 'ignore)   ;; ignore annoying bell sounds while in emacs
   (tool-bar-mode -1)                  ;; removes ugly tool bar
   (menu-bar-mode -1)                  ;; removes menubar
 
+;; ---------------------------------------------------------------------------------------------------------------
 ;; Text and Writing
-  ;; Electric pair for closing parentheses etc
+;; ---------------------------------------------------------------------------------------------------------------
   (electric-pair-mode t)
-  ;; Linum mode
-  (global-display-line-numbers-mode t)
-  ;; use linum mode on old versions
-  ;;(global-linum-mode t)
-  ;; hide emphasis markers (bold, italics etc)
-  (setq org-hide-emphasis-markers t)
   ;; sentences does not end in double space anymore
   (setq sentence-end-double-space nil)
   ;; when something is selected it will now be deleted if typed over
   (delete-selection-mode t)
   ;; global visual line mode
   (global-visual-line-mode t)
+  ;; Line numbers
+  ;; Use linum mode for old version of Emacs and line numbers mode for new versions of Emacs
+  (global-display-line-numbers-mode t)
+  ;;(global-linum-mode t)
 
-;; flyspell
+  ;; flyspell
   (when (string= system-type "gnu/linux")
     (add-hook 'text-mode-hook 'flyspell-mode)
     (add-hook 'prog-mode-hook 'flyspell-prog-mode)
     (eval-after-load "flyspell"
       '(define-key flyspell-mode-map (kbd "C-.") nil)))
-
-;; Auto-revert
-  ;; files reload from disc when reopened
-  (global-auto-revert-mode t)
-  ;; dired automatically updates  
-  (setq dired-auto-revert-buffer t)
 
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; ORG
@@ -79,6 +74,8 @@
   (setq org-hide-leading-stars 1)
   ;; shift select
   (setq org-support-shift-select 1)
+  ;; hide emphasis markers
+  (setq org-hide-emphasis-markers t)
 
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; OTHER
@@ -106,22 +103,16 @@
     (interactive)
     (switch-to-buffer "*scratch*"))
 
-
 ;; Calendar
-  (copy-face font-lock-constant-face 'calendar-iso-week-face)
-  (set-face-attribute 'calendar-iso-week-face nil
-		      :height 0.7)
-  (setq calendar-intermonth-text
-	'(propertize
-	  (format "%2d"
-		  (car
-		   (calendar-iso-from-absolute
-		    (calendar-absolute-from-gregorian (list month day year)))))
-	  'font-lock-face 'calendar-iso-week-face))
-  (add-hook 'calendar-load-hook
-	    (lambda ()
-	  (calendar-set-date-style 'european)))
-  (setq calendar-week-start-day 1)
+(add-hook 'calendar-load-hook
+	  (lambda ()
+	    (calendar-set-date-style 'iso)))
+(setq calendar-week-start-day 1)
+;; Auto-revert
+  ;; files reload from disc when reopened
+  (global-auto-revert-mode t)
+  ;; dired automatically updates  
+  (setq dired-auto-revert-buffer t)
 
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; CUSTOM FUNCTIONS
