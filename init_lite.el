@@ -340,7 +340,7 @@
   (global-set-key (kbd "C-c v") 'goto-line)
   (global-set-key (kbd "C-c w") 'read-only-mode)
   (global-set-key (kbd "C-c x") 'cycle-themes)
-  (global-set-key (kbd "C-c y") 'my-save-word)
+  (global-set-key (kbd "C-c y") 'my-save-word) ;; adds word to my words so it does not get spellchecked.
   (global-set-key (kbd "C-c z") 'eshell)
 
 ;; 0-9 
