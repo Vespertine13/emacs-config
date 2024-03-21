@@ -1,0 +1,35 @@
+#+STARTUP: content
+
+* Basics
+#+begin_src emacs-lisp
+  ;; flyspell
+  (when (string= system-type "gnu/linux")
+    (add-hook 'text-mode-hook 'flyspell-mode)
+    (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+    (eval-after-load "flyspell"
+      '(define-key flyspell-mode-map (kbd "C-.") nil)))
+#+end_src
+
+* Custom Functions
+#+begin_src emacs-lisp
+  ;; Ispell save word
+  (defun my-save-word ()
+    (interactive)
+    (let ((current-location (point))
+	  (word (flyspell-get-word)))
+      (when (consp word)    
+	(flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
+#+end_src
+* Keybinding
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c f m")  'flyspell-mode)
+  (global-set-key (kbd "C-c f s")  'my-save-word) ;; adds word to my words so it does not get spellchecked.
+  (global-set-key (kbd "C-c f r")  'ispell-region)
+  (global-set-key (kbd "C-c f b")  'ispell-buffer)
+  (global-set-key (kbd "C-c f w")  'ispell-word)
+  (global-set-key (kbd "C-c f f")  'flyspell-auto-correct-word)
+#+end_src
+* loaded-modules
+#+begin_src emacs-lisp
+  (add-to-list 'loaded-modules "Flyspell")
+#+end_src

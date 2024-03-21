@@ -28,13 +28,6 @@
   (global-display-line-numbers-mode t)
   ;;(global-linum-mode t)
 
-  ;; flyspell
-  (when (string= system-type "gnu/linux")
-    (add-hook 'text-mode-hook 'flyspell-mode)
-    (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-    (eval-after-load "flyspell"
-      '(define-key flyspell-mode-map (kbd "C-.") nil)))
-
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; ORG
 ;; ---------------------------------------------------------------------------------------------------------------
@@ -154,13 +147,6 @@
 	      (message "File '%s' deleted." filename)
 	      (kill-buffer))
 	  (message "File '%s' not deleted." filename)))))
-  ;; Ispell save word
-  (defun my-save-word ()
-    (interactive)
-    (let ((current-location (point))
-	  (word (flyspell-get-word)))
-      (when (consp word)    
-	(flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
 
 ;; FOLDER AND FILE SHORTCUTS
     (defun open-cloud ()
@@ -321,10 +307,10 @@
   (global-set-key (kbd "C-c c") 'org-capture)
 ;;  (global-set-key (kbd "C-c d") 'xxxxx) ;; d is for zettelkasten and deft
   (global-set-key (kbd "C-c e") 'emms-add-playlist-directory)
-  (global-set-key (kbd "C-c f") 'set-frame-font)
+;;  (global-set-key (kbd "C-c f") 'xxxxx) ;; f is for flyspell
   (global-set-key (kbd "C-c g") 'undo-tree-visualize)
 ;;  (global-set-key (kbd "C-c h") 'xxxxx)
-  (global-set-key (kbd "C-c i") 'ispell)
+;;  (global-set-key (kbd "C-c i") 'xxxxx)
 ;;  (global-set-key (kbd "C-c j") 'xxxxx)
   (global-set-key (kbd "C-c k") 'delete-current-file)
   (global-set-key (kbd "C-c l") 'org-insert-link)
@@ -336,11 +322,11 @@
   (global-set-key (kbd "C-c r") 'visual-line-mode)
   (global-set-key (kbd "C-c s") 'shell)
   (global-set-key (kbd "C-c t") 'org-timer-set-timer)
-  (global-set-key (kbd "C-c u") 'flyspell-mode) ;; underline
+;;  (global-set-key (kbd "C-c u") 'flyspell-mode) ;; underline
   (global-set-key (kbd "C-c v") 'goto-line)
   (global-set-key (kbd "C-c w") 'read-only-mode)
   (global-set-key (kbd "C-c x") 'cycle-themes)
-  (global-set-key (kbd "C-c y") 'my-save-word) ;; adds word to my words so it does not get spellchecked.
+;;  (global-set-key (kbd "C-c y") 'xxxxx)
   (global-set-key (kbd "C-c z") 'eshell)
 
 ;; 0-9 
