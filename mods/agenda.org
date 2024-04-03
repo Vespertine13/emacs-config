@@ -9,7 +9,7 @@
   (setq org-agenda-files (list FOLDER_ORG))
   ;; defines today's date as a variable
   (setq today-scheduled (format-time-string "<%Y-%m-%d %a>"))
-  (setq handleliste-agenda-content (concat "* TODO %? "(format ":handle:\nSCHEDULED: %s\n:PROPERTIES:\n:ITEMS: \n:CREATED:" today-scheduled) "%U\n:END:\n"))
+  (setq handleliste-agenda-content (concat "* TODO %? [/] "(format ":handle:\nSCHEDULED: %s\n:PROPERTIES:\n:CREATED:" today-scheduled) "%U\n:END:\n\n- [ ] "))
   (setq todo-agenda-content (concat "* TODO %? "(format "\nSCHEDULED: %s" today-scheduled)))
   (setq todo-event-content (concat "* TODO %? "(format ":event: \nSCHEDULED: %s\n:PROPERTIES:\n:TIME: \n:PLACE: \n:NOTE:" today-scheduled) "%U\n:END:\n"))
   (setq org-capture-templates
