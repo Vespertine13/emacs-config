@@ -18,7 +18,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 * Constants
 #+begin_src emacs-lisp
 ;; shortcuts org and zettelkast
-(setq FOLDER_TEMP (concat FOLDER_CLOUD "temp/"))
 (setq FOLDER_ORG (concat FOLDER_CLOUD "org/"))
 (setq FOLDER_ROAM (concat FOLDER_CLOUD "org/roam/"))
 ;; tokens
@@ -35,19 +34,12 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ;; Misc
 (setq WAV_BELL (concat FOLDER_CLOUD "bell.wav"))
 (setq ORG_TIMELISTE (concat FOLDER_CLOUD "org/timeliste.org"))
-(setq TXT_TODAY (concat FOLDER_CLOUD "today.txt"))
+(setq TXT_TODAY (concat FOLDER_CLOUD ".todaysdate"))
 #+end_src
 * Paths
 #+begin_src emacs-lisp
   ;; other path settings
   (add-to-list 'custom-theme-load-path (concat FOLDER_CLOUD "themes/"))
-  ;; backup and temp
-  (setq backup-directory-alist
-	`((".*" . ,FOLDER_TEMP)))
-  (setq auto-save-file-name-transforms
-	`((".*" ,FOLDER_TEMP t)))
-  (setq temporary-file-directory
-	FOLDER_TEMP)
 #+end_src
 
 * Encoding
