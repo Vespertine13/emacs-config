@@ -1,20 +1,43 @@
 #+STARTUP: content
 * Settings
 #+begin_src emacs-lisp
-(set-default 'abbrev-mode t)
+  (set-default 'abbrev-mode t)
+  (clear-abbrev-table global-abbrev-table)
 #+end_src
 * Abbreviations
+** Elisp
 #+begin_src emacs-lisp
-  (clear-abbrev-table global-abbrev-table)
   (define-abbrev-table 'global-abbrev-table
     '(
       ("elispblock" "#+begin_src emacs-lisp\n#+end_src")
+      ))
+#+end_src
+** org mode
+#+begin_src emacs-lisp
+  (define-abbrev-table 'global-abbrev-table
+    '(
       ("startupcontent" "#+STARTUP: content")
       ("readonly" "# -*- buffer-read-only: t -*-")
-      ("tableformula" "#+TBLFM: $3=vsum($1 + $2)")))
+      ("tableformula" "#+TBLFM: $3=vsum($1 + $2)")
+      ))
+#+end_src
+** zettelkasten
+#+begin_src emacs-lisp
+  (define-abbrev-table 'global-abbrev-table
+    '(
+      ("propempty" ":BACKLINK: \n:TAGS:")
+      ("propnotes" ":BACKLINK: [[id:47644bb9-9716-44c6-a10b-01964c4cf529][Notes]] \n:TAGS: #notes")
+      ("propgm" ":BACKLINK: [[id:b8b2ee36-364b-4d43-960b-89a9f3964f67][Genomisk Medisin]] \n:TAGS: #genomiskmedisin")
+      ("propous" ":BACKLINK: [[id:a40c3cda-6e61-40f0-b53d-fea162219825][OUS]] \n:TAGS: #ous")
+      ("propcode" ":BACKLINK: [[id:30c78d9d-2895-4723-b279-9c588f34aed6][Code]] \n:TAGS: #code \n:LANGUAGE: \n:LIBRARY:")
+      ("propemacs" ":BACKLINK: [[id:3f119e5c-43b0-4773-ab73-c1ee45453e09][Emacs]] \n:TAGS: #emacs")
+      ("propbioinformatics" ":BACKLINK: [[id:56484c3a-e69b-42e7-984a-265eb69ed635][Bioinformatics]] \n:TAGS: #bioinformatics")
+      ("propteos" ":BACKLINK: [[id:a9eea227-1915-4c38-ae40-65b01a33328c][Teos]] \n:TAGS: #teos")
+      ("propdnd" ":BACKLINK: [[id:284c9904-1342-4361-97be-fd688ce23514][DnD]] \n:TAGS: #dnd")
+      ("propls" ":BACKLINK: [[id:20c1f6f3-2e69-4637-aff4-af6e5895f837][Lurkwoods Skjebne]] \n:TAGS: #dnd #lurkwoodsskjebne")
+      ))
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "Abbrev")
 #+end_src
-
