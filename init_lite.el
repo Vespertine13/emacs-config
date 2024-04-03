@@ -309,7 +309,7 @@
   (global-set-key (kbd "C-c e") 'emms-add-playlist-directory)
 ;;  (global-set-key (kbd "C-c f") 'xxxxx) ;; f is for flyspell
   (global-set-key (kbd "C-c g") 'undo-tree-visualize)
-;;  (global-set-key (kbd "C-c h") 'xxxxx)
+;;  (global-set-key (kbd "C-c h") 'hippie-expand) ;; alternative since M-space is often already bound
 ;;  (global-set-key (kbd "C-c i") 'xxxxx)
 ;;  (global-set-key (kbd "C-c j") 'xxxxx)
   (global-set-key (kbd "C-c k") 'delete-current-file)
@@ -359,7 +359,7 @@
 ;; Other keybindings
   (global-set-key (kbd "C-.") 'other-window)
   (global-set-key (kbd "C-:") 'other-frame)
-  (global-set-key "\M- " 'hippie-expand)
+  (global-set-key (kbd "C-<tab>") 'hippie-expand)
   (global-set-key  [C-backspace] 'ryanmarcus/backward-kill-word)
   (global-set-key (kbd "C-|") 'previous-buffer)
   (global-set-key (kbd "C-+") 'make-frame-command)
