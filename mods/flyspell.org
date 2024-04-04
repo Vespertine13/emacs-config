@@ -14,6 +14,7 @@
 * Custom Functions
 #+begin_src emacs-lisp
   ;; Ispell save word
+  ;; adds word to my words so it does not get spellchecked.
   (defun my-save-word ()
     (interactive)
     (let ((current-location (point))
@@ -37,7 +38,7 @@
 * Keybinding
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c f m")  'flyspell-mode)
-  (global-set-key (kbd "C-c f s")  'my-save-word) ;; adds word to my words so it does not get spellchecked.
+  (global-set-key (kbd "C-c f s")  'my-save-word) 
   (global-set-key (kbd "C-c f r")  'ispell-region)
   (global-set-key (kbd "C-c f b")  'ispell-buffer)
   (global-set-key (kbd "C-c f w")  'ispell-word)
