@@ -15,8 +15,6 @@
   (setq org-capture-templates
 	`(("t" "TODO" entry (file ORG_CAPTURE)
 	   , todo-agenda-content)
-	  ("b" "Bookmark" entry (file ORG_BOOKMARKS)
-	   "* %? :bookmark:\n:PROPERTIES:\n:CREATED: %U\n:DOMAIN: \n:NOTE: \n:END:\n")
 	  ("d" "Diary" entry (file+olp+datetree ORG_DIARY)
 	   "* Dagen i går\n%?")
 	  ("e" "Events" entry (file ORG_EVENTS)
@@ -52,12 +50,12 @@
       (string= (buffer-string) string)))
   ;; text and variables
   (setq today-var (format-time-string "%Y-%m-%d"))
-  (let ((daily-todo1 (format "* TODO Stemple inn\nSCHEDULED: %s\n" today-scheduled))
-	(daily-todo2 (format "* TODO git pull\nSCHEDULED: %s\n" today-scheduled))
-	(daily-todo3 (format "* TODO Sjekk kalender\nSCHEDULED: %s\n" today-scheduled))
-	(daily-todo4 (format "* TODO Sjekk Teams og mail på Citrix\nSCHEDULED: %s\n[[https://ekstern.ous-hf.no][ekstern-ous]]\n" today-scheduled))
-	(daily-todo5 (format "* TODO Skriv dagbok\nSCHEDULED: %s\n" today-scheduled))
-	(daily-todo6 (format "* TODO Standup (skriv i slack)\nSCHEDULED: %s\n" today-scheduled))
+  (let ((daily-todo1 (format "* TODO [#A] Stemple inn\nSCHEDULED: %s\n" today-scheduled))
+	(daily-todo2 (format "* TODO [#B] git pull\nSCHEDULED: %s\n" today-scheduled))
+	(daily-todo3 (format "* TODO [#A] Sjekk kalender\nSCHEDULED: %s\n" today-scheduled))
+	(daily-todo4 (format "* TODO [#A] Sjekk Teams og mail på Citrix\nSCHEDULED: %s\n[[https://ekstern.ous-hf.no][ekstern-ous]]\n" today-scheduled))
+	(daily-todo5 (format "* TODO [#B] Skriv dagbok\nSCHEDULED: %s\n" today-scheduled))
+	(daily-todo6 (format "* TODO [#A] Standup (skriv i slack)\nSCHEDULED: %s\n" today-scheduled))
 	)
     (setq daily-todos (concat daily-todo1 daily-todo2 daily-todo3 daily-todo4 daily-todo5 daily-todo6)))
   ;; run checks and replace

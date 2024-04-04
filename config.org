@@ -23,7 +23,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ;; tokens
 (setq ORG_TOKENS (concat FOLDER_CLOUD "org/tokens.org.gpg"))
 ;; agenda/capture
-(setq ORG_BOOKMARKS (concat FOLDER_CLOUD "org/roam/2023-10-06-1320 Bookmarks.org"))
 (setq ORG_HANDLELISTE (concat FOLDER_CLOUD "org/handleliste.org"))
 (setq ORG_CAPTURE (concat FOLDER_CLOUD "org/capture.org"))
 (setq ORG_EVENTS (concat FOLDER_CLOUD "org/events.org"))

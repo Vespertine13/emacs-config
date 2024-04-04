@@ -76,8 +76,6 @@
     (mark-whole-buffer)
     (org-toggle-checkbox)
     (message "check/uncheck all"))
-  ;; hide leading stars in org mode
-  (setq org-hide-leading-stars 1)
   ;; shift select
   (setq org-support-shift-select 1)
   ;; hide emphasis markers
@@ -168,9 +166,6 @@
     (defun open-org ()
       (interactive)
       (find-file FOLDER_ORG))
-    (defun open-bookmarks ()
-      (interactive)
-      (find-file ORG_BOOKMARKS))
     (defun open-emacs_utilities ()
       (interactive)
       (find-file FOLDER_EMACS_UTILITIES))
@@ -316,7 +311,7 @@
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; a-z
   (global-set-key (kbd "C-c a") 'org-agenda)
-  (global-set-key (kbd "C-c b") 'checkbox-all)
+;;  (global-set-key (kbd "C-c b") 'xxxxx) for bookmarks
   (global-set-key (kbd "C-c c") 'org-capture)
 ;;  (global-set-key (kbd "C-c d") 'xxxxx) ;; d is for zettelkasten and deft
   (global-set-key (kbd "C-c e") 'emms-add-playlist-directory)
@@ -354,12 +349,12 @@
   (global-set-key (kbd "C-c 9") 'open-fancy-about-screen)
   (global-set-key (kbd "C-c 0") 'open-scratch)
 
-;; Function keys
-  (global-set-key (kbd "<f5>") 'bookmark-jump)
-  (global-set-key (kbd "<f6>") 'bookmark-set)
-  (global-set-key (kbd "<f7>") 'list-bookmarks)
-  (global-set-key (kbd "<f8>") 'bookmark-save)
-  (global-set-key (kbd "<f9>") 'bookmark-delete)
+;;; Function keys
+;;  (global-set-key (kbd "<f5>") 'bookmark-jump)
+;;  (global-set-key (kbd "<f6>") 'bookmark-set)
+;;  (global-set-key (kbd "<f7>") 'list-bookmarks)
+;;  (global-set-key (kbd "<f8>") 'bookmark-save)
+;;  (global-set-key (kbd "<f9>") 'bookmark-delete)
 
 ;; Arrow keys
   (global-set-key (kbd "C-x <up>") 'make-frame-command)
@@ -372,8 +367,18 @@
 ;; Other keybindings
   (global-set-key (kbd "C-.") 'other-window)
   (global-set-key (kbd "C-:") 'other-frame)
-  (global-set-key (kbd "C-<tab>") 'hippie-expand)
+  (global-set-key (kbd "C-<") 'hippie-expand)
   (global-set-key  [C-backspace] 'ryanmarcus/backward-kill-word)
   (global-set-key (kbd "C-|") 'previous-buffer)
   (global-set-key (kbd "C-+") 'make-frame-command)
   (global-set-key (kbd "M-+") 'delete-frame)
+
+;; ---------------------------------------------------------------------------------------------------------------
+;; Bookmarks
+;; ---------------------------------------------------------------------------------------------------------------
+  (global-set-key (kbd "C-c b f") 'bookmark-jump)
+  (global-set-key (kbd "C-c b b") 'bookmark-set)
+  (global-set-key (kbd "C-c b l") 'list-bookmarks)
+  (global-set-key (kbd "C-c b s") 'bookmark-save)
+  (global-set-key (kbd "C-c b d") 'bookmark-delete)
+  (global-set-key (kbd "C-c b D") 'bookmark-delete-all)
