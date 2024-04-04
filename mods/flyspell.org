@@ -1,15 +1,16 @@
 #+STARTUP: content
 
 * Basics
-#+begin_src emacs-lisp
+#+begin_scr emacs-lisp
   ;; flyspell
   (when (string= system-type "gnu/linux")
-    (add-hook 'text-mode-hook 'flyspell-mode)
-    (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-    (eval-after-load "flyspell"
-      '(define-key flyspell-mode-map (kbd "C-.") nil)))
+     (setq ispell-program-name "hunspell")
+     (setq ispell-dictionary "en_US")
+     (add-hook 'text-mode-hook 'flyspell-mode)
+     (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+     (eval-after-load "flyspell"
+     '(define-key flyspell-mode-map (kbd "C-.") nil)))
 #+end_src
-
 * Custom Functions
 #+begin_src emacs-lisp
   ;; Ispell save word
@@ -19,6 +20,19 @@
 	  (word (flyspell-get-word)))
       (when (consp word)    
 	(flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
+
+  (defun ispell-no-dict ()
+    (interactive)
+    (setq ispell-program-name "hunspell")
+    (setq ispell-dictionary "nb_NO")
+    (flyspell-mode)
+    (message "Flyspell mode with Norwegian dictionary"))
+  (defun ispell-en-dict ()
+    (interactive)
+    (setq ispell-program-name "hunspell")
+    (ispell-change-dictionary "en_US")
+    (flyspell-mode)
+    (message "Flyspell mode with English dictionary"))
 #+end_src
 * Keybinding
 #+begin_src emacs-lisp
@@ -28,6 +42,8 @@
   (global-set-key (kbd "C-c f b")  'ispell-buffer)
   (global-set-key (kbd "C-c f w")  'ispell-word)
   (global-set-key (kbd "C-c f f")  'flyspell-auto-correct-word)
+  (global-set-key (kbd "C-c f e")  'ispell-en-dict)
+  (global-set-key (kbd "C-c f n")  'ispell-no-dict)
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp

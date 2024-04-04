@@ -68,14 +68,14 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	    (setq loaded-modules-with-time (cons formatted-string loaded-modules-with-time))
 	  loaded-modules-with-time))))
       ;; Set expected modules
-      (setq my-init-modules '("EMMS" "Abbrev" "Mastodon" "Pandoc" "Python" "R" "Company" "Agenda" "Flyspell" "Zettelkasten" "Packages"))
+      (setq my-init-modules '("EMMS" "Abbrev" "Mastodon" "Pandoc" "Python" "R" "Company" "Agenda" "Zettelkasten" "Flyspell" "Packages"))
       ;; Make a list of loaded modules
       (setq loaded-modules ())
       ;; Loading modules
       (load-module-and-measure-time "Packages" "~/emacs-config/mods/packages.org")
+      (load-module-and-measure-time "Flyspell" "~/emacs-config/mods/flyspell.org")
       (load-module-and-measure-time "Zettelkasten" "~/emacs-config/mods/zettelkasten.org")
       (load-module-and-measure-time "Agenda" "~/emacs-config/mods/agenda.org")
-      (load-module-and-measure-time "Flyspell" "~/emacs-config/mods/flyspell.org")
       (load-module-and-measure-time "Company" "~/emacs-config/mods/company.org")
       (load-module-and-measure-time "R" "~/emacs-config/mods/R.org")
       (load-module-and-measure-time "Python" "~/emacs-config/mods/python.org")
