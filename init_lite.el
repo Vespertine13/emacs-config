@@ -18,6 +18,8 @@
 ;; Text and Writing
 ;; ---------------------------------------------------------------------------------------------------------------
   (setq FOLDER_TEMP "~/.emacs.d/my_temp/")
+  (unless (file-exists-p FOLDER_TEMP)
+    (make-directory FOLDER_TEMP))
   ;; backup and temp
   (setq backup-directory-alist
 	`((".*" . ,FOLDER_TEMP)))
