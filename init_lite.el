@@ -291,7 +291,7 @@
       ((= current-theme-idx 1) (set-theme 'dark-font-lock))
       ((= current-theme-idx 2) (set-theme 'silkworm))
       ((= current-theme-idx 3) (set-theme 'subtle-blue))
-      ((= current-theme-idx 4) (set-theme 'gnome))
+      ((= current-theme-idx 4) (set-theme 'jonadabian-slate))
       ((= current-theme-idx 5) (set-theme 'shaman))
       ((= current-theme-idx 6) (set-theme 'birds-of-paradise-plus))
       ((= current-theme-idx 7) (set-theme 'desert))
