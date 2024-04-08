@@ -3,13 +3,12 @@
 * Basics
 #+begin_scr emacs-lisp
   ;; flyspell
-  (when (string= system-type "gnu/linux")
-     (setq ispell-program-name "hunspell")
-     (setq ispell-dictionary "en_US")
-     (add-hook 'text-mode-hook 'flyspell-mode)
-     (add-hook 'prog-mode-hook 'flyspell-prog-mode)
-     (eval-after-load "flyspell"
-     '(define-key flyspell-mode-map (kbd "C-.") nil)))
+  (setq ispell-program-name "hunspell")
+  (setq ispell-dictionary "en_US")
+  (add-hook 'text-mode-hook 'flyspell-mode)
+  (add-hook 'prog-mode-hook 'flyspell-prog-mode)
+  (eval-after-load "flyspell"
+  '(define-key flyspell-mode-map (kbd "C-.") nil))
 #+end_src
 * Custom Functions
 #+begin_src emacs-lisp
