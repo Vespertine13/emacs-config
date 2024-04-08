@@ -235,8 +235,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 * Startup
 #+begin_src emacs-lisp
-  (cd "~/")
-  (open-scratch)
   (dashboard-open)
 #+end_src
 
