@@ -3,7 +3,8 @@
 * Basics
 #+begin_scr emacs-lisp
   ;; flyspell
-  (setq ispell-program-name "hunspell")
+  (setq ispell-program-name "/usr/bin/hunspell")
+  (setenv  "DICPATH" (concat FOLDER_CLOUD "/Library/Spelling"))
   (setq ispell-dictionary "en_US")
   (add-hook 'text-mode-hook 'flyspell-mode)
   (add-hook 'prog-mode-hook 'flyspell-prog-mode)
