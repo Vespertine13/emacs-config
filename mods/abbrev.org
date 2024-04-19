@@ -31,6 +31,7 @@
       ("propous" ":BACKLINK: [[id:a40c3cda-6e61-40f0-b53d-fea162219825][OUS]] \n:TAGS: #ous")
       ("propcode" ":BACKLINK: [[id:30c78d9d-2895-4723-b279-9c588f34aed6][Code]] \n:TAGS: #code \n:LANGUAGE: \n:LIBRARY:")
       ("propemacs" ":BACKLINK: [[id:3f119e5c-43b0-4773-ab73-c1ee45453e09][Emacs]] \n:TAGS: #emacs")
+      ("proplinux" ":BACKLINK: [[id:d242fed4-3f07-43be-bb4d-295ef673c898][Linux]] \n:TAGS: #linux")
       ("propbioinf" ":BACKLINK: [[id:56484c3a-e69b-42e7-984a-265eb69ed635][Bioinformatics]] \n:TAGS: #bioinformatics")
       ("propteos" ":BACKLINK: [[id:a9eea227-1915-4c38-ae40-65b01a33328c][Teos]] \n:TAGS: #teos")
       ("propdnd" ":BACKLINK: [[id:284c9904-1342-4361-97be-fd688ce23514][DnD]] \n:TAGS: #dnd")
