@@ -56,8 +56,9 @@
 	(daily-todo4 (format "* TODO [#A] Sjekk Teams og mail på Citrix\nSCHEDULED: %s\n[[https://ekstern.ous-hf.no][ekstern-ous]]\n" today-scheduled))
 	(daily-todo5 (format "* TODO [#B] Skriv dagbok\nSCHEDULED: %s\n" today-scheduled))
 	(daily-todo6 (format "* TODO [#A] Standup (skriv i slack)\nSCHEDULED: %s\n" today-scheduled))
+	(daily-todo7 (format "* TODO [#A] Sjekk dine Groove saker du drar hjem \nSCHEDULED: %s\n" today-scheduled))
 	)
-    (setq daily-todos (concat daily-todo1 daily-todo2 daily-todo3 daily-todo4 daily-todo5 daily-todo6)))
+    (setq daily-todos (concat daily-todo1 daily-todo2 daily-todo3 daily-todo4 daily-todo5 daily-todo6 daily-todo7)))
   ;; run checks and replace
   ;; check if today's date file exists, if not it creates an empty file
   (unless (file-exists-p TXT_TODAY)
