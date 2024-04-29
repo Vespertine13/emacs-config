@@ -51,7 +51,7 @@
     ;; text and variables
     (setq today-var (format-time-string "%Y-%m-%d"))
     (let (
-	  (daily-end (format "* TODO [#A] Slutt arbeidsdag [0/3]\nSCHEDULED: %s
+	  (daily-end (format "* TODO [#A] Slutt arbeidsdag [0/4]\nSCHEDULED: %s
   - [ ] Sjekk slack
   - [ ] Sjekk groove
   - [ ] git push
