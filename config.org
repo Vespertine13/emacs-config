@@ -67,7 +67,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	    (setq loaded-modules-with-time (cons formatted-string loaded-modules-with-time))
 	  loaded-modules-with-time))))
       ;; Set expected modules
-      (setq my-init-modules '("EMMS" "Abbrev" "Mastodon" "Pandoc" "Python" "R" "Company" "Agenda" "Zettelkasten" "Flyspell" "Packages"))
+      (setq my-init-modules '("vterm" "EMMS" "Abbrev" "Mastodon" "Pandoc" "Python" "R" "Company" "Agenda" "Zettelkasten" "Flyspell" "Packages"))
       ;; Make a list of loaded modules
       (setq loaded-modules ())
       ;; Loading modules
@@ -82,6 +82,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       (load-module-and-measure-time "Mastodon" "~/emacs-config/mods/mastodon.org")
       (load-module-and-measure-time "Abbrev" "~/emacs-config/mods/abbrev.org")
       (load-module-and-measure-time "EMMS" "~/emacs-config/mods/emms.org")
+      (load-module-and-measure-time "vterm" "~/emacs-config/mods/vterm.org")
 #+end_src
 * Debris
 

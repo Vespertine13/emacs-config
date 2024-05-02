@@ -318,7 +318,7 @@
 ;;  (global-set-key (kbd "C-c d") 'xxxxx) ;; d is for zettelkasten and deft
   (global-set-key (kbd "C-c e") 'emms-add-playlist-directory)
 ;;  (global-set-key (kbd "C-c f") 'xxxxx) ;; f is for flyspell
-;;  (global-set-key (kbd "C-c g") 'undo-tree-visualize)
+  (global-set-key (kbd "C-c g") 'goto-line)
 ;;  (global-set-key (kbd "C-c h") 'hippie-expand) ;; alternative since M-space is often already bound
 ;;  (global-set-key (kbd "C-c i") 'xxxxx)
 ;;  (global-set-key (kbd "C-c j") 'xxxxx)
@@ -333,7 +333,7 @@
   (global-set-key (kbd "C-c s") 'shell)
   (global-set-key (kbd "C-c t") 'org-timer-set-timer)
   (global-set-key (kbd "C-c u") 'undo-tree-visualize)
-  (global-set-key (kbd "C-c v") 'goto-line)
+  (global-set-key (kbd "C-c v") 'vterm)
   (global-set-key (kbd "C-c w") 'read-only-mode)
   (global-set-key (kbd "C-c x") 'cycle-themes)
 ;;  (global-set-key (kbd "C-c y") 'xxxxx)

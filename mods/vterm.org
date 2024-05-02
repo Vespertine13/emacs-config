@@ -1,0 +1,57 @@
+#+STARTUP: content
+Remember to install libtool-bin and vterm-module using the command line.
+* setup
+#+begin_src emacs-lisp
+(use-package vterm
+  :ensure t)
+
+(defun vterm-counsel-yank-pop-action (orig-fun &rest args)
+  (if (equal major-mode 'vterm-mode)
+      (let ((inhibit-read-only t)
+            (yank-undo-function (lambda (_start _end) (vterm-undo))))
+        (cl-letf (((symbol-function 'insert-for-yank)
+		  (lambda (str) (vterm-send-string str t))))
+          (apply orig-fun args)))
+    (apply orig-fun args)))
+
+(advice-add 'counsel-yank-pop-action :around #'vterm-counsel-yank-pop-action)
+
+(use-package vterm-toggle
+  :ensure t)
+
+(defun vterm-toggle-other-window()
+  (interactive)
+  (let ((vterm-toggle-fullscreen-p nil)
+	(display-buffer-alist '((".*" (display-buffer-pop-up-window)))))
+    (vterm-toggle-cd-show)))
+
+(global-set-key [f2] 'vterm-toggle)
+(global-set-key [C-f2] 'vterm-toggle-cd)
+
+;; you can cd to the directory where your previous buffer file exists
+;; after you have toggle to the vterm buffer with `vterm-toggle'.
+(define-key vterm-mode-map [(control return)]   #'vterm-toggle-insert-cd)
+
+					;Switch to next vterm buffer
+(define-key vterm-mode-map (kbd "s-n")   'vterm-toggle-forward)
+					;Switch to previous vterm buffer
+(define-key vterm-mode-map (kbd "s-p")   'vterm-toggle-backward)
+
+
+
+(use-package multi-vterm
+  :straight t
+  :config
+  (setq multi-vterm-dedicated-window-height-percent 50))
+
+(defun spawn-shell (name)
+  "Create a new shell buffer: http://stackoverflow.com/a/4116113/446256"
+  (interactive "MName of shell buffer to create: ")
+  (pop-to-buffer (get-buffer-create
+		 (generate-new-buffer-name name)))
+  (shell (current-buffer)))
+#+end_src 
+* loaded-modules
+#+begin_src emacs-lisp
+  (add-to-list 'loaded-modules "vterm")
+#+end_src
