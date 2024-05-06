@@ -56,16 +56,16 @@
   - [ ] Sjekk groove
   - [ ] git push
   - [ ] Stemple ut\n" today-scheduled))
-	  (daily-start (format "* TODO [#A] Start arbeidsdag [0/7]\nSCHEDULED: %s
+	  (daily-start (format "* TODO [#A] Start arbeidsdag [0/6]\nSCHEDULED: %s
   - [ ] Stemple inn
   - [ ] git pull
   - [ ] sjekk kalender (uio, hotmail)
   - [ ] sjekk citrix (teams og ous)
   - [ ] Sjekk groove
-  - [ ] Standup (skriv i slack)
-  - [ ] Skriv dagbok\n" today-scheduled))
+  - [ ] Standup (skriv i slack)\n" today-scheduled))
+	  (daily-diary (format "* TODO [#C] Skriv dagbok\nSCHEDULED: %s" today-scheduled))
 	  )
-      (setq daily-todos (concat daily-start daily-end)))
+      (setq daily-todos (concat daily-start daily-end daily-diary)))
     ;; run checks and replace
     ;; check if today's date file exists, if not it creates an empty file
     (unless (file-exists-p TXT_TODAY)
