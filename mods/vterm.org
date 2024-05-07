@@ -1,5 +1,5 @@
 #+STARTUP: content
-Remember to install libtool-bin and vterm-module using the command line.
+Remember to install libtool-bin using the command line first.
 * setup
 #+begin_src emacs-lisp
 (use-package vterm
