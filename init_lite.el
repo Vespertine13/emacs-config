@@ -317,9 +317,9 @@
   (global-set-key (kbd "C-c c") 'org-capture)
 ;;  (global-set-key (kbd "C-c d") 'xxxxx) ;; d is for zettelkasten and deft
   (global-set-key (kbd "C-c e") 'emms-add-playlist-directory)
-;;  (global-set-key (kbd "C-c f") 'xxxxx) ;; f is for flyspell
-  (global-set-key (kbd "C-c g") 'goto-line)
-;;  (global-set-key (kbd "C-c h") 'hippie-expand) ;; alternative since M-space is often already bound
+  (global-set-key (kbd "C-c f") 'flyspell-mode)
+  (global-set-key (kbd "C-c g") 'goto-last-change)
+;;  (global-set-key (kbd "C-c h") 'xxxxx)
 ;;  (global-set-key (kbd "C-c i") 'xxxxx)
 ;;  (global-set-key (kbd "C-c j") 'xxxxx)
   (global-set-key (kbd "C-c k") 'delete-current-file)

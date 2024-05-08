@@ -33,6 +33,7 @@
       emms                             ;; media player through emacs
       wttrin                           ;; weather info, remember to edit package manually
       treemacs                         ;; sidebar showing file tree
+      goto-last-change                 ;; goto last change
       )
     )
 #+end_src

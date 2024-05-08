@@ -85,7 +85,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       (load-module-and-measure-time "vterm" "~/emacs-config/mods/vterm.org")
 #+end_src
 * Debris
-
 ** org crypt 
 #+begin_src emacs-lisp
 
