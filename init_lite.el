@@ -371,7 +371,7 @@
   (global-set-key (kbd "C-:") 'other-frame)
   (global-set-key (kbd "C-<") 'hippie-expand)
   (global-set-key  [C-backspace] 'ryanmarcus/backward-kill-word)
-  (global-set-key (kbd "C-|") 'previous-buffer)
+  (global-set-key (kbd "C-|") 'treemacs)
   (global-set-key (kbd "C-+") 'make-frame-command)
   (global-set-key (kbd "M-+") 'delete-frame)
 

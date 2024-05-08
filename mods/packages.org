@@ -32,6 +32,7 @@
       ef-themes                        ;; some nice themes
       emms                             ;; media player through emacs
       wttrin                           ;; weather info, remember to edit package manually
+      treemacs                         ;; sidebar showing file tree
       )
     )
 #+end_src
