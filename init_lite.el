@@ -318,6 +318,8 @@
 ;;  (global-set-key (kbd "C-c d") 'xxxxx) ;; d is for zettelkasten and deft
   (global-set-key (kbd "C-c e") 'emms-add-playlist-directory)
   (global-set-key (kbd "C-c f") 'flyspell-mode)
+  (global-set-key (kbd "C-c C-f") 'flyspell-auto-correct-word)
+  (global-set-key (kbd "C-c M-f") 'my-save-word)
   (global-set-key (kbd "C-c g") 'goto-last-change)
 ;;  (global-set-key (kbd "C-c h") 'xxxxx)
 ;;  (global-set-key (kbd "C-c i") 'xxxxx)
