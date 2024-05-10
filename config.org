@@ -68,11 +68,11 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	  loaded-modules-with-time))))
       ;; Set expected modules
       (when (not (boundp 'my-init-modules))
-	(setq my-init-modules '("vterm" "emms" "abbrev" "mastodon" "pandoc" "python" "R" "company" "agenda" "zettelkasten" "flyspell" "packages")))
+	(setq my-init-modules '("packages" "agenda" "zettelkasten" "flyspell" "company" "python" "R" "vterm" "emms" "abbrev" "mastodon" "pandoc")))
       ;; Make a list of loaded modules
       (setq loaded-modules ())
       ;; Loading modules
-      (dolist (module (reverse my-init-modules))
+      (dolist (module my-init-modules)
 	(setq module-file (concat "~/emacs-config/mods/" module ".org"))
 	(load-module-and-measure-time module module-file))
 #+end_src
