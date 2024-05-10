@@ -74,6 +74,18 @@
       (replace-file-contents TXT_TODAY today-var)
       (replace-file-contents ORG_DAILY daily-todos))
 #+end_src
+* org crypt 
+Used for the diary and tokens.
+#+begin_src emacs-lisp
+(require 'org-crypt)
+(org-crypt-use-before-save-magic)
+(setq org-tags-exclude-from-inheritance '("crypt"))
+
+(setq org-crypt-key nil)
+;; GPG key to use for encryption.
+;; nil means  use symmetric encryption unconditionally.
+;; "" means use symmetric encryption unless heading sets CRYPTKEY property.
+#+end_src 
 * Visuals
 Make the org mode a bit more chill.
 # refiojreoig

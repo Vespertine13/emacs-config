@@ -8,12 +8,20 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 (org-babel-load-file "~/emacs-config/config.org")
 ** suggested init.el
 ;; Set your cloud path here
-(setq FOLDER_CLOUD "//path/to/cloud//")
-;; loads the full config if the cloud is set
-;; loads the lite init othwervise
-(if (file-directory-p FOLDER_CLOUD)
-    (org-babel-load-file "~/emacs-config/config.org")
-  (load-file "~/emacs-config/init_lite.el"))
+(setq FOLDER_CLOUD "~/path/to/cloud/")
+
+
+;; Load config 
+;; init_lite.el is the basic config
+(load-file "~/emacs-config/init_lite.el")
+
+;; Load the rest of the config
+;; select modules (optional)
+;; (setq my-init-modules '("module1" "module2"))
+(when (file-directory-p FOLDER_CLOUD) (org-babel-load-file ORG_CONFIG))
+
+;; set theme
+(set-theme 'name-of-theme)
 
 * Constants
 #+begin_src emacs-lisp
@@ -40,7 +48,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   ;; other path settings
   (add-to-list 'custom-theme-load-path (concat FOLDER_CLOUD "themes/"))
 #+end_src
-
 * Encoding
 #+begin_src emacs-lisp
   (set-language-environment "utf-8")
@@ -66,81 +73,15 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	(if (> elapsed-time 0)
 	    (setq loaded-modules-with-time (cons formatted-string loaded-modules-with-time))
 	  loaded-modules-with-time))))
-      ;; Set expected modules
-      (when (not (boundp 'my-init-modules))
-	(setq my-init-modules '("packages" "agenda" "zettelkasten" "flyspell" "company" "python" "R" "vterm" "emms" "abbrev" "mastodon" "pandoc")))
-      ;; Make a list of loaded modules
-      (setq loaded-modules ())
-      ;; Loading modules
-      (dolist (module my-init-modules)
-	(setq module-file (concat "~/emacs-config/mods/" module ".org"))
-	(load-module-and-measure-time module module-file))
-#+end_src
-* Debris
-** org crypt 
-#+begin_src emacs-lisp
-
-(require 'org-crypt)
-(org-crypt-use-before-save-magic)
-(setq org-tags-exclude-from-inheritance '("crypt"))
-
-(setq org-crypt-key nil)
-;; GPG key to use for encryption.
-;; nil means  use symmetric encryption unconditionally.
-;; "" means use symmetric encryption unless heading sets CRYPTKEY property.
-#+end_src 
-** Undo-tree
-#+begin_src emacs-lisp
-  (require 'undo-tree)
-  (global-undo-tree-mode)
-  (setq undo-tree-history-directory-alist
-    '(("." . "~/.emacs.d/undo-tree-history/")))
-#+end_src
-
-** elfeed
-#+begin_src emacs-lisp
-;; ELFEED
-  (setq elfeed-search-filter "@1-week-ago +unread") ;; avoid old news
-  (add-hook 'elfeed-show-mode-hook 'visual-line-mode)
-  (add-hook 'elfeed-search-mode-hook 'visual-line-mode)
-  (elfeed-update)
-#+end_src 
-** Paste-fix
-#+begin_src emacs-lisp
-;; PASTE FIX
-  (defun paste-fix ()
-    "Replace characters with specific code points with other letters in the current buffer."
-    (interactive)
-    (save-excursion
-      (goto-char (point-min))
-      (while (re-search-forward "[\x3FFF92]" nil t)
-	(replace-match "'" nil nil))
-      (while (re-search-forward "[\x3FFFE5]" nil t)
-	(replace-match "å" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFE6]" nil t)
-	(replace-match "æ" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFF8]" nil t)
-	(replace-match "ø" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFC5]" nil t)
-	(replace-match "Å" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFC6]" nil t)
-	(replace-match "Æ" nil nil))
-      (goto-char (point-min)) ; Reset to the beginning of the buffer
-      (while (re-search-forward "[\x3FFFD8]" nil t)
-	(replace-match "Ø" nil nil))))
-  (add-hook 'before-save-hook 'paste-fix)
-#+end_src
-** Inconsolata
-#+begin_src emacs-lisp
-  ;; standard font
-  (add-to-list 'default-frame-alist '(font . "Inconsolata-16"))
-  ;; tabs
-  (custom-set-faces
-   '(tab-bar-tab ((t (:inherit default :font "inconsolata" :height 0.8)))))
+  ;; Set expected modules
+  (when (not (boundp 'my-init-modules))
+    (setq my-init-modules '("packages" "agenda" "undo-tree" "zettelkasten" "flyspell" "company" "python" "R" "vterm" "emms" "abbrev" "paste-fix" "mastodon" "pandoc" "elfeed")))
+  ;; Make a list of loaded modules
+  (setq loaded-modules ())
+  ;; Loading modules
+  (dolist (module my-init-modules)
+    (setq module-file (concat "~/emacs-config/mods/" module ".org"))
+    (load-module-and-measure-time module module-file))
 #+end_src
 * Dashboard
 ** Modules text
@@ -227,6 +168,10 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 * Startup
 #+begin_src emacs-lisp
+  ;; standard font
+  (add-to-list 'default-frame-alist '(font . "Inconsolata-16"))
+  ;; tabs
+  (custom-set-faces
+   '(tab-bar-tab ((t (:inherit default :font "inconsolata" :height 0.8)))))
   (dashboard-open)
 #+end_src
-
