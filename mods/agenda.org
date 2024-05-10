@@ -35,19 +35,6 @@
 #+end_src
 * Daily Todos
 #+begin_src emacs-lisp
-    ;; functions
-    (defun replace-file-contents (file-path new-content)
-      "Replace the contents of the FILE-PATH with NEW-CONTENT."
-      (with-temp-file file-path
-	(insert new-content)))
-    (defun create-empty-file (file-path)
-      "Create an empty file at FILE-PATH."
-      (write-region "" nil file-path))
-    (defun file-content-equal-to-string (file string)
-      "Check if the content of FILE is equal to STRING."
-      (with-temp-buffer
-	(insert-file-contents file)
-	(string= (buffer-string) string)))
     ;; text and variables
     (setq today-var (format-time-string "%Y-%m-%d"))
     (let (
@@ -80,7 +67,6 @@ Used for the diary and tokens.
 (require 'org-crypt)
 (org-crypt-use-before-save-magic)
 (setq org-tags-exclude-from-inheritance '("crypt"))
-
 (setq org-crypt-key nil)
 ;; GPG key to use for encryption.
 ;; nil means  use symmetric encryption unconditionally.

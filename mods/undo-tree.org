@@ -14,5 +14,4 @@
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "undo-tree")
-(wdwd)
 #+end_src

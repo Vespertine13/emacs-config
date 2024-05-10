@@ -1,7 +1,7 @@
 #+STARTUP: overview
 * Mastodon
 #+begin_src emacs-lisp
-  (when (member "Packages" loaded-modules)
+  (when (member "packages" loaded-modules)
     (setq mastodon-instance-url "https://tech.lgbt"
       mastodon-active-user "gray")
     (defun my-mastodon-hook ()
