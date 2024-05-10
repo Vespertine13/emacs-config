@@ -1,0 +1,38 @@
+#+STARTUP: content
+* keybinding
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c g") 'goto-last-change)
+
+  (global-set-key (kbd "C-æ") 'open-config)
+  (global-set-key (kbd "C-c æ") 'open-token)
+  (global-set-key (kbd "M-æ") 'cycle-themes)
+
+
+  (global-set-key (kbd "C-ø") 'dashboard-open)
+  (global-set-key (kbd "C-c ø") 'open-timeliste)
+  (global-set-key (kbd "M-ø") 'theme-select)
+
+  (global-set-key (kbd "C-å") 'open-cloud)
+  (global-set-key (kbd "C-c å") 'roam-home)
+  (global-set-key (kbd "M-å") 'toggle-frame-solidity)
+
+;; 0-9 
+(global-set-key (kbd "C-c 1") 'dashboard-open)
+(global-set-key (kbd "C-c 2") 'open-config)
+(global-set-key (kbd "C-c 3") 'open-cloud)
+(global-set-key (kbd "C-c 4") 'elfeed)
+(global-set-key (kbd "C-c 5") 'mastodon)
+(global-set-key (kbd "C-c 6") 'run-libera-chat)
+(global-set-key (kbd "C-c 7") 'org-agenda)
+(global-set-key (kbd "C-c 8") 'open-init)
+(global-set-key (kbd "C-c 9") 'open-fancy-about-screen)
+(global-set-key (kbd "C-c 0") 'open-scratch)
+
+(global-set-key (kbd "C-|") 'treemacs)
+
+#+end_src
+* loaded-modules
+#+begin_src emacs-lisp
+  (add-to-list 'loaded-modules "keybinding")
+#+end_src
+

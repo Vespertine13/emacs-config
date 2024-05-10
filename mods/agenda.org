@@ -101,8 +101,13 @@ Make the org mode a bit more chill.
    )
 ;; wdok
 #+end_src
+* Keybinding
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+#+end_src
 * loaded-modules
 #+begin_src emacs-lisp
-  (add-to-list 'loaded-modules "Agenda")
+  (add-to-list 'loaded-modules "agenda")
 #+end_src
 

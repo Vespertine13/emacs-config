@@ -18,7 +18,15 @@
       (when (consp word)    
 	(flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
 #+end_src
+* keybinding
+f is for flyspell
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c f") 'flyspell-mode)
+(global-set-key (kbd "C-c C-f") 'flyspell-auto-correct-word)
+(global-set-key (kbd "C-c M-f") 'my-save-word)
+
+#+end_src 
 * loaded-modules
 #+begin_src emacs-lisp
-  (add-to-list 'loaded-modules "Flyspell")
+  (add-to-list 'loaded-modules "flyspell")
 #+end_src

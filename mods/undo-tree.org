@@ -5,6 +5,11 @@
   (setq undo-tree-history-directory-alist
     '(("." . "~/.emacs.d/undo-tree-history/")))
 #+end_src
+* Keybinding
+#+begin_src emacs-lisp
+  (global-set-key (kbd "C-c u") 'undo-tree-visualize)
+#+end_src 
+
 
 * loaded-modules
 #+begin_src emacs-lisp

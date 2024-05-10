@@ -3,10 +3,14 @@
 (emms-all)
 (setq emms-player-list '(emms-player-vlc)
       emms-info-functions '(emms-info-native))
-
+#+end_src
+* keybinding
+e is for emms
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c e") 'emms-add-playlist-directory)
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
-  (add-to-list 'loaded-modules "EMMS")
+  (add-to-list 'loaded-modules "emms")
 #+end_src
 

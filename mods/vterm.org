@@ -51,6 +51,10 @@ Remember to install libtool-bin using the command line first.
 		 (generate-new-buffer-name name)))
   (shell (current-buffer)))
 #+end_src 
+* Keybinding
+#+begin_src emacs-lisp
+(global-set-key (kbd "C-c v") 'vterm)
+#+end_src 
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "vterm")

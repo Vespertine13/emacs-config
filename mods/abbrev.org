@@ -40,5 +40,5 @@
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
-  (add-to-list 'loaded-modules "Abbrev")
+  (add-to-list 'loaded-modules "abbrev")
 #+end_src

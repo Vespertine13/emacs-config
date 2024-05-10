@@ -10,7 +10,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ;; Set your cloud path here
 (setq FOLDER_CLOUD "~/path/to/cloud/")
 
-
 ;; Load config 
 ;; init_lite.el is the basic config
 (load-file "~/emacs-config/init_lite.el")
@@ -75,7 +74,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	  loaded-modules-with-time))))
   ;; Set expected modules
   (when (not (boundp 'my-init-modules))
-    (setq my-init-modules '("packages" "agenda" "undo-tree" "zettelkasten" "flyspell" "company" "python" "R" "vterm" "emms" "abbrev" "paste-fix" "mastodon" "elfeed")))
+    (setq my-init-modules '("packages" "agenda" "undo-tree" "zettelkasten" "flyspell" "company" "python" "R" "vterm" "emms" "abbrev" "paste-fix" "mastodon" "elfeed" "keybinding")))
   ;; Make a list of loaded modules
   (setq loaded-modules ())
   ;; Loading modules
@@ -102,8 +101,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
     (if (< n-loaded-modules n-total-modules)
 	(setq dashboard-missing-mods (concat "\n\n MISSING:\n\n    "(mapconcat 'identity list-missing-mods "\n    ")))
       (setq dashboard-missing-mods "")))
-
-
 #+end_src
 ** Dashboard
 #+begin_src emacs-lisp

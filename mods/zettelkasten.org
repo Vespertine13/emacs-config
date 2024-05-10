@@ -85,6 +85,6 @@ Overwrite some of the zetteldeft keybinding with new ones suiting org-roam
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
-  (add-to-list 'loaded-modules "Zettelkasten")
+  (add-to-list 'loaded-modules "zettelkasten")
 #+end_src
 

@@ -93,5 +93,5 @@ Additionally you need to have a /.venv/ folder already made.
 
 * loaded-modules
 #+begin_src emacs-lisp
-  (add-to-list 'loaded-modules "Python")
+  (add-to-list 'loaded-modules "python")
 #+end_src

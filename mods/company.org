@@ -7,5 +7,5 @@
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
-  (add-to-list 'loaded-modules "Company")
+  (add-to-list 'loaded-modules "company")
 #+end_src

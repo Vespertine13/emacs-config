@@ -11,5 +11,5 @@
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
-  (add-to-list 'loaded-modules "Mastodon")
+  (add-to-list 'loaded-modules "mastodon")
 #+end_src
