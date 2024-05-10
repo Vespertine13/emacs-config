@@ -42,6 +42,27 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 (setq ORG_TIMELISTE (concat FOLDER_CLOUD "org/timeliste.org"))
 (setq TXT_TODAY (concat FOLDER_CLOUD ".todaysdate"))
 #+end_src
+** open constants functions
+#+begin_src emacs-lisp
+  (defun open-cloud ()
+    (interactive)
+    (find-file FOLDER_CLOUD))
+  (defun open-org ()
+    (interactive)
+    (find-file FOLDER_ORG))
+  (defun open-emacs_utilities ()
+    (interactive)
+    (find-file FOLDER_EMACS_UTILITIES))
+  (defun open-config ()
+    (interactive)
+    (find-file ORG_CONFIG))
+  (defun open-timeliste ()
+    (interactive)
+    (find-file ORG_TIMELISTE))
+  (defun open-token ()
+    (interactive)
+    (find-file ORG_TOKENS))
+#+end_src 
 * Paths
 #+begin_src emacs-lisp
   ;; other path settings

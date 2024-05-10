@@ -117,32 +117,33 @@
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; CUSTOM FUNCTIONS
 ;; ---------------------------------------------------------------------------------------------------------------
-
-
-;; MISC
-;; other custom functions
 (defun unhighlight-all ()
   (interactive)
   (unhighlight-regexp t)
   (message "Removed all highlights"))
+
 (defun save-text-as-file (text filename)
   "Save TEXT as a file named FILENAME."
   (with-temp-buffer
     (insert text)
     (write-file filename))
   (message (format "'%s' saved." filename)))
+
 (defun replace-file-contents (file-path new-content)
   "Replace the contents of the FILE-PATH with NEW-CONTENT."
   (with-temp-file file-path
     (insert new-content)))
+
 (defun create-empty-file (file-path)
   "Create an empty file at FILE-PATH."
   (write-region "" nil file-path))
+
 (defun file-content-equal-to-string (file string)
   "Check if the content of FILE is equal to STRING."
   (with-temp-buffer
     (insert-file-contents file)
     (string= (buffer-string) string)))
+
 (defun delete-current-file ()
   "Deletes the current file being viewed in the buffer"
   (interactive)
@@ -155,25 +156,6 @@
 	    (kill-buffer))
 	(message "File '%s' not deleted." filename)))))
 
-;; FOLDER AND FILE SHORTCUTS
-(defun open-cloud ()
-  (interactive)
-  (find-file FOLDER_CLOUD))
-(defun open-org ()
-  (interactive)
-  (find-file FOLDER_ORG))
-(defun open-emacs_utilities ()
-  (interactive)
-  (find-file FOLDER_EMACS_UTILITIES))
-(defun open-config ()
-  (interactive)
-  (find-file ORG_CONFIG))
-(defun open-timeliste ()
-  (interactive)
-  (find-file ORG_TIMELISTE))
-(defun open-token ()
-  (interactive)
-  (find-file ORG_TOKENS))
 ;; open scratch
 (defun open-scratch ()
   (interactive)
@@ -218,12 +200,6 @@
 
 ;; pin entry
 (setq epg-pinentry-mode 'loopback)
-
-;; ERC
-(defun run-libera-chat ()
-  (interactive)
-  (erc-tls :server "irc.libera.chat" :port 6697 :nick "gray13")
-  (switch-to-buffer "irc.libera.chat:6697"))
 
 ;; NORMAL BACKSPACE
 (defun ryanmarcus/backward-kill-word ()
