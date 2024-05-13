@@ -40,7 +40,7 @@
     (let (
 	  (daily-end (format "* TODO [#A] Slutt arbeidsdag [0/4]\nSCHEDULED: %s
   - [ ] Sjekk slack
-  - [ ] Sjekk groove
+  - [ ] Sjekk groove (including notifications)
   - [ ] git push
   - [ ] Stemple ut\n" today-scheduled))
 	  (daily-start (format "* TODO [#A] Start arbeidsdag [0/6]\nSCHEDULED: %s

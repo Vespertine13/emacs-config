@@ -271,10 +271,6 @@
 ;; Arrow keys
 (global-set-key (kbd "C-x <up>") 'make-frame-command)
 (global-set-key (kbd "C-x <down>") 'delete-frame)
-;;  (global-set-key (kbd "C-c <up>") 'xxxx)
-;;  (global-set-key (kbd "C-c <down>") 'xxxx)
-;;  (global-set-key (kbd "C-c <left>") 'xxxx)
-;;  (global-set-key (kbd "C-c <right>") 'xxxx)
 
 ;; Other keybindings
 (global-set-key (kbd "C-.") 'other-window)
