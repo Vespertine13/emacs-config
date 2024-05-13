@@ -83,6 +83,15 @@ Overwrite some of the zetteldeft keybinding with new ones suiting org-roam
 #+begin_src emacs-lisp
   (roam-home) 
 #+end_src
+** case insensitive search
+The following code make org-roam-node-find and other functions case insensitive.
+#+begin_src emacs-lisp
+  (defun case-insensitive-org-roam-node-read (orig-fn &rest args)
+    (let ((completion-ignore-case t))
+      (apply orig-fn args)))
+
+  (advice-add 'org-roam-node-read :around #'case-insensitive-org-roam-node-read)
+#+end_src 
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "zettelkasten")
