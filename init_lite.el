@@ -281,6 +281,9 @@
 (global-set-key (kbd "C-+") 'make-frame-command)
 (global-set-key (kbd "M-+") 'delete-frame)
 
+(global-set-key (kbd "C-c 0") 'open-scratch)
+(global-set-key (kbd "C-c 9") 'open-fancy-about-screen)
+
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; Bookmarks
 ;; ---------------------------------------------------------------------------------------------------------------

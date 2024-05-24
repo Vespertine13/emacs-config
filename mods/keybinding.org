@@ -3,13 +3,6 @@
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c g") 'goto-last-change)
 
-
-
-
-
-
-
-
   (global-set-key (kbd "M-ø") 'theme-select)
 
 
@@ -24,9 +17,6 @@
 (global-set-key (kbd "C-c 5") 'mastodon)
 
 (global-set-key (kbd "C-c 7") 'org-agenda)
-
-(global-set-key (kbd "C-c 9") 'open-fancy-about-screen)
-(global-set-key (kbd "C-c 0") 'open-scratch)
 
 (global-set-key (kbd "C-|") 'treemacs)
 
