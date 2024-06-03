@@ -87,6 +87,11 @@ Overwrite some of the zetteldeft keybinding with new ones suiting org-roam
 #+begin_src emacs-lisp
   (roam-home) 
 #+end_src
+** open links
+Makes link being opened in the same frame instead of a new (or exisiting one).
+#+begin_src emacs-lisp
+(setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
+#+end_src 
 ** case insensitive search
 The following code make org-roam-node-find and other functions case insensitive.
 #+begin_src emacs-lisp
