@@ -74,8 +74,6 @@
 (add-hook 'before-save-hook 'org-update-all-dblocks)
 ;; shift select
 (setq org-support-shift-select 1)
-;; hide emphasis markers
-(setq org-hide-emphasis-markers t)
 
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; OTHER
