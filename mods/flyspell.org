@@ -15,6 +15,7 @@
 	  (word (flyspell-get-word)))
       (when (consp word)    
 	(flyspell-do-correct 'save nil (car word) current-location (cadr word) (caddr word) current-location))))
+
 #+end_src
 * keybinding
 f is for flyspell
