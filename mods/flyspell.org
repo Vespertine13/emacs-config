@@ -4,8 +4,6 @@
 #+begin_scr emacs-lisp
   ;; flyspell
   (setq ispell-program-name "/usr/bin/hunspell")
-  (eval-after-load "flyspell"
-   '(define-key flyspell-mode-map (kbd "C-.") nil))
 #+end_src
 * Custom Functions
 #+begin_src emacs-lisp
