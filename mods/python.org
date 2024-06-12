@@ -1,94 +1,9 @@
 #+STARTUP: overview
 
-* Instructions
-For this init to work you need to have python3 and ipython3 installed.
-Additionally you need to have a /.venv/ folder already made.
 * Setup
 #+begin_src emacs-lisp
-  ;;; env-python.el --- Python
-
-  ;;; Commentary:
-  ;;  python customizations
-  ;;  Provided by Daniel
-
-  ;;; Code:
-
-  (use-package pyenv-mode
-    :straight t)
-
-  (use-package flymake-ruff
-    :straight t
-    :hook (python-mode . flymake-ruff-load))
-
-  (use-package elpy
-    :straight t
-    :config
-    (setq elpy-rpc-python-command "python3")
-    (setq python-shell-interpreter "ipython3"
-	  python-shell-interpreter-args "-i --simple-prompt")
-
-    (setq python-shell-completion-native-enable nil)
-
-    (setq elpy-shell-echo-input nil)
-    (setenv "WORKON_HOME" "~/.venv")
-
-    (elpy-enable)
-    (when (load "flycheck" t t)
-      (setq elpy-modules (delq 'elpy-module-flymake elpy-modules))
-      (add-hook 'elpy-mode-hook 'flycheck-mode)))
-
-  (use-package py-isort
-    :straight t)
-
-  (use-package auto-virtualenv
-    :straight t
-    :ensure t)
-
-  (use-package polymode
-    :straight t
-    :config
-    ;; Polymode: syntax highlighting for inline SQL statements in Python
-    (define-hostmode poly-python-hostmode :mode 'python-mode)
-
-    (define-innermode poly-sql-expr-python-innermode
-      :mode 'sql-mode
-      :head-matcher (rx (= 3 (char "\"'")) (zero-or-more (any "\t\n ")) (or "SELECT" "INSERT" "UPDATE" "DELETE"))
-      :tail-matcher (rx (= 3 (char "\"'")))
-      :head-mode 'host
-      :tail-mode 'host)
-
-    (define-polymode poly-python-sql-mode
-      :hostmode 'poly-python-hostmode
-      :innermodes '(poly-sql-expr-python-innermode)))
-
-  (defun setup-python-mode ()
-    "Python mode setup."
-    (setq gud-pdb-command-name "python -m pdb")
-    (setq elpy-test-runner 'elpy-test-pytest-runner)
-    (setq elpy-formatter 'ruff)
-    (add-to-list 'company-backends 'company-jedi)
-    ;;(pyenv-mode +1)
-    (company-mode +1)
-    (auto-virtualenv-set-virtualenv)
-    )
-
-  (add-hook 'python-mode-hook #'setup-python-mode)
-
-  (provide 'env-python)
-
-  (defun python-send-line ()
-    "Send the current line or marked region to a Python shell."
-     (interactive)
-     (if (use-region-p)
-	  (python-shell-send-region (region-beginning) (region-end))
-       (let ((line-start (line-beginning-position))
-	      (line-end (line-end-position)))
-	  (push-mark line-start t t)
-	  (goto-char line-end)
-	  (python-shell-send-region line-start line-end))))
-
-  ;;; env-python.el ends here
-
+  (add-hook 'python-mode-hook
+	    (lambda () (local-set-key (kbd "C-<return>") 'python-shell-send-statement)))
 #+end_src 
 
 * loaded-modules
