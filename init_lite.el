@@ -256,7 +256,7 @@
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; KEYBINDINGS
 ;; ---------------------------------------------------------------------------------------------------------------
-# use C-h b to list current keybindings
+;; use C-h b to list current keybindings
 (global-set-key (kbd "C-c k") 'delete-current-file)
 (global-set-key (kbd "C-c l") 'org-insert-link)
 (global-set-key (kbd "C-c m") 'kmacro-end-or-call-macro)
