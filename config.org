@@ -21,6 +21,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 
 ;; set theme
 (set-theme 'name-of-theme)
+;; set font
+(add-to-list 'default-frame-alist '(font . "Inconsolata-16"))
 
 * Constants
 #+begin_src emacs-lisp
@@ -107,7 +109,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ** Dashboard
 #+begin_src emacs-lisp
   (require 'dashboard)
-  ;; (dashboard-setup-startup-hook)
   ;; Set the banner
   (setq dashboard-startup-banner (concat FOLDER_CLOUD "emacs_startup.txt"))
   ;; Value can be
@@ -167,10 +168,5 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 * Startup
 #+begin_src emacs-lisp
-  ;; standard font
-  (add-to-list 'default-frame-alist '(font . "Inconsolata-16"))
-  ;; tabs
-  (custom-set-faces
-   '(tab-bar-tab ((t (:inherit default :font "inconsolata" :height 0.8)))))
-  (dashboard-open)
+(dashboard-open)
 #+end_src
