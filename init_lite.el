@@ -115,6 +115,10 @@
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; CUSTOM FUNCTIONS
 ;; ---------------------------------------------------------------------------------------------------------------
+(defun font-select (my-font)
+  (interactive (list (completing-read "Font: " (font-family-list))))
+  (set-frame-font my-font nil t))
+
 (defun unhighlight-all ()
   (interactive)
   (unhighlight-regexp t)
@@ -252,6 +256,7 @@
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; KEYBINDINGS
 ;; ---------------------------------------------------------------------------------------------------------------
+# use C-h b to list current keybindings
 (global-set-key (kbd "C-c k") 'delete-current-file)
 (global-set-key (kbd "C-c l") 'org-insert-link)
 (global-set-key (kbd "C-c m") 'kmacro-end-or-call-macro)
@@ -264,7 +269,6 @@
 (global-set-key (kbd "C-c t") 'org-timer-set-timer)
 (global-set-key (kbd "C-c w") 'read-only-mode)
 (global-set-key (kbd "C-c z") 'eshell)
-
 
 ;; Arrow keys
 (global-set-key (kbd "C-x <up>") 'make-frame-command)
