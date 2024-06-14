@@ -267,6 +267,7 @@
 (global-set-key (kbd "C-c r") 'visual-line-mode)
 (global-set-key (kbd "C-c s") 'shell)
 (global-set-key (kbd "C-c t") 'org-timer-set-timer)
+(global-set-key (kbd "C-c v") 'goto-line)
 (global-set-key (kbd "C-c w") 'read-only-mode)
 (global-set-key (kbd "C-c z") 'eshell)
 

@@ -4,18 +4,13 @@
   (global-set-key (kbd "C-c g") 'goto-last-change)
 
   (global-set-key (kbd "M-ø") 'theme-select)
-
-
-  (global-set-key (kbd "C-c å") 'roam-home)
+  (global-set-key (kbd "M-æ") 'font-select)
   (global-set-key (kbd "M-å") 'toggle-frame-solidity)
 
 ;; 0-9 
 (global-set-key (kbd "C-c 1") 'dashboard-open)
-
-
 (global-set-key (kbd "C-c 4") 'elfeed)
 (global-set-key (kbd "C-c 5") 'mastodon)
-
 (global-set-key (kbd "C-c 7") 'org-agenda)
 
 (global-set-key (kbd "C-|") 'treemacs)
