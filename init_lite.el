@@ -52,7 +52,6 @@
 (setq-default org-log-done t
 	      org-adapt-indentation nil
 	      org-return-follows-link  t
-              org-pretty-entities t
 	      org-return-follows-link  t
 	      org-use-tag-inheritance t
 	      org-support-shift-select 1
