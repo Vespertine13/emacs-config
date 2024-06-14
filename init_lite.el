@@ -42,21 +42,25 @@
 ;; Use linum mode for old version of Emacs and line numbers mode for new versions of Emacs
 (global-display-line-numbers-mode t)
 ;;(global-linum-mode t)
+;; disables electric indent mode
+(electric-indent-mode -1)
 
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; ORG
 ;; ---------------------------------------------------------------------------------------------------------------
 (require 'org)
-(electric-indent-mode -1)       ;; disables electric indent mode
-(setq org-log-done t)
-;; RETURN will follow links in org-mode files
-(setq org-return-follows-link  t)
-;; remove stupid indent
-(setq org-adapt-indentation nil)
-;; enable tag inheritance
-(setq org-use-tag-inheritance t)
-;; images
-(setq org-image-actual-width nil) ;; do not display images in actual size
+(setq-default org-log-done t
+	      org-adapt-indentation nil
+	      org-return-follows-link  t
+              org-pretty-entities t
+	      org-return-follows-link  t
+	      org-use-tag-inheritance t
+	      org-support-shift-select 1
+	      org-hide-emphasis-markers 1
+              org-hide-emphasis-markers t
+              org-startup-with-inline-images t
+              org-image-actual-width '(300))
+
 ;; enables pictures in org files
 (defun org-show-images ()
   (interactive)
@@ -72,11 +76,6 @@
 ;; dynamic blocks
 (add-hook 'org-mode-hook 'org-update-all-dblocks)
 (add-hook 'before-save-hook 'org-update-all-dblocks)
-;; shift select
-(setq org-support-shift-select 1)
-;; emphasis
-(setq org-hide-emphasis-markers 1)
-
 
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; OTHER
