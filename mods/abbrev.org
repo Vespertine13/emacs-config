@@ -26,16 +26,14 @@
   (define-abbrev-table 'global-abbrev-table
     '(
       ("propempty" ":BACKLINK: \n:TAGS:")
+      ("propmedia" ":BACKLINK: \n:TAGS: \n:TYPE: \n:GENRE: \n:YEAR: \n:ARTIST/AUTHOR:")
       ("propnotes" ":BACKLINK: [[id:47644bb9-9716-44c6-a10b-01964c4cf529][Notes]] \n:TAGS: #notes")
-      ("propbio" ":BACKLINK: [[id:72221e16-6ff8-4a5b-8baa-2a071d831a17][Biology]] \n:TAGS: #biology")
       ("propous" ":BACKLINK: [[id:a40c3cda-6e61-40f0-b53d-fea162219825][OUS]] \n:TAGS: #ous")
       ("propcode" ":BACKLINK: [[id:30c78d9d-2895-4723-b279-9c588f34aed6][Code]] \n:TAGS: #code \n:LANGUAGE: \n:LIBRARY:")
       ("propemacs" ":BACKLINK: [[id:3f119e5c-43b0-4773-ab73-c1ee45453e09][Emacs]] \n:TAGS: #emacs")
       ("proplinux" ":BACKLINK: [[id:d242fed4-3f07-43be-bb4d-295ef673c898][Linux]] \n:TAGS: #linux")
-      ("propbioinf" ":BACKLINK: [[id:56484c3a-e69b-42e7-984a-265eb69ed635][Bioinformatics]] \n:TAGS: #bioinformatics")
       ("propteos" ":BACKLINK: [[id:a9eea227-1915-4c38-ae40-65b01a33328c][Teos]] \n:TAGS: #teos")
       ("propdnd" ":BACKLINK: [[id:284c9904-1342-4361-97be-fd688ce23514][DnD]] \n:TAGS: #dnd")
-      ("propls" ":BACKLINK: [[id:20c1f6f3-2e69-4637-aff4-af6e5895f837][Lurkwoods Skjebne]] \n:TAGS: #dnd #lurkwoodsskjebne")
       ))
 #+end_src
 * loaded-modules
