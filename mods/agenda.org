@@ -2,6 +2,7 @@
 * setup
 #+begin_src emacs-lisp
 (add-hook 'org-agenda-mode-hook (lambda () (visual-line-mode -1) (setq truncate-lines 1)))
+(setq org-agenda-window-setup 'current-window)
 #+end_src
 * Capture and Agenda
 #+begin_src emacs-lisp
