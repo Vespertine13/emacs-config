@@ -71,9 +71,10 @@
     (let (
 	  (monthly-water-plants-home (format "* TODO [#C] Vann planter hjemme\nSCHEDULED: %s\n" today-scheduled))
 	  (monthly-water-plants-work (format "* TODO [#C] Vann planter på jobb\nSCHEDULED: %s\n" today-scheduled))
+	  (monthly-vitamin-d (format "* TODO [#A] Vitamin-D\nSCHEDULED: %s\n" today-scheduled))
 	  (monthly-tune-watch (format "* TODO [#C] Skru opp og still klokka\nSCHEDULED: %s" today-scheduled))
 	  )
-      (setq monthly-todos (concat monthly-water-plants-home monthly-water-plants-work monthly-tune-watch)))
+      (setq monthly-todos (concat monthly-water-plants-home monthly-water-plants-work monthly-vitamin-d monthly-tune-watch)))
     ;; run checks and replace
     ;; check if this month file exists, if not it creates an empty file
     (unless (file-exists-p TXT_MONTH)
