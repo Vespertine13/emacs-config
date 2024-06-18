@@ -37,12 +37,14 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 (setq ORG_EVENTS (concat FOLDER_CLOUD "org/events.org"))
 (setq ORG_DIARY (concat FOLDER_CLOUD "org/diary.org.gpg"))
 (setq ORG_ROLODEX (concat FOLDER_CLOUD "org/rolodex.org"))
-;; daily todos
+;; regular todos
 (setq ORG_DAILY (concat FOLDER_CLOUD "org/daily.org"))
+(setq ORG_MONTHLY (concat FOLDER_CLOUD "org/monthly.org"))
 ;; Misc
 (setq WAV_BELL (concat FOLDER_CLOUD "bell.wav"))
 (setq ORG_TIMELISTE (concat FOLDER_CLOUD "org/timeliste.org"))
 (setq TXT_TODAY (concat FOLDER_CLOUD ".todaysdate"))
+(setq TXT_MONTH (concat FOLDER_CLOUD ".todaysmonth"))
 #+end_src
 
 * Paths

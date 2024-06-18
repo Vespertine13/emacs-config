@@ -34,7 +34,8 @@
 	(call-interactively 'org-agenda-list))
       (message "Opening agenda for current week"))
 #+end_src
-* Daily Todos
+* Regular TODOS
+** Daily TODOS
 #+begin_src emacs-lisp
     ;; text and variables
     (setq today-var (format-time-string "%Y-%m-%d"))
@@ -58,9 +59,31 @@
     ;; check if today's date file exists, if not it creates an empty file
     (unless (file-exists-p TXT_TODAY)
       (create-empty-file TXT_TODAY))
+    (unless (file-exists-p ORG_DAILY)
+      (create-empty-file ORG_DAILY))
     (when (not (file-content-equal-to-string TXT_TODAY today-var))
       (replace-file-contents TXT_TODAY today-var)
       (replace-file-contents ORG_DAILY daily-todos))
+#+end_src
+** Monthly TODOS
+#+begin_src emacs-lisp
+    (setq this-month-var (format-time-string "%Y-%m"))
+    (let (
+	  (monthly-water-plants-home (format "* TODO [#C] Vann planter hjemme\nSCHEDULED: %s\n" today-scheduled))
+	  (monthly-water-plants-work (format "* TODO [#C] Vann planter på jobb\nSCHEDULED: %s\n" today-scheduled))
+	  (monthly-tune-watch (format "* TODO [#C] Skru opp og still klokka\nSCHEDULED: %s" today-scheduled))
+	  )
+      (setq monthly-todos (concat monthly-water-plants-home monthly-water-plants-work monthly-tune-watch)))
+    ;; run checks and replace
+    ;; check if this month file exists, if not it creates an empty file
+    (unless (file-exists-p TXT_MONTH)
+      (create-empty-file TXT_MONTH))
+    (unless (file-exists-p ORG_MONTHLY)
+      (create-empty-file ORG_MONTHLY))
+    (when (not (file-content-equal-to-string TXT_MONTH this-month-var))
+      (replace-file-contents TXT_MONTH this-month-var)
+      (replace-file-contents ORG_MONTHLY monthly-todos))
+
 #+end_src
 * org crypt 
 Used for the diary and tokens.
