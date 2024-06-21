@@ -7,13 +7,18 @@
   (global-set-key (kbd "M-æ") 'font-select)
   (global-set-key (kbd "M-å") 'toggle-frame-solidity)
 
-;; 0-9 
-(global-set-key (kbd "C-c 1") 'dashboard-open)
-(global-set-key (kbd "C-c 4") 'elfeed)
-(global-set-key (kbd "C-c 5") 'mastodon)
-(global-set-key (kbd "C-c 7") 'org-agenda)
+  (global-set-key (kbd "C-|") 'treemacs)
 
-(global-set-key (kbd "C-|") 'treemacs)
+;; 0-9 
+;; (global-set-key (kbd "C-c 1") 'xxxxx)
+;; (global-set-key (kbd "C-c 2") 'xxxxx)
+;; (global-set-key (kbd "C-c 3") 'xxxxx)
+;; (global-set-key (kbd "C-c 4") 'xxxxx)
+;; (global-set-key (kbd "C-c 5") 'xxxxx)
+;; (global-set-key (kbd "C-c 6") 'xxxxx)
+;; (global-set-key (kbd "C-c 7") 'xxxxx)
+;; (global-set-key (kbd "C-c 8") 'xxxxx)
+;; (global-set-key (kbd "C-c 9") 'xxxxx)
 
 #+end_src
 ** function keys

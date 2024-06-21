@@ -134,28 +134,34 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (defun dashboard-links (list-size)
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
-			     (roam-home))
+			     (dashboard-open))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
-		   "Roam")
+		   "Dashboard F5")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
-			     (find-file "~/venn/run.R"))
+			     (mastodon))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
-		   "Venn")
+		   "Mastodon F6")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
-			     (org-agenda-list))
+			     (elfeed))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
-		   "Agenda")
+		   "Elfeed F7")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
-			     (find-file "~/emacs-config/config.org"))
+			     (open-fancy-about-screen))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
-		   "Configuration")
+		   "Splash F8")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
+			     (open-scratch))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   "Scratch F9")
     )
   (defun dashboard-loaded-modules (list-size)
     (insert (concat dashboard-loaded-mods dashboard-missing-mods)))
