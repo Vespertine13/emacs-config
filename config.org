@@ -19,6 +19,10 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ;; (setq my-init-modules '("module1" "module2"))
 (when (file-directory-p FOLDER_CLOUD) (org-babel-load-file ORG_CONFIG))
 
+;; set window dimensions
+(set-frame-height (selected-frame) 30)
+(set-frame-width (selected-frame) 80)
+
 ;; set theme
 (set-theme 'name-of-theme)
 ;; set font
@@ -176,5 +180,5 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 * Startup
 #+begin_src emacs-lisp
-(dashboard-open)
+  (dashboard-open)
 #+end_src
