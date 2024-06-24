@@ -268,18 +268,6 @@
 (global-set-key (kbd "C-c w") 'read-only-mode)
 (global-set-key (kbd "C-c z") 'eshell)
 
-;; 0-9 
-;; (global-set-key (kbd "C-c 1") 'xxxxx)
-;; (global-set-key (kbd "C-c 2") 'xxxxx)
-;; (global-set-key (kbd "C-c 3") 'xxxxx)
-;; (global-set-key (kbd "C-c 4") 'xxxxx)
-;; (global-set-key (kbd "C-c 5") 'xxxxx)
-;; (global-set-key (kbd "C-c 6") 'xxxxx)
-;; (global-set-key (kbd "C-c 7") 'xxxxx)
-;; (global-set-key (kbd "C-c 8") 'xxxxx)
-;; (global-set-key (kbd "C-c 9") 'xxxxx)
-;; (global-set-key (kbd "C-c 0") 'scratch-buffer)
-
 ;; Arrow keys
 (global-set-key (kbd "C-x <up>") 'make-frame-command)
 (global-set-key (kbd "C-x <down>") 'delete-frame)
@@ -289,9 +277,6 @@
 (global-set-key (kbd "C-:") 'other-frame)
 (global-set-key (kbd "C-<") 'hippie-expand)
 (global-set-key  [C-backspace] 'ryanmarcus/backward-kill-word)
-
-(global-set-key (kbd "C-+") 'make-frame-command)
-(global-set-key (kbd "M-+") 'delete-frame)
 
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; Bookmarks

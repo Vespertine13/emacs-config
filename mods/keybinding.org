@@ -1,14 +1,9 @@
 #+STARTUP: content
+use C-h b to list current keybindings
+
 * keybinding
 #+begin_src emacs-lisp
   (global-set-key (kbd "C-c g") 'goto-last-change)
-
-  (global-set-key (kbd "M-ø") 'theme-select)
-  (global-set-key (kbd "M-æ") 'font-select)
-  (global-set-key (kbd "M-å") 'toggle-frame-solidity)
-
-  (global-set-key (kbd "C-|") 'treemacs)
-
 #+end_src
 ** function keys
 #+begin_src emacs-lisp
