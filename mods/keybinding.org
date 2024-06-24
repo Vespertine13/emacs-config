@@ -9,17 +9,6 @@
 
   (global-set-key (kbd "C-|") 'treemacs)
 
-;; 0-9 
-;; (global-set-key (kbd "C-c 1") 'xxxxx)
-;; (global-set-key (kbd "C-c 2") 'xxxxx)
-;; (global-set-key (kbd "C-c 3") 'xxxxx)
-;; (global-set-key (kbd "C-c 4") 'xxxxx)
-;; (global-set-key (kbd "C-c 5") 'xxxxx)
-;; (global-set-key (kbd "C-c 6") 'xxxxx)
-;; (global-set-key (kbd "C-c 7") 'xxxxx)
-;; (global-set-key (kbd "C-c 8") 'xxxxx)
-;; (global-set-key (kbd "C-c 9") 'xxxxx)
-
 #+end_src
 ** function keys
 #+begin_src emacs-lisp
@@ -27,7 +16,7 @@
 (global-set-key (kbd "<f6>") 'mastodon)
 (global-set-key (kbd "<f7>") 'elfeed)
 (global-set-key (kbd "<f8>") 'open-fancy-about-screen)
-(global-set-key (kbd "<f9>") 'open-scratch)
+(global-set-key (kbd "<f9>") 'scratch-buffer)
 #+end_src 
 * loaded-modules
 #+begin_src emacs-lisp

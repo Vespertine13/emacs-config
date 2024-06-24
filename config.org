@@ -162,7 +162,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 		   "Splash F8")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
-			     (open-scratch))
+			     (scratch-buffer))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
 		   "Scratch F9")
