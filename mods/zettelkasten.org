@@ -38,9 +38,7 @@ Please forgive me gods of emacs.
       :init
       (setq org-roam-v2-ack t)
       :custom
-      (org-roam-directory FOLDER_ROAM)
-      :config
-      (org-roam-setup))
+      (org-roam-directory FOLDER_ROAM))
     ;; org-roam capture templates
     (setq org-roam-capture-templates
 	  '(
