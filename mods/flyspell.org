@@ -21,6 +21,8 @@
 f is for flyspell
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-c f") 'flyspell-mode)
+(global-set-key (kbd "C-c F") 'my-save-word)
+
 #+end_src 
 * loaded-modules
 #+begin_src emacs-lisp
