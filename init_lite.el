@@ -116,6 +116,7 @@
   (interactive (list (completing-read "Font: " (font-family-list))))
   (set-frame-font my-font nil t))
 
+;; works with highlight symbol at point
 (defun unhighlight-all ()
   (interactive)
   (unhighlight-regexp t)
@@ -254,6 +255,8 @@
 ;; KEYBINDINGS
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; use C-h b to list current keybindings
+(global-set-key (kbd "C-c h") 'highlight-symbol-at-point)
+(global-set-key (kbd "C-c H") 'unhighlight-all)
 (global-set-key (kbd "C-c k") 'delete-current-file)
 (global-set-key (kbd "C-c l") 'org-insert-link)
 (global-set-key (kbd "C-c m") 'kmacro-end-or-call-macro)
