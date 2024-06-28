@@ -216,18 +216,20 @@
 
 ;; APPEARANCE
 ;; Transparent frames
-(defvar-local transparent-frame-enabled nil
+;; start with transparent background
+(add-to-list 'default-frame-alist '(alpha-background  . 80))
+(defvar-local transparent-frame-enabled t
   "Flag that indicates if the buffer is transparent.")
 (defun set-frame-solid ()
   (set-frame-parameter (selected-frame) 'alpha-background '100)
   (message "Solid frame"))
 (defun set-frame-transparent ()
-  (set-frame-parameter (selected-frame) 'alpha-background '50)
+  (set-frame-parameter (selected-frame) 'alpha-background '80)
   (message "Transparent frame"))
 (defun toggle-frame-solidity ()
   "Toggle between solid and transparent frame for the current buffer."
   (interactive)
-  (setq transparent-frame-enabled (not transparent-frame-enabled))
+  (setq transparent-frame-enabled (transparent-frame-enabled))
   (if transparent-frame-enabled
       (set-frame-transparent)
     (set-frame-solid)))
@@ -270,6 +272,7 @@
 (global-set-key (kbd "C-c v") 'goto-line)
 (global-set-key (kbd "C-c w") 'read-only-mode)
 (global-set-key (kbd "C-c z") 'eshell)
+(global-set-key (kbd "C-c x") 'toggle-frame-solidity)
 
 ;; Arrow keys
 (global-set-key (kbd "C-x <up>") 'make-frame-command)
