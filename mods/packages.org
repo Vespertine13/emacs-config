@@ -34,6 +34,7 @@
       wttrin                           ;; weather info, remember to edit package manually
       treemacs                         ;; sidebar showing file tree
       goto-last-change                 ;; goto last change
+      magit                            ;; git porcelain for emacs
       )
     )
 #+end_src
