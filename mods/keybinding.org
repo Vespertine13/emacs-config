@@ -2,9 +2,6 @@
 use C-h b to list current keybindings
 
 * keybinding
-#+begin_src emacs-lisp
-  (global-set-key (kbd "C-c g") 'goto-last-change)
-#+end_src
 ** function keys
 #+begin_src emacs-lisp
 (global-set-key (kbd "<f5>") 'dashboard-open)

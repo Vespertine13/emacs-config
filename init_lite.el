@@ -254,6 +254,7 @@
 ;; KEYBINDINGS
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; use C-h b to list current keybindings
+(global-set-key (kbd "C-c g") 'rgrep)
 (global-set-key (kbd "C-c h") 'highlight-symbol-at-point)
 (global-set-key (kbd "C-c H") 'unhighlight-all)
 (global-set-key (kbd "C-c k") 'delete-current-file)
