@@ -214,12 +214,7 @@
     ;; otherwise, just do the normal kill word.
     (backward-kill-word 1)))
 
-;; APPEARANCE
-;; Transparent frames
-;; start with transparent background
-(add-to-list 'default-frame-alist '(alpha-background  . 80))
-(defvar-local transparent-frame-enabled t
-  "Flag that indicates if the buffer is transparent.")
+;; Toggle transparent frame
 (defun set-frame-solid ()
   (set-frame-parameter (selected-frame) 'alpha-background '100)
   (message "Solid frame"))
@@ -229,6 +224,8 @@
 (defun toggle-frame-solidity ()
   "Toggle between solid and transparent frame for the current buffer."
   (interactive)
+  (when (not (boundp 'transparent-frame-enabled))
+    (setq transparent-frame-enabled nil))
   (setq transparent-frame-enabled (not transparent-frame-enabled))
   (if transparent-frame-enabled
       (set-frame-transparent)

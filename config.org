@@ -180,5 +180,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+end_src
 * Startup
 #+begin_src emacs-lisp
+  (add-to-list 'default-frame-alist '(alpha-background  . 80)) ;; set buffer transparent
+  (setq transparent-frame-enabled t)
   (dashboard-open)
 #+end_src
