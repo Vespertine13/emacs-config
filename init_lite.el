@@ -229,7 +229,7 @@
 (defun toggle-frame-solidity ()
   "Toggle between solid and transparent frame for the current buffer."
   (interactive)
-  (setq transparent-frame-enabled (transparent-frame-enabled))
+  (setq transparent-frame-enabled (not transparent-frame-enabled))
   (if transparent-frame-enabled
       (set-frame-transparent)
     (set-frame-solid)))
