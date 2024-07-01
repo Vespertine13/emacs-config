@@ -243,12 +243,6 @@
   (disable-all-themes)
   (load-theme theme t)
   (message "Theme '%s' set" theme))
-;; interactive version of set-theme
-(defun theme-select (theme)
-  (interactive (list (completing-read "Theme: " (mapcar 'symbol-name (custom-available-themes)))))
-  (unless (member theme (mapcar 'symbol-name (custom-available-themes)))
-    (error "Theme not in list!"))
-  (set-theme (intern theme)))
 
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; KEYBINDINGS
