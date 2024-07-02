@@ -19,6 +19,7 @@
       ("startupcontent" "#+STARTUP: content")
       ("readonly" "# -*- buffer-read-only: t -*-")
       ("tableformula" "#+TBLFM: $3=vsum($1 + $2)")
+      ("orgtable" "# -*- mode: Org; eval: (progn (visual-line-mode -1) (setq truncate-lines t)) -*- #")
       ))
 #+end_src
 ** zettelkasten
