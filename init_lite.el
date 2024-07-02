@@ -12,7 +12,7 @@
 (setq ring-bell-function 'ignore)   ;; ignore annoying bell sounds while in emacs
 (tool-bar-mode -1)                  ;; removes ugly tool bar
 (menu-bar-mode -1)                  ;; removes menubar
-
+(blink-cursor-mode 0)               ;; stop cursor from blinking
 
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; Backup and temp
