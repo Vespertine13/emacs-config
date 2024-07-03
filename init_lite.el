@@ -10,8 +10,9 @@
 (setq inhibit-startup-message t)    ;; Hide the startup message
 (setq debug-on-error t)             ;; enable in-depth message on error
 (setq ring-bell-function 'ignore)   ;; ignore annoying bell sounds while in emacs
-(tool-bar-mode -1)                  ;; removes ugly tool bar
+(tool-bar-mode -1)                  ;; removes tool bar
 (menu-bar-mode -1)                  ;; removes menubar
+(scroll-bar-mode -1)                ;; removes scroll bar
 (blink-cursor-mode 0)               ;; stop cursor from blinking
 
 ;; ---------------------------------------------------------------------------------------------------------------
