@@ -4,6 +4,7 @@ This is will overwrite some standard keybindings.
 (global-set-key (kbd "C-x b") 'consult-buffer)
 (global-set-key (kbd "C-c g") 'consult-grep)
 (global-set-key (kbd "C-c v") 'consult-goto-line)
+(global-set-key (kbd "C-c x") 'consult-theme)
 
 #+end_src 
 * loaded-modules
