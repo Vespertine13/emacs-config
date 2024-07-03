@@ -75,6 +75,10 @@
 ;; dynamic blocks
 (add-hook 'org-mode-hook 'org-update-all-dblocks)
 (add-hook 'before-save-hook 'org-update-all-dblocks)
+;; bullet points
+  (font-lock-add-keywords 'org-mode
+                          '(("^ *\\([-]\\) "
+                             (0 (prog1 () (compose-region (match-beginning 1) (match-end 1) "•"))))))
 
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; OTHER

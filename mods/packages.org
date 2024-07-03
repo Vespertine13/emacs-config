@@ -36,6 +36,7 @@
       goto-last-change                 ;; goto last change
       consult                          ;; enhance some standard commands
       magit                            ;; git porcelain for emacs
+      org-bullets                      ;; pretty bullets in org mode
       )
     )
 #+end_src

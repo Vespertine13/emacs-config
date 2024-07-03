@@ -1,0 +1,15 @@
+* org bullets
+#+begin_src emacs-lisp
+    (use-package org-bullets
+      :config
+      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+  (custom-set-variables  '(org-bullets-bullet-list '("●" "◉" "○")))
+#+end_src
+* Rerun org mode
+#+begin_src emacs-lisp
+  (org-mode-restart)
+#+end_src
+* loaded-modules
+#+begin_src emacs-lisp
+  (add-to-list 'loaded-modules "org-styling")
+#+end_src
