@@ -57,6 +57,7 @@ Please forgive me gods of emacs.
     (deft)
     (deft-refresh)
     (org-roam-update-org-id-locations)
+    (org-roam-setup)
     (global-unset-key (kbd "C-c d"))
     (global-set-key (kbd "C-c d l")  'org-roam-buffer-toggle)
     (global-set-key (kbd "C-c d f")  'org-roam-node-find)
