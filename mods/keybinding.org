@@ -4,11 +4,14 @@ use C-h b to list current keybindings
 * keybinding
 ** function keys
 #+begin_src emacs-lisp
-(global-set-key (kbd "<f5>") 'dashboard-open)
-(global-set-key (kbd "<f6>") 'mastodon)
-(global-set-key (kbd "<f7>") 'elfeed)
-(global-set-key (kbd "<f8>") 'open-fancy-about-screen)
-(global-set-key (kbd "<f9>") 'scratch-buffer)
+  (global-set-key (kbd "<f5>") 'dashboard-open)
+  (global-set-key (kbd "<f6>") 'mastodon)
+  (global-set-key (kbd "<f7>") 'elfeed)
+  (defun open-timeliste ()
+    (interactive)
+    (find-file ORG_TIMELISTE))
+  (global-set-key (kbd "<f8>") 'open-timeliste)
+  (global-set-key (kbd "<f9>") 'scratch-buffer)
 #+end_src 
 * loaded-modules
 #+begin_src emacs-lisp
