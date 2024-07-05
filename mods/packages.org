@@ -21,7 +21,6 @@
       emojify                          ;; emojis
       mastodon                         ;; mastodon social media
       elfeed                           ;; can be used to read RSS
-      nyan-mode                        ;; yes.
       rainbow-mode                     ;; shows colours
       dashboard                        ;; startup dashboard
       deft                             ;; file manager
@@ -38,6 +37,9 @@
       magit                            ;; git porcelain for emacs
       org-bullets                      ;; pretty bullets in org mode
       smooth-scrolling                 ;; enables smooth scrolling
+      sml-modeline                     ;; neat line position indicator
+      vertico                          ;; vertical completion of commands
+      marginalia                       ;; list description of commands
       )
     )
 #+end_src
@@ -74,13 +76,18 @@
 #+end_src
 * initialize packages
 #+begin_src emacs-lisp
+  ;; vertica and marginalia
+  (vertico-mode t)
+  (marginalia-mode t)
+  ;; sml modeline
+  (sml-modeline-mode t)
   ;; smooth scrolling
   (smooth-scrolling-mode t)
   ;; Rainbow mode
   (add-hook 'org-mode-hook (lambda () 
 			     (rainbow-mode 1)))
   (add-hook 'emacs-lisp-mode-hook (lambda () 
-			     (rainbow-mode 1)))
+				    (rainbow-mode 1)))
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
