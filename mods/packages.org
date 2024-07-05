@@ -40,6 +40,7 @@
       sml-modeline                     ;; neat line position indicator
       vertico                          ;; vertical completion of commands
       marginalia                       ;; list description of commands
+      orderless                        ;; orderless completion style
       )
     )
 #+end_src
@@ -79,6 +80,7 @@
   ;; vertica and marginalia
   (vertico-mode t)
   (marginalia-mode t)
+  (setq completion-styles '(orderless basic))
   ;; sml modeline
   (sml-modeline-mode t)
   ;; smooth scrolling
