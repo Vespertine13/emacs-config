@@ -37,6 +37,7 @@
       consult                          ;; enhance some standard commands
       magit                            ;; git porcelain for emacs
       org-bullets                      ;; pretty bullets in org mode
+      smooth-scrolling                 ;; enables smooth scrolling
       )
     )
 #+end_src
@@ -70,6 +71,16 @@
       (goto-char (point-max))
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
+#+end_src
+* initialize packages
+#+begin_src emacs-lisp
+  ;; smooth scrolling
+  (smooth-scrolling-mode t)
+  ;; Rainbow mode
+  (add-hook 'org-mode-hook (lambda () 
+			     (rainbow-mode 1)))
+  (add-hook 'emacs-lisp-mode-hook (lambda () 
+			     (rainbow-mode 1)))
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
