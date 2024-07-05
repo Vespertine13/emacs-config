@@ -41,6 +41,7 @@
       vertico                          ;; vertical completion of commands
       marginalia                       ;; list description of commands
       orderless                        ;; orderless completion style
+      embark                           ;; right click menu
       )
     )
 #+end_src
@@ -90,6 +91,8 @@
 			     (rainbow-mode 1)))
   (add-hook 'emacs-lisp-mode-hook (lambda () 
 				    (rainbow-mode 1)))
+  ;; embark
+  (global-set-key (kbd "C-;") 'embark-act)
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
