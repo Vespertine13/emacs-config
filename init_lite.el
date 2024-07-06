@@ -264,8 +264,7 @@
 (global-set-key (kbd "C-c t") 'org-timer-set-timer)
 (global-set-key (kbd "C-c v") 'goto-line)
 (global-set-key (kbd "C-c w") 'read-only-mode)
-(global-set-key (kbd "C-c z") 'toggle-frame-solidity)
-(global-set-key (kbd "C-c X") 'menu-set-font)
+(global-set-key (kbd "C-c z") 'hippie-expand)
 
 ;; Arrow keys
 (global-set-key (kbd "C-x <up>") 'make-frame-command)
@@ -274,7 +273,6 @@
 ;; Other keybindings
 (global-set-key (kbd "C-.") 'other-window)
 (global-set-key (kbd "C-:") 'other-frame)
-(global-set-key (kbd "C-<") 'hippie-expand)
 (global-set-key  [C-backspace] 'ryanmarcus/backward-kill-word)
 
 ;; ---------------------------------------------------------------------------------------------------------------

@@ -92,7 +92,11 @@
   (add-hook 'emacs-lisp-mode-hook (lambda () 
 				    (rainbow-mode 1)))
   ;; embark
-  (global-set-key (kbd "C-;") 'embark-act)
+  (global-set-key (kbd "C-c x") 'embark-act)
+  ;; consult
+  (global-set-key (kbd "C-x b") 'consult-buffer)
+  (global-set-key (kbd "C-c g") 'consult-grep)
+  (global-set-key (kbd "C-c v") 'consult-goto-line)
 #+end_src
 * loaded-modules
 #+begin_src emacs-lisp
