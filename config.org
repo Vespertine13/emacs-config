@@ -83,7 +83,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 	  loaded-modules-with-time))))
   ;; Set expected modules
   (when (not (boundp 'my-init-modules))
-    (setq my-init-modules '("packages" "setup-packages" "agenda" "undo-tree"  "zettelkasten" "flyspell" "company" "R" "python" "emms" "abbrev" "paste-fix" "mastodon" "elfeed" "keybinding")))
+    (setq my-init-modules '("packages" "setup-packages" "agenda" "undo-tree"  "zettelkasten" "flyspell" "company" "R" "python" "emms" "abbrev" "paste-fix" "mastodon" "elfeed")))
   ;; Make a list of loaded modules
   (setq loaded-modules ())
   ;; Loading modules
@@ -138,34 +138,28 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (defun dashboard-links (list-size)
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
-			     (dashboard-open))
+			     (open-fancy-about-screen))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
-		   "Dashboard F5")
+		   "Splash")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
 			     (mastodon))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
-		   "Mastodon F6")
+		   "Mastodon")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
 			     (elfeed))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
-		   "Elfeed F7")
-    (widget-create 'link
-		   :notify (lambda (&rest ignore)
-			     (open-fancy-about-screen))
-		   :mouse-face 'highlight
-		   :follow-link "\C-m"
-		   "Splash F8")
+		   "Elfeed")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
 			     (scratch-buffer))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
-		   "Scratch F9")
+		   "Scratch")
     )
   (defun dashboard-loaded-modules (list-size)
     (insert (concat dashboard-loaded-mods dashboard-missing-mods)))
@@ -176,8 +170,16 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (add-to-list 'dashboard-item-generators '(line . dashboard-line))
   (add-to-list 'dashboard-item-generators '(custom-links . dashboard-links))
   (add-to-list 'dashboard-item-generators '(custom-loaded-modules . dashboard-loaded-modules))
+
   (setq dashboard-items '((custom-loaded-modules) (custom-links)))
 #+end_src
+* keybinding
+#+begin_src emacs-lisp
+  (global-set-key (kbd "<f5>") 'dashboard-open)
+  (global-set-key (kbd "<f7>") 'menu-set-font)
+  (global-set-key (kbd "<f8>") 'toggle-frame-solidity)
+  (global-set-key (kbd "<f9>") 'scratch-buffer)
+#+end_src 
 * Startup
 #+begin_src emacs-lisp
   (add-to-list 'default-frame-alist '(alpha-background  . 80)) ;; set buffer transparent

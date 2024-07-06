@@ -20,6 +20,7 @@
     (global-set-key (kbd "C-x b") 'consult-buffer)
     (global-set-key (kbd "C-c g") 'consult-grep)
     (global-set-key (kbd "C-c v") 'consult-goto-line)
+    (global-set-key (kbd "<f6>") 'consult-theme)
     ;; org-bullets
     (use-package org-bullets
       :config
