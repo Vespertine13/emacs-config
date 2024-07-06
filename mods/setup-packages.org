@@ -1,0 +1,34 @@
+* initialize packages
+#+begin_src emacs-lisp
+  (when (member "packages" loaded-modules)
+    ;; vertica and marginalia
+    (vertico-mode t)
+    (marginalia-mode t)
+    (setq completion-styles '(orderless basic))
+    ;; sml modeline
+    (sml-modeline-mode t)
+    ;; smooth scrolling
+    (smooth-scrolling-mode t)
+    ;; Rainbow mode
+    (add-hook 'org-mode-hook (lambda () 
+			       (rainbow-mode 1)))
+    (add-hook 'emacs-lisp-mode-hook (lambda () 
+				      (rainbow-mode 1)))
+    ;; embark
+    (global-set-key (kbd "C-c x") 'embark-act)
+    ;; consult
+    (global-set-key (kbd "C-x b") 'consult-buffer)
+    (global-set-key (kbd "C-c g") 'consult-grep)
+    (global-set-key (kbd "C-c v") 'consult-goto-line)
+    ;; org-bullets
+    (use-package org-bullets
+      :config
+      (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
+    (custom-set-variables  '(org-bullets-bullet-list '("●" "◉" "○")))
+    )
+#+end_src
+
+* loaded-modules
+#+begin_src emacs-lisp
+  (add-to-list 'loaded-modules "setup-packages")
+#+end_src

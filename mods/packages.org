@@ -76,28 +76,6 @@
       (eval-print-last-sexp)))
   (load bootstrap-file nil 'nomessage))
 #+end_src
-* initialize packages
-#+begin_src emacs-lisp
-  ;; vertica and marginalia
-  (vertico-mode t)
-  (marginalia-mode t)
-  (setq completion-styles '(orderless basic))
-  ;; sml modeline
-  (sml-modeline-mode t)
-  ;; smooth scrolling
-  (smooth-scrolling-mode t)
-  ;; Rainbow mode
-  (add-hook 'org-mode-hook (lambda () 
-			     (rainbow-mode 1)))
-  (add-hook 'emacs-lisp-mode-hook (lambda () 
-				    (rainbow-mode 1)))
-  ;; embark
-  (global-set-key (kbd "C-c x") 'embark-act)
-  ;; consult
-  (global-set-key (kbd "C-x b") 'consult-buffer)
-  (global-set-key (kbd "C-c g") 'consult-grep)
-  (global-set-key (kbd "C-c v") 'consult-goto-line)
-#+end_src
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "packages")
