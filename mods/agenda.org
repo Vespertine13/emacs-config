@@ -54,11 +54,12 @@
     - [ ] Standup (skriv i slack)\n" today-scheduled))
 	    (daily-diary (format "* TODO [#C] Skriv dagbok\nSCHEDULED: %s\n" today-scheduled))
 	    (daily-piano (format "* TODO [#C] Spill piano i 10 min\nSCHEDULED: %s\n" today-scheduled))
-	    (daily-duolingo (format "* TODO [#C] Duolingo\nSCHEDULED: %s
+	    (daily-languages (format "* TODO [#C] Språkapper [0/3]\nSCHEDULED: %s
+    - [ ] Toleio
     - [ ] Japansk
     - [ ] Spansk\n" today-scheduled))
 	    )
-	(setq daily-todos (concat daily-start daily-end daily-diary daily-piano daily-duolingo)))
+	(setq daily-todos (concat daily-start daily-end daily-diary daily-piano daily-languages)))
       ;; run checks and replace
       ;; check if today's date file exists, if not it creates an empty file
       (unless (file-exists-p TXT_TODAY)
