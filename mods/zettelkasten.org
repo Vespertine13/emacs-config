@@ -13,7 +13,8 @@ Please forgive me gods of emacs.
   (setq deft-use-filename-as-title t)
   (setq deft-use-filter-string-for-filename t)
   (setq deft-auto-save-interval 0)
-  (setq deft-file-limit 25)
+  (setq deft-file-limit 48)
+  (add-hook 'deft-mode-hook (lambda() (setq-default truncate-lines t)))
   (use-package zetteldeft)
 #+end_src
 ** Functions
