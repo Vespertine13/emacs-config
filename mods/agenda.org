@@ -37,33 +37,37 @@
 * Regular TODOS
 ** Daily TODOS
 #+begin_src emacs-lisp
-    ;; text and variables
-    (setq today-var (format-time-string "%Y-%m-%d"))
-    (let (
-	  (daily-end (format "* TODO [#A] Slutt arbeidsdag [0/4]\nSCHEDULED: %s
-  - [ ] Sjekk slack
-  - [ ] Sjekk groove (including notifications)
-  - [ ] git push
-  - [ ] Stemple ut\n" today-scheduled))
-	  (daily-start (format "* TODO [#A] Start arbeidsdag [0/6]\nSCHEDULED: %s
-  - [ ] Stemple inn
-  - [ ] git pull
-  - [ ] sjekk kalender (uio, hotmail)
-  - [ ] sjekk citrix (teams og ous)
-  - [ ] Sjekk groove
-  - [ ] Standup (skriv i slack)\n" today-scheduled))
-	  (daily-diary (format "* TODO [#C] Skriv dagbok\nSCHEDULED: %s" today-scheduled))
-	  )
-      (setq daily-todos (concat daily-start daily-end daily-diary)))
-    ;; run checks and replace
-    ;; check if today's date file exists, if not it creates an empty file
-    (unless (file-exists-p TXT_TODAY)
-      (create-empty-file TXT_TODAY))
-    (unless (file-exists-p ORG_DAILY)
-      (create-empty-file ORG_DAILY))
-    (when (not (file-content-equal-to-string TXT_TODAY today-var))
-      (replace-file-contents TXT_TODAY today-var)
-      (replace-file-contents ORG_DAILY daily-todos))
+  ;; text and variables
+  (setq today-var (format-time-string "%Y-%m-%d"))
+  (let (
+	(daily-end (format "* TODO [#A] Slutt arbeidsdag [0/4]\nSCHEDULED: %s
+    - [ ] Sjekk slack
+    - [ ] Sjekk groove (including notifications)
+    - [ ] git push
+    - [ ] Stemple ut\n" today-scheduled))
+	    (daily-start (format "* TODO [#A] Start arbeidsdag [0/6]\nSCHEDULED: %s
+    - [ ] Stemple inn
+    - [ ] git pull
+    - [ ] sjekk kalender (uio, hotmail)
+    - [ ] sjekk citrix (teams og ous)
+    - [ ] Sjekk groove
+    - [ ] Standup (skriv i slack)\n" today-scheduled))
+	    (daily-diary (format "* TODO [#C] Skriv dagbok\nSCHEDULED: %s\n" today-scheduled))
+	    (daily-piano (format "* TODO [#C] Spill piano i 10 min\nSCHEDULED: %s\n" today-scheduled))
+	    (daily-duolingo (format "* TODO [#C] Duolingo\nSCHEDULED: %s
+    - [ ] Japansk
+    - [ ] Spansk\n" today-scheduled))
+	    )
+	(setq daily-todos (concat daily-start daily-end daily-diary daily-piano daily-duolingo)))
+      ;; run checks and replace
+      ;; check if today's date file exists, if not it creates an empty file
+      (unless (file-exists-p TXT_TODAY)
+	(create-empty-file TXT_TODAY))
+      (unless (file-exists-p ORG_DAILY)
+	(create-empty-file ORG_DAILY))
+      (when (not (file-content-equal-to-string TXT_TODAY today-var))
+	(replace-file-contents TXT_TODAY today-var)
+	(replace-file-contents ORG_DAILY daily-todos))
 #+end_src
 ** Monthly TODOS
 #+begin_src emacs-lisp
