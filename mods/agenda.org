@@ -125,4 +125,3 @@ Make the org mode a bit more chill.
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "agenda")
 #+end_src
-

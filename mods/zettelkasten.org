@@ -5,17 +5,22 @@ Please forgive me gods of emacs.
 ** General Settings
 #+begin_src emacs-lisp
   (require 'deft)
-  (setq deft-extensions '("org"))
-  (setq deft-default-extension "org")
-  (setq zetteldeft-home-id "20240107102607")
-  (setq deft-directory FOLDER_ROAM)
-  (setq deft-text-mode 'org-mode)
-  (setq deft-use-filename-as-title t)
-  (setq deft-use-filter-string-for-filename t)
-  (setq deft-auto-save-interval 0)
-  (setq deft-file-limit 48)
+  (setq-default
+   deft-extensions '("org")
+   deft-default-extension "org"
+   deft-directory FOLDER_ROAM
+   deft-text-mode 'org-mode
+   deft-use-filename-as-title t
+   deft-use-filter-string-for-filename t
+   deft-auto-save-interval 0
+   deft-file-limit 48
+   )
   (add-hook 'deft-mode-hook (lambda() (setq-default truncate-lines t)))
-  (use-package zetteldeft)
+  (use-package zetteldeft
+    :ensure t
+    :config
+    (setq zetteldeft-home-id "20240107102607")
+    )
 #+end_src
 ** Functions
 #+begin_src emacs-lisp
