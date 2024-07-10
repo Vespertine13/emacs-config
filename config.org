@@ -31,22 +31,24 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 * Constants
 #+begin_src emacs-lisp
 ;; shortcuts org and zettelkast
-(setq FOLDER_ORG (concat FOLDER_CLOUD "org/"))
+(setq FOLDER_AGENDA (concat FOLDER_CLOUD "org/agenda/"))
 (setq FOLDER_ROAM (concat FOLDER_CLOUD "org/roam/"))
+(setq FOLDER_UTILITIES (concat FOLDER_CLOUD "emacs_utilities/"))
+
 ;; tokens
-(setq ORG_TOKENS (concat FOLDER_CLOUD "org/tokens.org.gpg"))
+(setq ORG_TOKENS (concat FOLDER_AGENDA "tokens.org.gpg"))
 ;; agenda/capture
-(setq ORG_HANDLELISTE (concat FOLDER_CLOUD "org/handleliste.org"))
-(setq ORG_CAPTURE (concat FOLDER_CLOUD "org/capture.org"))
-(setq ORG_EVENTS (concat FOLDER_CLOUD "org/events.org"))
-(setq ORG_DIARY (concat FOLDER_CLOUD "org/diary.org.gpg"))
-(setq ORG_ROLODEX (concat FOLDER_CLOUD "org/rolodex.org"))
+(setq ORG_HANDLELISTE (concat FOLDER_AGENDA "handleliste.org"))
+(setq ORG_CAPTURE (concat FOLDER_AGENDA "capture.org"))
+(setq ORG_EVENTS (concat FOLDER_AGENDA "events.org"))
+(setq ORG_DIARY (concat FOLDER_AGENDA "diary.org.gpg"))
+(setq ORG_ROLODEX (concat FOLDER_AGENDA "rolodex.org"))
 ;; regular todos
-(setq ORG_DAILY (concat FOLDER_CLOUD "org/daily.org"))
-(setq ORG_MONTHLY (concat FOLDER_CLOUD "org/monthly.org"))
+(setq ORG_DAILY (concat FOLDER_AGENDA "daily.org"))
+(setq ORG_MONTHLY (concat FOLDER_AGENDA "monthly.org"))
 ;; Misc
-(setq WAV_BELL (concat FOLDER_CLOUD "bell.wav"))
-(setq ORG_TIMELISTE (concat FOLDER_CLOUD "org/timeliste.org"))
+(setq WAV_BELL (concat FOLDER_UTILITIES "bell.wav"))
+(setq ORG_TIMELISTE (concat FOLDER_AGENDA "timeliste.org"))
 (setq TXT_TODAY (concat FOLDER_CLOUD ".todaysdate"))
 (setq TXT_MONTH (concat FOLDER_CLOUD ".todaysmonth"))
 #+end_src
@@ -54,7 +56,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 * Paths
 #+begin_src emacs-lisp
   ;; other path settings
-  (add-to-list 'custom-theme-load-path (concat FOLDER_CLOUD "themes/"))
+  (add-to-list 'custom-theme-load-path (concat FOLDER_UTILITIES "themes/"))
 #+end_src
 * Encoding
 #+begin_src emacs-lisp
@@ -116,7 +118,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 #+begin_src emacs-lisp
   (require 'dashboard)
   ;; Set the banner
-  (setq dashboard-startup-banner (concat FOLDER_CLOUD "emacs_startup.txt"))
+  (setq dashboard-startup-banner (concat FOLDER_CLOUD "emacs_utilities/emacs_startup.txt"))
   ;; Value can be
   ;; - nil to display no banner
   ;; - 'official which displays the official emacs logo

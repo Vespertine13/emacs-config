@@ -7,7 +7,7 @@
 * Capture and Agenda
 #+begin_src emacs-lisp
   ;; set org folder
-  (setq org-agenda-files (list FOLDER_ORG))
+  (setq org-agenda-files (list FOLDER_AGENDA))
   ;; defines today's date as a variable
   (setq today-scheduled (format-time-string "<%Y-%m-%d %a>"))
   (setq handleliste-agenda-content (concat "* TODO %? [/] "(format ":handle:\nSCHEDULED: %s\n:PROPERTIES:\n:CREATED:" today-scheduled) "%U\n:END:\n\n- [ ] "))
