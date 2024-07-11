@@ -111,7 +111,7 @@
 ;; Auto-revert
 ;; files reload from disc when reopened
 (global-auto-revert-mode t)
-;; dired automatically updates  
+;; dired
 (setq dired-auto-revert-buffer t)
 
 ;; ---------------------------------------------------------------------------------------------------------------
