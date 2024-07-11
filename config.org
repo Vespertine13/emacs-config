@@ -49,8 +49,8 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 ;; Misc
 (setq WAV_BELL (concat FOLDER_UTILITIES "bell.wav"))
 (setq ORG_TIMELISTE (concat FOLDER_AGENDA "timeliste.org"))
-(setq TXT_TODAY (concat FOLDER_CLOUD ".todaysdate"))
-(setq TXT_MONTH (concat FOLDER_CLOUD ".todaysmonth"))
+(setq TXT_TODAY (concat FOLDER_UTILITIES ".todaysdate"))
+(setq TXT_MONTH (concat FOLDER_UTILITIES ".todaysmonth"))
 #+end_src
 
 * Paths
