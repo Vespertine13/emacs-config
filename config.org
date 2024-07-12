@@ -43,6 +43,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 (setq ORG_EVENTS (concat FOLDER_AGENDA "events.org"))
 (setq ORG_DIARY (concat FOLDER_AGENDA "diary.org.gpg"))
 (setq ORG_ROLODEX (concat FOLDER_AGENDA "rolodex.org"))
+(setq ORG_TIMELISTE (concat FOLDER_AGENDA "timeliste.org"))
 ;; regular todos
 (setq ORG_DAILY (concat FOLDER_AGENDA "daily.org"))
 (setq ORG_MONTHLY (concat FOLDER_AGENDA "monthly.org"))
@@ -52,7 +53,6 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 (setq TXT_TODAY (concat FOLDER_UTILITIES ".todaysdate"))
 (setq TXT_MONTH (concat FOLDER_UTILITIES ".todaysmonth"))
 #+end_src
-
 * Paths
 #+begin_src emacs-lisp
   ;; other path settings
