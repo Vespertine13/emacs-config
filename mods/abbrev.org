@@ -44,6 +44,14 @@
       ("basherror" "handle_error () {\n    echo ${1}\n    exit 1\n}")
       ))
 #+end_src
+** OUS delivery
+#+begin_src emacs-lisp
+  (define-abbrev-table 'global-abbrev-table
+    '(
+      ("wgsdelivery" "* TODO wgsxxx\nSamples: \nPriority 3: \nPriority 2: \nSingles: \nTrios: \nHybrids: \nCustoms: \nBaerer: \n** delivery [/]\n- [ ] pri 3\n- [ ] pri 2\n- [ ]")
+      ("ekgdelivery" "* TODO EKGxxxxxx\nSamples: \nCustoms: \n** delivery [/]\n- [ ]")
+      ))
+#+end_src
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "abbrev")
