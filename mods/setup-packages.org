@@ -26,9 +26,12 @@
       :config
       (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))))
     (custom-set-variables  '(org-bullets-bullet-list '("●" "◉" "○")))
+    ;; company
+    (require 'company)
+    (setq company-idle-delay 0)
+    (global-company-mode t)
     )
 #+end_src
-
 * loaded-modules
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "setup-packages")
