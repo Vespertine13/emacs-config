@@ -14,6 +14,7 @@
 #+begin_src emacs-lisp
   (setq package-list
     '(use-package
+      dashboard                        ;; startup dashboard
       ess                              ;; ESS
       flycheck                         ;; flycheck for coding
       ein                              ;; jupyterlab stuff
