@@ -1,10 +1,12 @@
 #+STARTUP: content
 * setup
+General agenda settings.
 #+begin_src emacs-lisp
 (add-hook 'org-agenda-mode-hook (lambda () (visual-line-mode -1) (setq truncate-lines 1)))
 (setq org-agenda-window-setup 'current-window)
 #+end_src
 * Capture and Agenda
+Define agenda folders and capture templates
 #+begin_src emacs-lisp
   ;; set org folder
   (setq org-agenda-files (list FOLDER_AGENDA))
@@ -27,15 +29,11 @@
 	  ))
     ;; Org todo workflow
     (setq org-todo-keywords'((sequence "TODO" "|" "DONE")))
-    ;; custom function
-    (defun open-org-agenda-for-current-week ()
-      (interactive)
-      (let ((current-prefix-arg '(4)))
-	(call-interactively 'org-agenda-list))
-      (message "Opening agenda for current week"))
 #+end_src
 * Regular TODOS
+TODOs that reset regularly are defined here. they check the current date and overwrite the relevant agenda org file with fresh TODOS.
 ** Daily TODOS
+Here the TODOS that reset daily are defined.
 #+begin_src emacs-lisp
   ;; text and variables
   (setq today-var (format-time-string "%Y-%m-%d"))
@@ -71,6 +69,7 @@
 	(replace-file-contents ORG_DAILY daily-todos))
 #+end_src
 ** Monthly TODOS
+Here the TODOS that reset monthly are defined.
 #+begin_src emacs-lisp
     (setq this-month-var (format-time-string "%Y-%m"))
     (let (
@@ -92,19 +91,21 @@
       (replace-file-contents ORG_MONTHLY monthly-todos))
 
 #+end_src
-* org crypt 
-Used for the diary and tokens.
+* org crypt
+Settings used for when encryption keys are needed.
+
+~org-crypt-key~
+GPG key to use for encryption.
+nil means  use symmetric encryption unconditionally.
+"" means use symmetric encryption unless heading sets CRYPTKEY property.
 #+begin_src emacs-lisp
 (require 'org-crypt)
 (org-crypt-use-before-save-magic)
 (setq org-tags-exclude-from-inheritance '("crypt"))
 (setq org-crypt-key nil)
-;; GPG key to use for encryption.
-;; nil means  use symmetric encryption unconditionally.
-;; "" means use symmetric encryption unless heading sets CRYPTKEY property.
 #+end_src 
 * Visuals
-Make the org mode a bit more chill.
+These settings make the org agenda colors a bit more chill.
 #+begin_src emacs-lisp
   (custom-set-faces
    '(org-scheduled-today ((t (:inherit default))))
@@ -117,11 +118,13 @@ Make the org mode a bit more chill.
    )
 #+end_src
 * Keybinding
+Keybinding for org agenda.
 #+begin_src emacs-lisp
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
 #+end_src
 * loaded-modules
+Register that the module has been loaded for the Dashboard.
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "agenda")
 #+end_src
