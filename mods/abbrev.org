@@ -1,10 +1,12 @@
 #+STARTUP: content
 * Settings
+Enables abbrev mode and clears old abbrevs. All abbrevs I use should be defined here.
 #+begin_src emacs-lisp
   (set-default 'abbrev-mode t)
   (clear-abbrev-table global-abbrev-table)
 #+end_src
 * Abbreviations
+Here are all my abbreviations divided into their uses.
 ** Elisp
 #+begin_src emacs-lisp
   (define-abbrev-table 'global-abbrev-table
@@ -53,6 +55,7 @@
       ))
 #+end_src
 * loaded-modules
+Register that the module has been loaded for the Dashboard.
 #+begin_src emacs-lisp
   (add-to-list 'loaded-modules "abbrev")
 #+end_src
