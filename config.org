@@ -4,15 +4,16 @@ Eivind Kjeka Broen
 eivind.kb@hotmail.com
 
 * Init Setup
-The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it contains the following code: 
-(org-babel-load-file "~/emacs-config/config.org")
+My init setup is largely divided into two init_lite.el and config.org and its connected mods. init_lite.el is a lightweight script that should work with most versions of base emacs without any packages or internet connection. config.org is dependent on internet and a dedicated cloud. config.org will try to download the packages it needs. I have attempted to move all configuration that is not dependent on or connected to packages to init_lite.el. Therefore to use config.org, init_lite.el must be loaded first. This can be setup in .emacs.d/init.el.
+
 ** suggested init.el
 ;; Set your cloud path here
-(setq FOLDER_CLOUD "~/path/to/cloud/")
+(setq FOLDER_CLOUD "/path/to/cloud")
+(setq ORG_CONFIG "~/emacs-config/config.org")
 
-;; Load config 
-;; init_lite.el is the basic config
+;; Load configs
 (load-file "~/emacs-config/init_lite.el")
+(when (file-directory-p FOLDER_CLOUD) (org-babel-load-file ORG_CONFIG))
 
 ;; Load the rest of the config
 ;; select modules (optional)
@@ -29,12 +30,12 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 (add-to-list 'default-frame-alist '(font . "Inconsolata-16"))
 
 * Constants
+Here I add _all_ the constants that will be used for this file and the scrips in the mods folder. They are mostly derived from the cloud folder. They should be changed if the files are moved. 
 #+begin_src emacs-lisp
 ;; shortcuts org and zettelkast
 (setq FOLDER_AGENDA (concat FOLDER_CLOUD "org/agenda/"))
 (setq FOLDER_ROAM (concat FOLDER_CLOUD "org/roam/"))
 (setq FOLDER_UTILITIES (concat FOLDER_CLOUD "emacs_utilities/"))
-
 ;; tokens
 (setq ORG_TOKENS (concat FOLDER_AGENDA "tokens.org.gpg"))
 ;; agenda/capture
@@ -54,11 +55,12 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
 (setq TXT_MONTH (concat FOLDER_UTILITIES ".todaysmonth"))
 #+end_src
 * Paths
+Here are other path settings that are either used in this script or in any script in the mods folder.
 #+begin_src emacs-lisp
-  ;; other path settings
   (add-to-list 'custom-theme-load-path (concat FOLDER_UTILITIES "themes/"))
 #+end_src
 * Encoding
+I prefer using utf-8 because I use a Norwegian keyboard.
 #+begin_src emacs-lisp
   (set-language-environment "utf-8")
   (prefer-coding-system 'utf-8)
@@ -69,6 +71,7 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (setq-default buffer-file-coding-system 'utf-8)
 #+end_src
 * Loading Modules
+The modules in the module folder are loaded in this part. They are loaded in the order of the "my-init-modules" variable. Their loading time is recorded and presented in the Dashboard. The modules that are not loaded are also presented in the Dashboard.
 #+begin_src emacs-lisp
   ;; Function to load a module and measure the time
   (setq loaded-modules-with-time ())
@@ -92,10 +95,11 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (dolist (module my-init-modules)
     (setq module-file (concat "~/emacs-config/mods/" module ".org"))
     (load-module-and-measure-time module module-file))
-
 #+end_src
 * Dashboard
+The Dashboard is my startup screen. it shows some useful information about the emacs startup and has a few links.
 ** Modules text
+The text that is presented at my Dashboard is generated here.
 #+begin_src emacs-lisp
     ;; system text
     (setq dash-sys-text (concat "GNU Emacs " emacs-version "|" (symbol-name system-type)))
@@ -115,27 +119,27 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
       (setq dashboard-missing-mods "")))
 #+end_src
 ** Dashboard
+The Dashboard package is loaded here.
+
+Some info on the dashboard banner:
+Value can be
+- nil to display no banner
+- 'official which displays the official emacs logo
+- 'logo which displays an alternative emacs logo
+- 1, 2 or 3 which displays one of the text banners
+- "path/to/your/image.gif", "path/to/your/image.png" or "path/to/your/text.txt" which displays whatever gif/image/text you would prefer
+- a cons of '("path/to/your/image.png" . "path/to/your/text.txt")
 #+begin_src emacs-lisp
   (require 'dashboard)
   ;; Set the banner
   (setq dashboard-startup-banner (concat FOLDER_CLOUD "emacs_utilities/emacs_startup.txt"))
-  ;; Value can be
-  ;; - nil to display no banner
-  ;; - 'official which displays the official emacs logo
-  ;; - 'logo which displays an alternative emacs logo
-  ;; - 1, 2 or 3 which displays one of the text banners
-  ;; - "path/to/your/image.gif", "path/to/your/image.png" or "path/to/your/text.txt" which displays whatever gif/image/text you would prefer
-  ;; - a cons of '("path/to/your/image.png" . "path/to/your/text.txt")
-
-  ;; put content in centre
-  ;; (setq dashboard-center-content t)
-
   ;; Set the footer
   (setq dashboard-footer-messages (list (concat "Startup at: " (current-time-string))))
   ;; Set the title
   (setq dashboard-banner-logo-title dash-sys-text)
 #+end_src
 ** Customization
+The dashboard items and their order are defined here.
 #+begin_src emacs-lisp
   (defun dashboard-links (list-size)
     (widget-create 'link
@@ -165,17 +169,15 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
     )
   (defun dashboard-loaded-modules (list-size)
     (insert (concat dashboard-loaded-mods dashboard-missing-mods)))
-
   (defun dashboard-line (list-size)
     (insert "------------------------------------------------------------------------------------------"))
-
   (add-to-list 'dashboard-item-generators '(line . dashboard-line))
   (add-to-list 'dashboard-item-generators '(custom-links . dashboard-links))
   (add-to-list 'dashboard-item-generators '(custom-loaded-modules . dashboard-loaded-modules))
-
   (setq dashboard-items '((custom-loaded-modules) (custom-links)))
 #+end_src
 * keybinding
+Some general keybinding that are not defined elsewhere.
 #+begin_src emacs-lisp
   (global-set-key (kbd "<f5>") 'dashboard-open)
   (global-set-key (kbd "<f7>") 'menu-set-font)
@@ -183,8 +185,9 @@ The init.el (path ~/.emacs.d/init.el) file will redirect to this file if it cont
   (global-set-key (kbd "<f9>") 'scratch-buffer)
 #+end_src 
 * Startup
+Miscellaneous startup settings.
 #+begin_src emacs-lisp
   (add-to-list 'default-frame-alist '(alpha-background  . 80)) ;; set buffer transparent
-  (setq transparent-frame-enabled t)
+  (setq transparent-frame-enabled t) ;; edit variable that keeps track on transparency
   (dashboard-open)
 #+end_src
