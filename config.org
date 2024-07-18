@@ -51,8 +51,8 @@ Here I add _all_ the constants that will be used for this file and the scrips in
 ;; Misc
 (setq WAV_BELL (concat FOLDER_UTILITIES "bell.wav"))
 (setq ORG_TIMELISTE (concat FOLDER_AGENDA "timeliste.org"))
-(setq TXT_TODAY (concat FOLDER_UTILITIES ".todaysdate"))
-(setq TXT_MONTH (concat FOLDER_UTILITIES ".todaysmonth"))
+(setq TXT_TODAY (concat FOLDER_UTILITIES "todaysdate"))
+(setq TXT_MONTH (concat FOLDER_UTILITIES "todaysmonth"))
 #+end_src
 * Paths
 Here are other path settings that are either used in this script or in any script in the mods folder.
