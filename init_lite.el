@@ -232,6 +232,13 @@
       (set-frame-transparent)
     (set-frame-solid)))
 
+;; regexp highlight
+(defun operations-highlight()
+  (interactive)
+  (highlight-regexp "wgs..." "hi-green")
+  (highlight-regexp "EKG......" "hi-yellow")
+  )
+
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; THEMES
 ;; ---------------------------------------------------------------------------------------------------------------
@@ -252,6 +259,7 @@
 (global-set-key (kbd "C-c g") 'rgrep)
 (global-set-key (kbd "C-c h") 'highlight-symbol-at-point)
 (global-set-key (kbd "C-c H") 'unhighlight-all)
+(global-set-key (kbd "C-c j") 'operations-highlight)
 (global-set-key (kbd "C-c k") 'delete-current-file)
 (global-set-key (kbd "C-c l") 'org-insert-link)
 (global-set-key (kbd "C-c m") 'kmacro-end-or-call-macro)
