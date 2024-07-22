@@ -50,7 +50,7 @@ Here are all my abbreviations divided into their uses.
 #+begin_src emacs-lisp
   (define-abbrev-table 'global-abbrev-table
     '(
-      ("wgsdelivery" "* TODO wgsxxx\nSamples: \nPriority 3: \nPriority 2: \nSingles: \nTrios: \nHybrids: \nCustoms: \nBaerer: \n** delivery [/]\n- [ ] pri 3\n- [ ] pri 2\n- [ ]")
+      ("wgsdelivery" "* TODO wgsxxx\nSamples: \nPriority 3: \nPriority 2: \nSingles: \nTrios: \nHybrids: \nCustoms: \nBaerer: \n** delivery [/]\n- [ ] pri 3\n- [ ] pri 2\n- [ ] x in Ella imported\n- [ ] x in Sample repo")
       ("ekgdelivery" "* TODO EKGxxxxxx\nSamples: \nCustoms: \n** delivery [/]\n- [ ]")
       ))
 #+end_src
