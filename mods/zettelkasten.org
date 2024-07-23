@@ -13,7 +13,7 @@ Please forgive me gods of emacs.
    deft-use-filename-as-title t
    deft-use-filter-string-for-filename t
    deft-auto-save-interval 0
-   deft-file-limit 48
+   deft-file-limit 99
    )
   (add-hook 'deft-mode-hook (lambda() (setq-default truncate-lines t)))
   (use-package zetteldeft
