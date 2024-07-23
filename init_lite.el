@@ -235,8 +235,8 @@
 ;; regexp highlight
 (defun operations-highlight()
   (interactive)
-  (highlight-regexp "wgs..." "hi-green")
-  (highlight-regexp "EKG......" "hi-yellow")
+  (highlight-regexp "wgs[0-9][0-9][0-9]" "hi-green")
+  (highlight-regexp "EKG[0-9][0-9][0-9][0-9][0-9][0-9]" "hi-yellow")
   )
 
 ;; ---------------------------------------------------------------------------------------------------------------
