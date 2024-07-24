@@ -156,6 +156,7 @@ The dashboard items and their order are defined here.
 		   "Mastodon")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
+			     (elfeed-update)
 			     (elfeed))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
