@@ -272,7 +272,7 @@
 (global-set-key (kbd "C-c t") 'org-timer-set-timer)
 (global-set-key (kbd "C-c v") 'goto-line)
 (global-set-key (kbd "C-c w") 'read-only-mode)
-(global-set-key (kbd "C-c z") 'hippie-expand)
+(global-set-key (kbd "C-c z") 'delete-trailing-whitespace)
 
 ;; Arrow keys
 (global-set-key (kbd "C-x <up>") 'make-frame-command)
