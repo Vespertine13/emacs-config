@@ -282,6 +282,7 @@
 (global-set-key (kbd "C-.") 'other-window)
 (global-set-key (kbd "C-:") 'other-frame)
 (global-set-key  [C-backspace] 'ryanmarcus/backward-kill-word)
+(global-set-key "\M- " 'hippie-expand)
 
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; Bookmarks
