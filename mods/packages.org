@@ -43,6 +43,8 @@
       marginalia                       ;; list description of commands
       orderless                        ;; orderless completion style
       embark                           ;; right click menu
+      embark-consult                   ;; helps the two packages work together
+      le-thesaurus                     ;; synonyms
       )
     )
 #+end_src

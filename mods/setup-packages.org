@@ -30,6 +30,8 @@
     (require 'company)
     (setq company-idle-delay 0)
     (global-company-mode t)
+    ;; le-thesaurus
+    (global-set-key (kbd "C-c j") 'le-thesaurus-get-synonyms)
     )
 #+end_src
 * loaded-modules
