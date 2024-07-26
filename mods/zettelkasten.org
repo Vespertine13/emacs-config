@@ -1,6 +1,5 @@
 #+STARTUP: content
 An unholy combination of Org Roam, Deft and Zettelkasten.
-Please forgive me gods of emacs.
 * Deft and Zetteldeft
 ** General Settings
 #+begin_src emacs-lisp
@@ -52,7 +51,7 @@ Please forgive me gods of emacs.
 	    ("s" "Standard" plain
 	     "%?"
 	     :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org"
-				":PROPERTIES:\n:CREATED: %U\n:END:\n#+title: ${title}\n#+STARTUP: content\n")
+				":PROPERTIES:\n:CREATED: %U\n:TAGS: \n:END:\n#+STARTUP: content\n#+title: ${title}\nBacklink: \n")
 	     :unnarrowed t
 	     :immediate-finish t)))
 #+end_src
