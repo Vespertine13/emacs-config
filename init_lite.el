@@ -14,6 +14,7 @@
 (menu-bar-mode -1)                  ;; removes menubar
 (scroll-bar-mode -1)                ;; removes scroll bar
 (blink-cursor-mode 0)               ;; stop cursor from blinking
+(global-hl-line-mode 1)             ;; shows what line you are on
 
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; Backup and temp
