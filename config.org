@@ -163,11 +163,29 @@ The dashboard items and their order are defined here.
 		   " Elfeed")
     (widget-create 'link
 		   :notify (lambda (&rest ignore)
+			     (wttrin "Oslo"))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   " Weather")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
+			     (roam-home))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   " Org-roam")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
+			     (find-file ORG_CONFIG))
+		   :mouse-face 'highlight
+		   :follow-link "\C-m"
+		   " Config")
+    (widget-create 'link
+		   :notify (lambda (&rest ignore)
 			     (scratch-buffer))
 		   :mouse-face 'highlight
 		   :follow-link "\C-m"
 		   " Scratch")
-    )
+    ) 
   (defun dashboard-loaded-modules (list-size)
     (insert (concat dashboard-loaded-mods dashboard-missing-mods)))
   (defun dashboard-line (list-size)
