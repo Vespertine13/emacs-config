@@ -32,6 +32,11 @@
     (global-company-mode t)
     ;; le-thesaurus
     (global-set-key (kbd "C-c j") 'le-thesaurus-get-synonyms)
+    ;; Nerd-icons
+    (require 'nerd-icons)
+    (global-set-key (kbd "C-c i") 'nerd-icons-insert)
+    (require 'nerd-icons-dired)
+    (add-hook 'dired-mode-hook #'nerd-icons-dired-mode)
     )
 #+end_src
 * loaded-modules
