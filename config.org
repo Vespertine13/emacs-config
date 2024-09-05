@@ -33,24 +33,25 @@ My init setup is largely divided into two init_lite.el and config.org and its co
 Here I add _all_ the constants that will be used for this file and the scrips in the mods folder. They are mostly derived from the cloud folder. They should be changed if the files are moved. 
 #+begin_src emacs-lisp
 ;; shortcuts org and zettelkast
-(setq FOLDER_AGENDA (concat FOLDER_CLOUD "org/agenda/"))
+(setq FOLDER_SYNC (concat FOLDER_CLOUD "org/sync/"))
+(setq FOLDER_STATIC (concat FOLDER_CLOUD "org/static/"))
 (setq FOLDER_ROAM (concat FOLDER_CLOUD "org/roam/"))
 (setq FOLDER_UTILITIES (concat FOLDER_CLOUD "emacs_utilities/"))
 ;; tokens
-(setq ORG_TOKENS (concat FOLDER_AGENDA "tokens.org.gpg"))
+(setq ORG_TOKENS (concat FOLDER_STATIC "tokens.org.gpg"))
 ;; agenda/capture
-(setq ORG_HANDLELISTE (concat FOLDER_AGENDA "handleliste.org"))
-(setq ORG_CAPTURE (concat FOLDER_AGENDA "capture.org"))
-(setq ORG_EVENTS (concat FOLDER_AGENDA "events.org"))
-(setq ORG_DIARY (concat FOLDER_AGENDA "diary.org.gpg"))
-(setq ORG_ROLODEX (concat FOLDER_AGENDA "rolodex.org"))
-(setq ORG_TIMELISTE (concat FOLDER_AGENDA "timeliste.org"))
+(setq ORG_HANDLELISTE (concat FOLDER_SYNC "handleliste.org"))
+(setq ORG_CAPTURE (concat FOLDER_SYNC "capture.org"))
+(setq ORG_EVENTS (concat FOLDER_SYNC "events.org"))
+(setq ORG_DIARY (concat FOLDER_STATIC "diary.org.gpg"))
+(setq ORG_ROLODEX (concat FOLDER_SYNC "rolodex.org"))
+(setq ORG_TIMELISTE (concat FOLDER_STATIC "timeliste.org"))
 ;; regular todos
-(setq ORG_DAILY (concat FOLDER_AGENDA "daily.org"))
-(setq ORG_MONTHLY (concat FOLDER_AGENDA "monthly.org"))
+(setq ORG_DAILY (concat FOLDER_STATIC "daily.org"))
+(setq ORG_MONTHLY (concat FOLDER_STATIC "monthly.org"))
 ;; Misc
 (setq WAV_BELL (concat FOLDER_UTILITIES "bell.wav"))
-(setq ORG_TIMELISTE (concat FOLDER_AGENDA "timeliste.org"))
+(setq ORG_TIMELISTE (concat FOLDER_STATIC "timeliste.org"))
 (setq TXT_TODAY (concat FOLDER_UTILITIES "todaysdate"))
 (setq TXT_MONTH (concat FOLDER_UTILITIES "todaysmonth"))
 #+end_src
