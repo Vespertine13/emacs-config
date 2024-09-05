@@ -108,7 +108,22 @@
 (add-hook 'calendar-load-hook
 	  (lambda ()
 	    (calendar-set-date-style 'iso)))
+;; start week on mondays
 (setq calendar-week-start-day 1)
+;; Add week numbers to the calendar
+(copy-face font-lock-constant-face 'calendar-iso-week-face)
+(set-face-attribute 'calendar-iso-week-face nil
+                    :height 0.7)
+(setq calendar-intermonth-text
+      '(propertize
+        (format "%2d"
+                (car
+                 (calendar-iso-from-absolute
+                  (calendar-absolute-from-gregorian (list month day year)))))
+        'font-lock-face 'calendar-iso-week-face))
+
+
+
 ;; Auto-revert
 ;; files reload from disc when reopened
 (global-auto-revert-mode t)
