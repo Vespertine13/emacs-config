@@ -57,7 +57,6 @@ Here the TODOS that reset daily are defined.
 	    (daily-piano (format "* TODO [#C] Spill piano\nSCHEDULED: %s\n" today-scheduled))
 	    (daily-languages (format "* TODO [#C] Språkapper [0/3]\nSCHEDULED: %s
     - [ ] Toleio
-    - [ ] Japansk
     - [ ] Spansk\n" today-scheduled))
 	    )
 	(setq daily-todos (concat daily-start daily-end daily-diary daily-piano daily-languages)))
