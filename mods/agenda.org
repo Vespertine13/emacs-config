@@ -55,7 +55,7 @@ Here the TODOS that reset daily are defined.
     - [ ] Standup (skriv i slack)\n" today-scheduled))
 	    (daily-diary (format "* TODO [#C] Skriv dagbok\nSCHEDULED: %s\n" today-scheduled))
 	    (daily-piano (format "* TODO [#C] Spill piano\nSCHEDULED: %s\n" today-scheduled))
-	    (daily-languages (format "* TODO [#C] Språkapper [0/3]\nSCHEDULED: %s
+	    (daily-languages (format "* TODO [#C] Språkapper [0/2]\nSCHEDULED: %s
     - [ ] Toleio
     - [ ] Spansk\n" today-scheduled))
 	    )
