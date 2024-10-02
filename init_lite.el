@@ -260,18 +260,22 @@
 ;; ---------------------------------------------------------------------------------------------------------------
 
 (defun tail-nsc-exporter ()
-  (interactive)
   (shell)
   (rename-buffer "tail-nsc-exporter")
   (operations-highlight)
   (insert "tail-nsc-exporter"))
 
 (defun tail-lims-exporter ()
-  (interactive)
   (shell)
   (rename-buffer "tail-lims-exporter")
   (operations-highlight)
   (insert "tail-lims-exporter"))
+
+(defun tail-logs ()
+  (interactive)
+  (tail-nsc-exporter)
+  (split-window-below)
+  (tail-lims-exporter))
 
 ;; ---------------------------------------------------------------------------------------------------------------
 ;; THEMES
