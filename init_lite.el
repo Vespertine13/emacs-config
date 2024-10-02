@@ -253,6 +253,9 @@
   (interactive)
   (highlight-regexp "wgs[0-9][0-9][0-9]" "hi-green")
   (highlight-regexp "EKG[0-9][0-9][0-9][0-9][0-9][0-9]" "hi-yellow")
+  (highlight-regexp "trio[a-z][a-z][a-z]" "hi-blue")
+  (highlight-regexp "trio" "hi-blue")
+  (highlight-regexp "reanalyse" "hi-brown")
   )
 
 ;; ---------------------------------------------------------------------------------------------------------------
