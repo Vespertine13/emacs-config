@@ -33,6 +33,8 @@
     (global-company-mode t)
     ;; le-thesaurus
     (global-set-key (kbd "C-c j") 'le-thesaurus-get-synonyms)
+    ;; synosaurus
+    (global-set-key (kbd "C-c J") 'synosaurus-lookup)
     ;; Nerd-icons
     (require 'nerd-icons)
     (global-set-key (kbd "C-c i") 'nerd-icons-insert)

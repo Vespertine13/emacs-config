@@ -44,6 +44,7 @@
       embark                           ;; right click menu
       embark-consult                   ;; helps the two packages work together
       le-thesaurus                     ;; synonyms
+      synosaurus                       ;; synonyms backup
       nerd-icons                       ;; framework for adding Nerd font icons
       nerd-icons-dired                 ;; add nerd icons to dired
       )
