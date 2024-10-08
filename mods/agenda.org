@@ -79,6 +79,7 @@ Here the TODOS that reset monthly are defined.
 	  (monthly-water-plants-work (format "* TODO [#C] Vann planter på jobb\nSCHEDULED: %s\n" today-scheduled))
 	  (monthly-vitamin-d (format "* TODO [#A] Vitamin-D\nSCHEDULED: %s\n" today-scheduled))
 	  (monthly-vim (format "* TODO [#B] Practise VIM\nSCHEDULED: %s\n" today-scheduled))
+	  (monthly-statped (format "* TODO [#C] Do a Statped course\nSCHEDULED: %s\n" today-scheduled))
 	  (monthly-tune-watch (format "* TODO [#C] Skru opp og still klokka\nSCHEDULED: %s" today-scheduled))
 	  )
       (setq monthly-todos (concat monthly-water-plants-home monthly-water-plants-work monthly-vitamin-d monthly-vim monthly-tune-watch)))
